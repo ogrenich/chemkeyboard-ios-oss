@@ -28,6 +28,10 @@
 		15BBC6F61F7D32E000A229BC /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BBC6F41F7D32E000A229BC /* Reusable.swift */; };
 		15BBC6F81F7D333500A229BC /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BBC6F71F7D333500A229BC /* NibLoadable.swift */; };
 		15BBC6F91F7D333500A229BC /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BBC6F71F7D333500A229BC /* NibLoadable.swift */; };
+		15BBC6FC1F7D344500A229BC /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BBC6FB1F7D344500A229BC /* UICollectionView+Extensions.swift */; };
+		15BBC6FD1F7D344500A229BC /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BBC6FB1F7D344500A229BC /* UICollectionView+Extensions.swift */; };
+		15BBC6FF1F7D345D00A229BC /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BBC6FE1F7D345D00A229BC /* UITableView+Extensions.swift */; };
+		15BBC7001F7D345D00A229BC /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BBC6FE1F7D345D00A229BC /* UITableView+Extensions.swift */; };
 		67FC87EA54389552C9666C61 /* Pods_Keyboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D99AB0CD5D9709735ACA2D78 /* Pods_Keyboard.framework */; };
 		F8FE752B013B0FB06FA20E40 /* Pods_ChemKeyboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94816A35B5E6AAAC942FEBF0 /* Pods_ChemKeyboard.framework */; };
 /* End PBXBuildFile section */
@@ -75,6 +79,8 @@
 		15BBC6F11F7D325100A229BC /* Iteratable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iteratable.swift; sourceTree = "<group>"; };
 		15BBC6F41F7D32E000A229BC /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		15BBC6F71F7D333500A229BC /* NibLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
+		15BBC6FB1F7D344500A229BC /* UICollectionView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extensions.swift"; sourceTree = "<group>"; };
+		15BBC6FE1F7D345D00A229BC /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 		94816A35B5E6AAAC942FEBF0 /* Pods_ChemKeyboard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChemKeyboard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		95B32E252AD372118A0E2B80 /* Pods-Keyboard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keyboard.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Keyboard/Pods-Keyboard.debug.xcconfig"; sourceTree = "<group>"; };
 		9E581C5FEAACD12DDB020775 /* Pods-ChemKeyboard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChemKeyboard.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChemKeyboard/Pods-ChemKeyboard.release.xcconfig"; sourceTree = "<group>"; };
@@ -131,6 +137,7 @@
 				1501F6CD1F792A19000DCE0B /* Assets.xcassets */,
 				1501F6CF1F792A19000DCE0B /* LaunchScreen.storyboard */,
 				1501F6D21F792A19000DCE0B /* Info.plist */,
+				15BBC6FA1F7D33EB00A229BC /* Extensions */,
 				15BBC6DA1F7CFF7A00A229BC /* Models */,
 				15BBC6F01F7D323400A229BC /* Protocols */,
 			);
@@ -165,6 +172,15 @@
 				15BBC6F41F7D32E000A229BC /* Reusable.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		15BBC6FA1F7D33EB00A229BC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				15BBC6FB1F7D344500A229BC /* UICollectionView+Extensions.swift */,
+				15BBC6FE1F7D345D00A229BC /* UITableView+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		9F8E072D38A191C00E59BBEC /* Pods */ = {
@@ -400,10 +416,12 @@
 			files = (
 				15BBC6E21F7D035A00A229BC /* ElementCategory.swift in Sources */,
 				15BBC6E51F7D0EC900A229BC /* Symbol.swift in Sources */,
+				15BBC6FC1F7D344500A229BC /* UICollectionView+Extensions.swift in Sources */,
 				1501F6C91F792A18000DCE0B /* ViewController.swift in Sources */,
 				15BBC6F81F7D333500A229BC /* NibLoadable.swift in Sources */,
 				15BBC6E81F7D0F9600A229BC /* SymbolGroup.swift in Sources */,
 				15BBC6F51F7D32E000A229BC /* Reusable.swift in Sources */,
+				15BBC6FF1F7D345D00A229BC /* UITableView+Extensions.swift in Sources */,
 				15BBC6F21F7D325100A229BC /* Iteratable.swift in Sources */,
 				1501F6C71F792A18000DCE0B /* AppDelegate.swift in Sources */,
 				15BBC6DC1F7CFFB100A229BC /* Element.swift in Sources */,
@@ -416,10 +434,12 @@
 			files = (
 				15BBC6E31F7D035A00A229BC /* ElementCategory.swift in Sources */,
 				15BBC6E61F7D0EC900A229BC /* Symbol.swift in Sources */,
+				15BBC6FD1F7D344500A229BC /* UICollectionView+Extensions.swift in Sources */,
 				15BBC6DD1F7CFFB100A229BC /* Element.swift in Sources */,
 				15BBC6F91F7D333500A229BC /* NibLoadable.swift in Sources */,
 				15BBC6E91F7D0F9600A229BC /* SymbolGroup.swift in Sources */,
 				15BBC6F61F7D32E000A229BC /* Reusable.swift in Sources */,
+				15BBC7001F7D345D00A229BC /* UITableView+Extensions.swift in Sources */,
 				15BBC6F31F7D325100A229BC /* Iteratable.swift in Sources */,
 				15A542321F792B1A00AFB14E /* KeyboardViewController.swift in Sources */,
 			);
