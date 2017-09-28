@@ -14,6 +14,14 @@
 		1501F6D11F792A19000DCE0B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1501F6CF1F792A19000DCE0B /* LaunchScreen.storyboard */; };
 		15A542321F792B1A00AFB14E /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A542311F792B1A00AFB14E /* KeyboardViewController.swift */; };
 		15A542361F792B1A00AFB14E /* Keyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 15A5422F1F792B1A00AFB14E /* Keyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		15BBC6DC1F7CFFB100A229BC /* Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BBC6DB1F7CFFB100A229BC /* Element.swift */; };
+		15BBC6DD1F7CFFB100A229BC /* Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BBC6DB1F7CFFB100A229BC /* Element.swift */; };
+		15BBC6E21F7D035A00A229BC /* ElementCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BBC6E11F7D035A00A229BC /* ElementCategory.swift */; };
+		15BBC6E31F7D035A00A229BC /* ElementCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BBC6E11F7D035A00A229BC /* ElementCategory.swift */; };
+		15BBC6E51F7D0EC900A229BC /* Symbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BBC6E41F7D0EC900A229BC /* Symbol.swift */; };
+		15BBC6E61F7D0EC900A229BC /* Symbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BBC6E41F7D0EC900A229BC /* Symbol.swift */; };
+		15BBC6E81F7D0F9600A229BC /* SymbolGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BBC6E71F7D0F9600A229BC /* SymbolGroup.swift */; };
+		15BBC6E91F7D0F9600A229BC /* SymbolGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BBC6E71F7D0F9600A229BC /* SymbolGroup.swift */; };
 		67FC87EA54389552C9666C61 /* Pods_Keyboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D99AB0CD5D9709735ACA2D78 /* Pods_Keyboard.framework */; };
 		F8FE752B013B0FB06FA20E40 /* Pods_ChemKeyboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94816A35B5E6AAAC942FEBF0 /* Pods_ChemKeyboard.framework */; };
 /* End PBXBuildFile section */
@@ -54,6 +62,10 @@
 		15A5422F1F792B1A00AFB14E /* Keyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Keyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		15A542311F792B1A00AFB14E /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		15A542331F792B1A00AFB14E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		15BBC6DB1F7CFFB100A229BC /* Element.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Element.swift; sourceTree = "<group>"; };
+		15BBC6E11F7D035A00A229BC /* ElementCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementCategory.swift; sourceTree = "<group>"; };
+		15BBC6E41F7D0EC900A229BC /* Symbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Symbol.swift; sourceTree = "<group>"; };
+		15BBC6E71F7D0F9600A229BC /* SymbolGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolGroup.swift; sourceTree = "<group>"; };
 		94816A35B5E6AAAC942FEBF0 /* Pods_ChemKeyboard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChemKeyboard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		95B32E252AD372118A0E2B80 /* Pods-Keyboard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keyboard.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Keyboard/Pods-Keyboard.debug.xcconfig"; sourceTree = "<group>"; };
 		9E581C5FEAACD12DDB020775 /* Pods-ChemKeyboard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChemKeyboard.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChemKeyboard/Pods-ChemKeyboard.release.xcconfig"; sourceTree = "<group>"; };
@@ -110,6 +122,7 @@
 				1501F6CD1F792A19000DCE0B /* Assets.xcassets */,
 				1501F6CF1F792A19000DCE0B /* LaunchScreen.storyboard */,
 				1501F6D21F792A19000DCE0B /* Info.plist */,
+				15BBC6DA1F7CFF7A00A229BC /* Models */,
 			);
 			path = ChemKeyboard;
 			sourceTree = "<group>";
@@ -121,6 +134,17 @@
 				15A542331F792B1A00AFB14E /* Info.plist */,
 			);
 			path = Keyboard;
+			sourceTree = "<group>";
+		};
+		15BBC6DA1F7CFF7A00A229BC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				15BBC6DB1F7CFFB100A229BC /* Element.swift */,
+				15BBC6E11F7D035A00A229BC /* ElementCategory.swift */,
+				15BBC6E41F7D0EC900A229BC /* Symbol.swift */,
+				15BBC6E71F7D0F9600A229BC /* SymbolGroup.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		9F8E072D38A191C00E59BBEC /* Pods */ = {
@@ -354,8 +378,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15BBC6E21F7D035A00A229BC /* ElementCategory.swift in Sources */,
+				15BBC6E51F7D0EC900A229BC /* Symbol.swift in Sources */,
 				1501F6C91F792A18000DCE0B /* ViewController.swift in Sources */,
+				15BBC6E81F7D0F9600A229BC /* SymbolGroup.swift in Sources */,
 				1501F6C71F792A18000DCE0B /* AppDelegate.swift in Sources */,
+				15BBC6DC1F7CFFB100A229BC /* Element.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +391,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15BBC6E31F7D035A00A229BC /* ElementCategory.swift in Sources */,
+				15BBC6E61F7D0EC900A229BC /* Symbol.swift in Sources */,
+				15BBC6DD1F7CFFB100A229BC /* Element.swift in Sources */,
+				15BBC6E91F7D0F9600A229BC /* SymbolGroup.swift in Sources */,
 				15A542321F792B1A00AFB14E /* KeyboardViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
