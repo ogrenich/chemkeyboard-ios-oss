@@ -6,8 +6,11 @@ target 'ChemKeyboard' do
   use_frameworks!
 
   # Pods for ChemKeyboard
-  pod 'RxSwift', :git => 'https://github.com/ReactiveX/RxSwift.git', :branch => 'rxswift4.0-swift4.0'
-  pod 'RxCocoa', :git => 'https://github.com/ReactiveX/RxSwift.git', :branch => 'rxswift4.0-swift4.0'
+  pod 'RxSwift', '4.0.0-beta.0'
+  pod 'RxCocoa', '4.0.0-beta.0'
+  pod 'RxRealm', '0.7.1'
+  pod 'ObjectMapper+Realm', '0.5'
+  pod 'ObjectMapperAdditions/Realm', '3.0.5'
 
 end
 
@@ -16,7 +19,10 @@ target 'Keyboard' do
   use_frameworks!
 
   # Pods for Keyboard
-  pod 'RxSwift', :git => 'https://github.com/ReactiveX/RxSwift.git', :branch => 'rxswift4.0-swift4.0'
-  pod 'RxCocoa', :git => 'https://github.com/ReactiveX/RxSwift.git', :branch => 'rxswift4.0-swift4.0'
+  pod 'RxSwift', '4.0.0-beta.0'
+  pod 'RxCocoa', '4.0.0-beta.0'
+  pod 'RxRealm', '0.7.1'
+  pod 'ObjectMapper+Realm', '0.5'
+  pod 'ObjectMapperAdditions/Realm', '3.0.5'
 
 end
