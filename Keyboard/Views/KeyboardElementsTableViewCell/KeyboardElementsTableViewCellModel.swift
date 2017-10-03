@@ -13,10 +13,13 @@ class KeyboardElementsTableViewCellModel {
     
     fileprivate let bag = DisposeBag()
     
+    weak var selectedCategory: Variable<ElementCategory?>!
     weak var categories: Variable<[ElementCategory]>!
     
     
-    init(with categories: Variable<[ElementCategory]>) {
+    init(with categories: Variable<[ElementCategory]>,
+         selectedCategory: Variable<ElementCategory?>) {
+        self.selectedCategory = selectedCategory
         self.categories = categories
     }
     

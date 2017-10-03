@@ -96,7 +96,8 @@ extension KeyboardViewController: UITableViewDataSource {
             return cell.configure(with: cellModel)
         case .elements:
             let cell: KeyboardElementsTableViewCell = tableView.dequeueReusableCell()
-            let cellModel = KeyboardElementsTableViewCellModel.init(with: viewModel.categories)
+            let cellModel = KeyboardElementsTableViewCellModel.init(with: viewModel.categories,
+                                                                    selectedCategory: viewModel.selectedCategory)
             return cell.configure(with: cellModel)
         case .symbols:
             let cell: KeyboardSymbolsTableViewCell = tableView.dequeueReusableCell()
