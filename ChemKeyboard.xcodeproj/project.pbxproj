@@ -22,6 +22,10 @@
 		156D00971F7D4A08004C333F /* KeyboardSymbolsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 156D00951F7D4A08004C333F /* KeyboardSymbolsCollectionViewCell.xib */; };
 		156D009B1F7E981D004C333F /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D009A1F7E981D004C333F /* RealmService.swift */; };
 		156D009C1F7E981D004C333F /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D009A1F7E981D004C333F /* RealmService.swift */; };
+		157697811F838C5D0051AD67 /* SymbolService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157697801F838C5D0051AD67 /* SymbolService.swift */; };
+		157697821F838C5D0051AD67 /* SymbolService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157697801F838C5D0051AD67 /* SymbolService.swift */; };
+		157697841F838C690051AD67 /* ElementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157697831F838C690051AD67 /* ElementService.swift */; };
+		157697851F838C690051AD67 /* ElementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157697831F838C690051AD67 /* ElementService.swift */; };
 		15A542321F792B1A00AFB14E /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A542311F792B1A00AFB14E /* KeyboardViewController.swift */; };
 		15A542361F792B1A00AFB14E /* Keyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 15A5422F1F792B1A00AFB14E /* Keyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		15BBC6DC1F7CFFB100A229BC /* Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BBC6DB1F7CFFB100A229BC /* Element.swift */; };
@@ -106,6 +110,8 @@
 		156D00941F7D4A08004C333F /* KeyboardSymbolsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSymbolsCollectionViewCell.swift; sourceTree = "<group>"; };
 		156D00951F7D4A08004C333F /* KeyboardSymbolsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KeyboardSymbolsCollectionViewCell.xib; sourceTree = "<group>"; };
 		156D009A1F7E981D004C333F /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
+		157697801F838C5D0051AD67 /* SymbolService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolService.swift; sourceTree = "<group>"; };
+		157697831F838C690051AD67 /* ElementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementService.swift; sourceTree = "<group>"; };
 		15A5422F1F792B1A00AFB14E /* Keyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Keyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		15A542311F792B1A00AFB14E /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		15A542331F792B1A00AFB14E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -246,6 +252,8 @@
 		156D00981F7E97EC004C333F /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				1576977F1F838C3B0051AD67 /* SymbolService */,
+				1576977E1F838C2B0051AD67 /* ElementService */,
 				156D00991F7E9808004C333F /* RealmService */,
 			);
 			path = Services;
@@ -273,6 +281,22 @@
 				15531AF91F83BA7600D4FA76 /* ChemKeyboard.realm */,
 			);
 			path = Realm;
+			sourceTree = "<group>";
+		};
+		1576977E1F838C2B0051AD67 /* ElementService */ = {
+			isa = PBXGroup;
+			children = (
+				157697831F838C690051AD67 /* ElementService.swift */,
+			);
+			path = ElementService;
+			sourceTree = "<group>";
+		};
+		1576977F1F838C3B0051AD67 /* SymbolService */ = {
+			isa = PBXGroup;
+			children = (
+				157697801F838C5D0051AD67 /* SymbolService.swift */,
+			);
+			path = SymbolService;
 			sourceTree = "<group>";
 		};
 		15A542301F792B1A00AFB14E /* Keyboard */ = {
@@ -653,7 +677,9 @@
 				156D009B1F7E981D004C333F /* RealmService.swift in Sources */,
 				15BBC6FF1F7D345D00A229BC /* UITableView+Extensions.swift in Sources */,
 				15BBC6F21F7D325100A229BC /* Iteratable.swift in Sources */,
+				157697811F838C5D0051AD67 /* SymbolService.swift in Sources */,
 				1501F6C71F792A18000DCE0B /* AppDelegate.swift in Sources */,
+				157697841F838C690051AD67 /* ElementService.swift in Sources */,
 				15BBC6DC1F7CFFB100A229BC /* Element.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -668,6 +694,7 @@
 				156D00961F7D4A08004C333F /* KeyboardSymbolsCollectionViewCell.swift in Sources */,
 				15BBC6FD1F7D344500A229BC /* UICollectionView+Extensions.swift in Sources */,
 				15BBC7101F7D3BD700A229BC /* KeyboardElementsTableViewCell.swift in Sources */,
+				157697821F838C5D0051AD67 /* SymbolService.swift in Sources */,
 				15BBC6DD1F7CFFB100A229BC /* Element.swift in Sources */,
 				15BBC6F91F7D333500A229BC /* NibLoadable.swift in Sources */,
 				15BBC70C1F7D3BC900A229BC /* KeyboardSymbolsTableViewCell.swift in Sources */,
@@ -675,6 +702,7 @@
 				15BBC6E91F7D0F9600A229BC /* SymbolGroup.swift in Sources */,
 				15BBC7171F7D3C0200A229BC /* KeyboardActionsTableViewCellModel.swift in Sources */,
 				15BBC7051F7D3B7E00A229BC /* KeyboardCategoriesTableViewCell.swift in Sources */,
+				157697851F838C690051AD67 /* ElementService.swift in Sources */,
 				15BBC7261F7D446500A229BC /* UITableViewCell+Extensions.swift in Sources */,
 				15BBC7291F7D447C00A229BC /* UICollectionViewCell+Extensions.swift in Sources */,
 				15BBC7191F7D3C1400A229BC /* KeyboardCategoriesTableViewCellModel.swift in Sources */,
