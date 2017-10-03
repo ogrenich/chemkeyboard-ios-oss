@@ -18,9 +18,26 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eAp-H2-Fpw">
+                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
             </view>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="eAp-H2-Fpw" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="2Mc-q9-6J6"/>
+                <constraint firstAttribute="trailing" secondItem="eAp-H2-Fpw" secondAttribute="trailing" id="6Js-AA-9VH"/>
+                <constraint firstItem="eAp-H2-Fpw" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="And-D2-tT2"/>
+                <constraint firstAttribute="bottom" secondItem="eAp-H2-Fpw" secondAttribute="bottom" id="KBq-Mc-Pyj"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <connections>
+                <outlet property="symbolLabel" destination="eAp-H2-Fpw" id="55h-jl-aZT"/>
+            </connections>
         </collectionViewCell>
     </objects>
 </document>

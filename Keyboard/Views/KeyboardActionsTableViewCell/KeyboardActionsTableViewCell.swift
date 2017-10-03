@@ -34,6 +34,7 @@ extension KeyboardActionsTableViewCell {
         
         configureCollectionView()
         
+        bindToViewModel()
         bindViewModel()
         
         return self
@@ -51,11 +52,16 @@ private extension KeyboardActionsTableViewCell {
 
 private extension KeyboardActionsTableViewCell {
     
-    func bindViewModel() {
-        
+    func bindToViewModel() {
+        viewModel.symbolGroups.asDriver()
+            .drive(collectionView.rx.items) { (collectionView, item, symbolGroup) in
+                let cell: KeyboardActionsCollectionViewCell = collectionView.dequeueReusableCell(for: IndexPath(item: item, section: 0))
+                return cell.configure(with: symbolGroup)
+            }
+            .disposed(by: bag)
     }
     
-    func bindToViewModel() {
+    func bindViewModel() {
         
     }
     
@@ -66,7 +72,7 @@ extension KeyboardActionsTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.size.width / 7 , height: 67)
+        return CGSize(width: collectionView.frame.size.width / 8 , height: 56)
     }
     
 }

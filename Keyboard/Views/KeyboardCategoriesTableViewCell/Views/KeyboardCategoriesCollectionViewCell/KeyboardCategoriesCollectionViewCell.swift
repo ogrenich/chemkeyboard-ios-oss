@@ -9,10 +9,18 @@
 import UIKit
 
 class KeyboardCategoriesCollectionViewCell: UICollectionViewCell {
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    
+}
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+extension KeyboardCategoriesCollectionViewCell {
+    
+    @discardableResult
+    func configure(with category: ElementCategory) -> KeyboardCategoriesCollectionViewCell {
+        nameLabel.text = category.name
+        
+        return self
     }
-
+    
 }

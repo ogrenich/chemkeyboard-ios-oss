@@ -26,6 +26,7 @@ class ElementCategory: Object, Mappable {
     func mapping(map: Map) {
         name        <- map["name"]
         color       <- map["color"]
+        
         elements    <- (map["elements"], ListTransform<Element>())
     }
     

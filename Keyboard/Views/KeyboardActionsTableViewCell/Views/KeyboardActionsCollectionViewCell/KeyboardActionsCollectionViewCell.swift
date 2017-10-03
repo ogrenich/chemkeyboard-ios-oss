@@ -9,10 +9,18 @@
 import UIKit
 
 class KeyboardActionsCollectionViewCell: UICollectionViewCell {
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    
+}
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+extension KeyboardActionsCollectionViewCell {
+    
+    @discardableResult
+    func configure(with group: SymbolGroup) -> KeyboardActionsCollectionViewCell {
+        titleLabel.text = group.name
+        
+        return self
     }
-
+    
 }

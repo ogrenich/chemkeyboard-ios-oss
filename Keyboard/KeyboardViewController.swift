@@ -33,6 +33,7 @@ class KeyboardViewController: UIInputViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         configureTableView()
     }
 
@@ -58,6 +59,7 @@ private extension KeyboardViewController {
         tableView.heightAnchor.constraint(equalToConstant: 300).isActive = true
         
         view.addSubview(tableView)
+        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
@@ -121,10 +123,14 @@ extension KeyboardViewController: UITableViewDelegate {
         }
         
         switch section {
+        case .categories:
+            return 36
+        case .elements:
+            return 156
+        case .symbols:
+            return 52
         case .actions:
-            return 67
-        default:
-            return 44
+            return 56
         }
     }
     

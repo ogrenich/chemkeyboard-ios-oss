@@ -34,6 +34,7 @@ extension KeyboardSymbolsTableViewCell {
         
         configureCollectionView()
         
+        bindToViewModel()
         bindViewModel()
         
         return self
@@ -51,12 +52,20 @@ private extension KeyboardSymbolsTableViewCell {
 
 private extension KeyboardSymbolsTableViewCell {
     
-    func bindViewModel() {
+    func bindToViewModel() {
         
     }
     
-    func bindToViewModel() {
-        
+    func bindViewModel() {
+        viewModel.selectedSymbolGroup.asDriver()
+            .filter { $0 != nil }
+            .map { $0! }
+            .map { Array($0.symbols) }
+            .drive(collectionView.rx.items) { (collectionView, item, symbol) in
+                let cell: KeyboardSymbolsCollectionViewCell = collectionView.dequeueReusableCell(for: IndexPath(item: item, section: 0))
+                return cell.configure(with: symbol)
+            }
+            .disposed(by: bag)
     }
     
 }

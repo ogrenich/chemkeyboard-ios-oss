@@ -34,6 +34,7 @@ extension KeyboardCategoriesTableViewCell {
         
         configureCollectionView()
         
+        bindToViewModel()
         bindViewModel()
         
         return self
@@ -51,12 +52,17 @@ private extension KeyboardCategoriesTableViewCell {
 
 private extension KeyboardCategoriesTableViewCell {
     
-    func bindViewModel() {
+    func bindToViewModel() {
         
     }
     
-    func bindToViewModel() {
-        
+    func bindViewModel() {
+        viewModel.categories.asDriver()
+            .drive(collectionView.rx.items) { (collectionView, item, category) in
+                let cell: KeyboardCategoriesCollectionViewCell = collectionView.dequeueReusableCell(for: IndexPath(item: item, section: 0))
+                return cell.configure(with: category)
+            }
+            .disposed(by: bag)
     }
     
 }

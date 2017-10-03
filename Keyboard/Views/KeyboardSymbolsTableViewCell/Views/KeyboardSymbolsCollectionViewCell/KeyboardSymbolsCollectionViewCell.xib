@@ -18,9 +18,26 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eU1-dX-y46">
+                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
             </view>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="eU1-dX-y46" secondAttribute="trailing" id="Qm7-iz-0rs"/>
+                <constraint firstItem="eU1-dX-y46" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="gnC-Dm-V82"/>
+                <constraint firstItem="eU1-dX-y46" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="oS4-rk-iMi"/>
+                <constraint firstAttribute="bottom" secondItem="eU1-dX-y46" secondAttribute="bottom" id="qkB-XS-fjP"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <connections>
+                <outlet property="symbolLabel" destination="eU1-dX-y46" id="uO5-so-B0p"/>
+            </connections>
         </collectionViewCell>
     </objects>
 </document>

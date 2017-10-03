@@ -9,10 +9,18 @@
 import UIKit
 
 class KeyboardSymbolsCollectionViewCell: UICollectionViewCell {
+    
+    @IBOutlet weak var symbolLabel: UILabel!
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+}
+
+extension KeyboardSymbolsCollectionViewCell {
+    
+    @discardableResult
+    func configure(with symbol: Symbol) -> KeyboardSymbolsCollectionViewCell {
+        symbolLabel.text = symbol.value
+        
+        return self
     }
-
+    
 }
