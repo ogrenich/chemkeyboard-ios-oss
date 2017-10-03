@@ -26,23 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 private extension AppDelegate {
     
     func setUpRealm() {
-        performRealmMigration()
-        printRealmPath()
-    }
-    
-    func performRealmMigration() {
-        Realm.Configuration.defaultConfiguration = Realm.Configuration(
-            schemaVersion: 1,
-            migrationBlock: { migration, oldSchemaVersion in
-                if oldSchemaVersion < 1 { // the old (default) version is 0
-                    
-                }
-            }
-        )
-    }
-    
-    func printRealmPath() {
-        print(Realm.Configuration.defaultConfiguration.fileURL ?? "Realm not found")
+        RealmService.instance.setUpRealm()
+        RealmService.instance.performMigration()
+        RealmService.instance.printRealmURL()
     }
     
 }

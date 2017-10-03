@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import RealmSwift
 
 class KeyboardViewModel {
     
@@ -18,5 +19,18 @@ class KeyboardViewModel {
     
     let categories = Variable<[ElementCategory]>([])
     let symbolGroups = Variable<[SymbolGroup]>([])
+    
+    init() {
+        setUpRealm()
+    }
+    
+}
+
+private extension KeyboardViewModel {
+    
+    func setUpRealm() {
+        RealmService.instance.setUpRealm()
+        RealmService.instance.performMigration()
+    }
     
 }
