@@ -7,5 +7,25 @@
 //
 
 import Foundation
+import RealmSwift
+import ObjectMapper
+import ObjectMapper_Realm
 
-typealias SymbolGroup = [Symbol]
+class SymbolGroup: Object, Mappable {
+    
+    @objc dynamic var name: String? = nil
+    
+    var symbols = List<Symbol>()
+    
+    
+    required convenience init?(map: Map) {
+        self.init()
+    }
+    
+    func mapping(map: Map) {
+        name        <- map["name"]
+        
+        symbols     <- (map["symbols"], ListTransform<Symbol>())
+    }
+    
+}
