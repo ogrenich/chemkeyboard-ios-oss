@@ -18,6 +18,8 @@
 		156D00921F7D49DC004C333F /* KeyboardElementsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 156D00901F7D49DC004C333F /* KeyboardElementsCollectionViewCell.xib */; };
 		156D00961F7D4A08004C333F /* KeyboardSymbolsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D00941F7D4A08004C333F /* KeyboardSymbolsCollectionViewCell.swift */; };
 		156D00971F7D4A08004C333F /* KeyboardSymbolsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 156D00951F7D4A08004C333F /* KeyboardSymbolsCollectionViewCell.xib */; };
+		1576977C1F8385640051AD67 /* ChemKeyboard.realm in Resources */ = {isa = PBXBuildFile; fileRef = 1576977B1F8381AF0051AD67 /* ChemKeyboard.realm */; };
+		1576977D1F8385640051AD67 /* ChemKeyboard.realm in Resources */ = {isa = PBXBuildFile; fileRef = 1576977B1F8381AF0051AD67 /* ChemKeyboard.realm */; };
 		15A542321F792B1A00AFB14E /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A542311F792B1A00AFB14E /* KeyboardViewController.swift */; };
 		15A542361F792B1A00AFB14E /* Keyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 15A5422F1F792B1A00AFB14E /* Keyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		15BBC6DC1F7CFFB100A229BC /* Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BBC6DB1F7CFFB100A229BC /* Element.swift */; };
@@ -100,6 +102,7 @@
 		156D00901F7D49DC004C333F /* KeyboardElementsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KeyboardElementsCollectionViewCell.xib; sourceTree = "<group>"; };
 		156D00941F7D4A08004C333F /* KeyboardSymbolsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSymbolsCollectionViewCell.swift; sourceTree = "<group>"; };
 		156D00951F7D4A08004C333F /* KeyboardSymbolsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KeyboardSymbolsCollectionViewCell.xib; sourceTree = "<group>"; };
+		1576977B1F8381AF0051AD67 /* ChemKeyboard.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = ChemKeyboard.realm; sourceTree = "<group>"; };
 		15A5422F1F792B1A00AFB14E /* Keyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Keyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		15A542311F792B1A00AFB14E /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		15A542331F792B1A00AFB14E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -188,6 +191,7 @@
 				15BBC6FA1F7D33EB00A229BC /* Extensions */,
 				15BBC6DA1F7CFF7A00A229BC /* Models */,
 				15BBC6F01F7D323400A229BC /* Protocols */,
+				156D009D1F7E9E5C004C333F /* Resources */,
 			);
 			path = ChemKeyboard;
 			sourceTree = "<group>";
@@ -233,6 +237,22 @@
 				156D00951F7D4A08004C333F /* KeyboardSymbolsCollectionViewCell.xib */,
 			);
 			path = KeyboardSymbolsCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		156D009D1F7E9E5C004C333F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				156D009E1F7E9E7A004C333F /* Realm */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		156D009E1F7E9E7A004C333F /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				1576977B1F8381AF0051AD67 /* ChemKeyboard.realm */,
+			);
+			path = Realm;
 			sourceTree = "<group>";
 		};
 		15A542301F792B1A00AFB14E /* Keyboard */ = {
@@ -469,6 +489,7 @@
 				1501F6D11F792A19000DCE0B /* LaunchScreen.storyboard in Resources */,
 				1501F6CE1F792A19000DCE0B /* Assets.xcassets in Resources */,
 				1501F6CC1F792A19000DCE0B /* Main.storyboard in Resources */,
+				1576977C1F8385640051AD67 /* ChemKeyboard.realm in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,6 +505,7 @@
 				156D00921F7D49DC004C333F /* KeyboardElementsCollectionViewCell.xib in Resources */,
 				15BBC7231F7D43BB00A229BC /* KeyboardActionsCollectionViewCell.xib in Resources */,
 				156D00971F7D4A08004C333F /* KeyboardSymbolsCollectionViewCell.xib in Resources */,
+				1576977D1F8385640051AD67 /* ChemKeyboard.realm in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
