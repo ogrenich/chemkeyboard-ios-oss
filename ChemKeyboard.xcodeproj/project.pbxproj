@@ -105,6 +105,7 @@
 		15BBC7261F7D446500A229BC /* UITableViewCell+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BBC7241F7D446400A229BC /* UITableViewCell+Extensions.swift */; };
 		15BBC7281F7D447C00A229BC /* UICollectionViewCell+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BBC7271F7D447C00A229BC /* UICollectionViewCell+Extensions.swift */; };
 		15BBC7291F7D447C00A229BC /* UICollectionViewCell+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BBC7271F7D447C00A229BC /* UICollectionViewCell+Extensions.swift */; };
+		5A9396F81F83DC6900B0E546 /* KeyboardElementsCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9396F71F83DC6900B0E546 /* KeyboardElementsCollectionViewLayout.swift */; };
 		5ABE8D8C1F854EEC0029E30B /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABE8D8B1F854EEC0029E30B /* String+Extensions.swift */; };
 		5ABE8D8D1F854F220029E30B /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABE8D8B1F854EEC0029E30B /* String+Extensions.swift */; };
 		5AC0F7B91F866463004ECF6E /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC0F7B81F866463004ECF6E /* UIView+Extensions.swift */; };
@@ -207,6 +208,7 @@
 		15BBC7211F7D43BB00A229BC /* KeyboardActionsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KeyboardActionsCollectionViewCell.xib; sourceTree = "<group>"; };
 		15BBC7241F7D446400A229BC /* UITableViewCell+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extensions.swift"; sourceTree = "<group>"; };
 		15BBC7271F7D447C00A229BC /* UICollectionViewCell+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+Extensions.swift"; sourceTree = "<group>"; };
+		5A9396F71F83DC6900B0E546 /* KeyboardElementsCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardElementsCollectionViewLayout.swift; sourceTree = "<group>"; };
 		5ABE8D8B1F854EEC0029E30B /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		5AC0F7B81F866463004ECF6E /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		5AC0F7BF1F866BCF004ECF6E /* ChemKeyboard.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = ChemKeyboard.realm; sourceTree = "<group>"; };
@@ -483,6 +485,7 @@
 		15BBC7071F7D3B9200A229BC /* KeyboardElementsTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				5A9396F71F83DC6900B0E546 /* KeyboardElementsCollectionViewLayout.swift */,
 				15BBC70E1F7D3BD700A229BC /* KeyboardElementsTableViewCell.swift */,
 				15BBC70F1F7D3BD700A229BC /* KeyboardElementsTableViewCell.xib */,
 				15BBC71A1F7D3C3400A229BC /* KeyboardElementsTableViewCellModel.swift */,
@@ -870,6 +873,7 @@
 				15BBC6F61F7D32E000A229BC /* Reusable.swift in Sources */,
 				156D008A1F7D48A0004C333F /* KeyboardCategoriesCollectionViewCell.swift in Sources */,
 				156D00911F7D49DC004C333F /* KeyboardElementsCollectionViewCell.swift in Sources */,
+				5A9396F81F83DC6900B0E546 /* KeyboardElementsCollectionViewLayout.swift in Sources */,
 				15BBC7001F7D345D00A229BC /* UITableView+Extensions.swift in Sources */,
 				15BBC6F31F7D325100A229BC /* Iteratable.swift in Sources */,
 				15A542321F792B1A00AFB14E /* KeyboardViewController.swift in Sources */,
