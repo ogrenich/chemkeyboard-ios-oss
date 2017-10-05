@@ -16,7 +16,7 @@ class KeyboardElementsTableViewCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     
     fileprivate var bag = DisposeBag()
-    fileprivate weak var viewModel: KeyboardElementsTableViewCellModel!
+    fileprivate var viewModel: KeyboardElementsTableViewCellModel!
     
     
     override func prepareForReuse() {

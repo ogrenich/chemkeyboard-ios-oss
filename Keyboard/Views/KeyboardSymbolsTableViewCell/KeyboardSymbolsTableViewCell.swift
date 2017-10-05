@@ -16,7 +16,7 @@ class KeyboardSymbolsTableViewCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     
     fileprivate var bag = DisposeBag()
-    fileprivate weak var viewModel: KeyboardSymbolsTableViewCellModel!
+    fileprivate var viewModel: KeyboardSymbolsTableViewCellModel!
     
     
     override func prepareForReuse() {
