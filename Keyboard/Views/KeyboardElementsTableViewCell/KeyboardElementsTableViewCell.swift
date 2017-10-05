@@ -57,15 +57,27 @@ private extension KeyboardElementsTableViewCell {
     }
     
     func bindViewModel() {
-        viewModel.selectedCategory.asDriver()
-            .filter { $0 != nil }
-            .map { $0! }
-            .map { Array($0.elements) }
-            .drive(collectionView.rx.items) { (collectionView, item, element) in
-                let cell: KeyboardElementsCollectionViewCell = collectionView.dequeueReusableCell(for: IndexPath(item: item, section: 0))
-                return cell.configure(with: element)
-            }
-            .disposed(by: bag)
+        
+    }
+    
+}
+
+extension KeyboardElementsTableViewCell: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
+        return viewModel.categories.value[section].elements.count
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return viewModel.categories.value.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell: KeyboardElementsCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+        let element = viewModel.categories.value[indexPath.section].elements.toArray()[indexPath.item]
+        return cell.configure(with: element)
     }
     
 }
