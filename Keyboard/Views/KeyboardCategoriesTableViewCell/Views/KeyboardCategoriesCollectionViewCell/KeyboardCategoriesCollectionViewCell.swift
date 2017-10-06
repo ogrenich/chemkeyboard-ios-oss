@@ -10,15 +10,24 @@ import UIKit
 
 class KeyboardCategoriesCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var selectedBackgroundImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    
+    override var isSelected: Bool {
+        didSet {
+            selectedBackgroundImageView.isHidden = !isSelected
+        }
+    }
     
 }
 
 extension KeyboardCategoriesCollectionViewCell {
     
     @discardableResult
-    func configure(with category: ElementCategory) -> KeyboardCategoriesCollectionViewCell {
+    func configure(with category: ElementCategory,
+                   selected: Bool) -> KeyboardCategoriesCollectionViewCell {
         nameLabel.text = category.name
+        isSelected = selected
         
         return self
     }
