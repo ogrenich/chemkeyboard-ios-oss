@@ -25,6 +25,7 @@ class KeyboardViewModel {
         setUpRealm()
         
         bindSelf()
+        bindToOutputs()
     }
     
 }
@@ -46,11 +47,6 @@ private extension KeyboardViewModel {
             .bind(to: categories)
             .disposed(by: bag)
         
-        ElementService.instance.categories.asObservable()
-            .map { $0[6] }
-            .bind(to: selectedCategory)
-            .disposed(by: bag)
-        
         SymbolService.instance.groups.asObservable()
             .bind(to: symbolGroups)
             .disposed(by: bag)
@@ -58,6 +54,13 @@ private extension KeyboardViewModel {
         SymbolService.instance.groups.asObservable()
             .map { $0.first }
             .bind(to: selectedSymbolGroup)
+            .disposed(by: bag)
+    }
+    
+    func bindToOutputs() {
+        categories.asObservable()
+            .map { $0.first }
+            .bind(to: selectedCategory)
             .disposed(by: bag)
     }
     
