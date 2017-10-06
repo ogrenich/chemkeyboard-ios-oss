@@ -42,6 +42,7 @@ private extension KeyboardViewModel {
     
     func bindSelf() {
         ElementService.instance.categories.asObservable()
+            .map { $0.filter { $0.elements.count > 0 } }
             .bind(to: categories)
             .disposed(by: bag)
         
