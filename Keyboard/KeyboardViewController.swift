@@ -21,6 +21,7 @@ private extension KeyboardViewController {
 class KeyboardViewController: UIInputViewController {
     
     lazy var tableView = UITableView()
+    var tableViewHeightConstraint: NSLayoutConstraint!
     
     fileprivate var bag = DisposeBag()
     fileprivate let viewModel = KeyboardViewModel()
@@ -35,6 +36,8 @@ class KeyboardViewController: UIInputViewController {
         super.viewDidLoad()
         
         configureTableView()
+        
+        bindViewModel()
     }
 
 }
@@ -56,7 +59,8 @@ private extension KeyboardViewController {
         tableView.alwaysBounceVertical = false
 
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        tableViewHeightConstraint = tableView.heightAnchor.constraint(equalToConstant: 300)
+        tableViewHeightConstraint.isActive = true
         
         view.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -69,6 +73,35 @@ private extension KeyboardViewController {
             .register(KeyboardElementsTableViewCell.self)
             .register(KeyboardSymbolsTableViewCell.self)
             .register(KeyboardActionsTableViewCell.self)
+    }
+    
+}
+
+private extension KeyboardViewController {
+    
+    func bindViewModel() {
+        viewModel.selectedSymbolGroup.asDriver()
+            .map {
+                guard
+                    let selectedSymbolGroup = $0,
+                    let numberOfSymbolsInLine = selectedSymbolGroup.numberOfSymbolsInLine.value
+                else {
+                    return 300 - 52
+                }
+
+                let numberOfLines = (CGFloat(selectedSymbolGroup.symbols.count) / CGFloat(numberOfSymbolsInLine)).rounded(.up)
+                return (300 - 52) + (numberOfLines * 44) + ((numberOfLines - 1) * 1) + 8
+            }
+            .drive(tableViewHeightConstraint.rx.constant)
+            .disposed(by: bag)
+        
+        viewModel.selectedSymbolGroup.asDriver()
+            .drive(onNext: { [weak self] _ in
+                DispatchQueue.main.async { [weak self] in
+                    self?.tableView.reloadData()
+                }
+            })
+            .disposed(by: bag)
     }
     
 }
@@ -128,7 +161,15 @@ extension KeyboardViewController: UITableViewDelegate {
         case .elements:
             return 156
         case .symbols:
-            return 52
+            guard
+                let selectedSymbolGroup = viewModel.selectedSymbolGroup.value,
+                let numberOfSymbolsInLine = selectedSymbolGroup.numberOfSymbolsInLine.value
+            else {
+                return CGFloat.leastNonzeroMagnitude
+            }
+            
+            let numberOfLines = (CGFloat(selectedSymbolGroup.symbols.count) / CGFloat(numberOfSymbolsInLine)).rounded(.up)
+            return (numberOfLines * 44) + ((numberOfLines - 1) * 1) + 8
         case .actions:
             return 56
         }
