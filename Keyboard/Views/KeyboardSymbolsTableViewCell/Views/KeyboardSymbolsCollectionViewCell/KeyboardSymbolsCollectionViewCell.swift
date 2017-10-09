@@ -17,8 +17,9 @@ class KeyboardSymbolsCollectionViewCell: UICollectionViewCell {
 extension KeyboardSymbolsCollectionViewCell {
     
     @discardableResult
-    func configure(with symbol: Symbol) -> KeyboardSymbolsCollectionViewCell {
+    func configure(with symbol: Symbol, corners: UIRectCorner = []) -> KeyboardSymbolsCollectionViewCell {
         symbolLabel.text = symbol.value
+        roundCorners(corners: corners, radius: 4)
         
         return self
     }
