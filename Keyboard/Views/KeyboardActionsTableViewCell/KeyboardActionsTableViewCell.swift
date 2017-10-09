@@ -53,16 +53,18 @@ private extension KeyboardActionsTableViewCell {
 private extension KeyboardActionsTableViewCell {
     
     func bindToViewModel() {
+        collectionView.rx.modelSelected(SymbolGroup.self)
+            .bind(to: viewModel.selectedSymbolGroup)
+            .disposed(by: bag)
+    }
+    
+    func bindViewModel() {
         viewModel.symbolGroups.asDriver()
             .drive(collectionView.rx.items) { (collectionView, item, symbolGroup) in
                 let cell: KeyboardActionsCollectionViewCell = collectionView.dequeueReusableCell(for: IndexPath(item: item, section: 0))
                 return cell.configure(with: symbolGroup)
             }
             .disposed(by: bag)
-    }
-    
-    func bindViewModel() {
-        
     }
     
 }
