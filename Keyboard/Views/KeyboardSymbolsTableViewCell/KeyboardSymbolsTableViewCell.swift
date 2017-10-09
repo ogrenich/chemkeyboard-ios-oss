@@ -61,11 +61,55 @@ private extension KeyboardSymbolsTableViewCell {
             .filter { $0 != nil }
             .map { $0! }
             .map { Array($0.symbols) }
-            .drive(collectionView.rx.items) { (collectionView, item, symbol) in
+            .drive(collectionView.rx.items) { [weak self] (collectionView, item, symbol) in
                 let cell: KeyboardSymbolsCollectionViewCell = collectionView.dequeueReusableCell(for: IndexPath(item: item, section: 0))
-                return cell.configure(with: symbol)
+                
+                guard let selectedSymbolGroup = self?.viewModel.selectedSymbolGroup.value else {
+                    return cell.configure(with: symbol)
+                }
+                
+                let numberOfSymbols = selectedSymbolGroup.symbols.count
+                let numberOfSymbolsInLine = selectedSymbolGroup.numberOfSymbolsInLine.value ?? 10
+                
+                var corners: UIRectCorner = []
+                
+                if item == 0 {
+                    corners.insert(.topLeft)
+                }
+                
+                if item == numberOfSymbolsInLine - 1 {
+                    corners.insert(.topRight)
+                }
+                
+                if item == numberOfSymbols - numberOfSymbolsInLine {
+                    corners.insert(.bottomLeft)
+                }
+                
+                if item == numberOfSymbols - 1 {
+                    corners.insert(.bottomRight)
+                }
+                
+                return cell.configure(with: symbol, corners: corners)
             }
             .disposed(by: bag)
+    }
+    
+}
+
+extension KeyboardSymbolsTableViewCell: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        guard let layout = collectionViewLayout as? UICollectionViewFlowLayout else {
+            return CGSize.zero
+        }
+        
+        let sectionsInsets = layout.sectionInset.left + layout.sectionInset.right
+        let numberOfSymbolsInLine = viewModel.selectedSymbolGroup.value?.numberOfSymbolsInLine.value ?? 10
+        let interitemsSpacing = layout.minimumInteritemSpacing * CGFloat(numberOfSymbolsInLine - 1)
+        
+        return CGSize(width: (collectionView.frame.size.width - sectionsInsets - interitemsSpacing) / CGFloat(numberOfSymbolsInLine), height: 44)
     }
     
 }
