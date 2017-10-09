@@ -53,7 +53,7 @@ class KeyboardElementsCollectionViewLayout: UICollectionViewLayout {
                 let width: CGFloat = cellWidth + 2 * cellPadding
                 let height: CGFloat = cellHeight + 2 * cellPadding
                 let frame = CGRect(x: cellPadding + width * CGFloat(columnNumber),
-                                   y: cellPadding + height * CGFloat(rowNumber),
+                                   y: height * CGFloat(rowNumber),
                                    width: width, height: height)
                 let insetFrame = frame.insetBy(dx: cellPadding, dy: cellPadding)
                 
