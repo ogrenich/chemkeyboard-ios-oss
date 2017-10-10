@@ -71,7 +71,18 @@ private extension KeyboardElementsTableViewCell {
     }
     
     func bindViewModel() {
-        
+        viewModel.selectedCategory.asDriver()
+            .filter { $0 != nil }
+            .map { $0! }
+            .withLatestFrom(viewModel.categories.asDriver()) { ($0, $1) }
+            .map { $1.index(of: $0) }
+            .filter { $0 != nil }
+            .map { $0! }
+            .drive(onNext: { [weak self] section in
+                self?.collectionView.scrollToItem(at: IndexPath(item: 0, section: section),
+                                                  at: .centeredHorizontally, animated: true)
+            })
+            .disposed(by: bag)
     }
     
 }
