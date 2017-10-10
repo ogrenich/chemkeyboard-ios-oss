@@ -6,6 +6,8 @@ target 'ChemKeyboard' do
   use_frameworks!
 
   # Pods for ChemKeyboard
+  pod 'Reveal-SDK', :configurations => ['Debug']
+  
   pod 'RxSwift', '4.0.0-beta.0'
   pod 'RxCocoa', '4.0.0-beta.0'
   pod 'RxRealm', '0.7.1'
@@ -19,6 +21,8 @@ target 'Keyboard' do
   use_frameworks!
 
   # Pods for Keyboard
+  pod 'Reveal-SDK', :configurations => ['Debug']
+  
   pod 'RxSwift', '4.0.0-beta.0'
   pod 'RxCocoa', '4.0.0-beta.0'
   pod 'RxRealm', '0.7.1'
