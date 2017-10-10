@@ -7,5 +7,20 @@
 //
 
 import Foundation
+import RealmSwift
+import ObjectMapper
 
-typealias Symbol = String
+class Symbol: Object, Mappable {
+    
+    @objc dynamic var value: String? = nil
+    
+    
+    required convenience init?(map: Map) {
+        self.init()
+    }
+    
+    func mapping(map: Map) {
+        value   <- map["value"]
+    }
+    
+}
