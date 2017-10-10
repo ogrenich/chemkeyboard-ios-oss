@@ -23,6 +23,10 @@ class KeyboardViewController: UIInputViewController {
     lazy var tableView = UITableView()
     var tableViewHeightConstraint: NSLayoutConstraint!
     
+    let needsReactToSwitchButtonTouchEvent = PublishSubject<Void>()
+    let needsReactToDeleteButtonTouchEvent = PublishSubject<Void>()
+    let needsReactToSimpleButtonTouchEvent = PublishSubject<Symbol?>()
+    
     fileprivate var bag = DisposeBag()
     fileprivate let viewModel = KeyboardViewModel()
     
@@ -37,6 +41,7 @@ class KeyboardViewController: UIInputViewController {
         
         configureTableView()
         
+        bindSelf()
         bindViewModel()
     }
 
@@ -78,6 +83,26 @@ private extension KeyboardViewController {
 }
 
 private extension KeyboardViewController {
+    
+    func bindSelf() {
+        needsReactToSwitchButtonTouchEvent
+            .bind { [weak self] in
+                self?.advanceToNextInputMode()
+            }
+            .disposed(by: bag)
+        
+        needsReactToDeleteButtonTouchEvent
+            .bind { [weak self] in
+                self?.textDocumentProxy.deleteBackward()
+            }
+            .disposed(by: bag)
+        
+        needsReactToSimpleButtonTouchEvent
+            .bind { [weak self] symbol in
+                self?.textDocumentProxy.insertText(symbol?.value ?? "")
+            }
+            .disposed(by: bag)
+    }
     
     func bindViewModel() {
         viewModel.selectedSymbolGroup.asDriver()
@@ -133,16 +158,20 @@ extension KeyboardViewController: UITableViewDataSource {
             let cell: KeyboardElementsTableViewCell = tableView.dequeueReusableCell()
             let cellModel = KeyboardElementsTableViewCellModel.init(with: viewModel.categories,
                                                                     selectedCategory: viewModel.selectedCategory)
-            return cell.configure(with: cellModel)
+            return cell.configure(with: cellModel,
+                                  needsReactToSimpleButtonTouchEvent: needsReactToSimpleButtonTouchEvent)
         case .symbols:
             let cell: KeyboardSymbolsTableViewCell = tableView.dequeueReusableCell()
             let cellModel = KeyboardSymbolsTableViewCellModel.init(with: viewModel.selectedSymbolGroup)
-            return cell.configure(with: cellModel)
+            return cell.configure(with: cellModel,
+                                  needsReactToSimpleButtonTouchEvent: needsReactToSimpleButtonTouchEvent)
         case .actions:
             let cell: KeyboardActionsTableViewCell = tableView.dequeueReusableCell()
             let cellModel = KeyboardActionsTableViewCellModel.init(with: viewModel.symbolGroups,
                                                                    selectedSymbolGroup: viewModel.selectedSymbolGroup)
-            return cell.configure(with: cellModel)
+            return cell.configure(with: cellModel,
+                                  needsReactToSwitchButtonTouchEvent: needsReactToSwitchButtonTouchEvent,
+                                  needsReactToDeleteButtonTouchEvent: needsReactToDeleteButtonTouchEvent)
         }
     }
     

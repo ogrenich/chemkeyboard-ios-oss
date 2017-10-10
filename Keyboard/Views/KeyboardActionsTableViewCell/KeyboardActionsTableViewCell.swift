@@ -14,6 +14,8 @@ import RxCocoa
 class KeyboardActionsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    fileprivate weak var needsReactToSwitchButtonTouchEvent: PublishSubject<Void>!
+    fileprivate weak var needsReactToDeleteButtonTouchEvent: PublishSubject<Void>!
     
     fileprivate var bag = DisposeBag()
     fileprivate var viewModel: KeyboardActionsTableViewCellModel!
@@ -29,11 +31,16 @@ class KeyboardActionsTableViewCell: UITableViewCell {
 extension KeyboardActionsTableViewCell {
     
     @discardableResult
-    func configure(with viewModel: KeyboardActionsTableViewCellModel) -> KeyboardActionsTableViewCell {
+    func configure(with viewModel: KeyboardActionsTableViewCellModel,
+                   needsReactToSwitchButtonTouchEvent: PublishSubject<Void>,
+                   needsReactToDeleteButtonTouchEvent: PublishSubject<Void>) -> KeyboardActionsTableViewCell {
         self.viewModel = viewModel
+        self.needsReactToSwitchButtonTouchEvent = needsReactToSwitchButtonTouchEvent
+        self.needsReactToDeleteButtonTouchEvent = needsReactToDeleteButtonTouchEvent
         
         configureCollectionView()
         
+        bindSelf()
         bindToViewModel()
         bindViewModel()
         
@@ -51,6 +58,16 @@ private extension KeyboardActionsTableViewCell {
 }
 
 private extension KeyboardActionsTableViewCell {
+    
+    func bindSelf() {
+        switchButton.rx.tap
+            .bind(to: needsReactToSwitchButtonTouchEvent)
+            .disposed(by: bag)
+        
+        deleteButton.rx.tap
+            .bind(to: needsReactToDeleteButtonTouchEvent)
+            .disposed(by: bag)
+    }
     
     func bindToViewModel() {
         collectionView.rx.modelSelected(SymbolGroup.self)

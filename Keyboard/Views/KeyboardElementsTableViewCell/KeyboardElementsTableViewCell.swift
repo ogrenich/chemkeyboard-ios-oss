@@ -15,6 +15,8 @@ class KeyboardElementsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    fileprivate weak var needsReactToSimpleButtonTouchEvent: PublishSubject<Symbol?>!
+    
     fileprivate var bag = DisposeBag()
     fileprivate var viewModel: KeyboardElementsTableViewCellModel!
     
@@ -29,11 +31,14 @@ class KeyboardElementsTableViewCell: UITableViewCell {
 extension KeyboardElementsTableViewCell {
     
     @discardableResult
-    func configure(with viewModel: KeyboardElementsTableViewCellModel) -> KeyboardElementsTableViewCell {
+    func configure(with viewModel: KeyboardElementsTableViewCellModel,
+                   needsReactToSimpleButtonTouchEvent: PublishSubject<Symbol?>) -> KeyboardElementsTableViewCell {
         self.viewModel = viewModel
+        self.needsReactToSimpleButtonTouchEvent = needsReactToSimpleButtonTouchEvent
         
         configureCollectionView()
         
+        bindSelf()
         bindToViewModel()
         bindViewModel()
         
@@ -51,6 +56,15 @@ private extension KeyboardElementsTableViewCell {
 }
 
 private extension KeyboardElementsTableViewCell {
+    
+    func bindSelf() {
+        collectionView.rx.itemSelected
+            .map { [weak self] in
+                self?.viewModel.categories.value[$0.section].elements[$0.item].symbol
+            }
+            .bind(to: needsReactToSimpleButtonTouchEvent)
+            .disposed(by: bag)
+    }
     
     func bindToViewModel() {
         
