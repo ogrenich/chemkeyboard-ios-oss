@@ -123,7 +123,9 @@ private extension KeyboardViewController {
         viewModel.selectedSymbolGroup.asDriver()
             .drive(onNext: { [weak self] _ in
                 DispatchQueue.main.async { [weak self] in
-                    self?.tableView.reloadData()
+                    UIView.performWithoutAnimation {
+                        self?.tableView.reloadSections(IndexSet(integersIn: 2...2), with: .none)
+                    }
                 }
             })
             .disposed(by: bag)
