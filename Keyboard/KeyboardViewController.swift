@@ -93,7 +93,7 @@ private extension KeyboardViewController {
         
         needsReactToDeleteButtonTouchEvent
             .bind { [weak self] in
-                self?.textDocumentProxy.deleteBackward()
+                self?.deleteLastSymbol()
             }
             .disposed(by: bag)
         
@@ -203,6 +203,30 @@ extension KeyboardViewController: UITableViewDelegate {
             return (numberOfLines * 44) + ((numberOfLines - 1) * 1) + 8
         case .actions:
             return 56
+        }
+    }
+    
+}
+
+extension KeyboardViewController {
+    
+    func deleteLastSymbol() {
+        var lengthOfSymbol = 1
+        
+        if let context = textDocumentProxy.documentContextBeforeInput {
+            let pattern = "([A-Z][a-z]*)"
+            let regex = try! NSRegularExpression(pattern: pattern, options: [])
+            let matches = regex.matches(in: context, options: [],
+                                        range: NSRange(location: 0,
+                                                       length: context.characters.count))
+            if let last = matches.last,
+                last.range.location + last.range.length == context.characters.count {
+                lengthOfSymbol = last.range.length
+            }
+        }
+        
+        (0..<lengthOfSymbol).forEach { [weak self] _ in
+            self?.textDocumentProxy.deleteBackward()
         }
     }
     
