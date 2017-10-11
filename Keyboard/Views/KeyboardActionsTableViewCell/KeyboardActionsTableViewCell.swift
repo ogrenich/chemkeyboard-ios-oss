@@ -49,11 +49,11 @@ extension KeyboardActionsTableViewCell {
         
         configureCollectionView()
         
+        addGestureRecognizersOnDeleteButton()
+        
         bindSelf()
         bindToViewModel()
         bindViewModel()
-        
-        addGestureRecognizersOnDeleteButton()
         
         return self
     }
