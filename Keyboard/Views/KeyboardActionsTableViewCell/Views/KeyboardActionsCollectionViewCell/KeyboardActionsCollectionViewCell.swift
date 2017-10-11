@@ -46,10 +46,10 @@ private extension KeyboardActionsCollectionViewCell {
             bottomLeftLabel.text = "⇋"
             bottomRightLabel.text = "⇠"
         case "Group 3"?:
-            topLeftLabel.text = "𝞾"
-            topRightLabel.text = "𝞰"
-            bottomLeftLabel.text = "𝞺"
-            bottomRightLabel.text = "𝞛"
+            topLeftLabel.text = "υ"
+            topRightLabel.text = "η"
+            bottomLeftLabel.text = "ρ"
+            bottomRightLabel.text = "Μ"
         case "Group 4"?:
             topLeftLabel.text = "D"
             topRightLabel.text = "M"
