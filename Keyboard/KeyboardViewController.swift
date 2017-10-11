@@ -93,7 +93,7 @@ private extension KeyboardViewController {
         
         needsReactToDeleteButtonTouchEvent
             .bind { [weak self] in
-                self?.deleteLast()
+                self?.deleteLastSymbol()
             }
             .disposed(by: bag)
         
@@ -210,7 +210,7 @@ extension KeyboardViewController: UITableViewDelegate {
 
 extension KeyboardViewController {
     
-    func deleteLast() {
+    func deleteLastSymbol() {
         var lengthOfSymbol = 1
         
         if let context = textDocumentProxy.documentContextBeforeInput {
