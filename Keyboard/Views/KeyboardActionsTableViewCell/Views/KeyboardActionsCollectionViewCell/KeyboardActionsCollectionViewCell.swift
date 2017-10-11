@@ -16,12 +16,17 @@ class KeyboardActionsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var bottomLeftLabel: UILabel!
     @IBOutlet weak var bottomRightLabel: UILabel!
     
+    fileprivate var accessoryView: UIView!
+    
+    
     override var isSelected: Bool {
         didSet {
             buttonView.layer.mask = nil
             
             buttonView.roundCorners(corners: isSelected ? [.bottomLeft, .bottomRight] : .allCorners,
                          radius: 8)
+            
+            accessoryView?.isHidden = !isSelected
         }
     }
     
@@ -73,9 +78,52 @@ extension KeyboardActionsCollectionViewCell {
     @discardableResult
     func configure(with group: SymbolGroup, selected: Bool) -> KeyboardActionsCollectionViewCell {
         configureLabels(with: group)
+        
+        if accessoryView == nil {
+            configureAccessoryView()
+        }
+        
         isSelected = selected
         
         return self
+    }
+    
+}
+
+extension KeyboardActionsCollectionViewCell {
+    
+    func configureAccessoryView() {
+        let collectionViewTopInset: CGFloat = 6
+        let cellPadding: CGFloat = 8
+        
+        accessoryView = UIView()
+        accessoryView.clipsToBounds = true
+        accessoryView.backgroundColor = buttonView.backgroundColor
+        
+        let leftView = UIView()
+        let rightView = UIView()
+        
+        [leftView, rightView].forEach { view in
+            view.backgroundColor = .white
+            view.cornerRadius = 8
+            
+            accessoryView.addSubview(view)
+            
+            view.translatesAutoresizingMaskIntoConstraints = false
+            view.topAnchor.constraint(equalTo: accessoryView.topAnchor).isActive = true
+            view.centerYAnchor.constraint(equalTo: accessoryView.bottomAnchor).isActive = true
+            view.widthAnchor.constraint(equalToConstant: 2 * cellPadding).isActive = true
+        }
+        
+        leftView.centerXAnchor.constraint(equalTo: accessoryView.leadingAnchor).isActive = true
+        rightView.centerXAnchor.constraint(equalTo: accessoryView.trailingAnchor).isActive = true
+        
+        addSubview(accessoryView)
+        accessoryView.translatesAutoresizingMaskIntoConstraints = false
+        accessoryView.heightAnchor.constraint(equalToConstant: collectionViewTopInset).isActive = true
+        accessoryView.widthAnchor.constraint(equalTo: widthAnchor, constant: 2 * cellPadding).isActive = true
+        accessoryView.bottomAnchor.constraint(equalTo: topAnchor).isActive = true
+        accessoryView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
     }
     
 }
