@@ -10,6 +10,7 @@ import UIKit
 
 class KeyboardActionsCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var buttonView: UIView!
     @IBOutlet weak var topLeftLabel: UILabel!
     @IBOutlet weak var topRightLabel: UILabel!
     @IBOutlet weak var bottomLeftLabel: UILabel!
@@ -17,9 +18,9 @@ class KeyboardActionsCollectionViewCell: UICollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
-            layer.mask = nil
+            buttonView.layer.mask = nil
             
-            roundCorners(corners: isSelected ? [.bottomLeft, .bottomRight] : .allCorners,
+            buttonView.roundCorners(corners: isSelected ? [.bottomLeft, .bottomRight] : .allCorners,
                          radius: 8)
         }
     }
