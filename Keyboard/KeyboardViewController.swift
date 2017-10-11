@@ -225,8 +225,8 @@ extension KeyboardViewController {
             }
         }
         
-        for _ in 0..<lengthOfSymbol {
-            textDocumentProxy.deleteBackward()
+        (0..<lengthOfSymbol).forEach { [weak self] _ in
+            self?.textDocumentProxy.deleteBackward()
         }
     }
     
