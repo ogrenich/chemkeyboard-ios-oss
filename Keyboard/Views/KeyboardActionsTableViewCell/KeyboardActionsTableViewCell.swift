@@ -23,6 +23,8 @@ class KeyboardActionsTableViewCell: UITableViewCell {
     fileprivate var bag = DisposeBag()
     fileprivate var viewModel: KeyboardActionsTableViewCellModel!
     
+    fileprivate var timer: Timer?
+    
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -47,6 +49,8 @@ extension KeyboardActionsTableViewCell {
         bindToViewModel()
         bindViewModel()
         
+        addGestureRecognizers()
+        
         return self
     }
     
@@ -65,10 +69,6 @@ private extension KeyboardActionsTableViewCell {
     func bindSelf() {
         switchButton.rx.tap
             .bind(to: needsReactToSwitchButtonTouchEvent)
-            .disposed(by: bag)
-        
-        deleteButton.rx.tap
-            .bind(to: needsReactToDeleteButtonTouchEvent)
             .disposed(by: bag)
     }
     
@@ -119,6 +119,36 @@ extension KeyboardActionsTableViewCell: UICollectionViewDelegateFlowLayout {
         let width = (collectionView.frame.size.width - 5 * layout.minimumInteritemSpacing -
                     layout.sectionInset.left - layout.sectionInset.right) / 6
         return CGSize(width: width, height: 44)
+    }
+    
+}
+
+extension KeyboardActionsTableViewCell {
+    
+    func addGestureRecognizers() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleSimpleDeleteEvent))
+        let longPress = UILongPressGestureRecognizer(target: self,
+                                                     action: #selector(handleLongPressOnDeleteButton(_:)))
+        deleteButton.addGestureRecognizer(tap)
+        deleteButton.addGestureRecognizer(longPress)
+    }
+    
+    @objc func handleSimpleDeleteEvent() {
+        needsReactToDeleteButtonTouchEvent.onNext(())
+    }
+    
+    @objc func handleLongPressOnDeleteButton(_ gesture: UIGestureRecognizer) {
+        switch gesture.state {
+        case .began:
+            timer = Timer.scheduledTimer(timeInterval: 0.1, target: self,
+                                         selector: #selector(handleSimpleDeleteEvent),
+                                         userInfo: nil, repeats: true)
+        case .ended, .cancelled, .failed:
+            timer?.invalidate()
+            timer = nil
+        default:
+            break
+        }
     }
     
 }
