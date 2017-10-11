@@ -23,10 +23,16 @@ class KeyboardActionsTableViewCell: UITableViewCell {
     fileprivate var bag = DisposeBag()
     fileprivate var viewModel: KeyboardActionsTableViewCellModel!
     
+    fileprivate weak var timer: Timer?
+    
     
     override func prepareForReuse() {
         super.prepareForReuse()
         bag = DisposeBag()
+    }
+    
+    deinit {
+        invalidateTimer()
     }
     
 }
@@ -42,6 +48,8 @@ extension KeyboardActionsTableViewCell {
         self.needsReactToDeleteButtonTouchEvent = needsReactToDeleteButtonTouchEvent
         
         configureCollectionView()
+        
+        addGestureRecognizersOnDeleteButton()
         
         bindSelf()
         bindToViewModel()
@@ -65,10 +73,6 @@ private extension KeyboardActionsTableViewCell {
     func bindSelf() {
         switchButton.rx.tap
             .bind(to: needsReactToSwitchButtonTouchEvent)
-            .disposed(by: bag)
-        
-        deleteButton.rx.tap
-            .bind(to: needsReactToDeleteButtonTouchEvent)
             .disposed(by: bag)
     }
     
@@ -119,6 +123,48 @@ extension KeyboardActionsTableViewCell: UICollectionViewDelegateFlowLayout {
         let width = (collectionView.frame.size.width - 5 * layout.minimumInteritemSpacing -
                     layout.sectionInset.left - layout.sectionInset.right) / 6
         return CGSize(width: width, height: 44)
+    }
+    
+}
+
+private extension KeyboardActionsTableViewCell {
+    
+    func setUpTimer(with selector: Selector) {
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self,
+                                     selector: selector,
+                                     userInfo: nil, repeats: true)
+    }
+    
+    func invalidateTimer() {
+        timer?.invalidate()
+        timer = nil
+    }
+    
+}
+
+extension KeyboardActionsTableViewCell {
+    
+    func addGestureRecognizersOnDeleteButton() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleSimpleDeleteEvent))
+        let longPress = UILongPressGestureRecognizer(target: self,
+                                                     action: #selector(handleLongPressOnDeleteButton(_:)))
+        deleteButton.addGestureRecognizer(tap)
+        deleteButton.addGestureRecognizer(longPress)
+    }
+    
+    @objc func handleSimpleDeleteEvent() {
+        needsReactToDeleteButtonTouchEvent.onNext(())
+    }
+    
+    @objc func handleLongPressOnDeleteButton(_ gesture: UIGestureRecognizer) {
+        switch gesture.state {
+        case .began:
+            setUpTimer(with: #selector(handleSimpleDeleteEvent))
+        case .ended, .cancelled, .failed:
+            invalidateTimer()
+        default:
+            break
+        }
     }
     
 }
