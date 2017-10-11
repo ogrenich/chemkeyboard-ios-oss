@@ -24,7 +24,7 @@ class KeyboardActionsCollectionViewCell: UICollectionViewCell {
             buttonView.layer.mask = nil
             
             buttonView.roundCorners(corners: isSelected ? [.bottomLeft, .bottomRight] : .allCorners,
-                         radius: 8)
+                                    radius: 8)
             
             accessoryView?.isHidden = !isSelected
         }
@@ -121,7 +121,8 @@ extension KeyboardActionsCollectionViewCell {
         addSubview(accessoryView)
         accessoryView.translatesAutoresizingMaskIntoConstraints = false
         accessoryView.heightAnchor.constraint(equalToConstant: collectionViewTopInset).isActive = true
-        accessoryView.widthAnchor.constraint(equalTo: widthAnchor, constant: 2 * cellPadding).isActive = true
+        accessoryView.widthAnchor.constraint(equalTo: widthAnchor,
+                                             constant: 2 * cellPadding).isActive = true
         accessoryView.bottomAnchor.constraint(equalTo: topAnchor).isActive = true
         accessoryView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
     }

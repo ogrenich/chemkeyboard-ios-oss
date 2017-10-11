@@ -97,8 +97,8 @@ private extension KeyboardActionsTableViewCell {
             .map { IndexPath(item: $0, section: 0) }
             .drive(onNext: { [weak self] indexPath in
                 self?.collectionView.selectItem(at: indexPath,
-                                                   animated: true,
-                                                   scrollPosition: .centeredHorizontally)
+                                                animated: true,
+                                                scrollPosition: .centeredHorizontally)
                 
                 self?.collectionView.reloadData()
             })
