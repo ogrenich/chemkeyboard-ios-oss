@@ -14,10 +14,6 @@ import RxCocoa
 class KeyboardActionsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var switchButton: UIButton!
-    @IBOutlet weak var leftView: UIView!
-    @IBOutlet weak var leftViewWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var rightView: UIView!
-    @IBOutlet weak var rightViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var deleteButton: UIButton!
     
@@ -45,7 +41,6 @@ extension KeyboardActionsTableViewCell {
         self.needsReactToSwitchButtonTouchEvent = needsReactToSwitchButtonTouchEvent
         self.needsReactToDeleteButtonTouchEvent = needsReactToDeleteButtonTouchEvent
         
-        configureLeftAndRightViews()
         configureCollectionView()
         
         bindSelf()
@@ -58,11 +53,6 @@ extension KeyboardActionsTableViewCell {
 }
 
 private extension KeyboardActionsTableViewCell {
-    
-    func configureLeftAndRightViews() {
-        leftView.roundCorners(corners: .topRight, radius: 8)
-        rightView.roundCorners(corners: .topLeft, radius: 8)
-    }
     
     func configureCollectionView() {
         collectionView.register(KeyboardActionsCollectionViewCell.self)
@@ -106,23 +96,11 @@ private extension KeyboardActionsTableViewCell {
             .map { $0! }
             .map { IndexPath(item: $0, section: 0) }
             .drive(onNext: { [weak self] indexPath in
-                DispatchQueue.main.async { [weak self] in
-                    guard let `self` = self else {
-                        return
-                    }
-                    
-                    if let cell = self.collectionView.cellForItem(at: indexPath) {
-                        self.leftViewWidthConstraint.constant = cell.frame.origin.x
-                        self.rightViewWidthConstraint.constant = self.collectionView.frame.width - cell.frame.origin.x - cell.frame.width
-                        self.setNeedsLayout()
-                        self.layoutIfNeeded()
-                    }
-                    
-                    self.collectionView.selectItem(at: indexPath,
-                                                   animated: true,
-                                                   scrollPosition: .centeredHorizontally)
-                    self.collectionView.reloadData()
-                }
+                self?.collectionView.selectItem(at: indexPath,
+                                                animated: true,
+                                                scrollPosition: .centeredHorizontally)
+                
+                self?.collectionView.reloadData()
             })
             .disposed(by: bag)
     }
