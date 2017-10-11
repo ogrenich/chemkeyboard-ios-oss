@@ -23,12 +23,16 @@ class KeyboardActionsTableViewCell: UITableViewCell {
     fileprivate var bag = DisposeBag()
     fileprivate var viewModel: KeyboardActionsTableViewCellModel!
     
-    fileprivate var timer: Timer?
+    fileprivate weak var timer: Timer?
     
     
     override func prepareForReuse() {
         super.prepareForReuse()
         bag = DisposeBag()
+    }
+    
+    deinit {
+        invalidateTimer()
     }
     
 }
@@ -49,7 +53,7 @@ extension KeyboardActionsTableViewCell {
         bindToViewModel()
         bindViewModel()
         
-        addGestureRecognizers()
+        addGestureRecognizersOnDeleteButton()
         
         return self
     }
@@ -123,9 +127,24 @@ extension KeyboardActionsTableViewCell: UICollectionViewDelegateFlowLayout {
     
 }
 
+private extension KeyboardActionsTableViewCell {
+    
+    func setUpTimer(with selector: Selector) {
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self,
+                                     selector: selector,
+                                     userInfo: nil, repeats: true)
+    }
+    
+    func invalidateTimer() {
+        timer?.invalidate()
+        timer = nil
+    }
+    
+}
+
 extension KeyboardActionsTableViewCell {
     
-    func addGestureRecognizers() {
+    func addGestureRecognizersOnDeleteButton() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleSimpleDeleteEvent))
         let longPress = UILongPressGestureRecognizer(target: self,
                                                      action: #selector(handleLongPressOnDeleteButton(_:)))
@@ -140,12 +159,9 @@ extension KeyboardActionsTableViewCell {
     @objc func handleLongPressOnDeleteButton(_ gesture: UIGestureRecognizer) {
         switch gesture.state {
         case .began:
-            timer = Timer.scheduledTimer(timeInterval: 0.1, target: self,
-                                         selector: #selector(handleSimpleDeleteEvent),
-                                         userInfo: nil, repeats: true)
+            setUpTimer(with: #selector(handleSimpleDeleteEvent))
         case .ended, .cancelled, .failed:
-            timer?.invalidate()
-            timer = nil
+            invalidateTimer()
         default:
             break
         }
