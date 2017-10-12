@@ -16,6 +16,7 @@ class KeyboardElementsTableViewCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     
     fileprivate weak var needsReactToSimpleButtonTouchEvent: PublishSubject<Symbol?>!
+    fileprivate weak var needsScrollElementsCollectionViewToSelectedCategory: PublishSubject<Int>!
     
     fileprivate var bag = DisposeBag()
     fileprivate var viewModel: KeyboardElementsTableViewCellModel!
@@ -32,9 +33,11 @@ extension KeyboardElementsTableViewCell {
     
     @discardableResult
     func configure(with viewModel: KeyboardElementsTableViewCellModel,
-                   needsReactToSimpleButtonTouchEvent: PublishSubject<Symbol?>) -> KeyboardElementsTableViewCell {
+                   needsReactToSimpleButtonTouchEvent: PublishSubject<Symbol?>,
+                   needsScrollElementsCollectionViewToSelectedCategory: PublishSubject<Int>) -> KeyboardElementsTableViewCell {
         self.viewModel = viewModel
         self.needsReactToSimpleButtonTouchEvent = needsReactToSimpleButtonTouchEvent
+        self.needsScrollElementsCollectionViewToSelectedCategory = needsScrollElementsCollectionViewToSelectedCategory
         
         configureCollectionView()
         
@@ -71,17 +74,15 @@ private extension KeyboardElementsTableViewCell {
     }
     
     func bindViewModel() {
-        viewModel.selectedCategory.asDriver()
-            .filter { $0 != nil }
-            .map { $0! }
-            .withLatestFrom(viewModel.categories.asDriver()) { ($0, $1) }
-            .map { $1.index(of: $0) }
-            .filter { $0 != nil }
-            .map { $0! }
-            .drive(onNext: { [weak self] section in
-                self?.collectionView.scrollToItem(at: IndexPath(item: 0, section: section),
-                                                  at: .centeredHorizontally, animated: true)
-            })
+        needsScrollElementsCollectionViewToSelectedCategory
+            .bind { [weak self] in
+                var offset: CGFloat = 0
+                (0..<$0).forEach { [weak self] section in
+                    offset += self?.widthOfCollectionViewSection(at: section) ?? 0
+                }
+
+                self?.collectionView.setContentOffset(CGPoint(x: offset, y: 0), animated: true)
+            }
             .disposed(by: bag)
     }
     

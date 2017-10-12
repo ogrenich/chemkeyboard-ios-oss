@@ -18,6 +18,8 @@ class KeyboardCategoriesTableViewCell: UITableViewCell {
     fileprivate var bag = DisposeBag()
     fileprivate var viewModel: KeyboardCategoriesTableViewCellModel!
     
+    fileprivate weak var needsScrollElementsCollectionViewToSelectedCategory: PublishSubject<Int>!
+    
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -29,8 +31,10 @@ class KeyboardCategoriesTableViewCell: UITableViewCell {
 extension KeyboardCategoriesTableViewCell {
     
     @discardableResult
-    func configure(with viewModel: KeyboardCategoriesTableViewCellModel) -> KeyboardCategoriesTableViewCell {
+    func configure(with viewModel: KeyboardCategoriesTableViewCellModel,
+                   needsScrollElementsCollectionViewToSelectedCategory: PublishSubject<Int>) -> KeyboardCategoriesTableViewCell {
         self.viewModel = viewModel
+        self.needsScrollElementsCollectionViewToSelectedCategory = needsScrollElementsCollectionViewToSelectedCategory
         
         configureCollectionView()
         
@@ -59,6 +63,11 @@ private extension KeyboardCategoriesTableViewCell {
     func bindToViewModel() {
         collectionView.rx.modelSelected(ElementCategory.self).asDriver()
             .drive(viewModel.selectedCategory)
+            .disposed(by: bag)
+        
+        collectionView.rx.itemSelected
+            .map { $0.item }
+            .bind(to: needsScrollElementsCollectionViewToSelectedCategory)
             .disposed(by: bag)
     }
     
