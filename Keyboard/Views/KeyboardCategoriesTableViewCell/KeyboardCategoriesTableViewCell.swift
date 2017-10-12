@@ -79,9 +79,16 @@ private extension KeyboardCategoriesTableViewCell {
             .map { $0! }
             .map { IndexPath(item: $0, section: 0) }
             .drive(onNext: { [weak self] in
-                self?.collectionView.selectItem(at: $0,
-                                                animated: true,
-                                                scrollPosition: .centeredHorizontally)
+                guard let `self` = self else {
+                    return
+                }
+                
+                self.collectionView.scrollToItem(at: $0,
+                                                 at: .centeredHorizontally,
+                                                 animated: true)
+                self.collectionView.selectItem(at: $0,
+                                               animated: true,
+                                               scrollPosition: .centeredHorizontally)
             })
             .disposed(by: bag)
     }
