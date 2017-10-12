@@ -26,7 +26,7 @@ class KeyboardViewController: UIInputViewController {
     let needsReactToSwitchButtonTouchEvent = PublishSubject<Void>()
     let needsReactToDeleteButtonTouchEvent = PublishSubject<Void>()
     let needsReactToSimpleButtonTouchEvent = PublishSubject<Symbol?>()
-    let needsScrollElementsCollectionViewToSelectedCategory = PublishSubject<Int>()
+    let needsScrollElementsCollectionViewToCategoryAt = PublishSubject<Int>()
     
     fileprivate var bag = DisposeBag()
     fileprivate let viewModel = KeyboardViewModel()
@@ -157,14 +157,14 @@ extension KeyboardViewController: UITableViewDataSource {
             let cellModel = KeyboardCategoriesTableViewCellModel.init(with: viewModel.categories,
                                                                       selectedCategory: viewModel.selectedCategory)
             return cell.configure(with: cellModel,
-                                  needsScrollElementsCollectionViewToSelectedCategory: needsScrollElementsCollectionViewToSelectedCategory)
+                                  needsScrollElementsCollectionViewToCategoryAt)
         case .elements:
             let cell: KeyboardElementsTableViewCell = tableView.dequeueReusableCell()
             let cellModel = KeyboardElementsTableViewCellModel.init(with: viewModel.categories,
                                                                     selectedCategory: viewModel.selectedCategory)
             return cell.configure(with: cellModel,
                                   needsReactToSimpleButtonTouchEvent: needsReactToSimpleButtonTouchEvent,
-                                  needsScrollElementsCollectionViewToSelectedCategory: needsScrollElementsCollectionViewToSelectedCategory)
+                                  needsScrollElementsCollectionViewToCategoryAt)
         case .symbols:
             let cell: KeyboardSymbolsTableViewCell = tableView.dequeueReusableCell()
             let cellModel = KeyboardSymbolsTableViewCellModel.init(with: viewModel.selectedSymbolGroup)

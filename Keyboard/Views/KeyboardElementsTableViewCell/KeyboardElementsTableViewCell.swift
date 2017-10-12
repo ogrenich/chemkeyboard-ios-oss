@@ -16,7 +16,7 @@ class KeyboardElementsTableViewCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     
     fileprivate weak var needsReactToSimpleButtonTouchEvent: PublishSubject<Symbol?>!
-    fileprivate weak var needsScrollElementsCollectionViewToSelectedCategory: PublishSubject<Int>!
+    fileprivate weak var needsScrollElementsCollectionViewToCategoryAt: PublishSubject<Int>!
     
     fileprivate var bag = DisposeBag()
     fileprivate var viewModel: KeyboardElementsTableViewCellModel!
@@ -60,10 +60,10 @@ extension KeyboardElementsTableViewCell {
     @discardableResult
     func configure(with viewModel: KeyboardElementsTableViewCellModel,
                    needsReactToSimpleButtonTouchEvent: PublishSubject<Symbol?>,
-                   needsScrollElementsCollectionViewToSelectedCategory: PublishSubject<Int>) -> KeyboardElementsTableViewCell {
+                   _ needsScrollElementsCollectionViewToCategoryAt: PublishSubject<Int>) -> KeyboardElementsTableViewCell {
         self.viewModel = viewModel
         self.needsReactToSimpleButtonTouchEvent = needsReactToSimpleButtonTouchEvent
-        self.needsScrollElementsCollectionViewToSelectedCategory = needsScrollElementsCollectionViewToSelectedCategory
+        self.needsScrollElementsCollectionViewToCategoryAt = needsScrollElementsCollectionViewToCategoryAt
         
         configureCollectionView()
         
@@ -124,7 +124,7 @@ private extension KeyboardElementsTableViewCell {
     }
     
     func bindViewModel() {
-        needsScrollElementsCollectionViewToSelectedCategory
+        needsScrollElementsCollectionViewToCategoryAt
             .bind { [weak self] in
                 var offset: CGFloat = 0
                 (0..<$0).forEach { [weak self] section in
