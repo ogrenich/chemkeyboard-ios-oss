@@ -15,10 +15,10 @@ class KeyboardCategoriesTableViewCell: UITableViewCell {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    fileprivate weak var needsScrollElementsCollectionViewToCategoryAt: PublishSubject<Int>!
+    
     fileprivate var bag = DisposeBag()
     fileprivate var viewModel: KeyboardCategoriesTableViewCellModel!
-    
-    fileprivate weak var needsScrollElementsCollectionViewToCategoryAt: PublishSubject<Int>!
     
     
     override func prepareForReuse() {
