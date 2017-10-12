@@ -21,6 +21,32 @@ class KeyboardElementsTableViewCell: UITableViewCell {
     fileprivate var bag = DisposeBag()
     fileprivate var viewModel: KeyboardElementsTableViewCellModel!
     
+    fileprivate var userIsScrolling: Bool = false
+
+    var currentSection: RxSwift.Observable<Int> {
+        return collectionView.rx.contentOffset
+            .flatMap { [weak self] contentOffset -> RxSwift.Observable<Int> in
+                guard
+                    let `self` = self,
+                    self.userIsScrolling
+                else {
+                    return Observable.empty()
+                }
+                
+                var offsetToCurrentSection = contentOffset.x + self.collectionView.contentInset.left
+                var section = -1
+                while offsetToCurrentSection > 0 {
+                    section += 1
+                    offsetToCurrentSection -= self.widthOfCollectionViewSection(at: section)
+                }
+                
+                section = section < 0 ? 0 : section
+                
+                return Observable.just(section)
+            }
+            .distinctUntilChanged()
+    }
+    
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -67,10 +93,34 @@ private extension KeyboardElementsTableViewCell {
             }
             .bind(to: needsReactToSimpleButtonTouchEvent)
             .disposed(by: bag)
+        
+        collectionView.rx.willBeginDragging
+            .bind { [weak self] in
+                self?.userIsScrolling = true
+            }
+            .disposed(by: bag)
+        
+        collectionView.rx.didEndDecelerating
+            .bind { [weak self] in
+                self?.userIsScrolling = false
+            }
+            .disposed(by: bag)
+
+        collectionView.rx.willEndDragging
+            .bind { [weak self] in
+                if $0.velocity == .zero {
+                    self?.userIsScrolling = false
+                }
+            }
+            .disposed(by: bag)
     }
     
     func bindToViewModel() {
-        
+        currentSection
+            .bind { [weak self] section in
+                self?.viewModel.selectedCategory.value = self?.viewModel.categories.value[section]
+            }
+            .disposed(by: bag)
     }
     
     func bindViewModel() {
@@ -84,6 +134,15 @@ private extension KeyboardElementsTableViewCell {
                 self?.collectionView.setContentOffset(CGPoint(x: offset, y: 0), animated: true)
             }
             .disposed(by: bag)
+    }
+    
+}
+
+private extension KeyboardElementsTableViewCell {
+    
+    func widthOfCollectionViewSection(at sectionNumber: Int) -> CGFloat {
+        let numberOfColumns = (CGFloat(viewModel.categories.value[sectionNumber].elements.count) / 3).rounded(.up)
+        return numberOfColumns * 66
     }
     
 }
