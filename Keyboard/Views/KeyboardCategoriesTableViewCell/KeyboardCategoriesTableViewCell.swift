@@ -38,6 +38,7 @@ extension KeyboardCategoriesTableViewCell {
         
         configureCollectionView()
         
+        bindSelf()
         bindToViewModel()
         bindViewModel()
         

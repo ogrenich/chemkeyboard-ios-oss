@@ -126,13 +126,19 @@ private extension KeyboardElementsTableViewCell {
     func bindViewModel() {
         needsScrollElementsCollectionViewToCategoryAt
             .bind { [weak self] in
+                guard let `self` = self else {
+                    return
+                }
+                
                 var offset: CGFloat = 0
                 
                 (0..<$0).forEach { [weak self] section in
                     offset += self?.widthOfCollectionViewSection(at: section) ?? 0
                 }
-
-                self?.collectionView.setContentOffset(CGPoint(x: offset, y: 0), animated: true)
+                
+                let maxContentOffset = self.collectionView.contentSize.width - self.collectionView.frame.width
+                offset = min(offset, maxContentOffset)
+                self.collectionView.setContentOffset(CGPoint(x: offset, y: 0), animated: true)
             }
             .disposed(by: bag)
     }
