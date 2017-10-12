@@ -35,6 +35,7 @@ class KeyboardElementsTableViewCell: UITableViewCell {
                 
                 var offsetToCurrentSection = contentOffset.x + self.collectionView.contentInset.left
                 var section = -1
+                
                 while offsetToCurrentSection > 0 {
                     section += 1
                     offsetToCurrentSection -= self.widthOfCollectionViewSection(at: section)
@@ -117,9 +118,8 @@ private extension KeyboardElementsTableViewCell {
     
     func bindToViewModel() {
         currentSection
-            .bind { [weak self] section in
-                self?.viewModel.selectedCategory.value = self?.viewModel.categories.value[section]
-            }
+            .withLatestFrom(viewModel.categories.asObservable()) { $1[$0] }
+            .bind(to: viewModel.selectedCategory)
             .disposed(by: bag)
     }
     
@@ -127,6 +127,7 @@ private extension KeyboardElementsTableViewCell {
         needsScrollElementsCollectionViewToCategoryAt
             .bind { [weak self] in
                 var offset: CGFloat = 0
+                
                 (0..<$0).forEach { [weak self] section in
                     offset += self?.widthOfCollectionViewSection(at: section) ?? 0
                 }
@@ -140,8 +141,8 @@ private extension KeyboardElementsTableViewCell {
 
 private extension KeyboardElementsTableViewCell {
     
-    func widthOfCollectionViewSection(at sectionNumber: Int) -> CGFloat {
-        let numberOfColumns = (CGFloat(viewModel.categories.value[sectionNumber].elements.count) / 3).rounded(.up)
+    func widthOfCollectionViewSection(at section: Int) -> CGFloat {
+        let numberOfColumns = (CGFloat(viewModel.categories.value[section].elements.count) / 3).rounded(.up)
         return numberOfColumns * 66
     }
     

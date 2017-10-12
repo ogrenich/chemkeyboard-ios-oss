@@ -60,14 +60,16 @@ private extension KeyboardCategoriesTableViewCell {
 
 private extension KeyboardCategoriesTableViewCell {
     
+    func bindSelf() {
+        collectionView.rx.itemSelected
+            .map { $0.item }
+            .bind(to: needsScrollElementsCollectionViewToCategoryAt)
+            .disposed(by: bag)
+    }
+    
     func bindToViewModel() {
         collectionView.rx.modelSelected(ElementCategory.self).asDriver()
             .drive(viewModel.selectedCategory)
-            .disposed(by: bag)
-        
-        collectionView.rx.itemSelected
-            .map { $0.item }
-            .bind(to: needsScrollElementsCollectionViewToSelectedCategory)
             .disposed(by: bag)
     }
     
