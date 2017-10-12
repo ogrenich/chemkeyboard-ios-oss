@@ -15,6 +15,8 @@ class KeyboardCategoriesTableViewCell: UITableViewCell {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    fileprivate weak var needsScrollElementsCollectionViewToCategoryAt: PublishSubject<Int>!
+    
     fileprivate var bag = DisposeBag()
     fileprivate var viewModel: KeyboardCategoriesTableViewCellModel!
     
@@ -29,11 +31,14 @@ class KeyboardCategoriesTableViewCell: UITableViewCell {
 extension KeyboardCategoriesTableViewCell {
     
     @discardableResult
-    func configure(with viewModel: KeyboardCategoriesTableViewCellModel) -> KeyboardCategoriesTableViewCell {
+    func configure(with viewModel: KeyboardCategoriesTableViewCellModel,
+                   _ needsScrollElementsCollectionViewToCategoryAt: PublishSubject<Int>) -> KeyboardCategoriesTableViewCell {
         self.viewModel = viewModel
+        self.needsScrollElementsCollectionViewToCategoryAt = needsScrollElementsCollectionViewToCategoryAt
         
         configureCollectionView()
         
+        bindSelf()
         bindToViewModel()
         bindViewModel()
         
@@ -55,6 +60,13 @@ private extension KeyboardCategoriesTableViewCell {
 }
 
 private extension KeyboardCategoriesTableViewCell {
+    
+    func bindSelf() {
+        collectionView.rx.itemSelected
+            .map { $0.item }
+            .bind(to: needsScrollElementsCollectionViewToCategoryAt)
+            .disposed(by: bag)
+    }
     
     func bindToViewModel() {
         collectionView.rx.modelSelected(ElementCategory.self).asDriver()
@@ -79,9 +91,16 @@ private extension KeyboardCategoriesTableViewCell {
             .map { $0! }
             .map { IndexPath(item: $0, section: 0) }
             .drive(onNext: { [weak self] in
-                self?.collectionView.selectItem(at: $0,
-                                                animated: true,
-                                                scrollPosition: .centeredHorizontally)
+                guard let `self` = self else {
+                    return
+                }
+                
+                self.collectionView.scrollToItem(at: $0,
+                                                 at: .centeredHorizontally,
+                                                 animated: true)
+                self.collectionView.selectItem(at: $0,
+                                               animated: true,
+                                               scrollPosition: .centeredHorizontally)
             })
             .disposed(by: bag)
     }

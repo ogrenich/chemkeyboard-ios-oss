@@ -16,9 +16,37 @@ class KeyboardElementsTableViewCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     
     fileprivate weak var needsReactToSimpleButtonTouchEvent: PublishSubject<Symbol?>!
+    fileprivate weak var needsScrollElementsCollectionViewToCategoryAt: PublishSubject<Int>!
     
     fileprivate var bag = DisposeBag()
     fileprivate var viewModel: KeyboardElementsTableViewCellModel!
+    
+    fileprivate var userIsScrolling: Bool = false
+
+    var currentSection: RxSwift.Observable<Int> {
+        return collectionView.rx.contentOffset
+            .flatMap { [weak self] contentOffset -> RxSwift.Observable<Int> in
+                guard
+                    let `self` = self,
+                    self.userIsScrolling
+                else {
+                    return Observable.empty()
+                }
+                
+                var offsetToCurrentSection = contentOffset.x + self.collectionView.contentInset.left
+                var section = -1
+                
+                while offsetToCurrentSection > 0 {
+                    section += 1
+                    offsetToCurrentSection -= self.widthOfCollectionViewSection(at: section)
+                }
+                
+                section = section < 0 ? 0 : section
+                
+                return Observable.just(section)
+            }
+            .distinctUntilChanged()
+    }
     
     
     override func prepareForReuse() {
@@ -32,9 +60,11 @@ extension KeyboardElementsTableViewCell {
     
     @discardableResult
     func configure(with viewModel: KeyboardElementsTableViewCellModel,
-                   needsReactToSimpleButtonTouchEvent: PublishSubject<Symbol?>) -> KeyboardElementsTableViewCell {
+                   needsReactToSimpleButtonTouchEvent: PublishSubject<Symbol?>,
+                   _ needsScrollElementsCollectionViewToCategoryAt: PublishSubject<Int>) -> KeyboardElementsTableViewCell {
         self.viewModel = viewModel
         self.needsReactToSimpleButtonTouchEvent = needsReactToSimpleButtonTouchEvent
+        self.needsScrollElementsCollectionViewToCategoryAt = needsScrollElementsCollectionViewToCategoryAt
         
         configureCollectionView()
         
@@ -64,25 +94,62 @@ private extension KeyboardElementsTableViewCell {
             }
             .bind(to: needsReactToSimpleButtonTouchEvent)
             .disposed(by: bag)
+        
+        collectionView.rx.willBeginDragging
+            .bind { [weak self] in
+                self?.userIsScrolling = true
+            }
+            .disposed(by: bag)
+        
+        collectionView.rx.didEndDecelerating
+            .bind { [weak self] in
+                self?.userIsScrolling = false
+            }
+            .disposed(by: bag)
+
+        collectionView.rx.willEndDragging
+            .bind { [weak self] in
+                if $0.velocity == .zero {
+                    self?.userIsScrolling = false
+                }
+            }
+            .disposed(by: bag)
     }
     
     func bindToViewModel() {
-        
+        currentSection
+            .withLatestFrom(viewModel.categories.asObservable()) { $1[$0] }
+            .bind(to: viewModel.selectedCategory)
+            .disposed(by: bag)
     }
     
     func bindViewModel() {
-        viewModel.selectedCategory.asDriver()
-            .filter { $0 != nil }
-            .map { $0! }
-            .withLatestFrom(viewModel.categories.asDriver()) { ($0, $1) }
-            .map { $1.index(of: $0) }
-            .filter { $0 != nil }
-            .map { $0! }
-            .drive(onNext: { [weak self] section in
-                self?.collectionView.scrollToItem(at: IndexPath(item: 0, section: section),
-                                                  at: .centeredHorizontally, animated: true)
-            })
+        needsScrollElementsCollectionViewToCategoryAt
+            .bind { [weak self] in
+                guard let `self` = self else {
+                    return
+                }
+                
+                var offset: CGFloat = 0
+                
+                (0..<$0).forEach { [weak self] section in
+                    offset += self?.widthOfCollectionViewSection(at: section) ?? 0
+                }
+                
+                let maxContentOffset = self.collectionView.contentSize.width - self.collectionView.frame.width
+                offset = min(offset, maxContentOffset)
+                self.collectionView.setContentOffset(CGPoint(x: offset, y: 0), animated: true)
+            }
             .disposed(by: bag)
+    }
+    
+}
+
+private extension KeyboardElementsTableViewCell {
+    
+    func widthOfCollectionViewSection(at section: Int) -> CGFloat {
+        let numberOfColumns = (CGFloat(viewModel.categories.value[section].elements.count) / 3).rounded(.up)
+        return numberOfColumns * 66
     }
     
 }
