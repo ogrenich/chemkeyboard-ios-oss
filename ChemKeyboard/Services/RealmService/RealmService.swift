@@ -60,9 +60,9 @@ extension RealmService {
         
         Realm.Configuration.defaultConfiguration = Realm.Configuration(
             fileURL: realmURL,
-            schemaVersion: 2,
+            schemaVersion: 3,
             migrationBlock: { migration, oldSchemaVersion in
-                if oldSchemaVersion < 2 { // the old (default) version is 0
+                if oldSchemaVersion < 3 { // the old (default) version is 0
                     
                 }
             }

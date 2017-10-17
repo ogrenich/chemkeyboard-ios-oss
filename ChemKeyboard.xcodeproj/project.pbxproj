@@ -12,8 +12,6 @@
 		1501F6CC1F792A19000DCE0B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1501F6CA1F792A19000DCE0B /* Main.storyboard */; };
 		1501F6CE1F792A19000DCE0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1501F6CD1F792A19000DCE0B /* Assets.xcassets */; };
 		1501F6D11F792A19000DCE0B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1501F6CF1F792A19000DCE0B /* LaunchScreen.storyboard */; };
-		155045271F8B8C2C00BE3A49 /* ChemKeyboard.realm in Resources */ = {isa = PBXBuildFile; fileRef = 155045261F8B8C2700BE3A49 /* ChemKeyboard.realm */; };
-		155045281F8B8C2C00BE3A49 /* ChemKeyboard.realm in Resources */ = {isa = PBXBuildFile; fileRef = 155045261F8B8C2700BE3A49 /* ChemKeyboard.realm */; };
 		15531B161F83E27D00D4FA76 /* SF-UI-Display-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 15531B001F83E26A00D4FA76 /* SF-UI-Display-Light.otf */; };
 		15531B171F83E27D00D4FA76 /* SF-UI-Display-Ultralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 15531B011F83E26A00D4FA76 /* SF-UI-Display-Ultralight.otf */; };
 		15531B181F83E27D00D4FA76 /* SF-UI-Display-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 15531B021F83E26A00D4FA76 /* SF-UI-Display-Heavy.otf */; };
@@ -113,6 +111,8 @@
 		5AC0F7B91F866463004ECF6E /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC0F7B81F866463004ECF6E /* UIView+Extensions.swift */; };
 		5AC0F7BA1F866482004ECF6E /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC0F7B81F866463004ECF6E /* UIView+Extensions.swift */; };
 		5AD182CB1F8CF20B00080313 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AD182CA1F8CF20B00080313 /* Assets.xcassets */; };
+		5AE382C41F92443D0059B080 /* ChemKeyboard.realm in Resources */ = {isa = PBXBuildFile; fileRef = 5AE382C31F92443C0059B080 /* ChemKeyboard.realm */; };
+		5AE382C51F9247F70059B080 /* ChemKeyboard.realm in Resources */ = {isa = PBXBuildFile; fileRef = 5AE382C31F92443C0059B080 /* ChemKeyboard.realm */; };
 		67FC87EA54389552C9666C61 /* Pods_Keyboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D99AB0CD5D9709735ACA2D78 /* Pods_Keyboard.framework */; };
 		F8FE752B013B0FB06FA20E40 /* Pods_ChemKeyboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94816A35B5E6AAAC942FEBF0 /* Pods_ChemKeyboard.framework */; };
 /* End PBXBuildFile section */
@@ -150,7 +150,6 @@
 		1501F6CD1F792A19000DCE0B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1501F6D01F792A19000DCE0B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1501F6D21F792A19000DCE0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		155045261F8B8C2700BE3A49 /* ChemKeyboard.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = ChemKeyboard.realm; sourceTree = "<group>"; };
 		15531B001F83E26A00D4FA76 /* SF-UI-Display-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Light.otf"; sourceTree = "<group>"; };
 		15531B011F83E26A00D4FA76 /* SF-UI-Display-Ultralight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Ultralight.otf"; sourceTree = "<group>"; };
 		15531B021F83E26A00D4FA76 /* SF-UI-Display-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Heavy.otf"; sourceTree = "<group>"; };
@@ -214,6 +213,7 @@
 		5ABE8D8B1F854EEC0029E30B /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		5AC0F7B81F866463004ECF6E /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		5AD182CA1F8CF20B00080313 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5AE382C31F92443C0059B080 /* ChemKeyboard.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = ChemKeyboard.realm; sourceTree = "<group>"; };
 		94816A35B5E6AAAC942FEBF0 /* Pods_ChemKeyboard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChemKeyboard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		95B32E252AD372118A0E2B80 /* Pods-Keyboard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keyboard.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Keyboard/Pods-Keyboard.debug.xcconfig"; sourceTree = "<group>"; };
 		9E581C5FEAACD12DDB020775 /* Pods-ChemKeyboard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChemKeyboard.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChemKeyboard/Pods-ChemKeyboard.release.xcconfig"; sourceTree = "<group>"; };
@@ -396,7 +396,7 @@
 		156D009E1F7E9E7A004C333F /* Realm */ = {
 			isa = PBXGroup;
 			children = (
-				155045261F8B8C2700BE3A49 /* ChemKeyboard.realm */,
+				5AE382C31F92443C0059B080 /* ChemKeyboard.realm */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
@@ -682,7 +682,7 @@
 				15531B2A1F83E28400D4FA76 /* SF-UI-Text-Bold.otf in Resources */,
 				15531B2C1F83E28400D4FA76 /* SF-UI-Text-BoldItalic.otf in Resources */,
 				15531B2F1F83E28400D4FA76 /* SF-UI-Text-HeavyItalic.otf in Resources */,
-				155045281F8B8C2C00BE3A49 /* ChemKeyboard.realm in Resources */,
+				5AE382C41F92443D0059B080 /* ChemKeyboard.realm in Resources */,
 				15531B2D1F83E28400D4FA76 /* SF-UI-Text-Light.otf in Resources */,
 				15531B331F83E28400D4FA76 /* SF-UI-Text-Semibold.otf in Resources */,
 			);
@@ -696,6 +696,7 @@
 				15531B1F1F83E27D00D4FA76 /* SF-UI-Display-Light.otf in Resources */,
 				15531B351F83E28400D4FA76 /* SF-UI-Text-RegularItalic.otf in Resources */,
 				15531B3B1F83E28400D4FA76 /* SF-UI-Text-HeavyItalic.otf in Resources */,
+				5AE382C51F9247F70059B080 /* ChemKeyboard.realm in Resources */,
 				15BBC7151F7D3BE600A229BC /* KeyboardActionsTableViewCell.xib in Resources */,
 				156D008B1F7D48A0004C333F /* KeyboardCategoriesCollectionViewCell.xib in Resources */,
 				15531B271F83E27D00D4FA76 /* SF-UI-Display-Thin.otf in Resources */,
@@ -709,7 +710,6 @@
 				15531B341F83E28400D4FA76 /* SF-UI-Text-SemiboldItalic.otf in Resources */,
 				15531B211F83E27D00D4FA76 /* SF-UI-Display-Heavy.otf in Resources */,
 				15BBC7231F7D43BB00A229BC /* KeyboardActionsCollectionViewCell.xib in Resources */,
-				155045271F8B8C2C00BE3A49 /* ChemKeyboard.realm in Resources */,
 				15531B371F83E28400D4FA76 /* SF-UI-Text-Regular.otf in Resources */,
 				156D00971F7D4A08004C333F /* KeyboardSymbolsCollectionViewCell.xib in Resources */,
 				15531B381F83E28400D4FA76 /* SF-UI-Text-BoldItalic.otf in Resources */,
