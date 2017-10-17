@@ -16,6 +16,7 @@ class ElementCategory: Object, Mappable {
     @objc dynamic var name: String? = nil
     @objc dynamic var color: String? = nil
     @objc dynamic var textColor: String? = nil
+    @objc dynamic var shadowColor: String? = nil
     
     var elements = List<Element>()
     
@@ -25,11 +26,12 @@ class ElementCategory: Object, Mappable {
     }
     
     func mapping(map: Map) {
-        name        <- map["name"]
-        color       <- map["color"]
-        textColor   <- map["textColor"]
+        name           <- map["name"]
+        color          <- map["color"]
+        textColor      <- map["textColor"]
+        shadowColor    <- map["shadowColor"]
         
-        elements    <- (map["elements"], ListTransform<Element>())
+        elements       <- (map["elements"], ListTransform<Element>())
     }
     
 }

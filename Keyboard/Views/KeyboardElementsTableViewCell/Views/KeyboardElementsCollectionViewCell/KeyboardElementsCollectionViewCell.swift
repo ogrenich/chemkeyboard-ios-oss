@@ -20,6 +20,7 @@ extension KeyboardElementsCollectionViewCell {
     @discardableResult
     func configure(with element: Element) -> KeyboardElementsCollectionViewCell {
         backgroundColor = element.category?.color?.hexColor
+        shadowColor = element.category?.shadowColor?.hexColor
         
         symbolLabel.text = element.symbol?.value
         numberLabel.text = element.number.value != nil ? "\(element.number.value!)" : ""
