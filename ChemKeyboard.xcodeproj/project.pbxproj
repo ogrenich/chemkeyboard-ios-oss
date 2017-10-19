@@ -113,6 +113,11 @@
 		5AD182CB1F8CF20B00080313 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AD182CA1F8CF20B00080313 /* Assets.xcassets */; };
 		5AE382C41F92443D0059B080 /* ChemKeyboard.realm in Resources */ = {isa = PBXBuildFile; fileRef = 5AE382C31F92443C0059B080 /* ChemKeyboard.realm */; };
 		5AE382C51F9247F70059B080 /* ChemKeyboard.realm in Resources */ = {isa = PBXBuildFile; fileRef = 5AE382C31F92443C0059B080 /* ChemKeyboard.realm */; };
+		5AE382C81F960B5F0059B080 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE382C71F960B5F0059B080 /* PopUp.swift */; };
+		5AE382CD1F9610F00059B080 /* SimpleElementPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE382CC1F9610F00059B080 /* SimpleElementPopUp.swift */; };
+		5AE382D51F97A8810059B080 /* SimpleSymbolPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE382D41F97A8800059B080 /* SimpleSymbolPopUp.swift */; };
+		5AE382D71F97AAF90059B080 /* ExtendedElementPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE382D61F97AAF90059B080 /* ExtendedElementPopUp.swift */; };
+		5AE382D91F988C940059B080 /* ExtendedSymbolPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE382D81F988C940059B080 /* ExtendedSymbolPopUp.swift */; };
 		67FC87EA54389552C9666C61 /* Pods_Keyboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D99AB0CD5D9709735ACA2D78 /* Pods_Keyboard.framework */; };
 		F8FE752B013B0FB06FA20E40 /* Pods_ChemKeyboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94816A35B5E6AAAC942FEBF0 /* Pods_ChemKeyboard.framework */; };
 /* End PBXBuildFile section */
@@ -214,6 +219,11 @@
 		5AC0F7B81F866463004ECF6E /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		5AD182CA1F8CF20B00080313 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5AE382C31F92443C0059B080 /* ChemKeyboard.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = ChemKeyboard.realm; sourceTree = "<group>"; };
+		5AE382C71F960B5F0059B080 /* PopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp.swift; sourceTree = "<group>"; };
+		5AE382CC1F9610F00059B080 /* SimpleElementPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleElementPopUp.swift; sourceTree = "<group>"; };
+		5AE382D41F97A8800059B080 /* SimpleSymbolPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleSymbolPopUp.swift; sourceTree = "<group>"; };
+		5AE382D61F97AAF90059B080 /* ExtendedElementPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedElementPopUp.swift; sourceTree = "<group>"; };
+		5AE382D81F988C940059B080 /* ExtendedSymbolPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedSymbolPopUp.swift; sourceTree = "<group>"; };
 		94816A35B5E6AAAC942FEBF0 /* Pods_ChemKeyboard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChemKeyboard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		95B32E252AD372118A0E2B80 /* Pods-Keyboard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keyboard.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Keyboard/Pods-Keyboard.debug.xcconfig"; sourceTree = "<group>"; };
 		9E581C5FEAACD12DDB020775 /* Pods-ChemKeyboard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChemKeyboard.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChemKeyboard/Pods-ChemKeyboard.release.xcconfig"; sourceTree = "<group>"; };
@@ -423,6 +433,7 @@
 				15A542331F792B1A00AFB14E /* Info.plist */,
 				15A542311F792B1A00AFB14E /* KeyboardViewController.swift */,
 				15BBC6EA1F7D1CCF00A229BC /* KeyboardViewModel.swift */,
+				5AE382C61F960B480059B080 /* PopUp */,
 				5AD182C91F8CF1C300080313 /* Resources */,
 				15BBC7011F7D3AEE00A229BC /* Views */,
 			);
@@ -550,6 +561,50 @@
 				5AD182CA1F8CF20B00080313 /* Assets.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		5AE382C61F960B480059B080 /* PopUp */ = {
+			isa = PBXGroup;
+			children = (
+				5AE382D11F979FD40059B080 /* ExtendedElementPopUp */,
+				5AE382D31F979FF70059B080 /* ExtendedSymbolPopUp */,
+				5AE382C71F960B5F0059B080 /* PopUp.swift */,
+				5AE382CB1F9610B70059B080 /* SimpleElementPopUp */,
+				5AE382D21F979FE60059B080 /* SimpleSymbolPopUp */,
+			);
+			path = PopUp;
+			sourceTree = "<group>";
+		};
+		5AE382CB1F9610B70059B080 /* SimpleElementPopUp */ = {
+			isa = PBXGroup;
+			children = (
+				5AE382CC1F9610F00059B080 /* SimpleElementPopUp.swift */,
+			);
+			path = SimpleElementPopUp;
+			sourceTree = "<group>";
+		};
+		5AE382D11F979FD40059B080 /* ExtendedElementPopUp */ = {
+			isa = PBXGroup;
+			children = (
+				5AE382D61F97AAF90059B080 /* ExtendedElementPopUp.swift */,
+			);
+			path = ExtendedElementPopUp;
+			sourceTree = "<group>";
+		};
+		5AE382D21F979FE60059B080 /* SimpleSymbolPopUp */ = {
+			isa = PBXGroup;
+			children = (
+				5AE382D41F97A8800059B080 /* SimpleSymbolPopUp.swift */,
+			);
+			path = SimpleSymbolPopUp;
+			sourceTree = "<group>";
+		};
+		5AE382D31F979FF70059B080 /* ExtendedSymbolPopUp */ = {
+			isa = PBXGroup;
+			children = (
+				5AE382D81F988C940059B080 /* ExtendedSymbolPopUp.swift */,
+			);
+			path = ExtendedSymbolPopUp;
 			sourceTree = "<group>";
 		};
 		9F8E072D38A191C00E59BBEC /* Pods */ = {
@@ -863,8 +918,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AE382D71F97AAF90059B080 /* ExtendedElementPopUp.swift in Sources */,
 				15BBC6E31F7D035A00A229BC /* ElementCategory.swift in Sources */,
 				15BBC71D1F7D3C4500A229BC /* KeyboardSymbolsTableViewCellModel.swift in Sources */,
+				5AE382CD1F9610F00059B080 /* SimpleElementPopUp.swift in Sources */,
 				15BBC6E61F7D0EC900A229BC /* Symbol.swift in Sources */,
 				156D00961F7D4A08004C333F /* KeyboardSymbolsCollectionViewCell.swift in Sources */,
 				15BBC6FD1F7D344500A229BC /* UICollectionView+Extensions.swift in Sources */,
@@ -878,6 +935,7 @@
 				15BBC6E91F7D0F9600A229BC /* SymbolGroup.swift in Sources */,
 				15BBC7171F7D3C0200A229BC /* KeyboardActionsTableViewCellModel.swift in Sources */,
 				15BBC7051F7D3B7E00A229BC /* KeyboardCategoriesTableViewCell.swift in Sources */,
+				5AE382D51F97A8810059B080 /* SimpleSymbolPopUp.swift in Sources */,
 				157697851F838C690051AD67 /* ElementService.swift in Sources */,
 				15BBC7261F7D446500A229BC /* UITableViewCell+Extensions.swift in Sources */,
 				15BBC7291F7D447C00A229BC /* UICollectionViewCell+Extensions.swift in Sources */,
@@ -887,8 +945,10 @@
 				156D00911F7D49DC004C333F /* KeyboardElementsCollectionViewCell.swift in Sources */,
 				5A9396F81F83DC6900B0E546 /* KeyboardElementsCollectionViewLayout.swift in Sources */,
 				15BBC7001F7D345D00A229BC /* UITableView+Extensions.swift in Sources */,
+				5AE382D91F988C940059B080 /* ExtendedSymbolPopUp.swift in Sources */,
 				15BBC6F31F7D325100A229BC /* Iteratable.swift in Sources */,
 				15A542321F792B1A00AFB14E /* KeyboardViewController.swift in Sources */,
+				5AE382C81F960B5F0059B080 /* PopUp.swift in Sources */,
 				15BBC71B1F7D3C3400A229BC /* KeyboardElementsTableViewCellModel.swift in Sources */,
 				15BBC7141F7D3BE600A229BC /* KeyboardActionsTableViewCell.swift in Sources */,
 				5AC0F7BA1F866482004ECF6E /* UIView+Extensions.swift in Sources */,
