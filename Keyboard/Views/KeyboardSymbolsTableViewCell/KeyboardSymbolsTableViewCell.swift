@@ -85,7 +85,7 @@ private extension KeyboardSymbolsTableViewCell {
         cellDrag
             .bind { cell in
                 if let pointOfTouch = cell.pointOfTouch {
-                    let pointInInputView = cell.convert(pointOfTouch, to: PopUp.instance.inputView)
+                    let pointInInputView = cell.convert(pointOfTouch, to: PopUp.instance.keyboardView)
                     PopUp.instance.select(at: pointInInputView)
                 }
             }

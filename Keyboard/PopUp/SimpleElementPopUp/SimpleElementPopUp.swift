@@ -20,7 +20,7 @@ extension SimpleElementPopUp {
     func configure(with element: Element) -> SimpleElementPopUp {
         backgroundColor = element.category?.color?.hexColor
         
-        accessoryShape(radius: 4, heightOfCell: 44, widthOfCell: 58)
+        accessoryShape(radius: 4, heightOfCell: 44, widthOfCell: 58, alignment: .center)
         
         setUpLabels(with: element)
         
