@@ -73,8 +73,10 @@ extension KeyboardElementsCollectionViewCell {
                     self.cellTouchLong.onNext(self)
                 }
             }
+            isHidden = true
         case .ended, .cancelled, .failed:
             cellTouchUp.onNext(self)
+            isHidden = false
         default:
             break
         }
