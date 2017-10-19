@@ -17,6 +17,10 @@ class KeyboardSymbolsTableViewCell: UITableViewCell {
     
     fileprivate weak var needsReactToSimpleButtonTouchEvent: PublishSubject<Symbol?>!
     
+    let cellTouchDown = PublishSubject<KeyboardSymbolsCollectionViewCell>()
+    let cellTouchUp = PublishSubject<KeyboardSymbolsCollectionViewCell>()
+    let cellDrag = PublishSubject<KeyboardSymbolsCollectionViewCell>()
+    
     fileprivate var bag = DisposeBag()
     fileprivate var viewModel: KeyboardSymbolsTableViewCellModel!
     
@@ -58,7 +62,43 @@ private extension KeyboardSymbolsTableViewCell {
 private extension KeyboardSymbolsTableViewCell {
     
     func bindSelf() {
-        collectionView.rx.modelSelected(Symbol.self)
+        cellTouchDown
+            .bind { [weak self] cell in
+                guard let `self` = self else {
+                    return
+                }
+                
+                let frame = CGRect(x: cell.frame.origin.x, y: cell.frame.origin.y + 36 + 156,
+                                   width: cell.frame.width, height: cell.frame.height)
+                if let indexPath = self.collectionView.indexPath(for: cell) {
+                    if let symbol = self.viewModel.selectedSymbolGroup?.value?.symbols[indexPath.item] {
+                        if symbol.topIndex != nil && symbol.bottomIndex != nil {
+                            PopUp.instance.show(symbol: symbol, at: frame, style: .extended)
+                        } else {
+                            PopUp.instance.show(symbol: symbol, at: frame, style: .simple)
+                        }
+                    }
+                }
+            }
+            .disposed(by: bag)
+        
+        cellDrag
+            .bind { cell in
+                if let pointOfTouch = cell.pointOfTouch {
+                    let pointInInputView = cell.convert(pointOfTouch, to: PopUp.instance.inputView)
+                    PopUp.instance.select(at: pointInInputView)
+                }
+            }
+            .disposed(by: bag)
+        
+        cellTouchUp
+            .bind { _ in
+                PopUp.instance.hide()
+            }
+            .disposed(by: bag)
+        
+        cellTouchUp
+            .map { $0.chosenSymbol }
             .bind(to: needsReactToSimpleButtonTouchEvent)
             .disposed(by: bag)
     }
@@ -75,8 +115,11 @@ private extension KeyboardSymbolsTableViewCell {
             .drive(collectionView.rx.items) { [weak self] (collectionView, item, symbol) in
                 let cell: KeyboardSymbolsCollectionViewCell = collectionView.dequeueReusableCell(for: IndexPath(item: item, section: 0))
                 
-                guard let selectedSymbolGroup = self?.viewModel.selectedSymbolGroup.value else {
-                    return cell.configure(with: symbol)
+                guard
+                    let `self` = self,
+                    let selectedSymbolGroup = self.viewModel.selectedSymbolGroup.value
+                else {
+                    return cell.configure(with: symbol, cellTouchDown: nil, cellTouchUp: nil, cellDrag: nil)
                 }
                 
                 let numberOfSymbols = selectedSymbolGroup.symbols.count
@@ -100,7 +143,8 @@ private extension KeyboardSymbolsTableViewCell {
                     corners.insert(.bottomRight)
                 }
                 
-                return cell.configure(with: symbol, corners: corners)
+                return cell.configure(with: symbol, corners: corners, cellTouchDown: self.cellTouchDown,
+                                      cellTouchUp: self.cellTouchUp, cellDrag: self.cellDrag)
             }
             .disposed(by: bag)
     }

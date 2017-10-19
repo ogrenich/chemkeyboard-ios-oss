@@ -18,6 +18,10 @@ class KeyboardElementsTableViewCell: UITableViewCell {
     fileprivate weak var needsReactToSimpleButtonTouchEvent: PublishSubject<Symbol?>!
     fileprivate weak var needsScrollElementsCollectionViewToCategoryAt: PublishSubject<Int>!
     
+    let cellTouchDown = PublishSubject<KeyboardElementsCollectionViewCell>()
+    let cellTouchUp = PublishSubject<KeyboardElementsCollectionViewCell>()
+    let cellTouchLong = PublishSubject<KeyboardElementsCollectionViewCell>()
+    
     fileprivate var bag = DisposeBag()
     fileprivate var viewModel: KeyboardElementsTableViewCellModel!
     
@@ -88,13 +92,6 @@ private extension KeyboardElementsTableViewCell {
 private extension KeyboardElementsTableViewCell {
     
     func bindSelf() {
-        collectionView.rx.itemSelected
-            .map { [weak self] in
-                self?.viewModel.categories.value[$0.section].elements[$0.item].symbol
-            }
-            .bind(to: needsReactToSimpleButtonTouchEvent)
-            .disposed(by: bag)
-        
         collectionView.rx.willBeginDragging
             .bind { [weak self] in
                 self?.userIsScrolling = true
@@ -112,6 +109,53 @@ private extension KeyboardElementsTableViewCell {
                 if $0.velocity == .zero {
                     self?.userIsScrolling = false
                 }
+            }
+            .disposed(by: bag)
+        
+        cellTouchDown
+            .map { [weak self] in self?.collectionView.indexPath(for: $0) }
+            .filter { $0 != nil }
+            .map { $0! }
+            .withLatestFrom(viewModel.categories.asObservable()) { ($0, $1) }
+            .map { $1[$0.section].elements[$0.item].symbol }
+            .bind(to: needsReactToSimpleButtonTouchEvent)
+            .disposed(by: bag)
+        
+        cellTouchDown
+            .bind { [weak self] cell in
+                guard let `self` = self else {
+                    return
+                }
+
+                let frame = CGRect(x: cell.frame.origin.x - self.collectionView.contentOffset.x,
+                                   y: cell.frame.origin.y + 36,
+                                   width: cell.frame.width, height: cell.frame.height)
+                if let indexPath = self.collectionView.indexPath(for: cell) {
+                    let element = self.viewModel.categories.value[indexPath.section].elements[indexPath.item]
+                    PopUp.instance.show(element: element, at: frame, style: .simple)
+                }
+            }
+            .disposed(by: bag)
+        
+        cellTouchLong
+            .bind { [weak self] cell in
+                guard let `self` = self else {
+                    return
+                }
+                
+                let frame = CGRect(x: cell.frame.origin.x - self.collectionView.contentOffset.x,
+                                   y: cell.frame.origin.y + 36,
+                                   width: cell.frame.width, height: cell.frame.height)
+                if let indexPath = self.collectionView.indexPath(for: cell) {
+                    let element = self.viewModel.categories.value[indexPath.section].elements[indexPath.item]
+                    PopUp.instance.show(element: element, at: frame, style: .extended)
+                }
+            }
+            .disposed(by: bag)
+
+        cellTouchUp
+            .bind { _ in
+                PopUp.instance.hide()
             }
             .disposed(by: bag)
     }
@@ -169,7 +213,8 @@ extension KeyboardElementsTableViewCell: UICollectionViewDataSource {
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: KeyboardElementsCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
         let element = viewModel.categories.value[indexPath.section].elements.toArray()[indexPath.item]
-        return cell.configure(with: element)
+        return cell.configure(with: element, cellTouchDown: cellTouchDown,
+                              cellTouchUp: cellTouchUp, cellTouchLong: cellTouchLong)
     }
     
 }
