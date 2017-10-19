@@ -56,6 +56,59 @@ extension PopUp {
     }
     
     func show(symbol: Symbol, at frame: CGRect, style: PopUpStyle) {
+        hide()
+        
+        switch style {
+        case .simple:
+            let frameForPopUp = CGRect(x: frame.origin.x,
+                                       y: frame.origin.y - 50,
+                                       width: frame.width,
+                                       height: 100)
+            popUpView = UIView(frame: frameForPopUp)
+            contentView = SimpleSymbolPopUp(frame: popUpView.bounds).configure(with: symbol)
+        case .extended:
+            if frame.maxX + 18 > UIScreen.main.bounds.width {
+                let frameForPopUp = CGRect(x: frame.origin.x - 18,
+                                           y: frame.origin.y - 50,
+                                           width: frame.width + 18,
+                                           height: 100)
+                popUpView = UIView(frame: frameForPopUp)
+                contentView = ExtendedSymbolPopUp(frame: popUpView.bounds).configure(with: symbol,
+                                                                                     frame.width,
+                                                                                     alignment: .left)
+            } else {
+                let frameForPopUp = CGRect(x: frame.origin.x,
+                                           y: frame.origin.y - 50,
+                                           width: frame.width + 18,
+                                           height: 100)
+                popUpView = UIView(frame: frameForPopUp)
+                contentView = ExtendedSymbolPopUp(frame: popUpView.bounds).configure(with: symbol,
+                                                                                     frame.width,
+                                                                                     alignment: .right)
+            }
+        }
+        
+        addConstraints()
+        setUpShadow(with: "#1d000000".hexColor, radius: 12, offset: CGSize(width: 2, height: 5))
+        keyboardView.addSubview(popUpView)
+    }
+    
+    func select(at point: CGPoint) {
+        if let contentView = contentView as? ExtendedSymbolPopUp {
+            let userDraggedToIndex: Bool = (contentView.alignment == .right) ?
+                (point.x > popUpView.frame.maxX - 18) : (point.x < popUpView.frame.origin.x + 18)
+            
+            if userDraggedToIndex {
+                if point.y < popUpView.frame.origin.y + 22 {
+                    contentView.selectLabel(.topIndex)
+                } else {
+                    contentView.selectLabel(.bottomIndex)
+                }
+            } else {
+                contentView.selectLabel(.symbol)
+            }
+        }
+    }
     
     func hide() {
         contentView?.removeFromSuperview()
