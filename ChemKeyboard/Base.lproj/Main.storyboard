@@ -9,6 +9,14 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="SF-UI-Display-Heavy.otf">
+            <string>SFUIDisplay-Heavy</string>
+        </array>
+        <array key="SF-UI-Display-Semibold.otf">
+            <string>SFUIDisplay-Semibold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -18,26 +26,122 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eWs-fH-kT4">
-                                <rect key="frame" x="8" y="329" width="359" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o7N-Pa-d82" customClass="Button" customModule="ChemKeyboard" customModuleProvider="target">
+                                <rect key="frame" x="319" y="28" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="ULv-eE-Mt3"/>
+                                    <constraint firstAttribute="width" constant="44" id="npf-Dy-T2o"/>
+                                </constraints>
+                                <state key="normal" image="Info"/>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Type Your Formula" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eWs-fH-kT4" customClass="TextField" customModule="ChemKeyboard" customModuleProvider="target">
+                                <rect key="frame" x="14" y="116" width="347" height="64"/>
+                                <color key="backgroundColor" red="0.88627450980392153" green="0.88627450980392153" blue="0.88627450980392153" alpha="0.30249357876712329" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="QKQ-o2-N1U"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFUIDisplay-Heavy" family="SF UI Display" pointSize="28"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" white="0.0" alpha="0.1033015839041096" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="paddingLeft">
+                                        <real key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="paddingRight">
+                                        <real key="value" value="58"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7zg-R9-cGW" customClass="Button" customModule="ChemKeyboard" customModuleProvider="target">
+                                <rect key="frame" x="317" y="116" width="44" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="mle-aN-39W"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
+                                <state key="normal" image="Clear"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nb8-5h-tzp" customClass="Button" customModule="ChemKeyboard" customModuleProvider="target">
+                                <rect key="frame" x="14" y="194" width="149" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="M1V-Ge-r8d"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFUIDisplay-Semibold" family="SF UI Display" pointSize="15"/>
+                                <inset key="contentEdgeInsets" minX="14" minY="0.0" maxX="14" maxY="0.0"/>
+                                <state key="normal" title="Copy to clipboard">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
+                                        <color key="value" red="0.22745098039215686" green="0.61568627450980395" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
+                                        <color key="value" red="0.22745098039215686" green="0.61568627450980395" blue="1" alpha="0.8044734589041096" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="disabledBackgroundColor">
+                                        <color key="value" red="0.22745098039215686" green="0.61568627450980395" blue="1" alpha="0.40483197773972601" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ChemKeyboard v1.0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BgL-4n-BvI">
+                                <rect key="frame" x="14" y="286" width="92" height="12"/>
+                                <fontDescription key="fontDescription" name="SFUIDisplay-Heavy" family="SF UI Display" pointSize="10"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.19568707191780821" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© 2017 Chemistry Open Intelligence Pte. Ltd." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s28-MY-vAR">
+                                <rect key="frame" x="14" y="298" width="203" height="12"/>
+                                <fontDescription key="fontDescription" name="SFUIDisplay-Heavy" family="SF UI Display" pointSize="10"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.19568707190000001" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="eWs-fH-kT4" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="W3D-BZ-980"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="eWs-fH-kT4" secondAttribute="trailing" constant="8" id="ea0-ui-nt4"/>
-                            <constraint firstItem="eWs-fH-kT4" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="kfZ-qj-GwE"/>
-                            <constraint firstItem="eWs-fH-kT4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="pvj-3j-cQ8"/>
+                            <constraint firstItem="eWs-fH-kT4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="96" id="BSQ-kl-c0o"/>
+                            <constraint firstItem="eWs-fH-kT4" firstAttribute="bottom" secondItem="7zg-R9-cGW" secondAttribute="bottom" id="Fwe-G4-Ukn"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="s28-MY-vAR" secondAttribute="trailing" constant="14" id="Iqu-4q-M0L"/>
+                            <constraint firstItem="BgL-4n-BvI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="14" id="VOx-H3-uos"/>
+                            <constraint firstItem="nb8-5h-tzp" firstAttribute="leading" secondItem="eWs-fH-kT4" secondAttribute="leading" id="XB2-uX-xx0"/>
+                            <constraint firstItem="BgL-4n-BvI" firstAttribute="top" secondItem="nb8-5h-tzp" secondAttribute="bottom" constant="52" id="eDe-4e-DbW"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="eWs-fH-kT4" secondAttribute="trailing" constant="14" id="ea0-ui-nt4"/>
+                            <constraint firstItem="o7N-Pa-d82" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="fhh-vk-9wx"/>
+                            <constraint firstItem="nb8-5h-tzp" firstAttribute="top" secondItem="eWs-fH-kT4" secondAttribute="bottom" constant="14" id="kk1-yY-GzE"/>
+                            <constraint firstItem="eWs-fH-kT4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="14" id="pvj-3j-cQ8"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="o7N-Pa-d82" secondAttribute="trailing" constant="12" id="sBM-rB-qva"/>
+                            <constraint firstItem="7zg-R9-cGW" firstAttribute="top" secondItem="eWs-fH-kT4" secondAttribute="top" id="sGa-76-eLt"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="BgL-4n-BvI" secondAttribute="trailing" constant="14" id="tLX-XD-BqN"/>
+                            <constraint firstItem="7zg-R9-cGW" firstAttribute="trailing" secondItem="eWs-fH-kT4" secondAttribute="trailing" id="uCg-NA-HlO"/>
+                            <constraint firstItem="nb8-5h-tzp" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="eWs-fH-kT4" secondAttribute="trailing" id="uTw-bp-2m2"/>
+                            <constraint firstItem="s28-MY-vAR" firstAttribute="top" secondItem="BgL-4n-BvI" secondAttribute="bottom" id="wGg-L4-S38"/>
+                            <constraint firstItem="s28-MY-vAR" firstAttribute="leading" secondItem="BgL-4n-BvI" secondAttribute="leading" id="zR1-qt-HkN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="clearTextButton" destination="7zg-R9-cGW" id="HP7-wG-y3a"/>
+                        <outlet property="copyToClipboardButton" destination="nb8-5h-tzp" id="7fY-2j-m9z"/>
+                        <outlet property="copyrightLabel" destination="s28-MY-vAR" id="QrG-Tg-X6D"/>
+                        <outlet property="formulaTextField" destination="eWs-fH-kT4" id="cnk-Y6-SN1"/>
+                        <outlet property="infoButton" destination="o7N-Pa-d82" id="pUR-nB-gHt"/>
+                        <outlet property="versionLabel" destination="BgL-4n-BvI" id="KQz-PP-jTL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Clear" width="21" height="22"/>
+        <image name="Info" width="26" height="26"/>
+    </resources>
 </document>
