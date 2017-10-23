@@ -276,7 +276,6 @@
 			children = (
 				1501F6C61F792A18000DCE0B /* AppDelegate.swift */,
 				1501F6CA1F792A19000DCE0B /* Main.storyboard */,
-				1501F6CD1F792A19000DCE0B /* Assets.xcassets */,
 				1501F6CF1F792A19000DCE0B /* LaunchScreen.storyboard */,
 				1501F6D21F792A19000DCE0B /* Info.plist */,
 				15BBC6FA1F7D33EB00A229BC /* Extensions */,
@@ -303,6 +302,14 @@
 				1501F6C81F792A18000DCE0B /* MainViewController.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		150E161B1F9DF48500BB591A /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				1501F6CD1F792A19000DCE0B /* Assets.xcassets */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 		15531AFD1F83E24F00D4FA76 /* Fonts */ = {
@@ -413,6 +420,7 @@
 		156D009D1F7E9E5C004C333F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				150E161B1F9DF48500BB591A /* Assets */,
 				15531AFD1F83E24F00D4FA76 /* Fonts */,
 				156D009E1F7E9E7A004C333F /* Realm */,
 			);
