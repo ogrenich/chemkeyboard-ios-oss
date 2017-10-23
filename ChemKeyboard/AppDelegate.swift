@@ -21,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        setUpMainInterface()
         setUpRealm()
         
         return true
@@ -29,6 +31,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 private extension AppDelegate {
+    
+    func setUpMainInterface() {
+        guard let window = AppDelegate.instance.window else {
+            return
+        }
+        
+        window.rootViewController = MainViewController.instantiateFromStoryboard()
+    }
     
     func setUpRealm() {
         RealmService.instance.setUpRealm()
