@@ -42,17 +42,26 @@ private extension MainViewController {
     func bindSelf() {
         formulaTextField.rx.text
             .map { $0 == nil || $0?.count == 0 }
-            .bind(to: clearTextButton.rx.isHidden)
+            .bind { [weak self] in
+                guard let `self` = self else {
+                    return
+                }
+                
+                self.clearTextButton.isHidden = $0
+                self.copyToClipboardButton.isEnabled = !$0
+            }
             .disposed(by: bag)
         
         clearTextButton.rx.tap
-            .map { _ in nil }
-            .bind(to: formulaTextField.rx.text)
-            .disposed(by: bag)
-        
-        clearTextButton.rx.tap
-            .map { _ in true }
-            .bind(to: clearTextButton.rx.isHidden)
+            .bind { [weak self] in
+                guard let `self` = self else {
+                    return
+                }
+                
+                self.formulaTextField.text = nil
+                self.clearTextButton.isHidden = true
+                self.copyToClipboardButton.isEnabled = false
+            }
             .disposed(by: bag)
         
         copyToClipboardButton.rx.tap
