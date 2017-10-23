@@ -12,6 +12,8 @@
 		1501F6CC1F792A19000DCE0B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1501F6CA1F792A19000DCE0B /* Main.storyboard */; };
 		1501F6CE1F792A19000DCE0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1501F6CD1F792A19000DCE0B /* Assets.xcassets */; };
 		1501F6D11F792A19000DCE0B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1501F6CF1F792A19000DCE0B /* LaunchScreen.storyboard */; };
+		150E16181F9DF18C00BB591A /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150E16171F9DF18C00BB591A /* TextField.swift */; };
+		150E161D1F9DFD8600BB591A /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150E161C1F9DFD8600BB591A /* Button.swift */; };
 		150E16211F9DFF7900BB591A /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150E16201F9DFF7900BB591A /* UIImage+Extensions.swift */; };
 		150E16231F9E012600BB591A /* CALayer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150E16221F9E012600BB591A /* CALayer+Extensions.swift */; };
 		150E16251F9E140D00BB591A /* Storyboardable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150E16241F9E140D00BB591A /* Storyboardable.swift */; };
@@ -159,6 +161,8 @@
 		1501F6CD1F792A19000DCE0B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1501F6D01F792A19000DCE0B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1501F6D21F792A19000DCE0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		150E16171F9DF18C00BB591A /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		150E161C1F9DFD8600BB591A /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		150E16201F9DFF7900BB591A /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		150E16221F9E012600BB591A /* CALayer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extensions.swift"; sourceTree = "<group>"; };
 		150E16241F9E140D00BB591A /* Storyboardable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboardable.swift; sourceTree = "<group>"; };
@@ -282,6 +286,7 @@
 		1501F6C51F792A18000DCE0B /* ChemKeyboard */ = {
 			isa = PBXGroup;
 			children = (
+				150E16161F9DF17500BB591A /* Common */,
 				1501F6C61F792A18000DCE0B /* AppDelegate.swift */,
 				1501F6CA1F792A19000DCE0B /* Main.storyboard */,
 				1501F6CF1F792A19000DCE0B /* LaunchScreen.storyboard */,
@@ -310,6 +315,15 @@
 				1501F6C81F792A18000DCE0B /* MainViewController.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		150E16161F9DF17500BB591A /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				150E161C1F9DFD8600BB591A /* Button.swift */,
+				150E16171F9DF18C00BB591A /* TextField.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		150E161B1F9DF48500BB591A /* Assets */ = {
@@ -942,9 +956,11 @@
 				15BBC6F51F7D32E000A229BC /* Reusable.swift in Sources */,
 				156D009B1F7E981D004C333F /* RealmService.swift in Sources */,
 				15BBC6FF1F7D345D00A229BC /* UITableView+Extensions.swift in Sources */,
+				150E16181F9DF18C00BB591A /* TextField.swift in Sources */,
 				15BBC6F21F7D325100A229BC /* Iteratable.swift in Sources */,
 				5AC0F7B91F866463004ECF6E /* UIView+Extensions.swift in Sources */,
 				5ABE8D8C1F854EEC0029E30B /* String+Extensions.swift in Sources */,
+				150E161D1F9DFD8600BB591A /* Button.swift in Sources */,
 				150E16271F9E147700BB591A /* UIStoryboard+Extensions.swift in Sources */,
 				150E16251F9E140D00BB591A /* Storyboardable.swift in Sources */,
 				157697811F838C5D0051AD67 /* SymbolService.swift in Sources */,
