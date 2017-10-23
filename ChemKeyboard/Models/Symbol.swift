@@ -13,14 +13,17 @@ import ObjectMapper
 class Symbol: Object, Mappable {
     
     @objc dynamic var value: String? = nil
-    
+    @objc dynamic var topIndex: Symbol? = nil
+    @objc dynamic var bottomIndex: Symbol? = nil
     
     required convenience init?(map: Map) {
         self.init()
     }
     
     func mapping(map: Map) {
-        value   <- map["value"]
+        value           <- map["value"]
+        topIndex        <- map["topIndex"]
+        bottomIndex     <- map["bottomIndex"]
     }
     
 }

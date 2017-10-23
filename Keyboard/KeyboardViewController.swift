@@ -44,6 +44,8 @@ class KeyboardViewController: UIInputViewController {
         
         bindSelf()
         bindViewModel()
+        
+        PopUp.instance.keyboardView = view
     }
 
 }

@@ -36,6 +36,69 @@ public extension UIView {
         layer.mask = mask
     }
     
+    enum Alignment {
+        case center, left, right
+    }
+    
+    public func accessoryShape(radius: CGFloat, heightOfCell: CGFloat, widthOfCell: CGFloat, alignment: Alignment) {
+        let (leftInset, rightInset): (CGFloat, CGFloat)
+        switch alignment {
+        case .left:
+            (leftInset, rightInset) = (frame.width - widthOfCell, 0)
+        case .center:
+            (leftInset, rightInset) = (0.5 * (frame.width - widthOfCell), 0.5 * (frame.width - widthOfCell))
+        case .right:
+            (leftInset, rightInset) = (0, frame.width - widthOfCell)
+        }
+        
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: 0, y: radius))
+        
+        path.addArc(withCenter: CGPoint(x: radius, y: radius), radius: radius,
+                    startAngle: CGFloat.pi, endAngle: -0.5 * CGFloat.pi, clockwise: true)
+        path.addLine(to: CGPoint(x: frame.width - radius, y: 0))
+        
+        path.addArc(withCenter: CGPoint(x: frame.width - radius, y: radius), radius: radius,
+                    startAngle: -0.5 * CGFloat.pi, endAngle: 0, clockwise: true)
+        path.addLine(to: CGPoint(x: frame.width, y: frame.height - 2 * radius - heightOfCell))
+        
+        if alignment != .left {
+            path.addArc(withCenter: CGPoint(x: frame.width - radius, y: frame.height - 2 * radius - heightOfCell),
+                        radius: radius, startAngle: 0, endAngle: 0.5 * CGFloat.pi, clockwise: true)
+            path.addLine(to: CGPoint(x: frame.width - rightInset + radius,
+                                     y: frame.height - radius - heightOfCell))
+            path.addArc(withCenter: CGPoint(x: frame.width - rightInset + radius,
+                                            y: frame.height - heightOfCell),
+                        radius: radius, startAngle: -0.5 * CGFloat.pi, endAngle: CGFloat.pi, clockwise: false)
+        }
+        
+        path.addLine(to: CGPoint(x: frame.width - rightInset, y: frame.height - radius))
+        
+        path.addArc(withCenter: CGPoint(x: frame.width - rightInset - radius,
+                                        y: frame.height - radius),
+                    radius: radius, startAngle: 0, endAngle: 0.5 * CGFloat.pi, clockwise: true)
+        path.addLine(to: CGPoint(x: leftInset + radius, y: frame.height))
+        
+        path.addArc(withCenter: CGPoint(x: leftInset + radius,
+                                        y: frame.height - radius), radius: radius,
+                    startAngle: 0.5 * CGFloat.pi, endAngle: CGFloat.pi, clockwise: true)
+        path.addLine(to: CGPoint(x: leftInset, y: frame.height - heightOfCell))
+        
+        if alignment != .right {
+            path.addArc(withCenter: CGPoint(x: leftInset - radius, y: frame.height - heightOfCell),
+                        radius: radius, startAngle: 0, endAngle: -0.5 * CGFloat.pi, clockwise: false)
+            path.addLine(to: CGPoint(x: radius, y: frame.height - heightOfCell - radius))
+            path.addArc(withCenter: CGPoint(x: radius, y: frame.height - 2 * radius - heightOfCell), radius: radius,
+                        startAngle: 0.5 * CGFloat.pi, endAngle: CGFloat.pi, clockwise: true)
+        }
+        
+        path.close()
+        
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        layer.mask = mask
+    }
+    
 }
 
 public extension UIView {
