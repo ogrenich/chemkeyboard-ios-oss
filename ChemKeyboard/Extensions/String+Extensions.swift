@@ -8,16 +8,16 @@
 
 import UIKit
 
-extension String {
+public extension String {
     
-    var hexColor: UIColor {
+    public var hexColor: UIColor {
         let hex = trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
         
         var rgbValue = UInt32()
         Scanner(string: hex).scanHexInt32(&rgbValue)
         
         let a, r, g, b: UInt32
-        switch hex.characters.count {
+        switch hex.count {
         case 3: // RGB (12-bit)
             (a, r, g, b) = (255, (rgbValue >> 8) * 17, (rgbValue >> 4 & 0xF) * 17, (rgbValue & 0xF) * 17)
         case 6: // RGB (24-bit)

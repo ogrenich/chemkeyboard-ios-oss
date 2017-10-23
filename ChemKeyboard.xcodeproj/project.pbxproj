@@ -488,11 +488,11 @@
 		15BBC6FA1F7D33EB00A229BC /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				5ABE8D8B1F854EEC0029E30B /* String+Extensions.swift */,
 				15BBC6FB1F7D344500A229BC /* UICollectionView+Extensions.swift */,
 				15BBC7271F7D447C00A229BC /* UICollectionViewCell+Extensions.swift */,
 				15BBC6FE1F7D345D00A229BC /* UITableView+Extensions.swift */,
 				15BBC7241F7D446400A229BC /* UITableViewCell+Extensions.swift */,
-				5ABE8D8B1F854EEC0029E30B /* String+Extensions.swift */,
 				5AC0F7B81F866463004ECF6E /* UIView+Extensions.swift */,
 			);
 			path = Extensions;
