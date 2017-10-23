@@ -11,6 +11,10 @@ import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    static let instance: AppDelegate = {
+        return UIApplication.shared.delegate as! AppDelegate
+    }()
 
     var window: UIWindow?
 
