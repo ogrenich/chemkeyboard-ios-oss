@@ -12,6 +12,7 @@
 		1501F6CC1F792A19000DCE0B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1501F6CA1F792A19000DCE0B /* Main.storyboard */; };
 		1501F6CE1F792A19000DCE0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1501F6CD1F792A19000DCE0B /* Assets.xcassets */; };
 		1501F6D11F792A19000DCE0B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1501F6CF1F792A19000DCE0B /* LaunchScreen.storyboard */; };
+		150E16211F9DFF7900BB591A /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150E16201F9DFF7900BB591A /* UIImage+Extensions.swift */; };
 		150E16231F9E012600BB591A /* CALayer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150E16221F9E012600BB591A /* CALayer+Extensions.swift */; };
 		150E16251F9E140D00BB591A /* Storyboardable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150E16241F9E140D00BB591A /* Storyboardable.swift */; };
 		150E16271F9E147700BB591A /* UIStoryboard+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150E16261F9E147700BB591A /* UIStoryboard+Extensions.swift */; };
@@ -158,6 +159,7 @@
 		1501F6CD1F792A19000DCE0B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1501F6D01F792A19000DCE0B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1501F6D21F792A19000DCE0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		150E16201F9DFF7900BB591A /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		150E16221F9E012600BB591A /* CALayer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extensions.swift"; sourceTree = "<group>"; };
 		150E16241F9E140D00BB591A /* Storyboardable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboardable.swift; sourceTree = "<group>"; };
 		150E16261F9E147700BB591A /* UIStoryboard+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extensions.swift"; sourceTree = "<group>"; };
@@ -499,6 +501,7 @@
 				5ABE8D8B1F854EEC0029E30B /* String+Extensions.swift */,
 				15BBC6FB1F7D344500A229BC /* UICollectionView+Extensions.swift */,
 				15BBC7271F7D447C00A229BC /* UICollectionViewCell+Extensions.swift */,
+				150E16201F9DFF7900BB591A /* UIImage+Extensions.swift */,
 				150E16261F9E147700BB591A /* UIStoryboard+Extensions.swift */,
 				15BBC6FE1F7D345D00A229BC /* UITableView+Extensions.swift */,
 				15BBC7241F7D446400A229BC /* UITableViewCell+Extensions.swift */,
@@ -929,6 +932,7 @@
 				15BBC7281F7D447C00A229BC /* UICollectionViewCell+Extensions.swift in Sources */,
 				15BBC6E21F7D035A00A229BC /* ElementCategory.swift in Sources */,
 				15BBC6E51F7D0EC900A229BC /* Symbol.swift in Sources */,
+				150E16211F9DFF7900BB591A /* UIImage+Extensions.swift in Sources */,
 				15BBC7251F7D446500A229BC /* UITableViewCell+Extensions.swift in Sources */,
 				15BBC6FC1F7D344500A229BC /* UICollectionView+Extensions.swift in Sources */,
 				1501F6C91F792A18000DCE0B /* MainViewController.swift in Sources */,
