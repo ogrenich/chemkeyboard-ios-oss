@@ -8,10 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		1501F6C71F792A18000DCE0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1501F6C61F792A18000DCE0B /* AppDelegate.swift */; };
-		1501F6C91F792A18000DCE0B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1501F6C81F792A18000DCE0B /* ViewController.swift */; };
+		1501F6C91F792A18000DCE0B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1501F6C81F792A18000DCE0B /* MainViewController.swift */; };
 		1501F6CC1F792A19000DCE0B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1501F6CA1F792A19000DCE0B /* Main.storyboard */; };
 		1501F6CE1F792A19000DCE0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1501F6CD1F792A19000DCE0B /* Assets.xcassets */; };
 		1501F6D11F792A19000DCE0B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1501F6CF1F792A19000DCE0B /* LaunchScreen.storyboard */; };
+		150E16181F9DF18C00BB591A /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150E16171F9DF18C00BB591A /* TextField.swift */; };
+		150E161D1F9DFD8600BB591A /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150E161C1F9DFD8600BB591A /* Button.swift */; };
+		150E16211F9DFF7900BB591A /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150E16201F9DFF7900BB591A /* UIImage+Extensions.swift */; };
+		150E16231F9E012600BB591A /* CALayer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150E16221F9E012600BB591A /* CALayer+Extensions.swift */; };
+		150E16251F9E140D00BB591A /* Storyboardable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150E16241F9E140D00BB591A /* Storyboardable.swift */; };
+		150E16271F9E147700BB591A /* UIStoryboard+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150E16261F9E147700BB591A /* UIStoryboard+Extensions.swift */; };
 		15531B161F83E27D00D4FA76 /* SF-UI-Display-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 15531B001F83E26A00D4FA76 /* SF-UI-Display-Light.otf */; };
 		15531B171F83E27D00D4FA76 /* SF-UI-Display-Ultralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 15531B011F83E26A00D4FA76 /* SF-UI-Display-Ultralight.otf */; };
 		15531B181F83E27D00D4FA76 /* SF-UI-Display-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 15531B021F83E26A00D4FA76 /* SF-UI-Display-Heavy.otf */; };
@@ -150,11 +156,17 @@
 		0E923791963465790D28BF41 /* Pods-ChemKeyboard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChemKeyboard.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChemKeyboard/Pods-ChemKeyboard.debug.xcconfig"; sourceTree = "<group>"; };
 		1501F6C31F792A18000DCE0B /* ChemKeyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChemKeyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1501F6C61F792A18000DCE0B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1501F6C81F792A18000DCE0B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1501F6C81F792A18000DCE0B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		1501F6CB1F792A19000DCE0B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1501F6CD1F792A19000DCE0B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1501F6D01F792A19000DCE0B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1501F6D21F792A19000DCE0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		150E16171F9DF18C00BB591A /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		150E161C1F9DFD8600BB591A /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		150E16201F9DFF7900BB591A /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
+		150E16221F9E012600BB591A /* CALayer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extensions.swift"; sourceTree = "<group>"; };
+		150E16241F9E140D00BB591A /* Storyboardable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboardable.swift; sourceTree = "<group>"; };
+		150E16261F9E147700BB591A /* UIStoryboard+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extensions.swift"; sourceTree = "<group>"; };
 		15531B001F83E26A00D4FA76 /* SF-UI-Display-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Light.otf"; sourceTree = "<group>"; };
 		15531B011F83E26A00D4FA76 /* SF-UI-Display-Ultralight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Ultralight.otf"; sourceTree = "<group>"; };
 		15531B021F83E26A00D4FA76 /* SF-UI-Display-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Heavy.otf"; sourceTree = "<group>"; };
@@ -274,19 +286,52 @@
 		1501F6C51F792A18000DCE0B /* ChemKeyboard */ = {
 			isa = PBXGroup;
 			children = (
+				150E16161F9DF17500BB591A /* Common */,
 				1501F6C61F792A18000DCE0B /* AppDelegate.swift */,
-				1501F6C81F792A18000DCE0B /* ViewController.swift */,
 				1501F6CA1F792A19000DCE0B /* Main.storyboard */,
-				1501F6CD1F792A19000DCE0B /* Assets.xcassets */,
 				1501F6CF1F792A19000DCE0B /* LaunchScreen.storyboard */,
 				1501F6D21F792A19000DCE0B /* Info.plist */,
 				15BBC6FA1F7D33EB00A229BC /* Extensions */,
 				15BBC6DA1F7CFF7A00A229BC /* Models */,
 				15BBC6F01F7D323400A229BC /* Protocols */,
 				156D009D1F7E9E5C004C333F /* Resources */,
+				150E16141F9DEE9500BB591A /* Screens */,
 				156D00981F7E97EC004C333F /* Services */,
 			);
 			path = ChemKeyboard;
+			sourceTree = "<group>";
+		};
+		150E16141F9DEE9500BB591A /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				150E16151F9DEE9F00BB591A /* Main */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		150E16151F9DEE9F00BB591A /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				1501F6C81F792A18000DCE0B /* MainViewController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		150E16161F9DF17500BB591A /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				150E161C1F9DFD8600BB591A /* Button.swift */,
+				150E16171F9DF18C00BB591A /* TextField.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		150E161B1F9DF48500BB591A /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				1501F6CD1F792A19000DCE0B /* Assets.xcassets */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 		15531AFD1F83E24F00D4FA76 /* Fonts */ = {
@@ -397,6 +442,7 @@
 		156D009D1F7E9E5C004C333F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				150E161B1F9DF48500BB591A /* Assets */,
 				15531AFD1F83E24F00D4FA76 /* Fonts */,
 				156D009E1F7E9E7A004C333F /* Realm */,
 			);
@@ -457,6 +503,7 @@
 				15BBC6F11F7D325100A229BC /* Iteratable.swift */,
 				15BBC6F71F7D333500A229BC /* NibLoadable.swift */,
 				15BBC6F41F7D32E000A229BC /* Reusable.swift */,
+				150E16241F9E140D00BB591A /* Storyboardable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -464,11 +511,14 @@
 		15BBC6FA1F7D33EB00A229BC /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				150E16221F9E012600BB591A /* CALayer+Extensions.swift */,
+				5ABE8D8B1F854EEC0029E30B /* String+Extensions.swift */,
 				15BBC6FB1F7D344500A229BC /* UICollectionView+Extensions.swift */,
 				15BBC7271F7D447C00A229BC /* UICollectionViewCell+Extensions.swift */,
+				150E16201F9DFF7900BB591A /* UIImage+Extensions.swift */,
+				150E16261F9E147700BB591A /* UIStoryboard+Extensions.swift */,
 				15BBC6FE1F7D345D00A229BC /* UITableView+Extensions.swift */,
 				15BBC7241F7D446400A229BC /* UITableViewCell+Extensions.swift */,
-				5ABE8D8B1F854EEC0029E30B /* String+Extensions.swift */,
 				5AC0F7B81F866463004ECF6E /* UIView+Extensions.swift */,
 			);
 			path = Extensions;
@@ -896,17 +946,23 @@
 				15BBC7281F7D447C00A229BC /* UICollectionViewCell+Extensions.swift in Sources */,
 				15BBC6E21F7D035A00A229BC /* ElementCategory.swift in Sources */,
 				15BBC6E51F7D0EC900A229BC /* Symbol.swift in Sources */,
+				150E16211F9DFF7900BB591A /* UIImage+Extensions.swift in Sources */,
 				15BBC7251F7D446500A229BC /* UITableViewCell+Extensions.swift in Sources */,
 				15BBC6FC1F7D344500A229BC /* UICollectionView+Extensions.swift in Sources */,
-				1501F6C91F792A18000DCE0B /* ViewController.swift in Sources */,
+				1501F6C91F792A18000DCE0B /* MainViewController.swift in Sources */,
+				150E16231F9E012600BB591A /* CALayer+Extensions.swift in Sources */,
 				15BBC6F81F7D333500A229BC /* NibLoadable.swift in Sources */,
 				15BBC6E81F7D0F9600A229BC /* SymbolGroup.swift in Sources */,
 				15BBC6F51F7D32E000A229BC /* Reusable.swift in Sources */,
 				156D009B1F7E981D004C333F /* RealmService.swift in Sources */,
 				15BBC6FF1F7D345D00A229BC /* UITableView+Extensions.swift in Sources */,
+				150E16181F9DF18C00BB591A /* TextField.swift in Sources */,
 				15BBC6F21F7D325100A229BC /* Iteratable.swift in Sources */,
 				5AC0F7B91F866463004ECF6E /* UIView+Extensions.swift in Sources */,
 				5ABE8D8C1F854EEC0029E30B /* String+Extensions.swift in Sources */,
+				150E161D1F9DFD8600BB591A /* Button.swift in Sources */,
+				150E16271F9E147700BB591A /* UIStoryboard+Extensions.swift in Sources */,
+				150E16251F9E140D00BB591A /* Storyboardable.swift in Sources */,
 				157697811F838C5D0051AD67 /* SymbolService.swift in Sources */,
 				1501F6C71F792A18000DCE0B /* AppDelegate.swift in Sources */,
 				157697841F838C690051AD67 /* ElementService.swift in Sources */,
