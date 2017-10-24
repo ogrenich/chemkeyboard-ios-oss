@@ -14,8 +14,10 @@ class KeyboardViewModel {
     
     fileprivate let bag = DisposeBag()
     
+    
     let selectedCategory = Variable<ElementCategory?>(nil)
     let selectedSymbolGroup = Variable<SymbolGroup?>(nil)
+    
     
     let categories = Variable<[ElementCategory]>([])
     let symbolGroups = Variable<[SymbolGroup]>([])

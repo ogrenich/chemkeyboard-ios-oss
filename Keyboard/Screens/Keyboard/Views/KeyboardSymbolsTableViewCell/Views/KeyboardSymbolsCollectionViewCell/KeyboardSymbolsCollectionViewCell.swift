@@ -14,11 +14,14 @@ class KeyboardSymbolsCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var symbolLabel: UILabel!
     
+    
     fileprivate weak var cellTouchDown: PublishSubject<KeyboardSymbolsCollectionViewCell>?
     fileprivate weak var cellTouchUp: PublishSubject<KeyboardSymbolsCollectionViewCell>?
     fileprivate weak var cellDrag: PublishSubject<KeyboardSymbolsCollectionViewCell>?
     
+    
     fileprivate var gesture: UILongPressGestureRecognizer!
+    
     
     fileprivate var symbol: Symbol!
     
@@ -54,7 +57,9 @@ extension KeyboardSymbolsCollectionViewCell {
 extension KeyboardSymbolsCollectionViewCell {
     
     func addTouchEvents() {
-        gesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressHandler))
+        gesture = UILongPressGestureRecognizer(target: self,
+                                               action: #selector(longPressHandler))
+        
         gesture.minimumPressDuration = 0
         addGestureRecognizer(gesture)
     }
@@ -70,6 +75,7 @@ extension KeyboardSymbolsCollectionViewCell {
             
             let userDraggedToIndex = (frame.maxX + 18 > UIScreen.main.bounds.width) ?
                 (pointOfTouch.x < 0) : (pointOfTouch.x > bounds.maxX)
+            
             if userDraggedToIndex {
                 if pointOfTouch.y > -28 {
                     chosenSymbol = symbol.bottomIndex ?? symbol

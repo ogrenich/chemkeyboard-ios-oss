@@ -13,6 +13,7 @@ class KeyboardActionsTableViewCellModel {
     
     fileprivate let bag = DisposeBag()
     
+    
     weak var selectedSymbolGroup: Variable<SymbolGroup?>!
     weak var symbolGroups: Variable<[SymbolGroup]>!
     

@@ -15,9 +15,11 @@ class KeyboardElementsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var symbolLabel: UILabel!
     @IBOutlet weak var numberLabel: UILabel!
     
+    
     fileprivate weak var cellTouchDown: PublishSubject<KeyboardElementsCollectionViewCell>!
     fileprivate weak var cellTouchUp: PublishSubject<KeyboardElementsCollectionViewCell>!
     fileprivate weak var cellTouchLong: PublishSubject<KeyboardElementsCollectionViewCell>!
+    
     
     fileprivate var gesture: UILongPressGestureRecognizer!
     
@@ -64,6 +66,7 @@ extension KeyboardElementsCollectionViewCell {
         switch gesture.state {
         case .began:
             cellTouchDown.onNext(self)
+            
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.7) { [weak self] in
                 guard let `self` = self else {
                     return
@@ -73,6 +76,7 @@ extension KeyboardElementsCollectionViewCell {
                     self.cellTouchLong.onNext(self)
                 }
             }
+            
             isHidden = true
         case .ended, .cancelled, .failed:
             cellTouchUp.onNext(self)

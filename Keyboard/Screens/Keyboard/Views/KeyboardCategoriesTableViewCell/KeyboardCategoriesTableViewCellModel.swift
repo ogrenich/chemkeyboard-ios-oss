@@ -13,6 +13,7 @@ class KeyboardCategoriesTableViewCellModel {
     
     fileprivate let bag = DisposeBag()
     
+    
     weak var selectedCategory: Variable<ElementCategory?>!
     weak var categories: Variable<[ElementCategory]>!
     

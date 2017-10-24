@@ -17,8 +17,10 @@ class KeyboardActionsTableViewCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var deleteButton: UIButton!
     
+    
     fileprivate weak var needsReactToSwitchButtonTouchEvent: PublishSubject<Void>!
     fileprivate weak var needsReactToDeleteButtonTouchEvent: PublishSubject<Void>!
+    
     
     fileprivate var bag = DisposeBag()
     fileprivate var viewModel: KeyboardActionsTableViewCellModel!
@@ -28,6 +30,7 @@ class KeyboardActionsTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        
         bag = DisposeBag()
     }
     
@@ -86,6 +89,7 @@ private extension KeyboardActionsTableViewCell {
         viewModel.symbolGroups.asDriver()
             .drive(collectionView.rx.items) { [weak self] (collectionView, item, symbolGroup) in
                 let cell: KeyboardActionsCollectionViewCell = collectionView.dequeueReusableCell(for: IndexPath(item: item, section: 0))
+                
                 return cell.configure(with: symbolGroup,
                                       selected: symbolGroup == self?.viewModel.selectedSymbolGroup.value)
             }
@@ -122,6 +126,7 @@ extension KeyboardActionsTableViewCell: UICollectionViewDelegateFlowLayout {
         
         let width = (collectionView.frame.size.width - 5 * layout.minimumInteritemSpacing -
                     layout.sectionInset.left - layout.sectionInset.right) / 6
+        
         return CGSize(width: width, height: 44)
     }
     
@@ -145,9 +150,12 @@ private extension KeyboardActionsTableViewCell {
 extension KeyboardActionsTableViewCell {
     
     func addGestureRecognizersOnDeleteButton() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleSimpleDeleteEvent))
+        let tap = UITapGestureRecognizer(target: self,
+                                         action: #selector(handleSimpleDeleteEvent))
+        
         let longPress = UILongPressGestureRecognizer(target: self,
                                                      action: #selector(handleLongPressOnDeleteButton(_:)))
+       
         deleteButton.addGestureRecognizer(tap)
         deleteButton.addGestureRecognizer(longPress)
     }

@@ -15,24 +15,29 @@ class KeyboardElementsCollectionViewLayout: UICollectionViewLayout {
     fileprivate let cellWidth: CGFloat = 58
     fileprivate let cellHeight: CGFloat = 44
 
+    
     fileprivate var cache = [[UICollectionViewLayoutAttributes]]()
 
+    
     fileprivate var contentHeight: CGFloat {
         guard let collectionView = collectionView else {
             return 0
         }
         
         let contentInset = collectionView.contentInset
-        return collectionView.bounds.height - (contentInset.top + contentInset.bottom)
+        
+        return collectionView.bounds.height
+            - (contentInset.top + contentInset.bottom)
     }
     
     fileprivate var contentWidth: CGFloat = 0
+    
     
     override var collectionViewContentSize: CGSize {
         return CGSize(width: contentWidth, height: contentHeight)
     }
     
-
+    
     override func prepare() {
         guard
             let collectionView = collectionView,
@@ -52,9 +57,11 @@ class KeyboardElementsCollectionViewLayout: UICollectionViewLayout {
 
                 let width: CGFloat = cellWidth + 2 * cellPadding
                 let height: CGFloat = cellHeight + 2 * cellPadding
+                
                 let frame = CGRect(x: cellPadding + width * CGFloat(columnNumber),
                                    y: height * CGFloat(rowNumber),
                                    width: width, height: height)
+                
                 let insetFrame = frame.insetBy(dx: cellPadding, dy: cellPadding)
                 
                 let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)

@@ -15,18 +15,22 @@ class KeyboardElementsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    
     fileprivate weak var needsReactToSimpleButtonTouchEvent: PublishSubject<Symbol?>!
     fileprivate weak var needsScrollElementsCollectionViewToCategoryAt: PublishSubject<Int>!
+    
     
     let cellTouchDown = PublishSubject<KeyboardElementsCollectionViewCell>()
     let cellTouchUp = PublishSubject<KeyboardElementsCollectionViewCell>()
     let cellTouchLong = PublishSubject<KeyboardElementsCollectionViewCell>()
+    
     
     fileprivate var bag = DisposeBag()
     fileprivate var viewModel: KeyboardElementsTableViewCellModel!
     
     fileprivate var userIsScrolling: Bool = false
 
+    
     var currentSection: RxSwift.Observable<Int> {
         return collectionView.rx.contentOffset
             .flatMap { [weak self] contentOffset -> RxSwift.Observable<Int> in
@@ -55,6 +59,7 @@ class KeyboardElementsTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        
         bag = DisposeBag()
     }
     
@@ -213,6 +218,7 @@ extension KeyboardElementsTableViewCell: UICollectionViewDataSource {
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: KeyboardElementsCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
         let element = viewModel.categories.value[indexPath.section].elements.toArray()[indexPath.item]
+        
         return cell.configure(with: element, cellTouchDown: cellTouchDown,
                               cellTouchUp: cellTouchUp, cellTouchLong: cellTouchLong)
     }

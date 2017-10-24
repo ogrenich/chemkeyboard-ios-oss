@@ -166,26 +166,33 @@ extension KeyboardViewController: UITableViewDataSource {
         switch section {
         case .categories:
             let cell: KeyboardCategoriesTableViewCell = tableView.dequeueReusableCell()
+            
             let cellModel = KeyboardCategoriesTableViewCellModel.init(with: viewModel.categories,
                                                                       selectedCategory: viewModel.selectedCategory)
+            
             return cell.configure(with: cellModel,
                                   needsScrollElementsCollectionViewToCategoryAt)
         case .elements:
             let cell: KeyboardElementsTableViewCell = tableView.dequeueReusableCell()
+            
             let cellModel = KeyboardElementsTableViewCellModel.init(with: viewModel.categories,
                                                                     selectedCategory: viewModel.selectedCategory)
+            
             return cell.configure(with: cellModel,
                                   needsReactToSimpleButtonTouchEvent: needsReactToSimpleButtonTouchEvent,
                                   needsScrollElementsCollectionViewToCategoryAt)
         case .symbols:
             let cell: KeyboardSymbolsTableViewCell = tableView.dequeueReusableCell()
             let cellModel = KeyboardSymbolsTableViewCellModel.init(with: viewModel.selectedSymbolGroup)
+            
             return cell.configure(with: cellModel,
                                   needsReactToSimpleButtonTouchEvent: needsReactToSimpleButtonTouchEvent)
         case .actions:
             let cell: KeyboardActionsTableViewCell = tableView.dequeueReusableCell()
+            
             let cellModel = KeyboardActionsTableViewCellModel.init(with: viewModel.symbolGroups,
                                                                    selectedSymbolGroup: viewModel.selectedSymbolGroup)
+            
             return cell.configure(with: cellModel,
                                   needsReactToSwitchButtonTouchEvent: needsReactToSwitchButtonTouchEvent,
                                   needsReactToDeleteButtonTouchEvent: needsReactToDeleteButtonTouchEvent)
@@ -196,7 +203,8 @@ extension KeyboardViewController: UITableViewDataSource {
 
 extension KeyboardViewController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView,
+                   heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let section = Section(rawValue: indexPath.section) else {
             return CGFloat.leastNonzeroMagnitude
         }
@@ -214,7 +222,9 @@ extension KeyboardViewController: UITableViewDelegate {
                 return CGFloat.leastNonzeroMagnitude
             }
             
-            let numberOfLines = (CGFloat(selectedSymbolGroup.symbols.count) / CGFloat(numberOfSymbolsInLine)).rounded(.up)
+            let numberOfLines = (CGFloat(selectedSymbolGroup.symbols.count)
+                / CGFloat(numberOfSymbolsInLine)).rounded(.up)
+            
             return (numberOfLines * 44) + ((numberOfLines - 1) * 1) + 8
         case .actions:
             return 56
@@ -229,13 +239,14 @@ extension KeyboardViewController {
         var lengthOfSymbol = 1
         
         if let context = textDocumentProxy.documentContextBeforeInput {
-            let pattern = "([A-Z][a-z]*)"
-            let regex = try! NSRegularExpression(pattern: pattern, options: [])
-            let matches = regex.matches(in: context, options: [],
+            let regex = try! NSRegularExpression(pattern: "([A-Z][a-z]*)")
+            
+            let matches = regex.matches(in: context,
                                         range: NSRange(location: 0,
-                                                       length: context.characters.count))
+                                                       length: context.count))
+            
             if let last = matches.last,
-                last.range.location + last.range.length == context.characters.count {
+                last.range.location + last.range.length == context.count {
                 lengthOfSymbol = last.range.length
             }
         }

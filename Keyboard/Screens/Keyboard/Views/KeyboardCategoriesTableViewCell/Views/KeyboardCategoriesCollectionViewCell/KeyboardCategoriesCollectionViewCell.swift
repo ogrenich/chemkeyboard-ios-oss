@@ -13,6 +13,7 @@ class KeyboardCategoriesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var selectedBackgroundImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     
+    
     override var isSelected: Bool {
         didSet {
             selectedBackgroundImageView.isHidden = !isSelected

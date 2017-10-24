@@ -15,7 +15,9 @@ class KeyboardCategoriesTableViewCell: UITableViewCell {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    
     fileprivate weak var needsScrollElementsCollectionViewToCategoryAt: PublishSubject<Int>!
+    
     
     fileprivate var bag = DisposeBag()
     fileprivate var viewModel: KeyboardCategoriesTableViewCellModel!
@@ -23,6 +25,7 @@ class KeyboardCategoriesTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        
         bag = DisposeBag()
     }
     
@@ -98,6 +101,7 @@ private extension KeyboardCategoriesTableViewCell {
                 self.collectionView.scrollToItem(at: $0,
                                                  at: .centeredHorizontally,
                                                  animated: true)
+                
                 self.collectionView.selectItem(at: $0,
                                                animated: true,
                                                scrollPosition: .centeredHorizontally)

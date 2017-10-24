@@ -16,6 +16,7 @@ class KeyboardActionsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var bottomLeftLabel: UILabel!
     @IBOutlet weak var bottomRightLabel: UILabel!
     
+    
     fileprivate var accessoryView: UIView!
     
     
@@ -76,7 +77,8 @@ private extension KeyboardActionsCollectionViewCell {
 extension KeyboardActionsCollectionViewCell {
     
     @discardableResult
-    func configure(with group: SymbolGroup, selected: Bool) -> KeyboardActionsCollectionViewCell {
+    func configure(with group: SymbolGroup,
+                   selected: Bool) -> KeyboardActionsCollectionViewCell {
         configureLabels(with: group)
         
         if accessoryView == nil {
@@ -121,8 +123,10 @@ extension KeyboardActionsCollectionViewCell {
         addSubview(accessoryView)
         accessoryView.translatesAutoresizingMaskIntoConstraints = false
         accessoryView.heightAnchor.constraint(equalToConstant: collectionViewTopInset).isActive = true
+        
         accessoryView.widthAnchor.constraint(equalTo: widthAnchor,
                                              constant: 2 * cellPadding).isActive = true
+        
         accessoryView.bottomAnchor.constraint(equalTo: topAnchor).isActive = true
         accessoryView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
     }
