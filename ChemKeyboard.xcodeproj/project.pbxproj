@@ -1170,7 +1170,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0E923791963465790D28BF41 /* Pods-ChemKeyboard.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2EC7R6EALB;
@@ -1187,7 +1187,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9E581C5FEAACD12DDB020775 /* Pods-ChemKeyboard.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2EC7R6EALB;
