@@ -8,30 +8,14 @@
 
 import Foundation
 import RealmSwift
-import ObjectMapper
-import ObjectMapper_Realm
 
-class ElementCategory: Object, Mappable {
+class ElementCategory: Object {
     
-    @objc dynamic var name: String? = nil
-    @objc dynamic var color: String? = nil
-    @objc dynamic var textColor: String? = nil
-    @objc dynamic var shadowColor: String? = nil
+    @objc dynamic var name: String?
+    @objc dynamic var color: String?
+    @objc dynamic var textColor: String?
+    @objc dynamic var shadowColor: String?
     
     var elements = List<Element>()
-    
-    
-    required convenience init?(map: Map) {
-        self.init()
-    }
-    
-    func mapping(map: Map) {
-        name           <- map["name"]
-        color          <- map["color"]
-        textColor      <- map["textColor"]
-        shadowColor    <- map["shadowColor"]
-        
-        elements       <- (map["elements"], ListTransform<Element>())
-    }
     
 }

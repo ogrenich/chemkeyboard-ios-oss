@@ -11,8 +11,6 @@ def common
     
     pod 'RxCocoa', '4.0.0'
     pod 'RxRealm', '0.7.3'
-    pod 'ObjectMapper+Realm', '0.5'
-    pod 'ObjectMapperAdditions/Realm', '3.0.5'
     
 end
 
