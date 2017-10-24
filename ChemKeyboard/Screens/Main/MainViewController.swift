@@ -40,6 +40,12 @@ class MainViewController: UIViewController, Storyboardable {
 private extension MainViewController {
     
     func bindSelf() {
+        infoButton.rx.tap
+            .bind { [weak self] in
+                self?.performSegue(withIdentifier: "Instructions", sender: nil)
+            }
+            .disposed(by: bag)
+        
         formulaTextField.rx.text
             .map { $0 == nil || $0?.count == 0 }
             .bind { [weak self] in
