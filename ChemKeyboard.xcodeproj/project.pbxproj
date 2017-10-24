@@ -113,6 +113,8 @@
 		15BBC7261F7D446500A229BC /* UITableViewCell+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BBC7241F7D446400A229BC /* UITableViewCell+Extensions.swift */; };
 		15BBC7281F7D447C00A229BC /* UICollectionViewCell+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BBC7271F7D447C00A229BC /* UICollectionViewCell+Extensions.swift */; };
 		15BBC7291F7D447C00A229BC /* UICollectionViewCell+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BBC7271F7D447C00A229BC /* UICollectionViewCell+Extensions.swift */; };
+		15E218041F9F7AA7008AC6B2 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 15E218031F9F7AA7008AC6B2 /* Settings.bundle */; };
+		4B8745AE4BAD293BC6D7131B /* Pods-ChemKeyboard-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 30C9BA0C773809E607101729 /* Pods-ChemKeyboard-metadata.plist */; };
 		5A9396F81F83DC6900B0E546 /* KeyboardElementsCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9396F71F83DC6900B0E546 /* KeyboardElementsCollectionViewLayout.swift */; };
 		5ABE8D8C1F854EEC0029E30B /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABE8D8B1F854EEC0029E30B /* String+Extensions.swift */; };
 		5ABE8D8D1F854F220029E30B /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABE8D8B1F854EEC0029E30B /* String+Extensions.swift */; };
@@ -127,6 +129,7 @@
 		5AE382D71F97AAF90059B080 /* ExtendedElementPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE382D61F97AAF90059B080 /* ExtendedElementPopUp.swift */; };
 		5AE382D91F988C940059B080 /* ExtendedSymbolPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE382D81F988C940059B080 /* ExtendedSymbolPopUp.swift */; };
 		67FC87EA54389552C9666C61 /* Pods_Keyboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D99AB0CD5D9709735ACA2D78 /* Pods_Keyboard.framework */; };
+		6C915C5F56EC5DFAE6271A4C /* Pods-Keyboard-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 61830F9875477CA72741DF34 /* Pods-Keyboard-metadata.plist */; };
 		F8FE752B013B0FB06FA20E40 /* Pods_ChemKeyboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94816A35B5E6AAAC942FEBF0 /* Pods_ChemKeyboard.framework */; };
 /* End PBXBuildFile section */
 
@@ -230,6 +233,8 @@
 		15BBC7211F7D43BB00A229BC /* KeyboardActionsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KeyboardActionsCollectionViewCell.xib; sourceTree = "<group>"; };
 		15BBC7241F7D446400A229BC /* UITableViewCell+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extensions.swift"; sourceTree = "<group>"; };
 		15BBC7271F7D447C00A229BC /* UICollectionViewCell+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+Extensions.swift"; sourceTree = "<group>"; };
+		15E218031F9F7AA7008AC6B2 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		30C9BA0C773809E607101729 /* Pods-ChemKeyboard-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-ChemKeyboard-metadata.plist"; path = "Pods/Pods-ChemKeyboard-metadata.plist"; sourceTree = "<group>"; };
 		5A9396F71F83DC6900B0E546 /* KeyboardElementsCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardElementsCollectionViewLayout.swift; sourceTree = "<group>"; };
 		5ABE8D8B1F854EEC0029E30B /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		5AC0F7B81F866463004ECF6E /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
@@ -240,6 +245,7 @@
 		5AE382D41F97A8800059B080 /* SimpleSymbolPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleSymbolPopUp.swift; sourceTree = "<group>"; };
 		5AE382D61F97AAF90059B080 /* ExtendedElementPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedElementPopUp.swift; sourceTree = "<group>"; };
 		5AE382D81F988C940059B080 /* ExtendedSymbolPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedSymbolPopUp.swift; sourceTree = "<group>"; };
+		61830F9875477CA72741DF34 /* Pods-Keyboard-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-Keyboard-metadata.plist"; path = "Pods/Pods-Keyboard-metadata.plist"; sourceTree = "<group>"; };
 		94816A35B5E6AAAC942FEBF0 /* Pods_ChemKeyboard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChemKeyboard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		95B32E252AD372118A0E2B80 /* Pods-Keyboard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keyboard.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Keyboard/Pods-Keyboard.debug.xcconfig"; sourceTree = "<group>"; };
 		9E581C5FEAACD12DDB020775 /* Pods-ChemKeyboard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChemKeyboard.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChemKeyboard/Pods-ChemKeyboard.release.xcconfig"; sourceTree = "<group>"; };
@@ -299,6 +305,7 @@
 				156D009D1F7E9E5C004C333F /* Resources */,
 				150E16141F9DEE9500BB591A /* Screens */,
 				156D00981F7E97EC004C333F /* Services */,
+				15E218021F9F78DB008AC6B2 /* Settings */,
 				150E16311F9F62E200BB591A /* Storyboards */,
 			);
 			path = ChemKeyboard;
@@ -675,6 +682,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		15E218021F9F78DB008AC6B2 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				15E218031F9F7AA7008AC6B2 /* Settings.bundle */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		5AD182C91F8CF1C300080313 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -734,6 +749,8 @@
 				9E581C5FEAACD12DDB020775 /* Pods-ChemKeyboard.release.xcconfig */,
 				95B32E252AD372118A0E2B80 /* Pods-Keyboard.debug.xcconfig */,
 				F352A39614F5287FBADB819F /* Pods-Keyboard.release.xcconfig */,
+				30C9BA0C773809E607101729 /* Pods-ChemKeyboard-metadata.plist */,
+				61830F9875477CA72741DF34 /* Pods-Keyboard-metadata.plist */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -761,6 +778,7 @@
 				15A5423A1F792B1A00AFB14E /* Embed App Extensions */,
 				49CCA580958D54F94A6094A0 /* [CP] Embed Pods Frameworks */,
 				36D920F89125E264E0BA5107 /* [CP] Copy Pods Resources */,
+				156F3C2E1F9F8B210049C3B8 /* Run Script / Version and Build */,
 			);
 			buildRules = (
 			);
@@ -837,6 +855,7 @@
 			files = (
 				15531B161F83E27D00D4FA76 /* SF-UI-Display-Light.otf in Resources */,
 				15531B2B1F83E28400D4FA76 /* SF-UI-Text-Regular.otf in Resources */,
+				15E218041F9F7AA7008AC6B2 /* Settings.bundle in Resources */,
 				15531B311F83E28400D4FA76 /* SF-UI-Text-Medium.otf in Resources */,
 				15531B321F83E28400D4FA76 /* SF-UI-Text-Heavy.otf in Resources */,
 				15531B171F83E27D00D4FA76 /* SF-UI-Display-Ultralight.otf in Resources */,
@@ -860,6 +879,7 @@
 				5AE382C41F92443D0059B080 /* ChemKeyboard.realm in Resources */,
 				15531B2D1F83E28400D4FA76 /* SF-UI-Text-Light.otf in Resources */,
 				15531B331F83E28400D4FA76 /* SF-UI-Text-Semibold.otf in Resources */,
+				4B8745AE4BAD293BC6D7131B /* Pods-ChemKeyboard-metadata.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -898,12 +918,27 @@
 				15531B3A1F83E28400D4FA76 /* SF-UI-Text-MediumItalic.otf in Resources */,
 				15531B3C1F83E28400D4FA76 /* SF-UI-Text-LightItalic.otf in Resources */,
 				15531B251F83E27D00D4FA76 /* SF-UI-Display-Black.otf in Resources */,
+				6C915C5F56EC5DFAE6271A4C /* Pods-Keyboard-metadata.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		156F3C2E1F9F8B210049C3B8 /* Run Script / Version and Build */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script / Version and Build";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "version=$(/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" \"$PROJECT_DIR/$INFOPLIST_FILE\")\nbuild=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\n\n/usr/libexec/PlistBuddy -c \"Set PreferenceSpecifiers:0:DefaultValue $version ($build)\" \"$CODESIGNING_FOLDER_PATH/Settings.bundle/Root.plist\"";
+		};
 		30F66BC62C1F6A087FC34558 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
