@@ -32,22 +32,27 @@ public extension UIView {
                                 byRoundingCorners: corners,
                                 cornerRadii: CGSize(width: radius,
                                                     height: radius))
+        
         let mask = CAShapeLayer()
         mask.path = path.cgPath
         layer.mask = mask
     }
     
     enum Alignment {
+        
         case center, left, right
+        
     }
     
     public func accessoryShape(radius: CGFloat, heightOfCell: CGFloat, widthOfCell: CGFloat, alignment: Alignment) {
         let (leftInset, rightInset): (CGFloat, CGFloat)
+        
         switch alignment {
         case .left:
             (leftInset, rightInset) = (frame.width - widthOfCell, 0)
         case .center:
-            (leftInset, rightInset) = (0.5 * (frame.width - widthOfCell), 0.5 * (frame.width - widthOfCell))
+            (leftInset, rightInset) = (0.5 * (frame.width - widthOfCell),
+                                       0.5 * (frame.width - widthOfCell))
         case .right:
             (leftInset, rightInset) = (0, frame.width - widthOfCell)
         }
@@ -57,17 +62,21 @@ public extension UIView {
         
         path.addArc(withCenter: CGPoint(x: radius, y: radius), radius: radius,
                     startAngle: CGFloat.pi, endAngle: -0.5 * CGFloat.pi, clockwise: true)
+        
         path.addLine(to: CGPoint(x: frame.width - radius, y: 0))
         
         path.addArc(withCenter: CGPoint(x: frame.width - radius, y: radius), radius: radius,
                     startAngle: -0.5 * CGFloat.pi, endAngle: 0, clockwise: true)
+        
         path.addLine(to: CGPoint(x: frame.width, y: frame.height - 2 * radius - heightOfCell))
         
         if alignment != .left {
             path.addArc(withCenter: CGPoint(x: frame.width - radius, y: frame.height - 2 * radius - heightOfCell),
                         radius: radius, startAngle: 0, endAngle: 0.5 * CGFloat.pi, clockwise: true)
+            
             path.addLine(to: CGPoint(x: frame.width - rightInset + radius,
                                      y: frame.height - radius - heightOfCell))
+            
             path.addArc(withCenter: CGPoint(x: frame.width - rightInset + radius,
                                             y: frame.height - heightOfCell),
                         radius: radius, startAngle: -0.5 * CGFloat.pi, endAngle: CGFloat.pi, clockwise: false)
@@ -78,11 +87,13 @@ public extension UIView {
         path.addArc(withCenter: CGPoint(x: frame.width - rightInset - radius,
                                         y: frame.height - radius),
                     radius: radius, startAngle: 0, endAngle: 0.5 * CGFloat.pi, clockwise: true)
+        
         path.addLine(to: CGPoint(x: leftInset + radius, y: frame.height))
         
         path.addArc(withCenter: CGPoint(x: leftInset + radius,
                                         y: frame.height - radius), radius: radius,
                     startAngle: 0.5 * CGFloat.pi, endAngle: CGFloat.pi, clockwise: true)
+        
         path.addLine(to: CGPoint(x: leftInset, y: frame.height - heightOfCell))
         
         if alignment != .right {
@@ -109,6 +120,7 @@ public extension UIView {
         get {
             return layer.shadowRadius
         }
+        
         set {
             layer.shadowRadius = newValue
         }
@@ -119,13 +131,16 @@ public extension UIView {
         get {
             return layer.shadowOpacity
         }
+        
         set {
             layer.shadowOpacity = newValue
+            
             if newValue > 0 {
                 layer.masksToBounds = false
                 
                 /// Defining shadow's path for performance improvement
-                layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).cgPath
+                layer.shadowPath = UIBezierPath(roundedRect: bounds,
+                                                cornerRadius: cornerRadius).cgPath
             }
         }
     }
@@ -135,6 +150,7 @@ public extension UIView {
         get {
             return layer.shadowOffset
         }
+        
         set {
             layer.shadowOffset = newValue
         }
@@ -146,8 +162,10 @@ public extension UIView {
             if let color = layer.shadowColor {
                 return UIColor(cgColor: color)
             }
+            
             return nil
         }
+        
         set {
             if let color = newValue {
                 layer.shadowColor = color.cgColor

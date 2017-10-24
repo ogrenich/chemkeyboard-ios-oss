@@ -19,11 +19,20 @@ public extension String {
         let a, r, g, b: UInt32
         switch hex.count {
         case 3: // RGB (12-bit)
-            (a, r, g, b) = (255, (rgbValue >> 8) * 17, (rgbValue >> 4 & 0xF) * 17, (rgbValue & 0xF) * 17)
+            (a, r, g, b) = (255,
+                            (rgbValue >> 8) * 17,
+                            (rgbValue >> 4 & 0xF) * 17,
+                            (rgbValue & 0xF) * 17)
         case 6: // RGB (24-bit)
-            (a, r, g, b) = (255, rgbValue >> 16, rgbValue >> 8 & 0xFF, rgbValue & 0xFF)
+            (a, r, g, b) = (255,
+                            rgbValue >> 16,
+                            rgbValue >> 8 & 0xFF,
+                            rgbValue & 0xFF)
         case 8: // ARGB (32-bit)
-            (a, r, g, b) = (rgbValue >> 24, rgbValue >> 16 & 0xFF, rgbValue >> 8 & 0xFF, rgbValue & 0xFF)
+            (a, r, g, b) = (rgbValue >> 24,
+                            rgbValue >> 16 & 0xFF,
+                            rgbValue >> 8 & 0xFF,
+                            rgbValue & 0xFF)
         default:
             return .clear
         }
