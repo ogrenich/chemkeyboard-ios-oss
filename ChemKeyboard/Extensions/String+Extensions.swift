@@ -8,22 +8,31 @@
 
 import UIKit
 
-extension String {
+public extension String {
     
-    var hexColor: UIColor {
+    public var hexColor: UIColor {
         let hex = trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
         
         var rgbValue = UInt32()
         Scanner(string: hex).scanHexInt32(&rgbValue)
         
         let a, r, g, b: UInt32
-        switch hex.characters.count {
+        switch hex.count {
         case 3: // RGB (12-bit)
-            (a, r, g, b) = (255, (rgbValue >> 8) * 17, (rgbValue >> 4 & 0xF) * 17, (rgbValue & 0xF) * 17)
+            (a, r, g, b) = (255,
+                            (rgbValue >> 8) * 17,
+                            (rgbValue >> 4 & 0xF) * 17,
+                            (rgbValue & 0xF) * 17)
         case 6: // RGB (24-bit)
-            (a, r, g, b) = (255, rgbValue >> 16, rgbValue >> 8 & 0xFF, rgbValue & 0xFF)
+            (a, r, g, b) = (255,
+                            rgbValue >> 16,
+                            rgbValue >> 8 & 0xFF,
+                            rgbValue & 0xFF)
         case 8: // ARGB (32-bit)
-            (a, r, g, b) = (rgbValue >> 24, rgbValue >> 16 & 0xFF, rgbValue >> 8 & 0xFF, rgbValue & 0xFF)
+            (a, r, g, b) = (rgbValue >> 24,
+                            rgbValue >> 16 & 0xFF,
+                            rgbValue >> 8 & 0xFF,
+                            rgbValue & 0xFF)
         default:
             return .clear
         }
@@ -32,6 +41,14 @@ extension String {
                        green: CGFloat(g) / 255,
                        blue: CGFloat(b) / 255,
                        alpha: CGFloat(a) / 255)
+    }
+    
+}
+
+public extension String {
+    
+    public func capitalizingFirstLetter() -> String {
+        return prefix(1).capitalized + dropFirst()
     }
     
 }

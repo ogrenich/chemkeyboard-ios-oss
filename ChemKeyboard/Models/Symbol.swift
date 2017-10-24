@@ -8,19 +8,11 @@
 
 import Foundation
 import RealmSwift
-import ObjectMapper
 
-class Symbol: Object, Mappable {
+class Symbol: Object {
     
-    @objc dynamic var value: String? = nil
-    
-    
-    required convenience init?(map: Map) {
-        self.init()
-    }
-    
-    func mapping(map: Map) {
-        value   <- map["value"]
-    }
+    @objc dynamic var value: String?
+    @objc dynamic var topIndex: Symbol?
+    @objc dynamic var bottomIndex: Symbol?
     
 }

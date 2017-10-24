@@ -11,12 +11,12 @@ import UIKit
 public extension UITableView {
     
     @discardableResult
-    public func register<T: UITableViewCell>(_: T.Type) -> UITableView where T: Reusable, T: NibLoadable {
+    public func register<T: UITableViewCell>(_: T.Type) -> UITableView {
         register(UINib(nibName: T.nibName, bundle: nil), forCellReuseIdentifier: T.reuseIdentifier)
         return self
     }
     
-    public func dequeueReusableCell<T: UITableViewCell>() -> T where T: Reusable {
+    public func dequeueReusableCell<T: UITableViewCell>() -> T {
         guard let cell = dequeueReusableCell(withIdentifier: T.reuseIdentifier) as? T else {
             fatalError("Could not dequeue cell: \(T.reuseIdentifier)")
         }
@@ -24,7 +24,7 @@ public extension UITableView {
         return cell
     }
     
-    public func dequeueReusableCell<T: UITableViewCell>(for indexPath: IndexPath) -> T where T: Reusable {
+    public func dequeueReusableCell<T: UITableViewCell>(for indexPath: IndexPath) -> T {
         guard let cell = dequeueReusableCell(withIdentifier: T.reuseIdentifier, for: indexPath) as? T else {
             fatalError("Could not dequeue cell: \(T.reuseIdentifier)")
         }
