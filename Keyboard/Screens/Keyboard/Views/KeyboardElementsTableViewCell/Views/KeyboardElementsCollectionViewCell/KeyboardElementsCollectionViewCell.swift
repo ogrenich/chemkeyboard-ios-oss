@@ -58,7 +58,7 @@ extension KeyboardElementsCollectionViewCell {
     
     func addTouchEvents() {
         gesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressHandler))
-        gesture.minimumPressDuration = 0
+        gesture.minimumPressDuration = 0.1
         addGestureRecognizer(gesture)
     }
     
