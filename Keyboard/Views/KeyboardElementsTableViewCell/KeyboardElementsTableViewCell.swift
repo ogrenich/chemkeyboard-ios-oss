@@ -113,15 +113,6 @@ private extension KeyboardElementsTableViewCell {
             .disposed(by: bag)
         
         cellTouchDown
-            .map { [weak self] in self?.collectionView.indexPath(for: $0) }
-            .filter { $0 != nil }
-            .map { $0! }
-            .withLatestFrom(viewModel.categories.asObservable()) { ($0, $1) }
-            .map { $1[$0.section].elements[$0.item].symbol }
-            .bind(to: needsReactToSimpleButtonTouchEvent)
-            .disposed(by: bag)
-        
-        cellTouchDown
             .bind { [weak self] cell in
                 guard let `self` = self else {
                     return
@@ -157,6 +148,15 @@ private extension KeyboardElementsTableViewCell {
             .bind { _ in
                 PopUp.instance.hide()
             }
+            .disposed(by: bag)
+        
+        cellTouchUp
+            .map { [weak self] in self?.collectionView.indexPath(for: $0) }
+            .filter { $0 != nil }
+            .map { $0! }
+            .withLatestFrom(viewModel.categories.asObservable()) { ($0, $1) }
+            .map { $1[$0.section].elements[$0.item].symbol }
+            .bind(to: needsReactToSimpleButtonTouchEvent)
             .disposed(by: bag)
     }
     
