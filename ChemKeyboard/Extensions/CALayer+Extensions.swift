@@ -43,6 +43,7 @@ public extension CALayer {
         
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
+        
         return image
     }
     

@@ -11,12 +11,12 @@ import UIKit
 public extension UICollectionView {
     
     @discardableResult
-    public func register<T: UICollectionViewCell>(_: T.Type) -> UICollectionView where T: Reusable, T: NibLoadable {
+    public func register<T: UICollectionViewCell>(_: T.Type) -> UICollectionView {
         register(UINib(nibName: T.nibName, bundle: nil), forCellWithReuseIdentifier: T.reuseIdentifier)
         return self
     }
     
-    public func dequeueReusableCell<T: UICollectionViewCell>(for indexPath: IndexPath) -> T where T: Reusable {
+    public func dequeueReusableCell<T: UICollectionViewCell>(for indexPath: IndexPath) -> T {
         guard let cell = dequeueReusableCell(withReuseIdentifier: T.reuseIdentifier, for: indexPath) as? T else {
             fatalError("Could not dequeue cell: \(T.reuseIdentifier)")
         }

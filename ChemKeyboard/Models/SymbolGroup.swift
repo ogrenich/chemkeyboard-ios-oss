@@ -8,26 +8,12 @@
 
 import Foundation
 import RealmSwift
-import ObjectMapper
-import ObjectMapper_Realm
 
-class SymbolGroup: Object, Mappable {
+class SymbolGroup: Object {
     
-    @objc dynamic var name: String? = nil
+    @objc dynamic var name: String?
     let numberOfSymbolsInLine = RealmOptional<Int>()
     
     var symbols = List<Symbol>()
-    
-    
-    required convenience init?(map: Map) {
-        self.init()
-    }
-    
-    func mapping(map: Map) {
-        name                        <- map["name"]
-        numberOfSymbolsInLine.value <- map["numberOfSymbolsInLine"]
-        
-        symbols                     <- (map["symbols"], ListTransform<Symbol>())
-    }
     
 }
