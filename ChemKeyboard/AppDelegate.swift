@@ -21,7 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
         setUpMainInterface()
         setUpRealm()
         
@@ -37,7 +36,18 @@ private extension AppDelegate {
             return
         }
         
-        window.rootViewController = MainViewController.instantiateFromStoryboard()
+        let root = MainViewController.instantiateFromStoryboard()
+        
+        if UserDefaults.standard.hasLaunchedBefore == false {
+            DispatchQueue.main.async {
+                root.performSegue(withIdentifier: "InstructionsWithoutAnimation",
+                                  sender: nil)
+            }
+            
+            UserDefaults.standard.hasLaunchedBefore = true
+        }
+        
+        window.rootViewController = root
     }
     
     func setUpRealm() {

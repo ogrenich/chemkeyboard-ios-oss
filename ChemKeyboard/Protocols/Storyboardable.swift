@@ -23,6 +23,8 @@ extension Storyboardable where Self: UIViewController {
     
     static var storyboard: UIStoryboard {
         switch storyboardIdentifier {
+        case String(describing: InstructionsViewController.self):
+            return UIStoryboard(.main)
         case String(describing: MainViewController.self):
             return UIStoryboard(.main)
         default:

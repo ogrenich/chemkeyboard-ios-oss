@@ -18,6 +18,8 @@
 		150E16231F9E012600BB591A /* CALayer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150E16221F9E012600BB591A /* CALayer+Extensions.swift */; };
 		150E16251F9E140D00BB591A /* Storyboardable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150E16241F9E140D00BB591A /* Storyboardable.swift */; };
 		150E16271F9E147700BB591A /* UIStoryboard+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150E16261F9E147700BB591A /* UIStoryboard+Extensions.swift */; };
+		150E16291F9E200600BB591A /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150E16281F9E200600BB591A /* UserDefaults+Extensions.swift */; };
+		150E162C1F9E21F200BB591A /* InstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150E162B1F9E21F200BB591A /* InstructionsViewController.swift */; };
 		15531B161F83E27D00D4FA76 /* SF-UI-Display-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 15531B001F83E26A00D4FA76 /* SF-UI-Display-Light.otf */; };
 		15531B171F83E27D00D4FA76 /* SF-UI-Display-Ultralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 15531B011F83E26A00D4FA76 /* SF-UI-Display-Ultralight.otf */; };
 		15531B181F83E27D00D4FA76 /* SF-UI-Display-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 15531B021F83E26A00D4FA76 /* SF-UI-Display-Heavy.otf */; };
@@ -167,6 +169,8 @@
 		150E16221F9E012600BB591A /* CALayer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extensions.swift"; sourceTree = "<group>"; };
 		150E16241F9E140D00BB591A /* Storyboardable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboardable.swift; sourceTree = "<group>"; };
 		150E16261F9E147700BB591A /* UIStoryboard+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extensions.swift"; sourceTree = "<group>"; };
+		150E16281F9E200600BB591A /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
+		150E162B1F9E21F200BB591A /* InstructionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsViewController.swift; sourceTree = "<group>"; };
 		15531B001F83E26A00D4FA76 /* SF-UI-Display-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Light.otf"; sourceTree = "<group>"; };
 		15531B011F83E26A00D4FA76 /* SF-UI-Display-Ultralight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Ultralight.otf"; sourceTree = "<group>"; };
 		15531B021F83E26A00D4FA76 /* SF-UI-Display-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Heavy.otf"; sourceTree = "<group>"; };
@@ -304,6 +308,7 @@
 		150E16141F9DEE9500BB591A /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				150E162A1F9E21C700BB591A /* Instructions */,
 				150E16151F9DEE9F00BB591A /* Main */,
 			);
 			path = Screens;
@@ -332,6 +337,14 @@
 				1501F6CD1F792A19000DCE0B /* Assets.xcassets */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		150E162A1F9E21C700BB591A /* Instructions */ = {
+			isa = PBXGroup;
+			children = (
+				150E162B1F9E21F200BB591A /* InstructionsViewController.swift */,
+			);
+			path = Instructions;
 			sourceTree = "<group>";
 		};
 		15531AFD1F83E24F00D4FA76 /* Fonts */ = {
@@ -520,6 +533,7 @@
 				15BBC6FE1F7D345D00A229BC /* UITableView+Extensions.swift */,
 				15BBC7241F7D446400A229BC /* UITableViewCell+Extensions.swift */,
 				5AC0F7B81F866463004ECF6E /* UIView+Extensions.swift */,
+				150E16281F9E200600BB591A /* UserDefaults+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -956,6 +970,7 @@
 				15BBC6F51F7D32E000A229BC /* Reusable.swift in Sources */,
 				156D009B1F7E981D004C333F /* RealmService.swift in Sources */,
 				15BBC6FF1F7D345D00A229BC /* UITableView+Extensions.swift in Sources */,
+				150E16291F9E200600BB591A /* UserDefaults+Extensions.swift in Sources */,
 				150E16181F9DF18C00BB591A /* TextField.swift in Sources */,
 				15BBC6F21F7D325100A229BC /* Iteratable.swift in Sources */,
 				5AC0F7B91F866463004ECF6E /* UIView+Extensions.swift in Sources */,
@@ -966,6 +981,7 @@
 				157697811F838C5D0051AD67 /* SymbolService.swift in Sources */,
 				1501F6C71F792A18000DCE0B /* AppDelegate.swift in Sources */,
 				157697841F838C690051AD67 /* ElementService.swift in Sources */,
+				150E162C1F9E21F200BB591A /* InstructionsViewController.swift in Sources */,
 				15BBC6DC1F7CFFB100A229BC /* Element.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
