@@ -290,17 +290,16 @@
 		1501F6C51F792A18000DCE0B /* ChemKeyboard */ = {
 			isa = PBXGroup;
 			children = (
+				150E162F1F9F625300BB591A /* Application */,
 				150E16161F9DF17500BB591A /* Common */,
-				1501F6C61F792A18000DCE0B /* AppDelegate.swift */,
-				1501F6CA1F792A19000DCE0B /* Main.storyboard */,
-				1501F6CF1F792A19000DCE0B /* LaunchScreen.storyboard */,
-				1501F6D21F792A19000DCE0B /* Info.plist */,
+				150E16301F9F629700BB591A /* Configuration */,
 				15BBC6FA1F7D33EB00A229BC /* Extensions */,
 				15BBC6DA1F7CFF7A00A229BC /* Models */,
 				15BBC6F01F7D323400A229BC /* Protocols */,
 				156D009D1F7E9E5C004C333F /* Resources */,
 				150E16141F9DEE9500BB591A /* Screens */,
 				156D00981F7E97EC004C333F /* Services */,
+				150E16311F9F62E200BB591A /* Storyboards */,
 			);
 			path = ChemKeyboard;
 			sourceTree = "<group>";
@@ -345,6 +344,65 @@
 				150E162B1F9E21F200BB591A /* InstructionsViewController.swift */,
 			);
 			path = Instructions;
+			sourceTree = "<group>";
+		};
+		150E162F1F9F625300BB591A /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				1501F6C61F792A18000DCE0B /* AppDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		150E16301F9F629700BB591A /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				1501F6D21F792A19000DCE0B /* Info.plist */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		150E16311F9F62E200BB591A /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				1501F6CF1F792A19000DCE0B /* LaunchScreen.storyboard */,
+				1501F6CA1F792A19000DCE0B /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		150E16331F9F638C00BB591A /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				15A542331F792B1A00AFB14E /* Info.plist */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		150E16351F9F657400BB591A /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				150E16361F9F657E00BB591A /* Keyboard */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		150E16361F9F657E00BB591A /* Keyboard */ = {
+			isa = PBXGroup;
+			children = (
+				15A542311F792B1A00AFB14E /* KeyboardViewController.swift */,
+				15BBC6EA1F7D1CCF00A229BC /* KeyboardViewModel.swift */,
+				15BBC7011F7D3AEE00A229BC /* Views */,
+			);
+			path = Keyboard;
+			sourceTree = "<group>";
+		};
+		150E16371F9F659900BB591A /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				5AE382C61F960B480059B080 /* PopUp */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		15531AFD1F83E24F00D4FA76 /* Fonts */ = {
@@ -437,9 +495,9 @@
 		156D00981F7E97EC004C333F /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				1576977F1F838C3B0051AD67 /* SymbolService */,
 				1576977E1F838C2B0051AD67 /* ElementService */,
 				156D00991F7E9808004C333F /* RealmService */,
+				1576977F1F838C3B0051AD67 /* SymbolService */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -489,12 +547,10 @@
 		15A542301F792B1A00AFB14E /* Keyboard */ = {
 			isa = PBXGroup;
 			children = (
-				15A542331F792B1A00AFB14E /* Info.plist */,
-				15A542311F792B1A00AFB14E /* KeyboardViewController.swift */,
-				15BBC6EA1F7D1CCF00A229BC /* KeyboardViewModel.swift */,
-				5AE382C61F960B480059B080 /* PopUp */,
+				150E16371F9F659900BB591A /* Common */,
+				150E16331F9F638C00BB591A /* Configuration */,
 				5AD182C91F8CF1C300080313 /* Resources */,
-				15BBC7011F7D3AEE00A229BC /* Views */,
+				150E16351F9F657400BB591A /* Screens */,
 			);
 			path = Keyboard;
 			sourceTree = "<group>";
@@ -888,11 +944,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ChemKeyboard/Pods-ChemKeyboard-frameworks.sh",
-                "${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
-                "${BUILT_PRODUCTS_DIR}/ObjectMapper+Realm/ObjectMapper_Realm.framework",
-                "${BUILT_PRODUCTS_DIR}/ObjectMapperAdditions/ObjectMapperAdditions.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-                "${BUILT_PRODUCTS_DIR}/RealmAdditions/RealmAdditions.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${PODS_ROOT}/Reveal-SDK/RevealServer-11/iOS/RevealServer.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
@@ -901,11 +953,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-                "${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
-                "${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper_Realm.framework",
-                "${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapperAdditions.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-                "${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmAdditions.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RevealServer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
@@ -1174,7 +1222,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2EC7R6EALB;
-				INFOPLIST_FILE = ChemKeyboard/Info.plist;
+				INFOPLIST_FILE = ChemKeyboard/Configuration/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tech.chemopin.ChemKeyboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1191,7 +1239,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2EC7R6EALB;
-				INFOPLIST_FILE = ChemKeyboard/Info.plist;
+				INFOPLIST_FILE = ChemKeyboard/Configuration/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tech.chemopin.ChemKeyboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1206,7 +1254,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2EC7R6EALB;
-				INFOPLIST_FILE = Keyboard/Info.plist;
+				INFOPLIST_FILE = Keyboard/Configuration/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tech.chemopin.ChemKeyboard.Keyboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1222,7 +1270,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2EC7R6EALB;
-				INFOPLIST_FILE = Keyboard/Info.plist;
+				INFOPLIST_FILE = Keyboard/Configuration/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tech.chemopin.ChemKeyboard.Keyboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";

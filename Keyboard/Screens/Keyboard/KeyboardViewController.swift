@@ -23,31 +23,35 @@ class KeyboardViewController: UIInputViewController {
     lazy var tableView = UITableView()
     var tableViewHeightConstraint: NSLayoutConstraint!
     
+    
     let needsReactToSwitchButtonTouchEvent = PublishSubject<Void>()
     let needsReactToDeleteButtonTouchEvent = PublishSubject<Void>()
     let needsReactToSimpleButtonTouchEvent = PublishSubject<Symbol?>()
     let needsScrollElementsCollectionViewToCategoryAt = PublishSubject<Int>()
     
-    fileprivate var bag = DisposeBag()
+    
+    fileprivate let bag = DisposeBag()
     fileprivate let viewModel = KeyboardViewModel()
     
-    
-    override func updateViewConstraints() {
-        super.updateViewConstraints()
-        // Add custom view sizing constraints here
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configurePopUp()
         configureTableView()
         
         bindSelf()
         bindViewModel()
-        
-        PopUp.instance.keyboardView = view
     }
 
+}
+
+private extension KeyboardViewController {
+    
+    func configurePopUp() {
+        PopUp.instance.keyboardView = view
+    }
+    
 }
 
 private extension KeyboardViewController {
@@ -112,13 +116,18 @@ private extension KeyboardViewController {
             .map {
                 guard
                     let selectedSymbolGroup = $0,
-                    let numberOfSymbolsInLine = selectedSymbolGroup.numberOfSymbolsInLine.value
+                    let numberOfSymbolsInLine = selectedSymbolGroup
+                        .numberOfSymbolsInLine.value
                 else {
                     return 300 - 52
                 }
 
-                let numberOfLines = (CGFloat(selectedSymbolGroup.symbols.count) / CGFloat(numberOfSymbolsInLine)).rounded(.up)
-                return (300 - 52) + (numberOfLines * 44) + ((numberOfLines - 1) * 1) + 8
+                let numberOfLines = (CGFloat(selectedSymbolGroup.symbols.count)
+                    / CGFloat(numberOfSymbolsInLine)).rounded(.up)
+                
+                return (300 - 52)
+                    + (numberOfLines * 44)
+                    + ((numberOfLines - 1) * 1) + 8
             }
             .drive(tableViewHeightConstraint.rx.constant)
             .disposed(by: bag)
@@ -127,7 +136,8 @@ private extension KeyboardViewController {
             .drive(onNext: { [weak self] _ in
                 DispatchQueue.main.async { [weak self] in
                     UIView.performWithoutAnimation {
-                        self?.tableView.reloadSections(IndexSet(integersIn: 2...2), with: .none)
+                        self?.tableView.reloadSections(IndexSet(integersIn: 2...2),
+                                                       with: .none)
                     }
                 }
             })
