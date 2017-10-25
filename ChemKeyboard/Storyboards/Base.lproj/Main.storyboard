@@ -361,11 +361,13 @@ set up ChemKeyboard</string>
                     <connections>
                         <outlet property="closeButton" destination="ZoD-Ki-JAk" id="KGb-kx-rXu"/>
                         <outlet property="goToSettingsButton" destination="hnq-TC-RdZ" id="ivo-qG-ilR"/>
-                        <outlet property="iconHeightConstraint" destination="4jC-2v-dij" id="in7-xy-TLX"/>
                         <outlet property="iconImageView" destination="7pd-aY-v2F" id="muk-BL-1K9"/>
-                        <outlet property="verticalSpaceBetweenButtonAndStepsViewConstraint" destination="2lN-Vr-IFk" id="ihI-91-jMx"/>
-                        <outlet property="verticalSpaceBetweenIconAndTitleConstraint" destination="gNT-bu-AyA" id="fSp-Lf-E90"/>
-                        <outlet property="verticalSpaceBetweenTitleAndStepsViewConstraint" destination="cnk-Nu-clG" id="3Jn-iF-Bbi"/>
+                        <outlet property="iconImageViewHeightConstraint" destination="4jC-2v-dij" id="g94-Tn-gZP"/>
+                        <outlet property="stepsView" destination="r1e-9m-KjL" id="Itd-cD-r5t"/>
+                        <outlet property="titleLabel" destination="Akc-QN-Xfw" id="dZ4-VW-MNl"/>
+                        <outlet property="verticalSpaceBetweenIconImageViewAndTitleLabelConstraint" destination="gNT-bu-AyA" id="Xsk-yJ-M87"/>
+                        <outlet property="verticalSpaceBetweenStepsViewAndGoToSettingsButtonConstraint" destination="2lN-Vr-IFk" id="NMJ-a7-4rZ"/>
+                        <outlet property="verticalSpaceBetweenTitleLabelAndStepsViewConstraint" destination="cnk-Nu-clG" id="Niz-7K-lUb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tuU-jB-eFY" userLabel="First Responder" sceneMemberID="firstResponder"/>
