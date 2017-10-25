@@ -15,6 +15,11 @@ class InstructionsViewController: UIViewController, Storyboardable {
     @IBOutlet weak var closeButton: Button!
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var goToSettingsButton: Button!
+    
+    @IBOutlet weak var iconHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var verticalSpaceBetweenIconAndTitleConstraint: NSLayoutConstraint!
+    @IBOutlet weak var verticalSpaceBetweenTitleAndStepsViewConstraint: NSLayoutConstraint!
+    @IBOutlet weak var verticalSpaceBetweenButtonAndStepsViewConstraint: NSLayoutConstraint!
 
     
     fileprivate let bag = DisposeBag()
@@ -24,6 +29,7 @@ class InstructionsViewController: UIViewController, Storyboardable {
         super.viewDidLoad()
 
         bindSelf()
+        configureConstraints()
     }
     
 }
@@ -58,6 +64,31 @@ private extension InstructionsViewController {
                 }
             }
             .disposed(by: bag)
+    }
+    
+    func configureConstraints() {
+        switch UIScreen.main.bounds.height {
+        case 0...568:
+            iconHeightConstraint.constant = 170
+            verticalSpaceBetweenIconAndTitleConstraint.constant = -4
+            verticalSpaceBetweenTitleAndStepsViewConstraint.constant = 16
+            verticalSpaceBetweenButtonAndStepsViewConstraint.constant = 0
+        case 569...667:
+            iconHeightConstraint.constant = 212
+            verticalSpaceBetweenIconAndTitleConstraint.constant = 12
+            verticalSpaceBetweenTitleAndStepsViewConstraint.constant = 22
+            verticalSpaceBetweenButtonAndStepsViewConstraint.constant = 18
+        case 668...736:
+            iconHeightConstraint.constant = 270
+            verticalSpaceBetweenIconAndTitleConstraint.constant = 8
+            verticalSpaceBetweenTitleAndStepsViewConstraint.constant = 22
+            verticalSpaceBetweenButtonAndStepsViewConstraint.constant = 34
+        default:
+            iconHeightConstraint.constant = 270
+            verticalSpaceBetweenIconAndTitleConstraint.constant = 46
+            verticalSpaceBetweenTitleAndStepsViewConstraint.constant = 22
+            verticalSpaceBetweenButtonAndStepsViewConstraint.constant = 44
+        }
     }
     
 }
