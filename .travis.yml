@@ -7,7 +7,7 @@ env:
 before_install:
   - gem install xcpretty -N
   - gem install cocoapods-acknowledgements
-  – pod update
+  - pod update
 
 script:
   - xcodebuild clean -workspace ChemKeyboard.xcworkspace -scheme ChemKeyboard -destination 'platform=iOS Simulator,name=iPhone 8' -sdk iphonesimulator build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO | xcpretty -c
