@@ -6,7 +6,6 @@ env:
 
 before_install:
   - gem install xcpretty -N
-  - gem install cocoapods
   - gem install cocoapods-acknowledgements
   - pod install
 
