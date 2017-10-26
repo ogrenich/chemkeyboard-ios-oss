@@ -779,6 +779,7 @@
 				49CCA580958D54F94A6094A0 /* [CP] Embed Pods Frameworks */,
 				36D920F89125E264E0BA5107 /* [CP] Copy Pods Resources */,
 				156F3C2E1F9F8B210049C3B8 /* Run Script / Version and Build */,
+				1591A15C1FA2202600846BC0 /* Run Script / Fabric / Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -938,6 +939,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "version=$(/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" \"$PROJECT_DIR/$INFOPLIST_FILE\")\nbuild=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\n\n/usr/libexec/PlistBuddy -c \"Set PreferenceSpecifiers:0:DefaultValue $version ($build)\" \"$CODESIGNING_FOLDER_PATH/Settings.bundle/Root.plist\"";
+		};
+		1591A15C1FA2202600846BC0 /* Run Script / Fabric / Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script / Fabric / Crashlytics";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" a310c7f3be9676421bbbcf654222bb76f8ece4d5 5dcd2ea38efce77c7c503afe8e5c5806f677acb7f468bb5532c7cfe6e7525e5f";
 		};
 		30F66BC62C1F6A087FC34558 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
