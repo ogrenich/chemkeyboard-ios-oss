@@ -15,62 +15,56 @@ public class Button: UIButton {
     @IBInspectable var highlightedBackgroundColor: UIColor? = nil
     @IBInspectable var disabledBackgroundColor: UIColor? = nil
     
-    @IBInspectable var normalImageColor: UIColor? = nil
-    @IBInspectable var highlightedImageColor: UIColor? = nil
-    @IBInspectable var disabledImageColor: UIColor? = nil
+    var sublayer: CALayer = CALayer()
     
     
-    override public func awakeFromNib() {
-        super.awakeFromNib()
-        
-        customize()
+    public override var isEnabled: Bool {
+        didSet {
+            if !isEnabled {
+                sublayer.backgroundColor = disabledBackgroundColor?.cgColor
+            } else {
+                sublayer.backgroundColor = normalBackgroundColor?.cgColor
+            }
+        }
     }
     
-    override public func prepareForInterfaceBuilder() {
-        super.prepareForInterfaceBuilder()
+    public override var isHighlighted: Bool {
+        didSet {
+            if isHighlighted {
+                sublayer.backgroundColor = highlightedBackgroundColor?.cgColor
+            } else {
+                sublayer.backgroundColor = normalBackgroundColor?.cgColor
+            }
+        }
+    }
+    
+    public override func layoutSubviews() {
+        super.layoutSubviews()
         
-        customize()
+        updateSublayer()
+    }
+    
+    public override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        setUpSublayer()
     }
     
 }
 
-public extension Button {
+private extension Button {
     
-    public func customize() {
-        if let normalBackgroundColor = normalBackgroundColor {
-            setBackgroundImage(UIImage(color: normalBackgroundColor),
-                               for: .normal)
-        }
-        
-        if let highlightedBackgroundColor = highlightedBackgroundColor {
-            setBackgroundImage(UIImage(color: highlightedBackgroundColor),
-                               for: .highlighted)
-        }
-        
-        if let disabledBackgroundColor = disabledBackgroundColor {
-            setBackgroundImage(UIImage(color: disabledBackgroundColor),
-                               for: .disabled)
-        }
-        
-        if let normalImageColor = normalImageColor {
-            let normalImage = image(for: .normal)?
-                .mask(with: normalImageColor)
-            
-            setImage(normalImage, for: .normal)
-        }
-        
-        if let highlightedImageColor = highlightedImageColor {
-            let highlightedImage = image(for: .highlighted)?
-                .mask(with: highlightedImageColor)
-            
-            setImage(highlightedImage, for: .highlighted)
-        }
-        
-        if let disabledImageColor = disabledImageColor {
-            let disabledImage = image(for: .disabled)?
-                .mask(with: disabledImageColor)
-            
-            setImage(disabledImage, for: .disabled)
+    func setUpSublayer() {
+        sublayer.frame = bounds
+        sublayer.masksToBounds = true
+        sublayer.backgroundColor = normalBackgroundColor?.cgColor
+        layer.backgroundColor = UIColor.white.cgColor
+        layer.insertSublayer(sublayer, below: nil)
+    }
+    
+    func updateSublayer() {
+        if sublayer.cornerRadius != cornerRadius {
+            sublayer.cornerRadius = cornerRadius
         }
     }
     
