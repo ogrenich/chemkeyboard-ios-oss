@@ -34,20 +34,20 @@ public class Button: UIButton {
     public override func layoutSubviews() {
         super.layoutSubviews()
         
-        updateSublayer()
+        updateLayers()
     }
     
     public override func awakeFromNib() {
         super.awakeFromNib()
         
-        setUpSublayer()
+        setUpLayers()
     }
     
 }
 
 private extension Button {
     
-    func setUpSublayer() {
+    func setUpLayers() {
         sublayer.frame = bounds
         sublayer.masksToBounds = true
         sublayer.backgroundColor = normalBackgroundColor?.cgColor
@@ -55,9 +55,12 @@ private extension Button {
         layer.insertSublayer(sublayer, below: nil)
     }
     
-    func updateSublayer() {
+    func updateLayers() {
         if sublayer.cornerRadius != cornerRadius {
             sublayer.cornerRadius = cornerRadius
+        }
+        if layer.masksToBounds {
+            layer.masksToBounds = false
         }
     }
     
