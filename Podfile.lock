@@ -2,11 +2,11 @@ PODS:
   - Crashlytics (3.9.0):
     - Fabric (~> 1.7.0)
   - Fabric (1.7.0)
-  - Realm (3.0.0):
-    - Realm/Headers (= 3.0.0)
-  - Realm/Headers (3.0.0)
-  - RealmSwift (3.0.0):
-    - Realm (= 3.0.0)
+  - Realm (3.0.1):
+    - Realm/Headers (= 3.0.1)
+  - Realm/Headers (3.0.1)
+  - RealmSwift (3.0.1):
+    - Realm (= 3.0.1)
   - Reveal-SDK (11)
   - RxCocoa (4.0.0):
     - RxSwift (~> 4.0)
@@ -25,8 +25,8 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Crashlytics: 64aad5dd97249dd3ff94b979fea140144590cdd3
   Fabric: e6be012366472553807dada21243c5ab8d904151
-  Realm: dec0de73be8c57506e39db72694d513c189493b3
-  RealmSwift: 44a7090b16d1b22a406c6bf129bdd602db1bbecc
+  Realm: ba6144c74f835f7497791f6599d63a7755377b83
+  RealmSwift: 7d13b1ac4b6022a13f841e3143e7789c9e40ad0d
   Reveal-SDK: 7fa13d04bb55db61ff2342a990cf731d5159361d
   RxCocoa: d62846ca96495d862fa4c59ea7d87e5031d7340e
   RxRealm: 529f5bc5601f04fd2a5c9f9c9004bf018ff64b2d
