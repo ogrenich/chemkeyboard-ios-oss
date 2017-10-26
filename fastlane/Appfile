@@ -1,0 +1,7 @@
+app_identifier "tech.chemopin.ChemKeyboard" # The bundle identifier of your app
+apple_id "ogrenich@icloud.com" # Your Apple email address
+
+team_id "2EC7R6EALB" # Developer Portal Team ID
+
+# you can even provide different app identifiers, Apple IDs and team names per lane:
+# More information: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Appfile.md
