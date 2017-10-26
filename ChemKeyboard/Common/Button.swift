@@ -20,21 +20,14 @@ public class Button: UIButton {
     
     public override var isEnabled: Bool {
         didSet {
-            if !isEnabled {
-                sublayer.backgroundColor = disabledBackgroundColor?.cgColor
-            } else {
-                sublayer.backgroundColor = normalBackgroundColor?.cgColor
-            }
+            sublayer.backgroundColor = isEnabled ? normalBackgroundColor?.cgColor : disabledBackgroundColor?.cgColor
         }
     }
     
     public override var isHighlighted: Bool {
         didSet {
-            if isHighlighted {
-                sublayer.backgroundColor = highlightedBackgroundColor?.cgColor
-            } else {
-                sublayer.backgroundColor = normalBackgroundColor?.cgColor
-            }
+            sublayer.backgroundColor = isHighlighted ?
+                highlightedBackgroundColor?.cgColor : normalBackgroundColor?.cgColor
         }
     }
     
