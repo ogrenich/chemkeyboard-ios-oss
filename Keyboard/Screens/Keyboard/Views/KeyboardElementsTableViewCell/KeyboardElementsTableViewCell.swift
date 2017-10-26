@@ -130,13 +130,22 @@ private extension KeyboardElementsTableViewCell {
                             PopUp.instance.show(element: element, at: frame, style: .extended)
                         }
                     }
+                    
+                    cell.isHidden = true
                 }
             }
             .disposed(by: bag)
 
         collectionView.rx.itemUnhighlighted
-            .bind { _ in
-                PopUp.instance.hide()
+            .bind { [weak self] in
+                guard let `self` = self else {
+                    return
+                }
+                
+                if let cell = self.collectionView.cellForItem(at: $0) {
+                    PopUp.instance.hide()
+                    cell.isHidden = false
+                }
             }
             .disposed(by: bag)
         
