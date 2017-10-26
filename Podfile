@@ -7,8 +7,6 @@ use_frameworks!
 # Pods for ChemKeyboard
 def common
     
-    pod 'Reveal-SDK', :configurations => ['Debug']
-    
     pod 'Fabric', '1.7.0'
     pod 'Crashlytics', '3.9.0'
     
@@ -30,7 +28,7 @@ target 'Keyboard' do
 end
 
 # Acknowledgements
-plugin 'cocoapods-acknowledgements', :exclude => ['Reveal-SDK']
+plugin 'cocoapods-acknowledgements'
 
 post_install do |installer|
     installer.pods_project.targets.each do |target|
