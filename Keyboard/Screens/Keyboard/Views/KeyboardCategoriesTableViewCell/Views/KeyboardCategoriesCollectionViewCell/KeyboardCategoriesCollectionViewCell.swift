@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import Device
 
 class KeyboardCategoriesCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var selectedBackgroundImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var leadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var trailingConstraint: NSLayoutConstraint!
     
     
     override var isSelected: Bool {
@@ -29,6 +32,15 @@ extension KeyboardCategoriesCollectionViewCell {
                    selected: Bool) -> KeyboardCategoriesCollectionViewCell {
         nameLabel.text = category.name
         isSelected = selected
+        
+        switch Device.type() {
+        case .iPad:
+            leadingConstraint.constant = 6
+            trailingConstraint.constant = 6
+        default:
+            leadingConstraint.constant = 0
+            trailingConstraint.constant = 0
+        }
         
         return self
     }
