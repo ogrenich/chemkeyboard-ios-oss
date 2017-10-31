@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import AudioToolbox.AudioServices
 
 private extension KeyboardViewController {
     
@@ -30,6 +31,7 @@ class KeyboardViewController: UIInputViewController {
     let needsScrollElementsCollectionViewToCategoryAt = PublishSubject<Int>()
     let needsPlayInputClick = PublishSubject<Void>()
     
+    var mediumImpactFeedbackGenerator: UIImpactFeedbackGenerator? = nil
     
     fileprivate let bag = DisposeBag()
     fileprivate let viewModel = KeyboardViewModel()
@@ -51,6 +53,16 @@ class KeyboardViewController: UIInputViewController {
         super.viewWillAppear(animated)
         
         updateUI()
+        
+        if UIDevice.current.hasHapticFeedback {
+            mediumImpactFeedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        mediumImpactFeedbackGenerator = nil
     }
 
 }
@@ -132,6 +144,13 @@ private extension KeyboardViewController {
         needsPlayInputClick
             .bind { [weak self] in
                 UIDevice.current.playInputClick()
+                if UIDevice.current.hasHapticFeedback {
+                    self?.mediumImpactFeedbackGenerator?.prepare()
+                    self?.mediumImpactFeedbackGenerator?.impactOccurred()
+                } else if UIDevice.current.hasTapticEngine {
+                    let peek = SystemSoundID(1519)
+                    AudioServicesPlaySystemSound(peek)
+                }
             }
             .disposed(by: bag)
     }
