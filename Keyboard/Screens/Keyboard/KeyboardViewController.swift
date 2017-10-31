@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import AudioToolbox.AudioServices
 
 private extension KeyboardViewController {
     
@@ -26,7 +27,9 @@ class KeyboardViewController: UIInputViewController {
     let needsReactToDeleteButtonTouchEvent = PublishSubject<Void>()
     let needsReactToSimpleButtonTouchEvent = PublishSubject<Symbol?>()
     let needsScrollElementsCollectionViewToCategoryAt = PublishSubject<Int>()
+    let needsPlayInputClick = PublishSubject<Void>()
     
+    var mediumImpactFeedbackGenerator: UIImpactFeedbackGenerator? = nil
     
     fileprivate let bag = DisposeBag()
     fileprivate let viewModel = KeyboardViewModel()
@@ -48,6 +51,16 @@ class KeyboardViewController: UIInputViewController {
         super.viewWillAppear(animated)
         
         updateUI()
+        
+        if UIDevice.current.hasHapticFeedback {
+            mediumImpactFeedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        mediumImpactFeedbackGenerator = nil
     }
 
 }
@@ -119,6 +132,19 @@ private extension KeyboardViewController {
                 self?.textDocumentProxy.insertText(symbol?.value ?? "")
             }
             .disposed(by: bag)
+        
+        needsPlayInputClick
+            .bind { [weak self] in
+                UIDevice.current.playInputClick()
+                if UIDevice.current.hasHapticFeedback {
+                    self?.mediumImpactFeedbackGenerator?.prepare()
+                    self?.mediumImpactFeedbackGenerator?.impactOccurred()
+                } else if UIDevice.current.hasTapticEngine {
+                    let peek = SystemSoundID(1519)
+                    AudioServicesPlaySystemSound(peek)
+                }
+            }
+            .disposed(by: bag)
     }
     
     func bindViewModel() {
@@ -181,7 +207,8 @@ extension KeyboardViewController: UITableViewDataSource {
                                                                       selectedCategory: viewModel.selectedCategory)
             
             return cell.configure(with: cellModel,
-                                  needsScrollElementsCollectionViewToCategoryAt)
+                                  needsScrollElementsCollectionViewToCategoryAt,
+                                  needsPlayInputClick)
         case .elements:
             let cell: KeyboardElementsTableViewCell = tableView.dequeueReusableCell()
             
@@ -190,13 +217,14 @@ extension KeyboardViewController: UITableViewDataSource {
             
             return cell.configure(with: cellModel,
                                   needsReactToSimpleButtonTouchEvent: needsReactToSimpleButtonTouchEvent,
-                                  needsScrollElementsCollectionViewToCategoryAt)
+                                  needsScrollElementsCollectionViewToCategoryAt, needsPlayInputClick)
         case .symbols:
             let cell: KeyboardSymbolsTableViewCell = tableView.dequeueReusableCell()
             let cellModel = KeyboardSymbolsTableViewCellModel.init(with: viewModel.selectedSymbolGroup)
             
             return cell.configure(with: cellModel,
-                                  needsReactToSimpleButtonTouchEvent: needsReactToSimpleButtonTouchEvent)
+                                  needsReactToSimpleButtonTouchEvent: needsReactToSimpleButtonTouchEvent,
+                                  needsPlayInputClick)
         case .actions:
             let cell: KeyboardActionsTableViewCell = tableView.dequeueReusableCell()
             
@@ -204,7 +232,9 @@ extension KeyboardViewController: UITableViewDataSource {
                                                                    selectedSymbolGroup: viewModel.selectedSymbolGroup)
             
             let configuredCell = cell.configure(with: cellModel,
-                                                needsReactToDeleteButtonTouchEvent: needsReactToDeleteButtonTouchEvent)
+                                  needsReactToSwitchButtonTouchEvent: needsReactToSwitchButtonTouchEvent,
+                                  needsReactToDeleteButtonTouchEvent: needsReactToDeleteButtonTouchEvent,
+                                  needsPlayInputClick)
             
             configuredCell.switchButton?.addTarget(self,
                                                    action: #selector(handleInputModeList(from:with:)),
@@ -271,3 +301,12 @@ extension KeyboardViewController {
     }
     
 }
+
+extension UIInputView: UIInputViewAudioFeedback {
+
+    public var enableInputClicksWhenVisible: Bool {
+        return true
+    }
+
+}
+
