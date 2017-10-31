@@ -17,6 +17,7 @@ class KeyboardCategoriesTableViewCell: UITableViewCell {
     
     
     fileprivate weak var needsScrollElementsCollectionViewToCategoryAt: PublishSubject<Int>!
+    fileprivate weak var needsPlayInputClick: PublishSubject<Void>!
     
     
     fileprivate var bag = DisposeBag()
@@ -35,9 +36,11 @@ extension KeyboardCategoriesTableViewCell {
     
     @discardableResult
     func configure(with viewModel: KeyboardCategoriesTableViewCellModel,
-                   _ needsScrollElementsCollectionViewToCategoryAt: PublishSubject<Int>) -> KeyboardCategoriesTableViewCell {
+                   _ needsScrollElementsCollectionViewToCategoryAt: PublishSubject<Int>,
+                   _ needsPlayInputClick: PublishSubject<Void>) -> KeyboardCategoriesTableViewCell {
         self.viewModel = viewModel
         self.needsScrollElementsCollectionViewToCategoryAt = needsScrollElementsCollectionViewToCategoryAt
+        self.needsPlayInputClick = needsPlayInputClick
         
         configureCollectionView()
         
@@ -68,6 +71,11 @@ private extension KeyboardCategoriesTableViewCell {
         collectionView.rx.itemSelected
             .map { $0.item }
             .bind(to: needsScrollElementsCollectionViewToCategoryAt)
+            .disposed(by: bag)
+        
+        collectionView.rx.itemHighlighted
+            .map { _ in }
+            .bind(to: needsPlayInputClick)
             .disposed(by: bag)
     }
     

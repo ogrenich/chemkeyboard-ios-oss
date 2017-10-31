@@ -28,6 +28,7 @@ class KeyboardViewController: UIInputViewController {
     let needsReactToDeleteButtonTouchEvent = PublishSubject<Void>()
     let needsReactToSimpleButtonTouchEvent = PublishSubject<Symbol?>()
     let needsScrollElementsCollectionViewToCategoryAt = PublishSubject<Int>()
+    let needsPlayInputClick = PublishSubject<Void>()
     
     
     fileprivate let bag = DisposeBag()
@@ -127,6 +128,12 @@ private extension KeyboardViewController {
                 self?.textDocumentProxy.insertText(symbol?.value ?? "")
             }
             .disposed(by: bag)
+        
+        needsPlayInputClick
+            .bind { [weak self] in
+                UIDevice.current.playInputClick()
+            }
+            .disposed(by: bag)
     }
     
     func bindViewModel() {
@@ -189,7 +196,8 @@ extension KeyboardViewController: UITableViewDataSource {
                                                                       selectedCategory: viewModel.selectedCategory)
             
             return cell.configure(with: cellModel,
-                                  needsScrollElementsCollectionViewToCategoryAt)
+                                  needsScrollElementsCollectionViewToCategoryAt,
+                                  needsPlayInputClick)
         case .elements:
             let cell: KeyboardElementsTableViewCell = tableView.dequeueReusableCell()
             
@@ -198,13 +206,14 @@ extension KeyboardViewController: UITableViewDataSource {
             
             return cell.configure(with: cellModel,
                                   needsReactToSimpleButtonTouchEvent: needsReactToSimpleButtonTouchEvent,
-                                  needsScrollElementsCollectionViewToCategoryAt)
+                                  needsScrollElementsCollectionViewToCategoryAt, needsPlayInputClick)
         case .symbols:
             let cell: KeyboardSymbolsTableViewCell = tableView.dequeueReusableCell()
             let cellModel = KeyboardSymbolsTableViewCellModel.init(with: viewModel.selectedSymbolGroup)
             
             return cell.configure(with: cellModel,
-                                  needsReactToSimpleButtonTouchEvent: needsReactToSimpleButtonTouchEvent)
+                                  needsReactToSimpleButtonTouchEvent: needsReactToSimpleButtonTouchEvent,
+                                  needsPlayInputClick)
         case .actions:
             let cell: KeyboardActionsTableViewCell = tableView.dequeueReusableCell()
             
@@ -213,7 +222,8 @@ extension KeyboardViewController: UITableViewDataSource {
             
             return cell.configure(with: cellModel,
                                   needsReactToSwitchButtonTouchEvent: needsReactToSwitchButtonTouchEvent,
-                                  needsReactToDeleteButtonTouchEvent: needsReactToDeleteButtonTouchEvent)
+                                  needsReactToDeleteButtonTouchEvent: needsReactToDeleteButtonTouchEvent,
+                                  needsPlayInputClick)
         }
     }
     
@@ -275,3 +285,12 @@ extension KeyboardViewController {
     }
     
 }
+
+extension UIInputView: UIInputViewAudioFeedback {
+
+    public var enableInputClicksWhenVisible: Bool {
+        return true
+    }
+
+}
+

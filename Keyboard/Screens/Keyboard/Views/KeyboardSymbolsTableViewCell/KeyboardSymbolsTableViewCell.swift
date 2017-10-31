@@ -17,6 +17,7 @@ class KeyboardSymbolsTableViewCell: UITableViewCell {
     
     
     fileprivate weak var needsReactToSimpleButtonTouchEvent: PublishSubject<Symbol?>!
+    fileprivate weak var needsPlayInputClick: PublishSubject<Void>!
     
     
     let cellTouchDown = PublishSubject<KeyboardSymbolsCollectionViewCell>()
@@ -40,9 +41,11 @@ extension KeyboardSymbolsTableViewCell {
     
     @discardableResult
     func configure(with viewModel: KeyboardSymbolsTableViewCellModel,
-                   needsReactToSimpleButtonTouchEvent: PublishSubject<Symbol?>) -> KeyboardSymbolsTableViewCell {
+                   needsReactToSimpleButtonTouchEvent: PublishSubject<Symbol?>,
+                   _ needsPlayInputClick: PublishSubject<Void>) -> KeyboardSymbolsTableViewCell {
         self.viewModel = viewModel
         self.needsReactToSimpleButtonTouchEvent = needsReactToSimpleButtonTouchEvent
+        self.needsPlayInputClick = needsPlayInputClick
         
         configureCollectionView()
         
@@ -65,6 +68,11 @@ private extension KeyboardSymbolsTableViewCell {
 private extension KeyboardSymbolsTableViewCell {
     
     func bindSelf() {
+        cellTouchDown
+            .map { _ in }
+            .bind(to: needsPlayInputClick)
+            .disposed(by: bag)
+        
         cellTouchDown
             .bind { [weak self] cell in
                 guard let `self` = self else {

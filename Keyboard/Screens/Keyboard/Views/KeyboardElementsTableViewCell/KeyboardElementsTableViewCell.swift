@@ -18,6 +18,7 @@ class KeyboardElementsTableViewCell: UITableViewCell {
     
     fileprivate weak var needsReactToSimpleButtonTouchEvent: PublishSubject<Symbol?>!
     fileprivate weak var needsScrollElementsCollectionViewToCategoryAt: PublishSubject<Int>!
+    fileprivate weak var needsPlayInputClick: PublishSubject<Void>!
     
     
     fileprivate var bag = DisposeBag()
@@ -65,10 +66,12 @@ extension KeyboardElementsTableViewCell {
     @discardableResult
     func configure(with viewModel: KeyboardElementsTableViewCellModel,
                    needsReactToSimpleButtonTouchEvent: PublishSubject<Symbol?>,
-                   _ needsScrollElementsCollectionViewToCategoryAt: PublishSubject<Int>) -> KeyboardElementsTableViewCell {
+                   _ needsScrollElementsCollectionViewToCategoryAt: PublishSubject<Int>,
+                   _ needsPlayInputClick: PublishSubject<Void>) -> KeyboardElementsTableViewCell {
         self.viewModel = viewModel
         self.needsReactToSimpleButtonTouchEvent = needsReactToSimpleButtonTouchEvent
         self.needsScrollElementsCollectionViewToCategoryAt = needsScrollElementsCollectionViewToCategoryAt
+        self.needsPlayInputClick = needsPlayInputClick
         
         configureCollectionView()
         
@@ -110,6 +113,11 @@ private extension KeyboardElementsTableViewCell {
                     self?.userIsScrolling = false
                 }
             }
+            .disposed(by: bag)
+        
+        collectionView.rx.itemHighlighted
+            .map { _ in }
+            .bind(to: needsPlayInputClick)
             .disposed(by: bag)
         
         collectionView.rx.itemHighlighted

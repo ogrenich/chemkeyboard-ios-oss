@@ -20,6 +20,7 @@ class KeyboardActionsTableViewCell: UITableViewCell {
     
     fileprivate weak var needsReactToSwitchButtonTouchEvent: PublishSubject<Void>!
     fileprivate weak var needsReactToDeleteButtonTouchEvent: PublishSubject<Void>!
+    fileprivate weak var needsPlayInputClick: PublishSubject<Void>!
     
     
     fileprivate var bag = DisposeBag()
@@ -45,10 +46,12 @@ extension KeyboardActionsTableViewCell {
     @discardableResult
     func configure(with viewModel: KeyboardActionsTableViewCellModel,
                    needsReactToSwitchButtonTouchEvent: PublishSubject<Void>,
-                   needsReactToDeleteButtonTouchEvent: PublishSubject<Void>) -> KeyboardActionsTableViewCell {
+                   needsReactToDeleteButtonTouchEvent: PublishSubject<Void>,
+                   _ needsPlayInputClick: PublishSubject<Void>) -> KeyboardActionsTableViewCell {
         self.viewModel = viewModel
         self.needsReactToSwitchButtonTouchEvent = needsReactToSwitchButtonTouchEvent
         self.needsReactToDeleteButtonTouchEvent = needsReactToDeleteButtonTouchEvent
+        self.needsPlayInputClick = needsPlayInputClick
         
         configureCollectionView()
         
@@ -76,6 +79,15 @@ private extension KeyboardActionsTableViewCell {
     func bindSelf() {
         switchButton.rx.tap
             .bind(to: needsReactToSwitchButtonTouchEvent)
+            .disposed(by: bag)
+        
+        switchButton.rx.tap
+            .bind(to: needsPlayInputClick)
+            .disposed(by: bag)
+        
+        collectionView.rx.itemHighlighted
+            .map { _ in }
+            .bind(to: needsPlayInputClick)
             .disposed(by: bag)
     }
     
@@ -162,6 +174,7 @@ extension KeyboardActionsTableViewCell {
     
     @objc func handleSimpleDeleteEvent() {
         needsReactToDeleteButtonTouchEvent.onNext(())
+        needsPlayInputClick.onNext(())
     }
     
     @objc func handleLongPressOnDeleteButton(_ gesture: UIGestureRecognizer) {
