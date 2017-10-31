@@ -84,11 +84,11 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <connections>
-                <outlet property="bottomLeftLabel" destination="v1W-jw-U3B" id="LfL-uW-3ym"/>
-                <outlet property="bottomRightLabel" destination="Nbv-6j-xvx" id="NR6-Th-cFk"/>
                 <outlet property="buttonView" destination="3di-gn-X6g" id="Zid-cf-0LD"/>
-                <outlet property="topLeftLabel" destination="CAT-pR-vNb" id="KWh-qy-XPU"/>
-                <outlet property="topRightLabel" destination="Cpa-kE-71g" id="jV4-dl-zB1"/>
+                <outlet property="firstLabel" destination="CAT-pR-vNb" id="qNO-ZG-mCH"/>
+                <outlet property="fourthLabel" destination="Nbv-6j-xvx" id="NR6-Th-cFk"/>
+                <outlet property="secondLabel" destination="Cpa-kE-71g" id="k0p-tT-xBY"/>
+                <outlet property="thirdLabel" destination="v1W-jw-U3B" id="LfL-uW-3ym"/>
             </connections>
             <point key="canvasLocation" x="75" y="87"/>
         </collectionViewCell>

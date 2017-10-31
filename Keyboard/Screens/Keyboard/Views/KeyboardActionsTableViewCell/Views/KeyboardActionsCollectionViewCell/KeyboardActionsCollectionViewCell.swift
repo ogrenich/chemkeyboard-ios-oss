@@ -11,10 +11,10 @@ import UIKit
 class KeyboardActionsCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var buttonView: UIView!
-    @IBOutlet weak var topLeftLabel: UILabel!
-    @IBOutlet weak var topRightLabel: UILabel!
-    @IBOutlet weak var bottomLeftLabel: UILabel!
-    @IBOutlet weak var bottomRightLabel: UILabel!
+    @IBOutlet weak var firstLabel: UILabel!
+    @IBOutlet weak var secondLabel: UILabel!
+    @IBOutlet weak var thirdLabel: UILabel!
+    @IBOutlet weak var fourthLabel: UILabel!
     
     
     fileprivate var accessoryView: UIView!
@@ -38,35 +38,35 @@ private extension KeyboardActionsCollectionViewCell {
     func configureLabels(with group: SymbolGroup) {
         switch group.name {
         case "Digits"?:
-            topLeftLabel.text = "0"
-            topRightLabel.text = "1"
-            bottomLeftLabel.text = "2"
-            bottomRightLabel.text = "3"
+            firstLabel.text = "0"
+            secondLabel.text = "1"
+            thirdLabel.text = "2"
+            fourthLabel.text = "3"
         case "Actions"?:
-            topLeftLabel.text = "+"
-            topRightLabel.text = "–"
-            bottomLeftLabel.text = "/"
-            bottomRightLabel.text = ")"
+            firstLabel.text = "+"
+            secondLabel.text = "–"
+            thirdLabel.text = "/"
+            fourthLabel.text = ")"
         case "Arrows"?:
-            topLeftLabel.text = "→"
-            topRightLabel.text = "="
-            bottomLeftLabel.text = "⇋"
-            bottomRightLabel.text = "⇠"
+            firstLabel.text = "→"
+            secondLabel.text = "="
+            thirdLabel.text = "⇋"
+            fourthLabel.text = "⇠"
         case "Conditions"?:
-            topLeftLabel.text = "(l)"
-            topRightLabel.text = "(aq)"
-            bottomLeftLabel.text = "(g)"
-            bottomRightLabel.text = "(s)"
+            firstLabel.text = "(l)"
+            secondLabel.text = "(aq)"
+            thirdLabel.text = "(g)"
+            fourthLabel.text = "(s)"
         case "Special Symbols"?:
-            topLeftLabel.text = "℃"
-            topRightLabel.text = "(t)"
-            bottomLeftLabel.text = "pH"
-            bottomRightLabel.text = "(p)"
+            firstLabel.text = "℃"
+            secondLabel.text = "(t)"
+            thirdLabel.text = "pH"
+            fourthLabel.text = "(p)"
         case "Greek"?:
-            topLeftLabel.text = "ψ"
-            topRightLabel.text = "ω"
-            bottomLeftLabel.text = "α"
-            bottomRightLabel.text = "β"
+            firstLabel.text = "ψ"
+            secondLabel.text = "ω"
+            thirdLabel.text = "α"
+            fourthLabel.text = "β"
         default:
             break
         }
