@@ -18,7 +18,6 @@ class KeyboardActionsTableViewCell: UITableViewCell {
     @IBOutlet weak var deleteButton: UIButton!
     
     
-    fileprivate weak var needsReactToSwitchButtonTouchEvent: PublishSubject<Void>!
     fileprivate weak var needsReactToDeleteButtonTouchEvent: PublishSubject<Void>!
     fileprivate weak var needsPlayInputClick: PublishSubject<Void>!
     
@@ -45,11 +44,14 @@ extension KeyboardActionsTableViewCell {
     
     @discardableResult
     func configure(with viewModel: KeyboardActionsTableViewCellModel,
+<<<<<<< HEAD
                    needsReactToSwitchButtonTouchEvent: PublishSubject<Void>,
                    needsReactToDeleteButtonTouchEvent: PublishSubject<Void>,
                    _ needsPlayInputClick: PublishSubject<Void>) -> KeyboardActionsTableViewCell {
+=======
+                   needsReactToDeleteButtonTouchEvent: PublishSubject<Void>) -> KeyboardActionsTableViewCell {
+>>>>>>> develop
         self.viewModel = viewModel
-        self.needsReactToSwitchButtonTouchEvent = needsReactToSwitchButtonTouchEvent
         self.needsReactToDeleteButtonTouchEvent = needsReactToDeleteButtonTouchEvent
         self.needsPlayInputClick = needsPlayInputClick
         
@@ -57,7 +59,6 @@ extension KeyboardActionsTableViewCell {
         
         addGestureRecognizersOnDeleteButton()
         
-        bindSelf()
         bindToViewModel()
         bindViewModel()
         
@@ -78,10 +79,6 @@ private extension KeyboardActionsTableViewCell {
     
     func bindSelf() {
         switchButton.rx.tap
-            .bind(to: needsReactToSwitchButtonTouchEvent)
-            .disposed(by: bag)
-        
-        switchButton.rx.tap
             .bind(to: needsPlayInputClick)
             .disposed(by: bag)
         
@@ -90,7 +87,7 @@ private extension KeyboardActionsTableViewCell {
             .bind(to: needsPlayInputClick)
             .disposed(by: bag)
     }
-    
+
     func bindToViewModel() {
         collectionView.rx.modelSelected(SymbolGroup.self)
             .bind(to: viewModel.selectedSymbolGroup)
