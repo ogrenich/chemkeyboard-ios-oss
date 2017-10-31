@@ -18,7 +18,6 @@ class KeyboardActionsTableViewCell: UITableViewCell {
     @IBOutlet weak var deleteButton: UIButton!
     
     
-    fileprivate weak var needsReactToSwitchButtonTouchEvent: PublishSubject<Void>!
     fileprivate weak var needsReactToDeleteButtonTouchEvent: PublishSubject<Void>!
     
     
@@ -44,17 +43,14 @@ extension KeyboardActionsTableViewCell {
     
     @discardableResult
     func configure(with viewModel: KeyboardActionsTableViewCellModel,
-                   needsReactToSwitchButtonTouchEvent: PublishSubject<Void>,
                    needsReactToDeleteButtonTouchEvent: PublishSubject<Void>) -> KeyboardActionsTableViewCell {
         self.viewModel = viewModel
-        self.needsReactToSwitchButtonTouchEvent = needsReactToSwitchButtonTouchEvent
         self.needsReactToDeleteButtonTouchEvent = needsReactToDeleteButtonTouchEvent
         
         configureCollectionView()
         
         addGestureRecognizersOnDeleteButton()
         
-        bindSelf()
         bindToViewModel()
         bindViewModel()
         
@@ -72,12 +68,6 @@ private extension KeyboardActionsTableViewCell {
 }
 
 private extension KeyboardActionsTableViewCell {
-    
-    func bindSelf() {
-        switchButton.rx.tap
-            .bind(to: needsReactToSwitchButtonTouchEvent)
-            .disposed(by: bag)
-    }
     
     func bindToViewModel() {
         collectionView.rx.modelSelected(SymbolGroup.self)

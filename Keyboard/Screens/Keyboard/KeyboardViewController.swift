@@ -23,8 +23,6 @@ class KeyboardViewController: UIInputViewController {
     lazy var tableView = UITableView()
     var viewHeightConstraint: NSLayoutConstraint!
     
-    
-    let needsReactToSwitchButtonTouchEvent = PublishSubject<Void>()
     let needsReactToDeleteButtonTouchEvent = PublishSubject<Void>()
     let needsReactToSimpleButtonTouchEvent = PublishSubject<Symbol?>()
     let needsScrollElementsCollectionViewToCategoryAt = PublishSubject<Int>()
@@ -110,12 +108,6 @@ private extension KeyboardViewController {
 private extension KeyboardViewController {
     
     func bindSelf() {
-        needsReactToSwitchButtonTouchEvent
-            .bind { [weak self] in
-                self?.advanceToNextInputMode()
-            }
-            .disposed(by: bag)
-        
         needsReactToDeleteButtonTouchEvent
             .bind { [weak self] in
                 self?.deleteLastSymbol()
@@ -211,9 +203,13 @@ extension KeyboardViewController: UITableViewDataSource {
             let cellModel = KeyboardActionsTableViewCellModel.init(with: viewModel.symbolGroups,
                                                                    selectedSymbolGroup: viewModel.selectedSymbolGroup)
             
-            return cell.configure(with: cellModel,
-                                  needsReactToSwitchButtonTouchEvent: needsReactToSwitchButtonTouchEvent,
-                                  needsReactToDeleteButtonTouchEvent: needsReactToDeleteButtonTouchEvent)
+            let configuredCell = cell.configure(with: cellModel,
+                                                needsReactToDeleteButtonTouchEvent: needsReactToDeleteButtonTouchEvent)
+            
+            configuredCell.switchButton?.addTarget(self,
+                                                   action: #selector(handleInputModeList(from:with:)),
+                                                   for: .allTouchEvents)
+            return configuredCell
         }
     }
     
