@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Device
 
 @IBDesignable
 class KeyboardCategoriesTableViewCell: UITableViewCell {
@@ -115,10 +116,17 @@ private extension KeyboardCategoriesTableViewCell {
 
 extension KeyboardCategoriesTableViewCell: UICollectionViewDelegateFlowLayout {
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        let sideInset: CGFloat = 6 + (Device.isPad() && (UIScreen.main.bounds.width > UIScreen.main.bounds.height) ?
+            130 : 0)
+        
+        return UIEdgeInsets(top: 0, left: sideInset, bottom: 0, right: sideInset)
+    }
+    
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 50, height: 36)
+        return CGSize(width: Device.isPad() ? 62 : 50, height: 36)
     }
     
 }
