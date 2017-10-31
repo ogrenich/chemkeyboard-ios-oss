@@ -44,13 +44,8 @@ extension KeyboardActionsTableViewCell {
     
     @discardableResult
     func configure(with viewModel: KeyboardActionsTableViewCellModel,
-<<<<<<< HEAD
-                   needsReactToSwitchButtonTouchEvent: PublishSubject<Void>,
                    needsReactToDeleteButtonTouchEvent: PublishSubject<Void>,
                    _ needsPlayInputClick: PublishSubject<Void>) -> KeyboardActionsTableViewCell {
-=======
-                   needsReactToDeleteButtonTouchEvent: PublishSubject<Void>) -> KeyboardActionsTableViewCell {
->>>>>>> develop
         self.viewModel = viewModel
         self.needsReactToDeleteButtonTouchEvent = needsReactToDeleteButtonTouchEvent
         self.needsPlayInputClick = needsPlayInputClick

@@ -232,9 +232,8 @@ extension KeyboardViewController: UITableViewDataSource {
                                                                    selectedSymbolGroup: viewModel.selectedSymbolGroup)
             
             let configuredCell = cell.configure(with: cellModel,
-                                  needsReactToSwitchButtonTouchEvent: needsReactToSwitchButtonTouchEvent,
-                                  needsReactToDeleteButtonTouchEvent: needsReactToDeleteButtonTouchEvent,
-                                  needsPlayInputClick)
+                                                needsReactToDeleteButtonTouchEvent: needsReactToDeleteButtonTouchEvent,
+                                                needsPlayInputClick)
             
             configuredCell.switchButton?.addTarget(self,
                                                    action: #selector(handleInputModeList(from:with:)),
