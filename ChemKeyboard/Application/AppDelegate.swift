@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         setUpMainInterface()
         setUpRealm()
+        setUpFabric()
         
         return true
     }
@@ -54,6 +57,10 @@ private extension AppDelegate {
         RealmService.instance.setUpRealm()
         RealmService.instance.performMigration()
         RealmService.instance.printRealmURL()
+    }
+    
+    func setUpFabric() {
+        Fabric.with([Crashlytics.self])
     }
     
 }
