@@ -20,11 +20,6 @@ class KeyboardElementsTableViewCell: UITableViewCell {
     fileprivate weak var needsScrollElementsCollectionViewToCategoryAt: PublishSubject<Int>!
     
     
-    let cellTouchDown = PublishSubject<KeyboardElementsCollectionViewCell>()
-    let cellTouchUp = PublishSubject<KeyboardElementsCollectionViewCell>()
-    let cellTouchLong = PublishSubject<KeyboardElementsCollectionViewCell>()
-    
-    
     fileprivate var bag = DisposeBag()
     fileprivate var viewModel: KeyboardElementsTableViewCellModel!
     
@@ -117,48 +112,44 @@ private extension KeyboardElementsTableViewCell {
             }
             .disposed(by: bag)
         
-        cellTouchDown
-            .bind { [weak self] cell in
-                guard let `self` = self else {
-                    return
-                }
-
-                let frame = CGRect(x: cell.frame.origin.x - self.collectionView.contentOffset.x,
-                                   y: cell.frame.origin.y + 36,
-                                   width: cell.frame.width, height: cell.frame.height)
-                if let indexPath = self.collectionView.indexPath(for: cell) {
-                    let element = self.viewModel.categories.value[indexPath.section].elements[indexPath.item]
-                    PopUp.instance.show(element: element, at: frame, style: .simple)
-                }
-            }
-            .disposed(by: bag)
-        
-        cellTouchLong
-            .bind { [weak self] cell in
+        collectionView.rx.itemHighlighted
+            .bind { [weak self] indexPath in
                 guard let `self` = self else {
                     return
                 }
                 
-                let frame = CGRect(x: cell.frame.origin.x - self.collectionView.contentOffset.x,
-                                   y: cell.frame.origin.y + 36,
-                                   width: cell.frame.width, height: cell.frame.height)
-                if let indexPath = self.collectionView.indexPath(for: cell) {
+                if let cell = self.collectionView.cellForItem(at: indexPath) {
+                    let frame = CGRect(x: cell.frame.origin.x - self.collectionView.contentOffset.x,
+                                       y: cell.frame.origin.y + 36,
+                                       width: cell.frame.width, height: cell.frame.height)
                     let element = self.viewModel.categories.value[indexPath.section].elements[indexPath.item]
-                    PopUp.instance.show(element: element, at: frame, style: .extended)
+                    PopUp.instance.show(element: element, at: frame, style: .simple)
+                    
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.7) {
+                        if cell.isHighlighted {
+                            PopUp.instance.show(element: element, at: frame, style: .extended)
+                        }
+                    }
+                    
+                    cell.isHidden = true
                 }
             }
             .disposed(by: bag)
 
-        cellTouchUp
-            .bind { _ in
-                PopUp.instance.hide()
+        collectionView.rx.itemUnhighlighted
+            .bind { [weak self] in
+                guard let `self` = self else {
+                    return
+                }
+                
+                if let cell = self.collectionView.cellForItem(at: $0) {
+                    PopUp.instance.hide()
+                    cell.isHidden = false
+                }
             }
             .disposed(by: bag)
         
-        cellTouchUp
-            .map { [weak self] in self?.collectionView.indexPath(for: $0) }
-            .filter { $0 != nil }
-            .map { $0! }
+        collectionView.rx.itemUnhighlighted
             .withLatestFrom(viewModel.categories.asObservable()) { ($0, $1) }
             .map { $1[$0.section].elements[$0.item].symbol }
             .bind(to: needsReactToSimpleButtonTouchEvent)
@@ -219,8 +210,7 @@ extension KeyboardElementsTableViewCell: UICollectionViewDataSource {
         let cell: KeyboardElementsCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
         let element = viewModel.categories.value[indexPath.section].elements.toArray()[indexPath.item]
         
-        return cell.configure(with: element, cellTouchDown: cellTouchDown,
-                              cellTouchUp: cellTouchUp, cellTouchLong: cellTouchLong)
+        return cell.configure(with: element)
     }
     
 }

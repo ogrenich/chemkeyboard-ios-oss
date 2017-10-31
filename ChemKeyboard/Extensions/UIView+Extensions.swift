@@ -18,8 +18,8 @@ public extension UIView {
         }
         
         set {
-            layer.masksToBounds = true
             layer.cornerRadius = newValue
+            layer.masksToBounds = newValue > 0
         }
     }
 

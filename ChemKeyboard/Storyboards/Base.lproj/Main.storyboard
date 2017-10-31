@@ -90,6 +90,18 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="4"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                        <size key="value" width="0.0" height="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.12" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ChemKeyboard v1.0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BgL-4n-BvI">
@@ -162,9 +174,8 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon" translatesAutoresizingMaskIntoConstraints="NO" id="7pd-aY-v2F">
                                 <rect key="frame" x="81.5" y="50.5" width="212" height="212"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="212" id="4jC-2v-dij"/>
+                                    <constraint firstAttribute="height" constant="212" id="4jC-2v-dij"/>
                                     <constraint firstAttribute="width" secondItem="7pd-aY-v2F" secondAttribute="height" multiplier="1:1" id="Em0-gN-x1V"/>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="212" id="KCq-uX-ZLh"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Akc-QN-Xfw">
@@ -339,23 +350,33 @@ set up ChemKeyboard</string>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="4"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                        <size key="value" width="0.0" height="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.12" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="hnq-TC-RdZ" firstAttribute="top" secondItem="r1e-9m-KjL" secondAttribute="bottom" constant="18" id="2lN-Vr-IFk"/>
                             <constraint firstItem="EoF-ee-vL4" firstAttribute="trailing" secondItem="ZoD-Ki-JAk" secondAttribute="trailing" id="DHs-aS-6mY"/>
                             <constraint firstItem="r1e-9m-KjL" firstAttribute="leading" secondItem="EoF-ee-vL4" secondAttribute="leading" id="F7w-l6-Iwh"/>
                             <constraint firstItem="EoF-ee-vL4" firstAttribute="trailing" secondItem="Akc-QN-Xfw" secondAttribute="trailing" constant="32" id="LYz-4k-HgL"/>
-                            <constraint firstItem="7pd-aY-v2F" firstAttribute="top" relation="greaterThanOrEqual" secondItem="EoF-ee-vL4" secondAttribute="top" constant="30" id="MhP-AJ-SuJ"/>
                             <constraint firstItem="EoF-ee-vL4" firstAttribute="bottom" secondItem="hnq-TC-RdZ" secondAttribute="bottom" constant="20" id="P9l-Hu-eGC"/>
                             <constraint firstItem="7pd-aY-v2F" firstAttribute="centerX" secondItem="EoF-ee-vL4" secondAttribute="centerX" id="PV6-hz-rsu"/>
-                            <constraint firstItem="Akc-QN-Xfw" firstAttribute="top" relation="greaterThanOrEqual" secondItem="7pd-aY-v2F" secondAttribute="bottom" priority="950" constant="12" id="SR0-gy-Zle"/>
                             <constraint firstItem="hnq-TC-RdZ" firstAttribute="centerX" secondItem="EoF-ee-vL4" secondAttribute="centerX" id="SnF-Z9-PIr"/>
-                            <constraint firstItem="hnq-TC-RdZ" firstAttribute="top" relation="greaterThanOrEqual" secondItem="r1e-9m-KjL" secondAttribute="bottom" constant="16" id="VMu-to-wbX"/>
                             <constraint firstItem="EoF-ee-vL4" firstAttribute="trailing" secondItem="r1e-9m-KjL" secondAttribute="trailing" id="VVe-Xn-1RQ"/>
                             <constraint firstItem="r1e-9m-KjL" firstAttribute="top" secondItem="Akc-QN-Xfw" secondAttribute="bottom" constant="22" id="cnk-Nu-clG"/>
-                            <constraint firstItem="Akc-QN-Xfw" firstAttribute="centerY" secondItem="EoF-ee-vL4" secondAttribute="centerY" priority="900" constant="-28" id="jK4-ML-1Ue"/>
+                            <constraint firstItem="Akc-QN-Xfw" firstAttribute="top" secondItem="7pd-aY-v2F" secondAttribute="bottom" constant="12" id="gNT-bu-AyA"/>
                             <constraint firstItem="ZoD-Ki-JAk" firstAttribute="top" secondItem="EoF-ee-vL4" secondAttribute="top" id="xdq-0z-UM5"/>
                             <constraint firstItem="Akc-QN-Xfw" firstAttribute="leading" secondItem="EoF-ee-vL4" secondAttribute="leading" constant="32" id="y6b-GE-HF7"/>
                         </constraints>
@@ -365,6 +386,12 @@ set up ChemKeyboard</string>
                         <outlet property="closeButton" destination="ZoD-Ki-JAk" id="KGb-kx-rXu"/>
                         <outlet property="goToSettingsButton" destination="hnq-TC-RdZ" id="ivo-qG-ilR"/>
                         <outlet property="iconImageView" destination="7pd-aY-v2F" id="muk-BL-1K9"/>
+                        <outlet property="iconImageViewHeightConstraint" destination="4jC-2v-dij" id="g94-Tn-gZP"/>
+                        <outlet property="stepsView" destination="r1e-9m-KjL" id="Itd-cD-r5t"/>
+                        <outlet property="titleLabel" destination="Akc-QN-Xfw" id="dZ4-VW-MNl"/>
+                        <outlet property="verticalSpaceBetweenIconImageViewAndTitleLabelConstraint" destination="gNT-bu-AyA" id="Xsk-yJ-M87"/>
+                        <outlet property="verticalSpaceBetweenStepsViewAndGoToSettingsButtonConstraint" destination="2lN-Vr-IFk" id="NMJ-a7-4rZ"/>
+                        <outlet property="verticalSpaceBetweenTitleLabelAndStepsViewConstraint" destination="cnk-Nu-clG" id="Niz-7K-lUb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tuU-jB-eFY" userLabel="First Responder" sceneMemberID="firstResponder"/>

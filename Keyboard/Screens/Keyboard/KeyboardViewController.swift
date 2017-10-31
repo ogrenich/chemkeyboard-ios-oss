@@ -21,7 +21,7 @@ private extension KeyboardViewController {
 class KeyboardViewController: UIInputViewController {
     
     lazy var tableView = UITableView()
-    var tableViewHeightConstraint: NSLayoutConstraint!
+    var viewHeightConstraint: NSLayoutConstraint!
     
     
     let needsReactToSwitchButtonTouchEvent = PublishSubject<Void>()
@@ -37,13 +37,33 @@ class KeyboardViewController: UIInputViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupUI()
+        
         configurePopUp()
         configureTableView()
         
         bindSelf()
         bindViewModel()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        updateUI()
+    }
 
+}
+
+private extension KeyboardViewController {
+    
+    func setupUI() {
+        viewHeightConstraint = view.heightAnchor.constraint(equalToConstant: 300)
+    }
+    
+    func updateUI() {
+        viewHeightConstraint.isActive = true
+    }
+    
 }
 
 private extension KeyboardViewController {
@@ -71,8 +91,6 @@ private extension KeyboardViewController {
         tableView.alwaysBounceVertical = false
 
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableViewHeightConstraint = tableView.heightAnchor.constraint(equalToConstant: 300)
-        tableViewHeightConstraint.isActive = true
         
         view.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -129,7 +147,7 @@ private extension KeyboardViewController {
                     + (numberOfLines * 44)
                     + ((numberOfLines - 1) * 1) + 8
             }
-            .drive(tableViewHeightConstraint.rx.constant)
+            .drive(viewHeightConstraint.rx.constant)
             .disposed(by: bag)
         
         viewModel.selectedSymbolGroup.asDriver()

@@ -52,16 +52,16 @@ private extension KeyboardActionsCollectionViewCell {
             topRightLabel.text = "="
             bottomLeftLabel.text = "⇋"
             bottomRightLabel.text = "⇠"
-        case "Group 3"?:
-            topLeftLabel.text = "υ"
-            topRightLabel.text = "η"
-            bottomLeftLabel.text = "ρ"
-            bottomRightLabel.text = "Μ"
-        case "Group 4"?:
-            topLeftLabel.text = "D"
-            topRightLabel.text = "M"
-            bottomLeftLabel.text = "C"
-            bottomRightLabel.text = "N"
+        case "Conditions"?:
+            topLeftLabel.text = "(l)"
+            topRightLabel.text = "(aq)"
+            bottomLeftLabel.text = "(g)"
+            bottomRightLabel.text = "(s)"
+        case "Special Symbols"?:
+            topLeftLabel.text = "℃"
+            topRightLabel.text = "(t)"
+            bottomLeftLabel.text = "pH"
+            bottomRightLabel.text = "(p)"
         case "Greek"?:
             topLeftLabel.text = "ψ"
             topRightLabel.text = "ω"
