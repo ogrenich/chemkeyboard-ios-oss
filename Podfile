@@ -13,6 +13,8 @@ def common
     pod 'RxCocoa', '4.0.0'
     pod 'RxRealm', '0.7.3'
     
+    pod "Device", '~> 3.0.3'
+    
 end
 
 target 'ChemKeyboard' do
