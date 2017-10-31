@@ -51,6 +51,17 @@ class KeyboardViewController: UIInputViewController {
         
         updateUI()
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        DispatchQueue.main.async { [weak self] in
+            UIView.performWithoutAnimation {
+                self?.tableView.reloadSections(IndexSet(integersIn: 0...3),
+                                               with: .none)
+            }
+        }
+    }
 
 }
 
