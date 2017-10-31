@@ -20,6 +20,9 @@
 		150E16271F9E147700BB591A /* UIStoryboard+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150E16261F9E147700BB591A /* UIStoryboard+Extensions.swift */; };
 		150E16291F9E200600BB591A /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150E16281F9E200600BB591A /* UserDefaults+Extensions.swift */; };
 		150E162C1F9E21F200BB591A /* InstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150E162B1F9E21F200BB591A /* InstructionsViewController.swift */; };
+		155082631FA8AE3B005113C3 /* ElementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157697831F838C690051AD67 /* ElementService.swift */; };
+		155082641FA8AE3B005113C3 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D009A1F7E981D004C333F /* RealmService.swift */; };
+		155082651FA8AE3B005113C3 /* SymbolService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157697801F838C5D0051AD67 /* SymbolService.swift */; };
 		15531B161F83E27D00D4FA76 /* SF-UI-Display-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 15531B001F83E26A00D4FA76 /* SF-UI-Display-Light.otf */; };
 		15531B171F83E27D00D4FA76 /* SF-UI-Display-Ultralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 15531B011F83E26A00D4FA76 /* SF-UI-Display-Ultralight.otf */; };
 		15531B181F83E27D00D4FA76 /* SF-UI-Display-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 15531B021F83E26A00D4FA76 /* SF-UI-Display-Heavy.otf */; };
@@ -69,11 +72,8 @@
 		156D00961F7D4A08004C333F /* KeyboardSymbolsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D00941F7D4A08004C333F /* KeyboardSymbolsCollectionViewCell.swift */; };
 		156D00971F7D4A08004C333F /* KeyboardSymbolsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 156D00951F7D4A08004C333F /* KeyboardSymbolsCollectionViewCell.xib */; };
 		156D009B1F7E981D004C333F /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D009A1F7E981D004C333F /* RealmService.swift */; };
-		156D009C1F7E981D004C333F /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D009A1F7E981D004C333F /* RealmService.swift */; };
 		157697811F838C5D0051AD67 /* SymbolService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157697801F838C5D0051AD67 /* SymbolService.swift */; };
-		157697821F838C5D0051AD67 /* SymbolService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157697801F838C5D0051AD67 /* SymbolService.swift */; };
 		157697841F838C690051AD67 /* ElementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157697831F838C690051AD67 /* ElementService.swift */; };
-		157697851F838C690051AD67 /* ElementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157697831F838C690051AD67 /* ElementService.swift */; };
 		15A542321F792B1A00AFB14E /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A542311F792B1A00AFB14E /* KeyboardViewController.swift */; };
 		15A542361F792B1A00AFB14E /* Keyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 15A5422F1F792B1A00AFB14E /* Keyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		15BBC6DC1F7CFFB100A229BC /* Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BBC6DB1F7CFFB100A229BC /* Element.swift */; };
@@ -121,8 +121,6 @@
 		5AC0F7B91F866463004ECF6E /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC0F7B81F866463004ECF6E /* UIView+Extensions.swift */; };
 		5AC0F7BA1F866482004ECF6E /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC0F7B81F866463004ECF6E /* UIView+Extensions.swift */; };
 		5AD182CB1F8CF20B00080313 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AD182CA1F8CF20B00080313 /* Assets.xcassets */; };
-		5AE382C41F92443D0059B080 /* predefined.realm in Resources */ = {isa = PBXBuildFile; fileRef = 5AE382C31F92443C0059B080 /* predefined.realm */; };
-		5AE382C51F9247F70059B080 /* predefined.realm in Resources */ = {isa = PBXBuildFile; fileRef = 5AE382C31F92443C0059B080 /* predefined.realm */; };
 		5AE382C81F960B5F0059B080 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE382C71F960B5F0059B080 /* PopUp.swift */; };
 		5AE382CD1F9610F00059B080 /* SimpleElementPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE382CC1F9610F00059B080 /* SimpleElementPopUp.swift */; };
 		5AE382D51F97A8810059B080 /* SimpleSymbolPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE382D41F97A8800059B080 /* SimpleSymbolPopUp.swift */; };
@@ -239,7 +237,6 @@
 		5ABE8D8B1F854EEC0029E30B /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		5AC0F7B81F866463004ECF6E /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		5AD182CA1F8CF20B00080313 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		5AE382C31F92443C0059B080 /* predefined.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = predefined.realm; sourceTree = "<group>"; };
 		5AE382C71F960B5F0059B080 /* PopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp.swift; sourceTree = "<group>"; };
 		5AE382CC1F9610F00059B080 /* SimpleElementPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleElementPopUp.swift; sourceTree = "<group>"; };
 		5AE382D41F97A8800059B080 /* SimpleSymbolPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleSymbolPopUp.swift; sourceTree = "<group>"; };
@@ -522,17 +519,8 @@
 			children = (
 				150E161B1F9DF48500BB591A /* Assets */,
 				15531AFD1F83E24F00D4FA76 /* Fonts */,
-				156D009E1F7E9E7A004C333F /* Realm */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		156D009E1F7E9E7A004C333F /* Realm */ = {
-			isa = PBXGroup;
-			children = (
-				5AE382C31F92443C0059B080 /* predefined.realm */,
-			);
-			path = Realm;
 			sourceTree = "<group>";
 		};
 		1576977E1F838C2B0051AD67 /* ElementService */ = {
@@ -877,7 +865,6 @@
 				15531B2A1F83E28400D4FA76 /* SF-UI-Text-Bold.otf in Resources */,
 				15531B2C1F83E28400D4FA76 /* SF-UI-Text-BoldItalic.otf in Resources */,
 				15531B2F1F83E28400D4FA76 /* SF-UI-Text-HeavyItalic.otf in Resources */,
-				5AE382C41F92443D0059B080 /* predefined.realm in Resources */,
 				15531B2D1F83E28400D4FA76 /* SF-UI-Text-Light.otf in Resources */,
 				15531B331F83E28400D4FA76 /* SF-UI-Text-Semibold.otf in Resources */,
 				4B8745AE4BAD293BC6D7131B /* Pods-ChemKeyboard-metadata.plist in Resources */,
@@ -892,7 +879,6 @@
 				15531B1F1F83E27D00D4FA76 /* SF-UI-Display-Light.otf in Resources */,
 				15531B351F83E28400D4FA76 /* SF-UI-Text-RegularItalic.otf in Resources */,
 				15531B3B1F83E28400D4FA76 /* SF-UI-Text-HeavyItalic.otf in Resources */,
-				5AE382C51F9247F70059B080 /* predefined.realm in Resources */,
 				15BBC7151F7D3BE600A229BC /* KeyboardActionsTableViewCell.xib in Resources */,
 				156D008B1F7D48A0004C333F /* KeyboardCategoriesCollectionViewCell.xib in Resources */,
 				15531B271F83E27D00D4FA76 /* SF-UI-Display-Thin.otf in Resources */,
@@ -1089,26 +1075,26 @@
 				15BBC71D1F7D3C4500A229BC /* KeyboardSymbolsTableViewCellModel.swift in Sources */,
 				5AE382CD1F9610F00059B080 /* SimpleElementPopUp.swift in Sources */,
 				15BBC6E61F7D0EC900A229BC /* Symbol.swift in Sources */,
+				155082651FA8AE3B005113C3 /* SymbolService.swift in Sources */,
 				156D00961F7D4A08004C333F /* KeyboardSymbolsCollectionViewCell.swift in Sources */,
 				15BBC6FD1F7D344500A229BC /* UICollectionView+Extensions.swift in Sources */,
 				15BBC7101F7D3BD700A229BC /* KeyboardElementsTableViewCell.swift in Sources */,
-				157697821F838C5D0051AD67 /* SymbolService.swift in Sources */,
 				15BBC6DD1F7CFFB100A229BC /* Element.swift in Sources */,
+				155082641FA8AE3B005113C3 /* RealmService.swift in Sources */,
 				15BBC6F91F7D333500A229BC /* NibLoadable.swift in Sources */,
 				15BBC70C1F7D3BC900A229BC /* KeyboardSymbolsTableViewCell.swift in Sources */,
 				5ABE8D8D1F854F220029E30B /* String+Extensions.swift in Sources */,
-				156D009C1F7E981D004C333F /* RealmService.swift in Sources */,
 				15BBC6E91F7D0F9600A229BC /* SymbolGroup.swift in Sources */,
 				15BBC7171F7D3C0200A229BC /* KeyboardActionsTableViewCellModel.swift in Sources */,
 				15BBC7051F7D3B7E00A229BC /* KeyboardCategoriesTableViewCell.swift in Sources */,
 				5AE382D51F97A8810059B080 /* SimpleSymbolPopUp.swift in Sources */,
-				157697851F838C690051AD67 /* ElementService.swift in Sources */,
 				15BBC7261F7D446500A229BC /* UITableViewCell+Extensions.swift in Sources */,
 				15BBC7291F7D447C00A229BC /* UICollectionViewCell+Extensions.swift in Sources */,
 				15BBC7191F7D3C1400A229BC /* KeyboardCategoriesTableViewCellModel.swift in Sources */,
 				15BBC6F61F7D32E000A229BC /* Reusable.swift in Sources */,
 				156D008A1F7D48A0004C333F /* KeyboardCategoriesCollectionViewCell.swift in Sources */,
 				156D00911F7D49DC004C333F /* KeyboardElementsCollectionViewCell.swift in Sources */,
+				155082631FA8AE3B005113C3 /* ElementService.swift in Sources */,
 				5A9396F81F83DC6900B0E546 /* KeyboardElementsCollectionViewLayout.swift in Sources */,
 				15BBC7001F7D345D00A229BC /* UITableView+Extensions.swift in Sources */,
 				5AE382D91F988C940059B080 /* ExtendedSymbolPopUp.swift in Sources */,

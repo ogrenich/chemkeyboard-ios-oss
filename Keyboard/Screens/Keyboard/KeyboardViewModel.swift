@@ -36,7 +36,6 @@ private extension KeyboardViewModel {
     
     func setUpRealm() {
         RealmService.instance.setUpRealm()
-        RealmService.instance.performMigration()
     }
     
 }
