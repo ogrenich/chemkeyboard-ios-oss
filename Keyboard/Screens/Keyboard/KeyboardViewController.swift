@@ -50,6 +50,8 @@ class KeyboardViewController: UIInputViewController {
         super.viewWillAppear(animated)
         
         updateUI()
+        
+        fetchData()
     }
 
 }
@@ -62,6 +64,10 @@ private extension KeyboardViewController {
     
     func updateUI() {
         viewHeightConstraint.isActive = true
+    }
+    
+    func fetchData() {
+        viewModel.needsFetchData.onNext(())
     }
     
 }
@@ -130,6 +136,32 @@ private extension KeyboardViewController {
     }
     
     func bindViewModel() {
+        viewModel.categories.asDriver()
+            .map { _ in }
+            .drive(onNext: { [weak self] in
+                DispatchQueue.main.async { [weak self] in
+                    UIView.performWithoutAnimation {
+                        self?.tableView.reloadSections([Section.categories.rawValue,
+                                                        Section.elements.rawValue],
+                                                       with: .none)
+                    }
+                }
+            })
+            .disposed(by: bag)
+        
+        viewModel.symbolGroups.asDriver()
+            .map { _ in }
+            .drive(onNext: { [weak self] in
+                DispatchQueue.main.async { [weak self] in
+                    UIView.performWithoutAnimation {
+                        self?.tableView.reloadSections([Section.actions.rawValue,
+                                                        Section.symbols.rawValue],
+                                                       with: .none)
+                    }
+                }
+            })
+            .disposed(by: bag)
+        
         viewModel.selectedSymbolGroup.asDriver()
             .map {
                 guard
@@ -154,7 +186,7 @@ private extension KeyboardViewController {
             .drive(onNext: { [weak self] _ in
                 DispatchQueue.main.async { [weak self] in
                     UIView.performWithoutAnimation {
-                        self?.tableView.reloadSections(IndexSet(integersIn: 2...2),
+                        self?.tableView.reloadSections([Section.symbols.rawValue],
                                                        with: .none)
                     }
                 }

@@ -20,26 +20,40 @@ class SymbolService {
     
     
     init() {
-        bindSyncedRealm()
+        fetchGroups()
     }
     
 }
 
-private extension SymbolService {
+extension SymbolService {
     
-    func bindSyncedRealm() {
+    func fetchGroups() {
+        guard isOpenAccessGranted, let user = SyncUser.current else {
+            let realm = try! Realm()
+            groups.value = Array(realm.objects(SymbolGroup.self))
+            
+            return
+        }
+        
         let server = "ec2-13-228-182-241.ap-southeast-1.compute.amazonaws.com:9080"
         let realmPath = "/ChemKeyboard/default"
-        let username = "username@chemopin.tech"
-        let password = "qwerty987"
+        let realmURL = URL(string: "realm://" + server + realmPath)!
         
-        let credentials = SyncCredentials.usernamePassword(username: username,
-                                                           password: password)
+        let syncedConfiguration = Realm.Configuration(
+            syncConfiguration: SyncConfiguration(user: user,
+                                                 realmURL: realmURL),
+            objectTypes: [
+                Element.self,
+                ElementCategory.self,
+                Symbol.self,
+                SymbolGroup.self
+            ]
+        )
         
-        let serverURL = URL(string: "http://" + server)!
-        
-        SyncUser.logIn(with: credentials, server: serverURL) { [weak self] user, error in
-            guard let user = user else {
+        Realm.asyncOpen(configuration: syncedConfiguration,
+                        callbackQueue: .main,
+                        callback: { [weak self] realm, error in
+            guard let realm = realm else {
                 if let error = error {
                     print(error.localizedDescription)
                 }
@@ -47,33 +61,10 @@ private extension SymbolService {
                 return
             }
             
-            let realmURL = URL(string: "realm://" + server + realmPath)!
-            
-            let syncedConfiguration = Realm.Configuration(
-                syncConfiguration: SyncConfiguration(user: user,
-                                                     realmURL: realmURL),
-                objectTypes: [
-                    Element.self,
-                    ElementCategory.self,
-                    Symbol.self,
-                    SymbolGroup.self
-                ]
-            )
-            
-            Realm.asyncOpen(configuration: syncedConfiguration,
-                            callbackQueue: .main,
-                            callback: { [weak self] realm, error in
-                guard let realm = realm else {
-                    if let error = error {
-                        print(error.localizedDescription)
-                    }
-                    
-                    return
-                }
-                                
+            DispatchQueue.main.async { [weak self] in
                 self?.groups.value = Array(realm.objects(SymbolGroup.self))
-            })
-        }
+            }
+        })
     }
-    
+
 }

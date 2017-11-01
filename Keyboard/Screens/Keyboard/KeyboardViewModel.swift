@@ -14,6 +14,8 @@ class KeyboardViewModel {
     
     fileprivate let bag = DisposeBag()
     
+    let needsFetchData = PublishSubject<Void>()
+    
     
     let selectedCategory = Variable<ElementCategory?>(nil)
     let selectedSymbolGroup = Variable<SymbolGroup?>(nil)
@@ -27,7 +29,10 @@ class KeyboardViewModel {
         setUpRealm()
         
         bindSelf()
+        bindInputs()
         bindToOutputs()
+        
+        fetchData()
     }
     
 }
@@ -53,6 +58,14 @@ private extension KeyboardViewModel {
             .disposed(by: bag)
     }
     
+    func bindInputs() {
+        needsFetchData
+            .bind { [weak self] in
+                self?.fetchData()
+            }
+            .disposed(by: bag)
+    }
+    
     func bindToOutputs() {
         categories.asObservable()
             .map { $0.first }
@@ -63,6 +76,15 @@ private extension KeyboardViewModel {
             .map { $0.first }
             .bind(to: selectedSymbolGroup)
             .disposed(by: bag)
+    }
+    
+}
+
+private extension KeyboardViewModel {
+    
+    func fetchData() {
+        ElementService.instance.fetchCategories()
+        SymbolService.instance.fetchGroups()
     }
     
 }
