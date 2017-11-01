@@ -62,6 +62,20 @@ class KeyboardViewController: UIInputViewController {
         
         mediumImpactFeedbackGenerator = nil
     }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        DispatchQueue.main.async { [weak self] in
+            UIView.performWithoutAnimation {
+                self?.tableView.reloadData()
+            }
+        }
+        
+        if let actionsCell = tableView.cellForRow(at: IndexPath(row: 0, section: Section.actions.rawValue)) as? KeyboardActionsTableViewCell {
+            actionsCell.willRotate()
+        }
+    }
 
 }
 

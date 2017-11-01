@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Device
 
 @IBDesignable
 class KeyboardActionsTableViewCell: UITableViewCell {
@@ -121,6 +122,13 @@ private extension KeyboardActionsTableViewCell {
 
 extension KeyboardActionsTableViewCell: UICollectionViewDelegateFlowLayout {
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        let sideInset: CGFloat = 8 + (Device.isPad() && (UIScreen.main.bounds.width > UIScreen.main.bounds.height) ?
+            130 : 0)
+        
+        return UIEdgeInsets(top: 6, left: sideInset, bottom: 6, right: sideInset)
+    }
+    
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -128,8 +136,9 @@ extension KeyboardActionsTableViewCell: UICollectionViewDelegateFlowLayout {
             return CGSize.zero
         }
         
-        let width = (collectionView.frame.size.width - 5 * layout.minimumInteritemSpacing -
-                    layout.sectionInset.left - layout.sectionInset.right) / 6
+        let horizontalInsets: CGFloat = 16 + (Device.isPad() &&
+            (UIScreen.main.bounds.width > UIScreen.main.bounds.height) ? 260 : 0)
+        let width = (collectionView.frame.size.width - 5 * layout.minimumInteritemSpacing - horizontalInsets) / 6
         
         return CGSize(width: width, height: 44)
     }
@@ -177,6 +186,22 @@ extension KeyboardActionsTableViewCell {
             invalidateTimer()
         default:
             break
+        }
+    }
+    
+}
+
+extension KeyboardActionsTableViewCell {
+    
+    func willRotate() {
+        DispatchQueue.main.async { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+        
+            self.collectionView.reloadData()
+            self.collectionView.setNeedsLayout()
+            self.collectionView.layoutIfNeeded()
         }
     }
     

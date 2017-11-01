@@ -7,14 +7,15 @@
 //
 
 import UIKit
+import Device
 
 class KeyboardActionsCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var buttonView: UIView!
-    @IBOutlet weak var topLeftLabel: UILabel!
-    @IBOutlet weak var topRightLabel: UILabel!
-    @IBOutlet weak var bottomLeftLabel: UILabel!
-    @IBOutlet weak var bottomRightLabel: UILabel!
+    @IBOutlet weak var firstLabel: UILabel!
+    @IBOutlet weak var secondLabel: UILabel!
+    @IBOutlet weak var thirdLabel: UILabel!
+    @IBOutlet weak var fourthLabel: UILabel!
     
     
     fileprivate var accessoryView: UIView!
@@ -36,37 +37,83 @@ class KeyboardActionsCollectionViewCell: UICollectionViewCell {
 private extension KeyboardActionsCollectionViewCell {
     
     func configureLabels(with group: SymbolGroup) {
+        setUpConstraints()
+        
         switch group.name {
         case "Digits"?:
-            topLeftLabel.text = "0"
-            topRightLabel.text = "1"
-            bottomLeftLabel.text = "2"
-            bottomRightLabel.text = "3"
+            firstLabel.text = "0"
+            secondLabel.text = "1"
+            thirdLabel.text = "2"
+            fourthLabel.text = "3"
         case "Actions"?:
-            topLeftLabel.text = "+"
-            topRightLabel.text = "–"
-            bottomLeftLabel.text = "/"
-            bottomRightLabel.text = ")"
+            firstLabel.text = "+"
+            secondLabel.text = "–"
+            thirdLabel.text = "/"
+            fourthLabel.text = ")"
         case "Arrows"?:
-            topLeftLabel.text = "→"
-            topRightLabel.text = "="
-            bottomLeftLabel.text = "⇋"
-            bottomRightLabel.text = "⇠"
+            firstLabel.text = "→"
+            secondLabel.text = "="
+            thirdLabel.text = "⇋"
+            fourthLabel.text = "⇠"
         case "Conditions"?:
-            topLeftLabel.text = "(l)"
-            topRightLabel.text = "(aq)"
-            bottomLeftLabel.text = "(g)"
-            bottomRightLabel.text = "(s)"
+            firstLabel.text = "(l)"
+            secondLabel.text = "(aq)"
+            thirdLabel.text = "(g)"
+            fourthLabel.text = "(s)"
         case "Special Symbols"?:
-            topLeftLabel.text = "℃"
-            topRightLabel.text = "(t)"
-            bottomLeftLabel.text = "pH"
-            bottomRightLabel.text = "(p)"
+            firstLabel.text = "℃"
+            secondLabel.text = "(t)"
+            thirdLabel.text = "pH"
+            fourthLabel.text = "(p)"
         case "Greek"?:
-            topLeftLabel.text = "ψ"
-            topRightLabel.text = "ω"
-            bottomLeftLabel.text = "α"
-            bottomRightLabel.text = "β"
+            firstLabel.text = "ψ"
+            secondLabel.text = "ω"
+            thirdLabel.text = "α"
+            fourthLabel.text = "β"
+        default:
+            break
+        }
+    }
+    
+    func setUpConstraints() {
+        [firstLabel, thirdLabel, secondLabel, fourthLabel].forEach { label in
+            label?.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
+        switch Device.type() {
+        case .iPhone:
+            [firstLabel, secondLabel].forEach { label in
+                label?.topAnchor.constraint(greaterThanOrEqualTo: buttonView.topAnchor, constant: 3).isActive = true
+                label?.bottomAnchor.constraint(equalTo: buttonView.centerYAnchor, constant: -1).isActive = true
+            }
+            [thirdLabel, fourthLabel].forEach { label in
+                label?.bottomAnchor.constraint(lessThanOrEqualTo: buttonView.bottomAnchor,
+                                               constant: -3).isActive = true
+                label?.topAnchor.constraint(equalTo: buttonView.centerYAnchor, constant: 1).isActive = true
+            }
+            [firstLabel, thirdLabel].forEach { label in
+                label?.leadingAnchor.constraint(greaterThanOrEqualTo: buttonView.leadingAnchor,
+                                                constant: 3).isActive = true
+                label?.trailingAnchor.constraint(equalTo: buttonView.centerXAnchor, constant: -3).isActive = true
+            }
+            [secondLabel, fourthLabel].forEach { label in
+                label?.trailingAnchor.constraint(lessThanOrEqualTo: buttonView.trailingAnchor,
+                                                 constant: -3).isActive = true
+                label?.leadingAnchor.constraint(equalTo: buttonView.centerXAnchor, constant: 3).isActive = true
+            }
+        case .iPad:
+            [firstLabel, secondLabel, thirdLabel, fourthLabel].forEach { label in
+                label?.centerYAnchor.constraint(equalTo: buttonView.centerYAnchor).isActive = true
+            }
+            firstLabel.leadingAnchor.constraint(greaterThanOrEqualTo: buttonView.leadingAnchor,
+                                                  constant: 8).isActive = true
+            secondLabel.leadingAnchor.constraint(equalTo: firstLabel.trailingAnchor, constant: 8).isActive = true
+            secondLabel.trailingAnchor.constraint(equalTo: buttonView.centerXAnchor, constant: -4).isActive = true
+            thirdLabel.leadingAnchor.constraint(equalTo: buttonView.centerXAnchor, constant: 4).isActive = true
+            fourthLabel.leadingAnchor.constraint(equalTo: thirdLabel.trailingAnchor,
+                                                      constant: 8).isActive = true
+            fourthLabel.trailingAnchor.constraint(lessThanOrEqualTo: buttonView.trailingAnchor,
+                                                       constant: -8).isActive = true
         default:
             break
         }
