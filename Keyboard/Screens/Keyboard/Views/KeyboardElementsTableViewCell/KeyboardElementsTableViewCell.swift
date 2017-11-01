@@ -216,7 +216,7 @@ extension KeyboardElementsTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: KeyboardElementsCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-        let element = viewModel.categories.value[indexPath.section].elements.toArray()[indexPath.item]
+        let element = Array(viewModel.categories.value[indexPath.section].elements)[indexPath.item]
         
         return cell.configure(with: element)
     }

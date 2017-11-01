@@ -24,7 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         setUpMainInterface()
-        setUpRealm()
         setUpFabric()
         
         return true
@@ -51,12 +50,6 @@ private extension AppDelegate {
         }
         
         window.rootViewController = root
-    }
-    
-    func setUpRealm() {
-        RealmService.instance.setUpRealm()
-        RealmService.instance.performMigration()
-        RealmService.instance.printRealmURL()
     }
     
     func setUpFabric() {
