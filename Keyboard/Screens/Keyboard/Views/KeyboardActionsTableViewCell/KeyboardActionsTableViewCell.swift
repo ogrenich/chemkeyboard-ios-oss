@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Device
 
 @IBDesignable
 class KeyboardActionsTableViewCell: UITableViewCell {
@@ -18,8 +19,8 @@ class KeyboardActionsTableViewCell: UITableViewCell {
     @IBOutlet weak var deleteButton: UIButton!
     
     
-    fileprivate weak var needsReactToSwitchButtonTouchEvent: PublishSubject<Void>!
     fileprivate weak var needsReactToDeleteButtonTouchEvent: PublishSubject<Void>!
+    fileprivate weak var needsPlayInputClick: PublishSubject<Void>!
     
     
     fileprivate var bag = DisposeBag()
@@ -44,17 +45,16 @@ extension KeyboardActionsTableViewCell {
     
     @discardableResult
     func configure(with viewModel: KeyboardActionsTableViewCellModel,
-                   needsReactToSwitchButtonTouchEvent: PublishSubject<Void>,
-                   needsReactToDeleteButtonTouchEvent: PublishSubject<Void>) -> KeyboardActionsTableViewCell {
+                   needsReactToDeleteButtonTouchEvent: PublishSubject<Void>,
+                   _ needsPlayInputClick: PublishSubject<Void>) -> KeyboardActionsTableViewCell {
         self.viewModel = viewModel
-        self.needsReactToSwitchButtonTouchEvent = needsReactToSwitchButtonTouchEvent
         self.needsReactToDeleteButtonTouchEvent = needsReactToDeleteButtonTouchEvent
+        self.needsPlayInputClick = needsPlayInputClick
         
         configureCollectionView()
         
         addGestureRecognizersOnDeleteButton()
         
-        bindSelf()
         bindToViewModel()
         bindViewModel()
         
@@ -75,10 +75,15 @@ private extension KeyboardActionsTableViewCell {
     
     func bindSelf() {
         switchButton.rx.tap
-            .bind(to: needsReactToSwitchButtonTouchEvent)
+            .bind(to: needsPlayInputClick)
+            .disposed(by: bag)
+        
+        collectionView.rx.itemHighlighted
+            .map { _ in }
+            .bind(to: needsPlayInputClick)
             .disposed(by: bag)
     }
-    
+
     func bindToViewModel() {
         collectionView.rx.modelSelected(SymbolGroup.self)
             .bind(to: viewModel.selectedSymbolGroup)
@@ -117,6 +122,13 @@ private extension KeyboardActionsTableViewCell {
 
 extension KeyboardActionsTableViewCell: UICollectionViewDelegateFlowLayout {
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        let sideInset: CGFloat = 8 + (Device.isPad() && (UIScreen.main.bounds.width > UIScreen.main.bounds.height) ?
+            130 : 0)
+        
+        return UIEdgeInsets(top: 6, left: sideInset, bottom: 6, right: sideInset)
+    }
+    
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -124,8 +136,9 @@ extension KeyboardActionsTableViewCell: UICollectionViewDelegateFlowLayout {
             return CGSize.zero
         }
         
-        let width = (collectionView.frame.size.width - 5 * layout.minimumInteritemSpacing -
-                    layout.sectionInset.left - layout.sectionInset.right) / 6
+        let horizontalInsets: CGFloat = 16 + (Device.isPad() &&
+            (UIScreen.main.bounds.width > UIScreen.main.bounds.height) ? 260 : 0)
+        let width = (collectionView.frame.size.width - 5 * layout.minimumInteritemSpacing - horizontalInsets) / 6
         
         return CGSize(width: width, height: 44)
     }
@@ -162,6 +175,7 @@ extension KeyboardActionsTableViewCell {
     
     @objc func handleSimpleDeleteEvent() {
         needsReactToDeleteButtonTouchEvent.onNext(())
+        needsPlayInputClick.onNext(())
     }
     
     @objc func handleLongPressOnDeleteButton(_ gesture: UIGestureRecognizer) {
@@ -172,6 +186,22 @@ extension KeyboardActionsTableViewCell {
             invalidateTimer()
         default:
             break
+        }
+    }
+    
+}
+
+extension KeyboardActionsTableViewCell {
+    
+    func willRotate() {
+        DispatchQueue.main.async { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+        
+            self.collectionView.reloadData()
+            self.collectionView.setNeedsLayout()
+            self.collectionView.layoutIfNeeded()
         }
     }
     

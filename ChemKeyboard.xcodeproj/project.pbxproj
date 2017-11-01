@@ -133,6 +133,8 @@
 		5AE382D51F97A8810059B080 /* SimpleSymbolPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE382D41F97A8800059B080 /* SimpleSymbolPopUp.swift */; };
 		5AE382D71F97AAF90059B080 /* ExtendedElementPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE382D61F97AAF90059B080 /* ExtendedElementPopUp.swift */; };
 		5AE382D91F988C940059B080 /* ExtendedSymbolPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE382D81F988C940059B080 /* ExtendedSymbolPopUp.swift */; };
+		5AF9BA621FA89B510034054D /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF9BA611FA89B510034054D /* UIDevice+Extensions.swift */; };
+		5AF9BA631FA89B510034054D /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF9BA611FA89B510034054D /* UIDevice+Extensions.swift */; };
 		67FC87EA54389552C9666C61 /* Pods_Keyboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D99AB0CD5D9709735ACA2D78 /* Pods_Keyboard.framework */; };
 		6C915C5F56EC5DFAE6271A4C /* Pods-Keyboard-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 61830F9875477CA72741DF34 /* Pods-Keyboard-metadata.plist */; };
 		F8FE752B013B0FB06FA20E40 /* Pods_ChemKeyboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94816A35B5E6AAAC942FEBF0 /* Pods_ChemKeyboard.framework */; };
@@ -251,6 +253,7 @@
 		5AE382D41F97A8800059B080 /* SimpleSymbolPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleSymbolPopUp.swift; sourceTree = "<group>"; };
 		5AE382D61F97AAF90059B080 /* ExtendedElementPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedElementPopUp.swift; sourceTree = "<group>"; };
 		5AE382D81F988C940059B080 /* ExtendedSymbolPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedSymbolPopUp.swift; sourceTree = "<group>"; };
+		5AF9BA611FA89B510034054D /* UIDevice+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extensions.swift"; sourceTree = "<group>"; };
 		61830F9875477CA72741DF34 /* Pods-Keyboard-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-Keyboard-metadata.plist"; path = "Pods/Pods-Keyboard-metadata.plist"; sourceTree = "<group>"; };
 		94816A35B5E6AAAC942FEBF0 /* Pods_ChemKeyboard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChemKeyboard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		95B32E252AD372118A0E2B80 /* Pods-Keyboard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keyboard.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Keyboard/Pods-Keyboard.debug.xcconfig"; sourceTree = "<group>"; };
@@ -612,6 +615,7 @@
 				15BBC7241F7D446400A229BC /* UITableViewCell+Extensions.swift */,
 				5AC0F7B81F866463004ECF6E /* UIView+Extensions.swift */,
 				150E16281F9E200600BB591A /* UserDefaults+Extensions.swift */,
+				5AF9BA611FA89B510034054D /* UIDevice+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1009,6 +1013,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ChemKeyboard/Pods-ChemKeyboard-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Device/Device.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
@@ -1016,6 +1021,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Device.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
@@ -1081,6 +1087,7 @@
 				15BBC6FF1F7D345D00A229BC /* UITableView+Extensions.swift in Sources */,
 				150E16291F9E200600BB591A /* UserDefaults+Extensions.swift in Sources */,
 				150DC39E1FAA0CEF004F9BC4 /* UIKit+Extensions.swift in Sources */,
+				5AF9BA621FA89B510034054D /* UIDevice+Extensions.swift in Sources */,
 				150E16181F9DF18C00BB591A /* TextField.swift in Sources */,
 				15BBC6F21F7D325100A229BC /* Iteratable.swift in Sources */,
 				5AC0F7B91F866463004ECF6E /* UIView+Extensions.swift in Sources */,
@@ -1131,6 +1138,7 @@
 				15BBC7001F7D345D00A229BC /* UITableView+Extensions.swift in Sources */,
 				150DC38A1FA9F129004F9BC4 /* UserDefaults+Extensions.swift in Sources */,
 				5AE382D91F988C940059B080 /* ExtendedSymbolPopUp.swift in Sources */,
+				5AF9BA631FA89B510034054D /* UIDevice+Extensions.swift in Sources */,
 				15BBC6F31F7D325100A229BC /* Iteratable.swift in Sources */,
 				15A542321F792B1A00AFB14E /* KeyboardViewController.swift in Sources */,
 				5AE382C81F960B5F0059B080 /* PopUp.swift in Sources */,

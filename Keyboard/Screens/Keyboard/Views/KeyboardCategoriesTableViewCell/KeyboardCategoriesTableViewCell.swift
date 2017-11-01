@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Device
 
 @IBDesignable
 class KeyboardCategoriesTableViewCell: UITableViewCell {
@@ -17,6 +18,7 @@ class KeyboardCategoriesTableViewCell: UITableViewCell {
     
     
     fileprivate weak var needsScrollElementsCollectionViewToCategoryAt: PublishSubject<Int>!
+    fileprivate weak var needsPlayInputClick: PublishSubject<Void>!
     
     
     fileprivate var bag = DisposeBag()
@@ -35,9 +37,11 @@ extension KeyboardCategoriesTableViewCell {
     
     @discardableResult
     func configure(with viewModel: KeyboardCategoriesTableViewCellModel,
-                   _ needsScrollElementsCollectionViewToCategoryAt: PublishSubject<Int>) -> KeyboardCategoriesTableViewCell {
+                   _ needsScrollElementsCollectionViewToCategoryAt: PublishSubject<Int>,
+                   _ needsPlayInputClick: PublishSubject<Void>) -> KeyboardCategoriesTableViewCell {
         self.viewModel = viewModel
         self.needsScrollElementsCollectionViewToCategoryAt = needsScrollElementsCollectionViewToCategoryAt
+        self.needsPlayInputClick = needsPlayInputClick
         
         configureCollectionView()
         
@@ -68,6 +72,11 @@ private extension KeyboardCategoriesTableViewCell {
         collectionView.rx.itemSelected
             .map { $0.item }
             .bind(to: needsScrollElementsCollectionViewToCategoryAt)
+            .disposed(by: bag)
+        
+        collectionView.rx.itemHighlighted
+            .map { _ in }
+            .bind(to: needsPlayInputClick)
             .disposed(by: bag)
     }
     
@@ -115,10 +124,17 @@ private extension KeyboardCategoriesTableViewCell {
 
 extension KeyboardCategoriesTableViewCell: UICollectionViewDelegateFlowLayout {
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        let sideInset: CGFloat = 6 + (Device.isPad() && (UIScreen.main.bounds.width > UIScreen.main.bounds.height) ?
+            130 : 0)
+        
+        return UIEdgeInsets(top: 0, left: sideInset, bottom: 0, right: sideInset)
+    }
+    
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 50, height: 36)
+        return CGSize(width: Device.isPad() ? 62 : 50, height: 36)
     }
     
 }

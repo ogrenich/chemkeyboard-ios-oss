@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Device
 
 @IBDesignable
 class KeyboardSymbolsTableViewCell: UITableViewCell {
@@ -17,6 +18,7 @@ class KeyboardSymbolsTableViewCell: UITableViewCell {
     
     
     fileprivate weak var needsReactToSimpleButtonTouchEvent: PublishSubject<Symbol?>!
+    fileprivate weak var needsPlayInputClick: PublishSubject<Void>!
     
     
     let cellTouchDown = PublishSubject<KeyboardSymbolsCollectionViewCell>()
@@ -40,9 +42,11 @@ extension KeyboardSymbolsTableViewCell {
     
     @discardableResult
     func configure(with viewModel: KeyboardSymbolsTableViewCellModel,
-                   needsReactToSimpleButtonTouchEvent: PublishSubject<Symbol?>) -> KeyboardSymbolsTableViewCell {
+                   needsReactToSimpleButtonTouchEvent: PublishSubject<Symbol?>,
+                   _ needsPlayInputClick: PublishSubject<Void>) -> KeyboardSymbolsTableViewCell {
         self.viewModel = viewModel
         self.needsReactToSimpleButtonTouchEvent = needsReactToSimpleButtonTouchEvent
+        self.needsPlayInputClick = needsPlayInputClick
         
         configureCollectionView()
         
@@ -65,6 +69,11 @@ private extension KeyboardSymbolsTableViewCell {
 private extension KeyboardSymbolsTableViewCell {
     
     func bindSelf() {
+        cellTouchDown
+            .map { _ in }
+            .bind(to: needsPlayInputClick)
+            .disposed(by: bag)
+        
         cellTouchDown
             .bind { [weak self] cell in
                 guard let `self` = self else {
@@ -152,6 +161,12 @@ private extension KeyboardSymbolsTableViewCell {
 
 extension KeyboardSymbolsTableViewCell: UICollectionViewDelegateFlowLayout {
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        let sideInset: CGFloat = 8 + (Device.isPad() && (UIScreen.main.bounds.width > UIScreen.main.bounds.height) ? 136 : 0)
+        
+        return UIEdgeInsets(top: 8, left: sideInset, bottom: 0, right: sideInset)
+    }
+    
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -159,7 +174,8 @@ extension KeyboardSymbolsTableViewCell: UICollectionViewDelegateFlowLayout {
             return CGSize.zero
         }
         
-        let sectionsInsets = layout.sectionInset.left + layout.sectionInset.right
+        let sectionsInsets: CGFloat = 16 + (Device.isPad() &&
+            (UIScreen.main.bounds.width > UIScreen.main.bounds.height) ? 272 : 0)
         let numberOfSymbolsInLine = viewModel.selectedSymbolGroup.value?.numberOfSymbolsInLine.value ?? 10
         let interitemsSpacing = layout.minimumInteritemSpacing * CGFloat(numberOfSymbolsInLine - 1)
         
