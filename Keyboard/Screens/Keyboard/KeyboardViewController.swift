@@ -52,13 +52,12 @@ class KeyboardViewController: UIInputViewController {
         updateUI()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
         
         DispatchQueue.main.async { [weak self] in
             UIView.performWithoutAnimation {
-                self?.tableView.reloadSections(IndexSet(integersIn: 0...3),
-                                               with: .none)
+                self?.tableView.reloadData()
             }
         }
     }
