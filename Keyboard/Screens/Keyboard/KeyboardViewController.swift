@@ -60,6 +60,10 @@ class KeyboardViewController: UIInputViewController {
                 self?.tableView.reloadData()
             }
         }
+        
+        if let actionsCell = tableView.cellForRow(at: IndexPath(row: 0, section: Section.actions.rawValue)) as? KeyboardActionsTableViewCell {
+            actionsCell.willRotate()
+        }
     }
 
 }

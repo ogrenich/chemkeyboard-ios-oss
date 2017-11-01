@@ -185,3 +185,19 @@ extension KeyboardActionsTableViewCell {
     }
     
 }
+
+extension KeyboardActionsTableViewCell {
+    
+    func willRotate() {
+        DispatchQueue.main.async { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+        
+            self.collectionView.reloadData()
+            self.collectionView.setNeedsLayout()
+            self.collectionView.layoutIfNeeded()
+        }
+    }
+    
+}
