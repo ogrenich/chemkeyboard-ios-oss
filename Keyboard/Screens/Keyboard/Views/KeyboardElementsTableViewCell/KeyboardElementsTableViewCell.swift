@@ -20,12 +20,15 @@ class KeyboardElementsTableViewCell: UITableViewCell {
     fileprivate weak var needsScrollElementsCollectionViewToCategoryAt: PublishSubject<Int>!
     fileprivate weak var needsPlayInputClick: PublishSubject<Void>!
     
+    fileprivate let needsToShowExtendedPopUp = PublishSubject<KeyboardElementsCollectionViewCell>()
+    
     
     fileprivate var bag = DisposeBag()
     fileprivate var viewModel: KeyboardElementsTableViewCellModel!
     
     fileprivate var userIsScrolling: Bool = false
-
+    
+    fileprivate var impactFeedbackGenerator: UIImpactFeedbackGenerator? = nil
     
     var currentSection: RxSwift.Observable<Int> {
         return collectionView.rx.contentOffset
@@ -133,9 +136,11 @@ private extension KeyboardElementsTableViewCell {
                     let element = self.viewModel.categories.value[indexPath.section].elements[indexPath.item]
                     PopUp.instance.show(element: element, at: frame, style: .simple)
                     
-                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.7) {
-                        if cell.isHighlighted {
-                            PopUp.instance.show(element: element, at: frame, style: .extended)
+                    if !UIDevice.current.hasTapticEngine {
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.7) {
+                            if cell.isHighlighted {
+                                PopUp.instance.show(element: element, at: frame, style: .extended)
+                            }
                         }
                     }
                     
@@ -143,6 +148,29 @@ private extension KeyboardElementsTableViewCell {
                 }
             }
             .disposed(by: bag)
+        
+        needsToShowExtendedPopUp
+            .bind { [weak self] cell in
+                guard let `self` = self else {
+                    return
+                }
+                
+                if let indexPath = self.collectionView.indexPath(for: cell) {
+                    let frame = CGRect(x: cell.frame.origin.x - self.collectionView.contentOffset.x,
+                                       y: cell.frame.origin.y + 36,
+                                       width: cell.frame.width, height: cell.frame.height)
+                    let element = self.viewModel.categories.value[indexPath.section].elements[indexPath.item]
+                    PopUp.instance.show(element: element, at: frame, style: .extended)
+                    DispatchQueue.main.async { [weak self] in
+                        self?.impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+                        self?.impactFeedbackGenerator?.prepare()
+                        self?.impactFeedbackGenerator?.impactOccurred()
+                        self?.impactFeedbackGenerator = nil
+                    }
+                }
+            }
+            .disposed(by: bag)
+        
 
         collectionView.rx.itemUnhighlighted
             .bind { [weak self] in
@@ -218,7 +246,7 @@ extension KeyboardElementsTableViewCell: UICollectionViewDataSource {
         let cell: KeyboardElementsCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
         let element = Array(viewModel.categories.value[indexPath.section].elements)[indexPath.item]
         
-        return cell.configure(with: element)
+        return cell.configure(with: element, needsToShowExtendedPopUp)
     }
     
 }

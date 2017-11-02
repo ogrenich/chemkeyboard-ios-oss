@@ -155,13 +155,15 @@ private extension KeyboardViewController {
 
         needsPlayInputClick
             .bind { [weak self] in
-                UIDevice.current.playInputClick()
-                if UIDevice.current.hasHapticFeedback {
-                    self?.mediumImpactFeedbackGenerator?.prepare()
-                    self?.mediumImpactFeedbackGenerator?.impactOccurred()
-                } else if UIDevice.current.hasTapticEngine {
-                    let peek = SystemSoundID(1519)
-                    AudioServicesPlaySystemSound(peek)
+                DispatchQueue.main.async { [weak self] in
+                    UIDevice.current.playInputClick()
+                    if UIDevice.current.hasHapticFeedback {
+                        self?.mediumImpactFeedbackGenerator?.prepare()
+                        self?.mediumImpactFeedbackGenerator?.impactOccurred()
+                    } else if UIDevice.current.hasTapticEngine {
+                        let peek = SystemSoundID(1519)
+                        AudioServicesPlaySystemSound(peek)
+                    }
                 }
             }
             .disposed(by: bag)

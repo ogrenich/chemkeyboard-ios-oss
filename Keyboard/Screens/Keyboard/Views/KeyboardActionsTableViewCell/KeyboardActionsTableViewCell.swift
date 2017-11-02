@@ -55,6 +55,7 @@ extension KeyboardActionsTableViewCell {
         
         addGestureRecognizersOnDeleteButton()
         
+        bindSelf()
         bindToViewModel()
         bindViewModel()
         
