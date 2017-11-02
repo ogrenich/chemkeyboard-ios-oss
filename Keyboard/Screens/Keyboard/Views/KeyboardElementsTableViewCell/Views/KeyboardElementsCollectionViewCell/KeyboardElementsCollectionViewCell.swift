@@ -17,18 +17,14 @@ class KeyboardElementsCollectionViewCell: UICollectionViewCell {
     
     fileprivate weak var needsToShowExtendedPopUp: PublishSubject<KeyboardElementsCollectionViewCell>!
     
-    fileprivate var popUpExtended: Bool = false
+    var popUpExtended: Bool = false
     
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let touch = touches.first, touch.force == touch.maximumPossibleForce && !popUpExtended {
+        if let touch = touches.first, touch.force == touch.maximumPossibleForce && !popUpExtended && isHighlighted {
             needsToShowExtendedPopUp.onNext(self)
             popUpExtended = true
         }
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        popUpExtended = false
     }
     
 }
