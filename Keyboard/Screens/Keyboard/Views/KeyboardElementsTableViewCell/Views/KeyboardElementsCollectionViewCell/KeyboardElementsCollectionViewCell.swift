@@ -21,7 +21,7 @@ class KeyboardElementsCollectionViewCell: UICollectionViewCell {
     
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let touch = touches.first, touch.force == touch.maximumPossibleForce && !popUpExtended {
+        if let touch = touches.first, touch.force == touch.maximumPossibleForce && !popUpExtended && isHighlighted {
             needsToShowExtendedPopUp.onNext(self)
             popUpExtended = true
         }
