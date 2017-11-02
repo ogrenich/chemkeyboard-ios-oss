@@ -64,12 +64,13 @@ private extension ExtendedElementPopUp {
             label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -6).isActive = true
         }
         
-        symbolLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        symbolLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 30).isActive = true
+        symbolLabel.heightAnchor.constraint(lessThanOrEqualToConstant: 34).isActive = true
         [numberLabel, molarMassLabel, nameLabel, electronConfigurationLabel].forEach { label in
             label.heightAnchor.constraint(equalToConstant: 14).isActive = true
         }
         
-        symbolLabel.topAnchor.constraint(equalTo: topAnchor, constant: 4).isActive = true
+        symbolLabel.topAnchor.constraint(equalTo: topAnchor, constant: 2).isActive = true
         numberLabel.topAnchor.constraint(equalTo: topAnchor, constant: 4).isActive = true
         nameLabel.topAnchor.constraint(equalTo: symbolLabel.bottomAnchor).isActive = true
         electronConfigurationLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor).isActive = true
