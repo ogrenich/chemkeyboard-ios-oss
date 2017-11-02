@@ -17,7 +17,7 @@ class KeyboardElementsCollectionViewCell: UICollectionViewCell {
     
     fileprivate weak var needsToShowExtendedPopUp: PublishSubject<KeyboardElementsCollectionViewCell>!
     
-    fileprivate var popUpExtended: Bool = false
+    var popUpExtended: Bool = false
     
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -25,10 +25,6 @@ class KeyboardElementsCollectionViewCell: UICollectionViewCell {
             needsToShowExtendedPopUp.onNext(self)
             popUpExtended = true
         }
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        popUpExtended = false
     }
     
 }

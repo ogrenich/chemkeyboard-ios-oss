@@ -178,9 +178,10 @@ private extension KeyboardElementsTableViewCell {
                     return
                 }
                 
-                if let cell = self.collectionView.cellForItem(at: $0) {
+                if let cell = self.collectionView.cellForItem(at: $0) as? KeyboardElementsCollectionViewCell {
                     PopUp.instance.hide()
                     cell.isHidden = false
+                    cell.popUpExtended = false
                 }
             }
             .disposed(by: bag)
