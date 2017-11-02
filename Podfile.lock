@@ -1,8 +1,8 @@
 PODS:
-  - Crashlytics (3.9.0):
-    - Fabric (~> 1.7.0)
+  - Crashlytics (3.9.3):
+    - Fabric (~> 1.7.2)
   - Device (3.0.3)
-  - Fabric (1.7.0)
+  - Fabric (1.7.2)
   - Realm (3.0.1):
     - Realm/Headers (= 3.0.1)
   - Realm/Headers (3.0.1)
@@ -13,21 +13,21 @@ PODS:
   - RxSwift (4.0.0)
 
 DEPENDENCIES:
-  - Crashlytics (= 3.9.0)
-  - Device (~> 3.0.3)
-  - Fabric (= 1.7.0)
+  - Crashlytics (= 3.9.3)
+  - Device (= 3.0.3)
+  - Fabric (= 1.7.2)
   - RealmSwift (= 3.0.1)
   - RxCocoa (= 4.0.0)
 
 SPEC CHECKSUMS:
-  Crashlytics: 64aad5dd97249dd3ff94b979fea140144590cdd3
+  Crashlytics: dbb07d01876c171c5ccbdf7826410380189e452c
   Device: 9a5264ee4e0f392e7153d2c46b10c8df46b7aad2
-  Fabric: e6be012366472553807dada21243c5ab8d904151
+  Fabric: 9cd6a848efcf1b8b07497e0b6a2e7d336353ba15
   Realm: ba6144c74f835f7497791f6599d63a7755377b83
   RealmSwift: 7d13b1ac4b6022a13f841e3143e7789c9e40ad0d
   RxCocoa: d62846ca96495d862fa4c59ea7d87e5031d7340e
   RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
 
-PODFILE CHECKSUM: e6ee05f41768b002fa4c66038c8862e45955e8bf
+PODFILE CHECKSUM: ddd020eb82fbfd311acad3c08eef47da7aa9a1cb
 
 COCOAPODS: 1.3.1
