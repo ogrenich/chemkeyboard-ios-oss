@@ -51,7 +51,9 @@ private extension Button {
         sublayer.frame = bounds
         sublayer.masksToBounds = true
         sublayer.backgroundColor = normalBackgroundColor?.cgColor
-        layer.backgroundColor = UIColor.white.cgColor
+        if shadowOpacity != 0 {
+            layer.backgroundColor = superview?.backgroundColor?.cgColor ?? UIColor.white.cgColor
+        }
         layer.insertSublayer(sublayer, below: nil)
     }
     
