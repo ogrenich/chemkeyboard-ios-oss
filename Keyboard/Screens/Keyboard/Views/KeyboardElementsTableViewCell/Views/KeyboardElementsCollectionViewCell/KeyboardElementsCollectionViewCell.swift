@@ -15,12 +15,27 @@ class KeyboardElementsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var symbolLabel: UILabel!
     @IBOutlet weak var numberLabel: UILabel!
     
+    fileprivate weak var needsToShowExtendedPopUp: PublishSubject<KeyboardElementsCollectionViewCell>!
+    
+    var popUpExtended: Bool = false
+    
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first, touch.force == touch.maximumPossibleForce && !popUpExtended && isHighlighted {
+            needsToShowExtendedPopUp.onNext(self)
+            popUpExtended = true
+        }
+    }
+    
 }
 
 extension KeyboardElementsCollectionViewCell {
     
     @discardableResult
-    func configure(with element: Element) -> KeyboardElementsCollectionViewCell {
+    func configure(with element: Element,
+                   _ needsToShowExtendedPopUp: PublishSubject<KeyboardElementsCollectionViewCell>) -> KeyboardElementsCollectionViewCell {
+        self.needsToShowExtendedPopUp = needsToShowExtendedPopUp
+        
         backgroundColor = element.category?.color?.hexColor
         shadowColor = element.category?.shadowColor?.hexColor
         

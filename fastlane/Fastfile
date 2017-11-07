@@ -1,4 +1,4 @@
-fastlane_version "2.62.1"
+fastlane_version "2.63.0"
 
 default_platform :ios
 
@@ -15,7 +15,7 @@ platform :ios do
         }
       }
     )
-    
+
     crashlytics(
       api_token: "a310c7f3be9676421bbbcf654222bb76f8ece4d5",
       build_secret: "5dcd2ea38efce77c7c503afe8e5c5806f677acb7f468bb5532c7cfe6e7525e5f"

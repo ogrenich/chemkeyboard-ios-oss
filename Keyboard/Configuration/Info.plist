@@ -17,9 +17,14 @@
 	<key>CFBundlePackageType</key>
 	<string>XPC!</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.4</string>
+	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>6</string>
+	<string>12</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionAttributes</key>
@@ -31,7 +36,7 @@
 			<key>PrimaryLanguage</key>
 			<string>en-US</string>
 			<key>RequestsOpenAccess</key>
-			<false/>
+			<true/>
 		</dict>
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.keyboard-service</string>
@@ -47,20 +52,6 @@
 		<string>SF-UI-Display-Medium.otf</string>
 		<string>SF-UI-Display-Regular.otf</string>
 		<string>SF-UI-Display-Semibold.otf</string>
-		<string>SF-UI-Display-Thin.otf</string>
-		<string>SF-UI-Display-Ultralight.otf</string>
-		<string>SF-UI-Text-Bold.otf</string>
-		<string>SF-UI-Text-BoldItalic.otf</string>
-		<string>SF-UI-Text-Heavy.otf</string>
-		<string>SF-UI-Text-HeavyItalic.otf</string>
-		<string>SF-UI-Text-Light.otf</string>
-		<string>SF-UI-Text-LightItalic.otf</string>
-		<string>SF-UI-Text-Medium.otf</string>
-		<string>SF-UI-Text-MediumItalic.otf</string>
-		<string>SF-UI-Text-Regular.otf</string>
-		<string>SF-UI-Text-RegularItalic.otf</string>
-		<string>SF-UI-Text-Semibold.otf</string>
-		<string>SF-UI-Text-SemiboldItalic.otf</string>
 	</array>
 </dict>
 </plist>

@@ -13,83 +13,118 @@ class RealmService {
     
     static let instance = RealmService()
     
-    var realmURL: URL? = Realm.Configuration.defaultConfiguration.fileURL
+    let server = "ec2-13-228-182-241.ap-southeast-1.compute.amazonaws.com:9080"
+    let realmPath = "/ChemKeyboard/default"
+    let username = "username@chemopin.tech"
+    let password = "qwerty987"
     
 }
 
 extension RealmService {
     
     func setUpRealm() {
-        guard
-            let resourceURL = Bundle.main.url(forResource: "ChemKeyboard",
-                                              withExtension: "realm"),
-            let realmDirectoryPath = NSSearchPathForDirectoriesInDomains(.documentDirectory,
-                                                                         .userDomainMask,
-                                                                         true).first
-        else {
-            return
-        }
-        
-        let realmPath = realmDirectoryPath + "/ChemKeyboard.realm"
-        realmURL = URL(fileURLWithPath: realmPath)
-        
-        guard let realmURL = realmURL else {
-            return
-        }
-        
-        if FileManager.default.fileExists(atPath: realmPath) {
-            do {
-                _ = try FileManager.default.replaceItemAt(realmURL,
-                                                          withItemAt: resourceURL)
-            } catch {
-                print(error.localizedDescription)
-            }
+        if isOpenAccessGranted && UserDefaults.standard.hasLaunchedBefore {
+            setUpSyncRealm()
         } else {
-            do {
-                try FileManager.default.copyItem(at: resourceURL, to: realmURL)
-            } catch {
+            UserDefaults.standard.hasLaunchedBefore = true
+            setUpPredefinedRealm()
+        }
+    }
+    
+}
+
+private extension RealmService {
+    
+    func setUpPredefinedRealm() {
+        guard let realmURL = Bundle.main.url(forResource: "predefined",
+                                             withExtension: "realm") else {
+            return
+        }
+        
+        let predefinedConfiguration = Realm.Configuration(
+            fileURL: realmURL,
+            readOnly: true,
+            objectTypes: [
+                Element.self,
+                ElementCategory.self,
+                Symbol.self,
+                SymbolGroup.self
+            ]
+        )
+        
+        Realm.Configuration.defaultConfiguration = predefinedConfiguration
+    }
+    
+    func setUpSyncRealm() {
+        let credentials = SyncCredentials.usernamePassword(username: username,
+                                                           password: password)
+        
+        let serverURL = URL(string: "http://" + server)!
+        
+        SyncUser.logIn(with: credentials, server: serverURL) { [weak self] user, error in
+            if let error = error {
                 print(error.localizedDescription)
             }
-        }
-    }
-    
-    func performMigration() {
-        guard let realmURL = realmURL else {
-            return
-        }
-        
-        Realm.Configuration.defaultConfiguration = Realm.Configuration(
-            fileURL: realmURL,
-            schemaVersion: 4,
-            migrationBlock: { migration, oldSchemaVersion in
-                if oldSchemaVersion < 4 { // the old (default) version is 0
-                    
-                }
+            
+            DispatchQueue.main.async {
+                ElementService.instance.fetchCategories()
+                SymbolService.instance.fetchGroups()
             }
-        )
+            
+//            self?.writeSyncRealmCopyToFile()
+        }
     }
     
-    func printRealmURL() {
-        print(realmURL ?? "Realm not found")
-    }
+}
+
+private extension RealmService {
     
-    func writeRealmCopyToResources() {
-        guard
-            let documentDirectory = try? FileManager.default.url(for: .documentDirectory,
-                                                                 in: .userDomainMask,
-                                                                 appropriateFor: nil,
-                                                                 create: true)
-        else {
+    func writeSyncRealmCopyToFile() {
+        guard let user = SyncUser.current else {
             return
         }
         
-        let fileURL = documentDirectory.appendingPathComponent("ChemKeyboard.realm")
+        let realmURL = URL(string: "realm://" + server + realmPath)!
         
-        do {
-            try Realm().writeCopy(toFile: fileURL)
-        } catch {
-            print(error.localizedDescription)
-        }
+        let syncedConfiguration = Realm.Configuration(
+            syncConfiguration: SyncConfiguration(user: user,
+                                                 realmURL: realmURL),
+            objectTypes: [
+                Element.self,
+                ElementCategory.self,
+                Symbol.self,
+                SymbolGroup.self
+            ]
+        )
+        
+        Realm.asyncOpen(configuration: syncedConfiguration,
+                        callbackQueue: .main,
+                        callback: { realm, error in
+            guard let realm = realm else {
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+                
+                return
+            }
+            
+            guard
+                let documentDirectory = try? FileManager.default.url(for: .documentDirectory,
+                                                                     in: .userDomainMask,
+                                                                     appropriateFor: nil,
+                                                                     create: true)
+            else {
+                return
+            }
+            
+            let fileURL = documentDirectory.appendingPathComponent("predefined.realm")
+            
+            do {
+                try realm.writeCopy(toFile: fileURL)
+            } catch {
+                print(error)
+            }
+        })
     }
-    
+
 }
