@@ -7,13 +7,13 @@ use_frameworks!
 # Pods for ChemKeyboard
 def common
     
-    pod 'Fabric', '1.7.0'
-    pod 'Crashlytics', '3.9.0'
+    pod 'Fabric', '1.7.2'
+    pod 'Crashlytics', '3.9.3'
     
     pod 'RxCocoa', '4.0.0'
     pod 'RealmSwift', '3.0.1'
     
-    pod "Device", '~> 3.0.3'
+    pod 'Device', '3.0.3'
     
 end
 
