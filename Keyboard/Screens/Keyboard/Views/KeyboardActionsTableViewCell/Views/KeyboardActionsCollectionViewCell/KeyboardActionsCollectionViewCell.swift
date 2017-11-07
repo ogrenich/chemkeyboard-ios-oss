@@ -81,7 +81,20 @@ private extension KeyboardActionsCollectionViewCell {
         }
         
         switch Device.type() {
-        case .iPhone:
+        case .iPad:
+            [firstLabel, secondLabel, thirdLabel, fourthLabel].forEach { label in
+                label?.centerYAnchor.constraint(equalTo: buttonView.centerYAnchor).isActive = true
+            }
+            firstLabel.leadingAnchor.constraint(greaterThanOrEqualTo: buttonView.leadingAnchor,
+                                                  constant: 8).isActive = true
+            secondLabel.leadingAnchor.constraint(equalTo: firstLabel.trailingAnchor, constant: 8).isActive = true
+            secondLabel.trailingAnchor.constraint(equalTo: buttonView.centerXAnchor, constant: -4).isActive = true
+            thirdLabel.leadingAnchor.constraint(equalTo: buttonView.centerXAnchor, constant: 4).isActive = true
+            fourthLabel.leadingAnchor.constraint(equalTo: thirdLabel.trailingAnchor,
+                                                      constant: 8).isActive = true
+            fourthLabel.trailingAnchor.constraint(lessThanOrEqualTo: buttonView.trailingAnchor,
+                                                       constant: -8).isActive = true
+        default:
             [firstLabel, secondLabel].forEach { label in
                 label?.topAnchor.constraint(greaterThanOrEqualTo: buttonView.topAnchor, constant: 3).isActive = true
                 label?.bottomAnchor.constraint(equalTo: buttonView.centerYAnchor, constant: -1).isActive = true
@@ -101,21 +114,6 @@ private extension KeyboardActionsCollectionViewCell {
                                                  constant: -3).isActive = true
                 label?.leadingAnchor.constraint(equalTo: buttonView.centerXAnchor, constant: 3).isActive = true
             }
-        case .iPad:
-            [firstLabel, secondLabel, thirdLabel, fourthLabel].forEach { label in
-                label?.centerYAnchor.constraint(equalTo: buttonView.centerYAnchor).isActive = true
-            }
-            firstLabel.leadingAnchor.constraint(greaterThanOrEqualTo: buttonView.leadingAnchor,
-                                                  constant: 8).isActive = true
-            secondLabel.leadingAnchor.constraint(equalTo: firstLabel.trailingAnchor, constant: 8).isActive = true
-            secondLabel.trailingAnchor.constraint(equalTo: buttonView.centerXAnchor, constant: -4).isActive = true
-            thirdLabel.leadingAnchor.constraint(equalTo: buttonView.centerXAnchor, constant: 4).isActive = true
-            fourthLabel.leadingAnchor.constraint(equalTo: thirdLabel.trailingAnchor,
-                                                      constant: 8).isActive = true
-            fourthLabel.trailingAnchor.constraint(lessThanOrEqualTo: buttonView.trailingAnchor,
-                                                       constant: -8).isActive = true
-        default:
-            break
         }
     }
     
