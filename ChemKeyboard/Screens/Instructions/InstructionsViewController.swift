@@ -47,22 +47,10 @@ private extension InstructionsViewController {
         
         goToSettingsButton.rx.tap
             .bind {
-                var preferencePath: String
-                
-                if #available(iOS 11.0, *) {
-                    preferencePath = UIApplicationOpenSettingsURLString
-                } else {
-                    preferencePath = "App-Prefs:root=General&path=Keyboard"
-                }
-                
-                if let url = URL(string: preferencePath) {
-                    if #available(iOS 10.0, *) {
-                        UIApplication.shared.open(url,
-                                                  options: [:],
-                                                  completionHandler: nil)
-                    } else {
-                        UIApplication.shared.openURL(url)
-                    }
+                if let url = URL(string: "App-Prefs:root") {
+                    UIApplication.shared.open(url,
+                                              options: [:],
+                                              completionHandler: nil)
                 }
             }
             .disposed(by: bag)
