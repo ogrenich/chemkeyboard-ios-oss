@@ -12,11 +12,12 @@ import RxCocoa
 
 class KeyboardElementsCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var symbolLabel: UILabel!
-    @IBOutlet weak var numberLabel: UILabel!
+    fileprivate let symbolLabel = UILabel()
+    fileprivate let numberLabel = UILabel()
     
     fileprivate weak var needsToShowExtendedPopUp: PublishSubject<KeyboardElementsCollectionViewCell>!
     
+    fileprivate var subviewsHierarchyHasBeenConfigured: Bool = false
     var popUpExtended: Bool = false
     
     
@@ -25,6 +26,12 @@ class KeyboardElementsCollectionViewCell: UICollectionViewCell {
             needsToShowExtendedPopUp.onNext(self)
             popUpExtended = true
         }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        layoutFrames()
     }
     
 }
@@ -37,15 +44,60 @@ extension KeyboardElementsCollectionViewCell {
         self.needsToShowExtendedPopUp = needsToShowExtendedPopUp
         
         backgroundColor = element.category?.color?.hexColor
+        cornerRadius = 4
+        shadowRadius = 4
+        shadowOffset = CGSize(width: 0, height: 1)
+        shadowOpacity = 1
         shadowColor = element.category?.shadowColor?.hexColor
         
-        symbolLabel.text = element.symbol?.value
-        numberLabel.text = element.number.value != nil ? "\(element.number.value!)" : ""
-
-        symbolLabel.textColor = element.category?.textColor?.hexColor ?? .black
-        numberLabel.textColor = (element.category?.textColor?.hexColor ?? .black).withAlphaComponent(0.5)
+        configureSymbolLabel(with: element)
+        configureNameLabel(with: element)
+        
+        if !subviewsHierarchyHasBeenConfigured {
+            configureSubviewsHierarchy()
+        }
         
         return self
+    }
+    
+}
+
+private extension KeyboardElementsCollectionViewCell {
+    
+    func configureSymbolLabel(with element: Element) {
+        symbolLabel.font = UIFont(name: "SFUIDisplay-Medium", size: 21)
+        symbolLabel.textColor = element.category?.textColor?.hexColor ?? .black
+        symbolLabel.textAlignment = .left
+        symbolLabel.text = element.symbol?.value
+        symbolLabel.sizeToFit()
+    }
+    
+    func configureNameLabel(with element: Element) {
+        numberLabel.font = UIFont(name: "SFUIDisplay-Bold", size: 10)
+        numberLabel.textColor = (element.category?.textColor?.hexColor ?? .black).withAlphaComponent(0.5)
+        numberLabel.textAlignment = .right
+        numberLabel.text = element.number.value != nil ? "\(element.number.value!)" : ""
+        numberLabel.sizeToFit()
+    }
+    
+    func configureSubviewsHierarchy() {
+        addSubview(symbolLabel)
+        addSubview(numberLabel)
+        
+        subviewsHierarchyHasBeenConfigured = true
+    }
+    
+}
+
+private extension KeyboardElementsCollectionViewCell {
+    
+    func layoutFrames() {
+        symbolLabel.anchorInCorner(.topLeft,
+                                   xPad: 6, yPad: 6,
+                                   width: symbolLabel.intrinsicContentSize.width, height: 26)
+        numberLabel.anchorInCorner(.topRight,
+                                   xPad: 6, yPad: 6,
+                                   width: numberLabel.intrinsicContentSize.width, height: 12)
     }
     
 }

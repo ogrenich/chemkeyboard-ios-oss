@@ -10,11 +10,13 @@ import UIKit
 import RxSwift
 import RxCocoa
 import Device
+import Neon
 
 @IBDesignable
 class KeyboardSymbolsTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    fileprivate let collectionView = UICollectionView(frame: .zero,
+                                                      collectionViewLayout: UICollectionViewFlowLayout())
     
     
     fileprivate weak var needsReactToSimpleButtonTouchEvent: PublishSubject<Symbol?>!
@@ -36,6 +38,12 @@ class KeyboardSymbolsTableViewCell: UITableViewCell {
         bag = DisposeBag()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        collectionView.fillSuperview()
+    }
+    
 }
 
 extension KeyboardSymbolsTableViewCell {
@@ -48,7 +56,13 @@ extension KeyboardSymbolsTableViewCell {
         self.needsReactToSimpleButtonTouchEvent = needsReactToSimpleButtonTouchEvent
         self.needsPlayInputClick = needsPlayInputClick
         
+        backgroundColor = .clear
+        
         configureCollectionView()
+        
+        if collectionView.superview == nil {
+            addSubview(collectionView)
+        }
         
         bindSelf()
         bindViewModel()
@@ -62,6 +76,25 @@ private extension KeyboardSymbolsTableViewCell {
     
     func configureCollectionView() {
         collectionView.register(KeyboardSymbolsCollectionViewCell.self)
+        
+        guard let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
+            return
+        }
+        
+        collectionView.delegate = self
+        
+        layout.scrollDirection = .vertical
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.isScrollEnabled = false
+        collectionView.isPagingEnabled = false
+        collectionView.bounces = false
+        collectionView.bouncesZoom = false
+        
+        collectionView.backgroundColor = .clear
+        
+        layout.minimumInteritemSpacing = 1
+        layout.minimumLineSpacing = 1
     }
     
 }

@@ -10,11 +10,13 @@ import UIKit
 import RxSwift
 import RxCocoa
 import Device
+import Neon
 
 @IBDesignable
 class KeyboardCategoriesTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    fileprivate let collectionView = UICollectionView(frame: .zero,
+                                                      collectionViewLayout: UICollectionViewFlowLayout())
     
     
     fileprivate weak var needsScrollElementsCollectionViewToCategoryAt: PublishSubject<Int>!
@@ -31,6 +33,12 @@ class KeyboardCategoriesTableViewCell: UITableViewCell {
         bag = DisposeBag()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        collectionView.fillSuperview()
+    }
+    
 }
 
 extension KeyboardCategoriesTableViewCell {
@@ -43,7 +51,13 @@ extension KeyboardCategoriesTableViewCell {
         self.needsScrollElementsCollectionViewToCategoryAt = needsScrollElementsCollectionViewToCategoryAt
         self.needsPlayInputClick = needsPlayInputClick
         
+        backgroundColor = .clear
+        
         configureCollectionView()
+        
+        if collectionView.superview == nil {
+            addSubview(collectionView)
+        }
         
         bindSelf()
         bindToViewModel()
@@ -59,9 +73,23 @@ private extension KeyboardCategoriesTableViewCell {
     func configureCollectionView() {
         collectionView.register(KeyboardCategoriesCollectionViewCell.self)
         
-        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.estimatedItemSize = UICollectionViewFlowLayoutAutomaticSize
+        guard let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
+            return
         }
+        
+        collectionView.delegate = self
+        
+        layout.scrollDirection = .horizontal
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.isPagingEnabled = false
+        collectionView.alwaysBounceHorizontal = true
+        
+        collectionView.backgroundColor = .clear
+        
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
+        layout.estimatedItemSize = CGSize(width: 100, height: 36)
     }
     
 }
@@ -130,11 +158,5 @@ extension KeyboardCategoriesTableViewCell: UICollectionViewDelegateFlowLayout {
         
         return UIEdgeInsets(top: 0, left: sideInset, bottom: 0, right: sideInset)
     }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: Device.isPad() ? 62 : 50, height: 36)
-    }
-    
+
 }

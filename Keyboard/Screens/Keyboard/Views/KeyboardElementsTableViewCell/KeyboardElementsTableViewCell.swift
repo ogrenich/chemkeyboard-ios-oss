@@ -9,11 +9,13 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Neon
 
 @IBDesignable
 class KeyboardElementsTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    fileprivate let collectionView = UICollectionView(frame: .zero,
+                                                      collectionViewLayout: KeyboardElementsCollectionViewLayout())
     
     
     fileprivate weak var needsReactToSimpleButtonTouchEvent: PublishSubject<Symbol?>!
@@ -62,6 +64,12 @@ class KeyboardElementsTableViewCell: UITableViewCell {
         bag = DisposeBag()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        collectionView.fillSuperview()
+    }
+    
 }
 
 extension KeyboardElementsTableViewCell {
@@ -76,7 +84,13 @@ extension KeyboardElementsTableViewCell {
         self.needsScrollElementsCollectionViewToCategoryAt = needsScrollElementsCollectionViewToCategoryAt
         self.needsPlayInputClick = needsPlayInputClick
         
+        backgroundColor = .clear
+        
         configureCollectionView()
+        
+        if collectionView.superview == nil {
+            addSubview(collectionView)
+        }
         
         bindSelf()
         bindToViewModel()
@@ -91,6 +105,15 @@ private extension KeyboardElementsTableViewCell {
     
     func configureCollectionView() {
         collectionView.register(KeyboardElementsCollectionViewCell.self)
+        
+        collectionView.backgroundColor = .clear
+        collectionView.clipsToBounds = false
+        collectionView.dataSource = self
+        
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.isPagingEnabled = false
+        collectionView.alwaysBounceHorizontal = true
     }
     
 }

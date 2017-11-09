@@ -8,17 +8,24 @@
 
 import UIKit
 import Device
+import Neon
 
 class KeyboardActionsCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var buttonView: UIView!
-    @IBOutlet weak var firstLabel: UILabel!
-    @IBOutlet weak var secondLabel: UILabel!
-    @IBOutlet weak var thirdLabel: UILabel!
-    @IBOutlet weak var fourthLabel: UILabel!
+    fileprivate let buttonView = UIView()
+    fileprivate let firstLabel = UILabel()
+    fileprivate let secondLabel = UILabel()
+    fileprivate let thirdLabel = UILabel()
+    fileprivate let fourthLabel = UILabel()
     
+    fileprivate let accessoryView = UIView()
+    fileprivate let leftView = UIView()
+    fileprivate let rightView = UIView()
     
-    fileprivate var accessoryView: UIView!
+    fileprivate let topView = UIView()
+    fileprivate let bottomView = UIView()
+    
+    fileprivate var subviewsHierarchyHasBeenConfigured: Bool = false
     
     
     override var isSelected: Bool {
@@ -28,8 +35,43 @@ class KeyboardActionsCollectionViewCell: UICollectionViewCell {
             buttonView.roundCorners(corners: isSelected ? [.bottomLeft, .bottomRight] : .allCorners,
                                     radius: 8)
             
-            accessoryView?.isHidden = !isSelected
+            accessoryView.isHidden = !isSelected
         }
+    }
+    
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        layoutFrames()
+    }
+    
+}
+
+extension KeyboardActionsCollectionViewCell {
+    
+    @discardableResult
+    func configure(with group: SymbolGroup,
+                   selected: Bool) -> KeyboardActionsCollectionViewCell {
+        clipsToBounds = false
+        backgroundColor = .clear
+        
+        buttonView.backgroundColor = #colorLiteral(red: 0.9568627451, green: 0.9568627451, blue: 0.9568627451, alpha: 1)
+        topView.backgroundColor = .clear
+        bottomView.backgroundColor = .clear
+        
+        configureLabels(with: group)
+        configureAccessoryView()
+        
+        if !subviewsHierarchyHasBeenConfigured {
+            configureSubviewsHierarchy()
+        }
+        
+        layoutFrames()
+        
+        isSelected = selected
+        
+        return self
     }
     
 }
@@ -37,7 +79,13 @@ class KeyboardActionsCollectionViewCell: UICollectionViewCell {
 private extension KeyboardActionsCollectionViewCell {
     
     func configureLabels(with group: SymbolGroup) {
-        setUpConstraints()
+        [firstLabel, thirdLabel, secondLabel, fourthLabel].forEach { label in
+            label.font = UIFont(name: "SFUIDisplay-Bold", size: 12)
+            label.backgroundColor = .clear
+            label.alpha = 0.35
+            label.adjustsFontSizeToFitWidth = true
+            label.textAlignment = .center
+        }
         
         switch group.name {
         case "Digits"?:
@@ -75,105 +123,65 @@ private extension KeyboardActionsCollectionViewCell {
         }
     }
     
-    func setUpConstraints() {
-        [firstLabel, thirdLabel, secondLabel, fourthLabel].forEach { label in
-            label?.translatesAutoresizingMaskIntoConstraints = false
-        }
-        
-        switch Device.type() {
-        case .iPad:
-            [firstLabel, secondLabel, thirdLabel, fourthLabel].forEach { label in
-                label?.centerYAnchor.constraint(equalTo: buttonView.centerYAnchor).isActive = true
-            }
-            firstLabel.leadingAnchor.constraint(greaterThanOrEqualTo: buttonView.leadingAnchor,
-                                                  constant: 8).isActive = true
-            secondLabel.leadingAnchor.constraint(equalTo: firstLabel.trailingAnchor, constant: 8).isActive = true
-            secondLabel.trailingAnchor.constraint(equalTo: buttonView.centerXAnchor, constant: -4).isActive = true
-            thirdLabel.leadingAnchor.constraint(equalTo: buttonView.centerXAnchor, constant: 4).isActive = true
-            fourthLabel.leadingAnchor.constraint(equalTo: thirdLabel.trailingAnchor,
-                                                      constant: 8).isActive = true
-            fourthLabel.trailingAnchor.constraint(lessThanOrEqualTo: buttonView.trailingAnchor,
-                                                       constant: -8).isActive = true
-        default:
-            [firstLabel, secondLabel].forEach { label in
-                label?.topAnchor.constraint(greaterThanOrEqualTo: buttonView.topAnchor, constant: 3).isActive = true
-                label?.bottomAnchor.constraint(equalTo: buttonView.centerYAnchor, constant: -1).isActive = true
-            }
-            [thirdLabel, fourthLabel].forEach { label in
-                label?.bottomAnchor.constraint(lessThanOrEqualTo: buttonView.bottomAnchor,
-                                               constant: -3).isActive = true
-                label?.topAnchor.constraint(equalTo: buttonView.centerYAnchor, constant: 1).isActive = true
-            }
-            [firstLabel, thirdLabel].forEach { label in
-                label?.leadingAnchor.constraint(greaterThanOrEqualTo: buttonView.leadingAnchor,
-                                                constant: 3).isActive = true
-                label?.trailingAnchor.constraint(equalTo: buttonView.centerXAnchor, constant: -3).isActive = true
-            }
-            [secondLabel, fourthLabel].forEach { label in
-                label?.trailingAnchor.constraint(lessThanOrEqualTo: buttonView.trailingAnchor,
-                                                 constant: -3).isActive = true
-                label?.leadingAnchor.constraint(equalTo: buttonView.centerXAnchor, constant: 3).isActive = true
-            }
-        }
-    }
-    
-}
-
-extension KeyboardActionsCollectionViewCell {
-    
-    @discardableResult
-    func configure(with group: SymbolGroup,
-                   selected: Bool) -> KeyboardActionsCollectionViewCell {
-        configureLabels(with: group)
-        
-        if accessoryView == nil {
-            configureAccessoryView()
-        }
-        
-        isSelected = selected
-        
-        return self
-    }
-    
-}
-
-extension KeyboardActionsCollectionViewCell {
-    
     func configureAccessoryView() {
-        let collectionViewTopInset: CGFloat = 6
-        let cellPadding: CGFloat = 8
-        
-        accessoryView = UIView()
         accessoryView.clipsToBounds = true
         accessoryView.backgroundColor = buttonView.backgroundColor
-        
-        let leftView = UIView()
-        let rightView = UIView()
-        
         [leftView, rightView].forEach { view in
             view.backgroundColor = .white
             view.cornerRadius = 8
-            
-            accessoryView.addSubview(view)
-            
-            view.translatesAutoresizingMaskIntoConstraints = false
-            view.topAnchor.constraint(equalTo: accessoryView.topAnchor).isActive = true
-            view.centerYAnchor.constraint(equalTo: accessoryView.bottomAnchor).isActive = true
-            view.widthAnchor.constraint(equalToConstant: 2 * cellPadding).isActive = true
+        }
+    }
+    
+    func configureSubviewsHierarchy() {
+        addSubview(buttonView)
+        if Device.isPad() {
+            [firstLabel, thirdLabel, secondLabel, fourthLabel].forEach { label in
+                buttonView.addSubview(label)
+            }
+        } else {
+            topView.addSubview(firstLabel)
+            topView.addSubview(secondLabel)
+            bottomView.addSubview(thirdLabel)
+            bottomView.addSubview(fourthLabel)
+            buttonView.addSubview(topView)
+            buttonView.addSubview(bottomView)
         }
         
-        leftView.centerXAnchor.constraint(equalTo: accessoryView.leadingAnchor).isActive = true
-        rightView.centerXAnchor.constraint(equalTo: accessoryView.trailingAnchor).isActive = true
-        
         addSubview(accessoryView)
-        accessoryView.translatesAutoresizingMaskIntoConstraints = false
-        accessoryView.heightAnchor.constraint(equalToConstant: collectionViewTopInset).isActive = true
+        [leftView, rightView].forEach { view in
+            accessoryView.addSubview(view)
+        }
         
-        accessoryView.widthAnchor.constraint(equalTo: widthAnchor,
-                                             constant: 2 * cellPadding).isActive = true
+        subviewsHierarchyHasBeenConfigured = true
+    }
+    
+}
+
+private extension KeyboardActionsCollectionViewCell {
+    
+    func layoutFrames() {
+        buttonView.fillSuperview(left: 0, right: 0, top: 0, bottom: 0)
         
-        accessoryView.bottomAnchor.constraint(equalTo: topAnchor).isActive = true
-        accessoryView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        switch Device.type() {
+        case .iPad:
+            buttonView.groupAndFill(group: .horizontal,
+                                    views: [firstLabel, secondLabel, thirdLabel, fourthLabel],
+                                    padding: 8)
+        default:
+            if UIScreen.main.bounds.width > UIScreen.main.bounds.height {
+                topView.fillSuperview(left: 6, right: 6, top: 2, bottom: 0.5 * height)
+                bottomView.fillSuperview(left: 6, right: 6, top: 0.5 * height, bottom: 2)
+            } else {
+                topView.fillSuperview(left: 3, right: 3, top: 2, bottom: 0.5 * height)
+                bottomView.fillSuperview(left: 3, right: 3, top: 0.5 * height, bottom: 2)
+            }
+            topView.groupAndFill(group: .horizontal, views: [firstLabel, secondLabel], padding: 1)
+            bottomView.groupAndFill(group: .horizontal, views: [thirdLabel, fourthLabel], padding: 1)
+        }
+        
+        accessoryView.fillSuperview(left: -8, right: -8, top: -6, bottom: height)
+        leftView.fillSuperview(left: -8, right: accessoryView.width - 8, top: 0, bottom: -6)
+        rightView.fillSuperview(left: accessoryView.width - 8, right: -8, top: 0, bottom: -6)
     }
     
 }

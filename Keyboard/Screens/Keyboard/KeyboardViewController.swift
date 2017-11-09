@@ -283,7 +283,7 @@ extension KeyboardViewController: UITableViewDataSource {
                                                 needsReactToDeleteButtonTouchEvent: needsReactToDeleteButtonTouchEvent,
                                                 needsPlayInputClick)
 
-            configuredCell.switchButton?.addTarget(self,
+            configuredCell.switchButton.addTarget(self,
                                                    action: #selector(handleInputModeList(from:with:)),
                                                    for: .allTouchEvents)
             return configuredCell

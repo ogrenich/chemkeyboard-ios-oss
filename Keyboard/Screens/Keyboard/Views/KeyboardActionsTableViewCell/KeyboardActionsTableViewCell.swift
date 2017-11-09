@@ -10,13 +10,15 @@ import UIKit
 import RxSwift
 import RxCocoa
 import Device
+import Neon
 
 @IBDesignable
 class KeyboardActionsTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var switchButton: UIButton!
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var deleteButton: UIButton!
+    let switchButton = UIButton()
+    fileprivate let collectionView = UICollectionView(frame: .zero,
+                                                      collectionViewLayout: UICollectionViewFlowLayout())
+    fileprivate let deleteButton = UIButton()
     
     
     fileprivate weak var needsReactToDeleteButtonTouchEvent: PublishSubject<Void>!
@@ -28,11 +30,19 @@ class KeyboardActionsTableViewCell: UITableViewCell {
     
     fileprivate weak var timer: Timer?
     
+    fileprivate var subviewsHierarchyHasBeenConfigured: Bool = false
+    
     
     override func prepareForReuse() {
         super.prepareForReuse()
         
         bag = DisposeBag()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        layoutFrames()
     }
     
     deinit {
@@ -51,7 +61,15 @@ extension KeyboardActionsTableViewCell {
         self.needsReactToDeleteButtonTouchEvent = needsReactToDeleteButtonTouchEvent
         self.needsPlayInputClick = needsPlayInputClick
         
+        backgroundColor = .clear
+        
         configureCollectionView()
+        configureSwitchButton()
+        configureDeleteButton()
+        
+        if !subviewsHierarchyHasBeenConfigured {
+            configureSubviewsHierarchy()
+        }
         
         addGestureRecognizersOnDeleteButton()
         
@@ -68,6 +86,43 @@ private extension KeyboardActionsTableViewCell {
     
     func configureCollectionView() {
         collectionView.register(KeyboardActionsCollectionViewCell.self)
+        
+        guard let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
+            return
+        }
+        
+        collectionView.delegate = self
+        
+        layout.scrollDirection = .vertical
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.isScrollEnabled = false
+        collectionView.isPagingEnabled = false
+        collectionView.bounces = false
+        collectionView.bouncesZoom = false
+        
+        collectionView.backgroundColor = .clear
+        
+        layout.minimumInteritemSpacing = 6
+        layout.minimumLineSpacing = 0
+    }
+    
+    func configureSwitchButton() {
+        switchButton.setImage(UIImage(named: "Switch"), for: .normal)
+        switchButton.imageEdgeInsets = UIEdgeInsets(top: 2, left: 6, bottom: 0, right: 0)
+    }
+    
+    func configureDeleteButton() {
+        deleteButton.setImage(UIImage(named: "Delete"), for: .normal)
+        deleteButton.imageEdgeInsets = UIEdgeInsets(top: 2, left: 0, bottom: 0, right: 4)
+    }
+    
+    func configureSubviewsHierarchy() {
+        addSubview(switchButton)
+        addSubview(deleteButton)
+        addSubview(collectionView)
+        
+        subviewsHierarchyHasBeenConfigured = true
     }
     
 }
@@ -121,6 +176,19 @@ private extension KeyboardActionsTableViewCell {
     
 }
 
+private extension KeyboardActionsTableViewCell {
+    
+    func layoutFrames() {
+        switchButton.fillSuperview(left: 0, right: width - 45, top: 0, bottom: 0)
+        deleteButton.fillSuperview(left: width - 44, right: 0, top: 0, bottom: 0)
+        collectionView.alignBetweenHorizontal(align: .toTheRightCentered,
+                                              primaryView: switchButton,
+                                              secondaryView: deleteButton,
+                                              padding: 0, height: height)
+    }
+    
+}
+
 extension KeyboardActionsTableViewCell: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -140,7 +208,6 @@ extension KeyboardActionsTableViewCell: UICollectionViewDelegateFlowLayout {
         let horizontalInsets: CGFloat = 16 + (Device.isPad() &&
             (UIScreen.main.bounds.width > UIScreen.main.bounds.height) ? 260 : 0)
         let width = (collectionView.frame.size.width - 5 * layout.minimumInteritemSpacing - horizontalInsets) / 6
-        
         return CGSize(width: width, height: 44)
     }
     
@@ -199,7 +266,7 @@ extension KeyboardActionsTableViewCell {
             guard let `self` = self else {
                 return
             }
-        
+            
             self.collectionView.reloadData()
             self.collectionView.setNeedsLayout()
             self.collectionView.layoutIfNeeded()
