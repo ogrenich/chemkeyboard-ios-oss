@@ -12,8 +12,8 @@ import RxCocoa
 
 class KeyboardElementsCollectionViewCell: UICollectionViewCell {
     
-    fileprivate let symbolLabel = UILabel()
-    fileprivate let numberLabel = UILabel()
+    fileprivate lazy var symbolLabel: UILabel = UILabel()
+    fileprivate lazy var numberLabel: UILabel = UILabel()
     
     fileprivate weak var needsToShowExtendedPopUp: PublishSubject<KeyboardElementsCollectionViewCell>!
     

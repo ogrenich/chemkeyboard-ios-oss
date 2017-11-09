@@ -12,8 +12,8 @@ import Neon
 
 class KeyboardCategoriesCollectionViewCell: UICollectionViewCell {
     
-    fileprivate let selectedBackgroundImageView = UIImageView()
-    fileprivate let nameLabel = UILabel()
+    fileprivate lazy var selectedBackgroundImageView: UIImageView = UIImageView()
+    fileprivate lazy var nameLabel: UILabel = UILabel()
     
     fileprivate var subviewsHierarchyHasBeenConfigured: Bool = false
     

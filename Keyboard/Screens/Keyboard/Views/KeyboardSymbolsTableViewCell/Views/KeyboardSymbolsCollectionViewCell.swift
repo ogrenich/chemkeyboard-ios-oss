@@ -13,7 +13,7 @@ import Neon
 
 class KeyboardSymbolsCollectionViewCell: UICollectionViewCell {
     
-    fileprivate let symbolLabel = UILabel()
+    fileprivate lazy var symbolLabel: UILabel = UILabel()
     
     
     fileprivate weak var cellTouchDown: PublishSubject<KeyboardSymbolsCollectionViewCell>?

@@ -12,18 +12,18 @@ import Neon
 
 class KeyboardActionsCollectionViewCell: UICollectionViewCell {
     
-    fileprivate let buttonView = UIView()
-    fileprivate let firstLabel = UILabel()
-    fileprivate let secondLabel = UILabel()
-    fileprivate let thirdLabel = UILabel()
-    fileprivate let fourthLabel = UILabel()
+    fileprivate lazy var buttonView: UIView = UIView()
+    fileprivate lazy var firstLabel: UILabel = UILabel()
+    fileprivate lazy var secondLabel: UILabel = UILabel()
+    fileprivate lazy var thirdLabel: UILabel = UILabel()
+    fileprivate lazy var fourthLabel: UILabel = UILabel()
     
-    fileprivate let accessoryView = UIView()
-    fileprivate let leftView = UIView()
-    fileprivate let rightView = UIView()
+    fileprivate lazy var accessoryView: UIView = UIView()
+    fileprivate lazy var leftView: UIView = UIView()
+    fileprivate lazy var rightView: UIView = UIView()
     
-    fileprivate let topView = UIView()
-    fileprivate let bottomView = UIView()
+    fileprivate lazy var topView: UIView = UIView()
+    fileprivate lazy var bottomView: UIView = UIView()
     
     fileprivate var subviewsHierarchyHasBeenConfigured: Bool = false
     

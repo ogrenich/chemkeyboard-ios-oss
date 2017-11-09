@@ -14,8 +14,9 @@ import Neon
 @IBDesignable
 class KeyboardElementsTableViewCell: UITableViewCell {
     
-    fileprivate let collectionView = UICollectionView(frame: .zero,
-                                                      collectionViewLayout: KeyboardElementsCollectionViewLayout())
+    fileprivate lazy var collectionView: UICollectionView = UICollectionView(frame: .zero,
+                                                                             collectionViewLayout:
+                                                                             KeyboardElementsCollectionViewLayout())
     
     
     fileprivate weak var needsReactToSimpleButtonTouchEvent: PublishSubject<Symbol?>!

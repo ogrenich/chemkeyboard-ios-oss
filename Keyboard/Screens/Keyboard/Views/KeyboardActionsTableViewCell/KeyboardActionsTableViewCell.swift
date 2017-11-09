@@ -15,10 +15,11 @@ import Neon
 @IBDesignable
 class KeyboardActionsTableViewCell: UITableViewCell {
     
-    let switchButton = UIButton()
-    fileprivate let collectionView = UICollectionView(frame: .zero,
-                                                      collectionViewLayout: UICollectionViewFlowLayout())
-    fileprivate let deleteButton = UIButton()
+    lazy var switchButton: UIButton = UIButton()
+    fileprivate lazy var collectionView: UICollectionView = UICollectionView(frame: .zero,
+                                                                             collectionViewLayout:
+                                                                             UICollectionViewFlowLayout())
+    fileprivate lazy var deleteButton: UIButton = UIButton()
     
     
     fileprivate weak var needsReactToDeleteButtonTouchEvent: PublishSubject<Void>!

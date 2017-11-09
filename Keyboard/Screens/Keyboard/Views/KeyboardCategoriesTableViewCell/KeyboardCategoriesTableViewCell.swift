@@ -15,8 +15,9 @@ import Neon
 @IBDesignable
 class KeyboardCategoriesTableViewCell: UITableViewCell {
     
-    fileprivate let collectionView = UICollectionView(frame: .zero,
-                                                      collectionViewLayout: UICollectionViewFlowLayout())
+    fileprivate lazy var collectionView: UICollectionView = UICollectionView(frame: .zero,
+                                                                             collectionViewLayout:
+                                                                             UICollectionViewFlowLayout())
     
     
     fileprivate weak var needsScrollElementsCollectionViewToCategoryAt: PublishSubject<Int>!
