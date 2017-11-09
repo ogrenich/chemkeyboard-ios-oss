@@ -7,10 +7,18 @@
 //
 
 import UIKit
+import Neon
 
 class SimpleSymbolPopUp: UIView {
 
     fileprivate let symbolLabel: UILabel = UILabel()
+    
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        symbolLabel.anchorAndFillEdge(.top, xPad: 6, yPad: 6, otherSize: 32)
+    }
 
 }
 
@@ -39,12 +47,6 @@ private extension SimpleSymbolPopUp {
         symbolLabel.textAlignment = .center
         
         addSubview(symbolLabel)
-        
-        symbolLabel.translatesAutoresizingMaskIntoConstraints = false
-        symbolLabel.heightAnchor.constraint(equalToConstant: 32).isActive = true
-        symbolLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 6).isActive = true
-        symbolLabel.topAnchor.constraint(equalTo: topAnchor, constant: 6).isActive = true
-        symbolLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -6).isActive = true
     }
     
 }

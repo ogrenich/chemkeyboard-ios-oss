@@ -15,6 +15,8 @@ def common
     
     pod 'Device', '3.0.3'
     
+    pod 'Neon', '0.4.0'
+    
 end
 
 target 'ChemKeyboard' do

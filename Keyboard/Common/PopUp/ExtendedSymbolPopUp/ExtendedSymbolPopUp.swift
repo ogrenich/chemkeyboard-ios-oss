@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Neon
 
 extension ExtendedSymbolPopUp {
     
@@ -23,12 +24,20 @@ class ExtendedSymbolPopUp: UIView {
     fileprivate let bottomIndexLabel: UILabel = UILabel()
     
     var alignment: UIView.Alignment!
+    
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        layoutFrames()
+    }
 
 }
 
 extension ExtendedSymbolPopUp {
     
-    func configure(with symbol: Symbol, _ cellWidth: CGFloat, alignment: UIView.Alignment) -> ExtendedSymbolPopUp {
+    func configure(with symbol: Symbol, _ cellWidth: CGFloat,
+                   alignment: UIView.Alignment) -> ExtendedSymbolPopUp {
         self.alignment = alignment
         
         backgroundColor = .white
@@ -77,38 +86,31 @@ private extension ExtendedSymbolPopUp {
         
         [symbolLabel, topIndexLabel, bottomIndexLabel].forEach { label in
             label.text = symbol.value ?? ""
-            label.adjustsFontSizeToFitWidth = true
+            label.sizeToFit()
             label.textAlignment = .center
             
-            label.translatesAutoresizingMaskIntoConstraints = false
             addSubview(label)
         }
         
-        symbolLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 18).isActive = true
-        symbolLabel.heightAnchor.constraint(equalToConstant: 32).isActive = true
+    }
+    
+}
+
+private extension ExtendedSymbolPopUp {
+    
+    func layoutFrames() {
+        let symbolCorner: Corner = (alignment == .left) ? .topRight : .topLeft
+        let indexCorner: Corner = (alignment == .left) ? .topLeft : .topRight
         
-        [topIndexLabel, bottomIndexLabel].forEach { label in
-            label.widthAnchor.constraint(greaterThanOrEqualToConstant: 12).isActive = true
-            label.heightAnchor.constraint(equalToConstant: 18).isActive = true
-        }
+        let symbolWidth = max(symbolLabel.width, width - 28)
+        let indexWidth = max(topIndexLabel.width, 12)
         
-        symbolLabel.topAnchor.constraint(equalTo: topAnchor, constant: 6).isActive = true
-        topIndexLabel.topAnchor.constraint(equalTo: topAnchor, constant: 4).isActive = true
-        bottomIndexLabel.topAnchor.constraint(equalTo: topIndexLabel.bottomAnchor).isActive = true
-        topIndexLabel.widthAnchor.constraint(equalTo: bottomIndexLabel.widthAnchor).isActive = true
-        
-        switch alignment {
-        case .left:
-            symbolLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -6).isActive = true
-            topIndexLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 4).isActive = true
-            bottomIndexLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 4).isActive = true
-            symbolLabel.leadingAnchor.constraint(equalTo: topIndexLabel.trailingAnchor, constant: 4).isActive = true
-        default:
-            symbolLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 6).isActive = true
-            topIndexLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -4).isActive = true
-            bottomIndexLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -4).isActive = true
-            topIndexLabel.leadingAnchor.constraint(equalTo: symbolLabel.trailingAnchor, constant: 4).isActive = true
-        }
+        symbolLabel.anchorInCorner(symbolCorner, xPad: 6, yPad: 6,
+                                   width: symbolWidth, height: 32)
+        topIndexLabel.anchorInCorner(indexCorner, xPad: 4, yPad: 4,
+                                     width: indexWidth, height: 18)
+        bottomIndexLabel.anchorInCorner(indexCorner, xPad: 4, yPad: 4 + 18,
+                                        width: indexWidth, height: 18)
     }
     
 }

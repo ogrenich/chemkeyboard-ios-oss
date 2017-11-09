@@ -7,11 +7,19 @@
 //
 
 import UIKit
+import Neon
 
 class SimpleElementPopUp: UIView {
 
     fileprivate let symbolLabel: UILabel = UILabel()
     fileprivate let numberLabel: UILabel = UILabel()
+    
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        layoutFrames()
+    }
 
 }
 
@@ -32,31 +40,33 @@ extension SimpleElementPopUp {
 private extension SimpleElementPopUp {
     
     func setUpLabels(with element: Element) {
-        
         symbolLabel.font = UIFont(name: "SFUIDisplay-Medium", size: 21)
         numberLabel.font = UIFont(name: "SFUIDisplay-Bold", size: 10)
         
-        symbolLabel.text = element.symbol?.value ?? ""
-        numberLabel.text = element.number.value != nil ? "\(element.number.value!)" : ""
         symbolLabel.textColor = element.category?.textColor?.hexColor ?? .black
         numberLabel.textColor = (element.category?.textColor?.hexColor ?? .black).withAlphaComponent(0.5)
         
-        [symbolLabel, numberLabel].forEach { label in
-            label.adjustsFontSizeToFitWidth = true
-            
-            addSubview(label)
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.topAnchor.constraint(equalTo: topAnchor, constant: 3).isActive = true
-        }
+        symbolLabel.text = element.symbol?.value ?? ""
+        numberLabel.text = element.number.value != nil ? "\(element.number.value!)" : ""
         
-        symbolLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
-        numberLabel.heightAnchor.constraint(equalToConstant: 12).isActive = true
+        symbolLabel.sizeToFit()
+        numberLabel.sizeToFit()
         
-        symbolLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 6).isActive = true
-        numberLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -6).isActive = true
-        
-        numberLabel.leadingAnchor.constraint(greaterThanOrEqualTo: symbolLabel.trailingAnchor,
-                                             constant: 2).isActive = true
+        addSubview(symbolLabel)
+        addSubview(numberLabel)
+    }
+    
+}
+
+private extension SimpleElementPopUp {
+    
+    func layoutFrames() {
+        symbolLabel.anchorInCorner(.topLeft,
+                                   xPad: 6, yPad: 3,
+                                   width: symbolLabel.width, height: 25)
+        numberLabel.anchorInCorner(.topRight,
+                                   xPad: 6, yPad: 3,
+                                   width: numberLabel.width, height: 12)
     }
     
 }

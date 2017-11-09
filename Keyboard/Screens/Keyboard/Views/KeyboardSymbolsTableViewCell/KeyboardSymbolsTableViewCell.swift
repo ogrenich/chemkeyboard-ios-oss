@@ -10,11 +10,14 @@ import UIKit
 import RxSwift
 import RxCocoa
 import Device
+import Neon
 
 @IBDesignable
 class KeyboardSymbolsTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    fileprivate lazy var collectionView: UICollectionView = UICollectionView(frame: .zero,
+                                                                             collectionViewLayout:
+                                                                             UICollectionViewFlowLayout())
     
     
     fileprivate weak var needsReactToSimpleButtonTouchEvent: PublishSubject<Symbol?>!
@@ -36,6 +39,12 @@ class KeyboardSymbolsTableViewCell: UITableViewCell {
         bag = DisposeBag()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        collectionView.fillSuperview()
+    }
+    
 }
 
 extension KeyboardSymbolsTableViewCell {
@@ -47,6 +56,8 @@ extension KeyboardSymbolsTableViewCell {
         self.viewModel = viewModel
         self.needsReactToSimpleButtonTouchEvent = needsReactToSimpleButtonTouchEvent
         self.needsPlayInputClick = needsPlayInputClick
+        
+        setupUI()
         
         configureCollectionView()
         
@@ -60,8 +71,39 @@ extension KeyboardSymbolsTableViewCell {
 
 private extension KeyboardSymbolsTableViewCell {
     
+    func setupUI() {
+        backgroundColor = .clear
+    }
+    
+}
+
+private extension KeyboardSymbolsTableViewCell {
+    
     func configureCollectionView() {
+        if collectionView.superview == nil {
+            addSubview(collectionView)
+        }
+        
         collectionView.register(KeyboardSymbolsCollectionViewCell.self)
+        
+        guard let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
+            return
+        }
+        
+        collectionView.delegate = self
+        
+        layout.scrollDirection = .vertical
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.isScrollEnabled = false
+        collectionView.isPagingEnabled = false
+        collectionView.bounces = false
+        collectionView.bouncesZoom = false
+        
+        collectionView.backgroundColor = .clear
+        
+        layout.minimumInteritemSpacing = 1
+        layout.minimumLineSpacing = 1
     }
     
 }

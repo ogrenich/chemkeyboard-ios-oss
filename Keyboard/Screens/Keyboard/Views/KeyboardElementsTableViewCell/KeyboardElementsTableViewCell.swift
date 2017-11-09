@@ -9,11 +9,14 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Neon
 
 @IBDesignable
 class KeyboardElementsTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    fileprivate lazy var collectionView: UICollectionView = UICollectionView(frame: .zero,
+                                                                             collectionViewLayout:
+                                                                             KeyboardElementsCollectionViewLayout())
     
     
     fileprivate weak var needsReactToSimpleButtonTouchEvent: PublishSubject<Symbol?>!
@@ -62,6 +65,12 @@ class KeyboardElementsTableViewCell: UITableViewCell {
         bag = DisposeBag()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        collectionView.fillSuperview()
+    }
+    
 }
 
 extension KeyboardElementsTableViewCell {
@@ -76,6 +85,8 @@ extension KeyboardElementsTableViewCell {
         self.needsScrollElementsCollectionViewToCategoryAt = needsScrollElementsCollectionViewToCategoryAt
         self.needsPlayInputClick = needsPlayInputClick
         
+        setupUI()
+        
         configureCollectionView()
         
         bindSelf()
@@ -89,8 +100,29 @@ extension KeyboardElementsTableViewCell {
 
 private extension KeyboardElementsTableViewCell {
     
+    func setupUI() {
+        backgroundColor = .clear
+    }
+    
+}
+
+private extension KeyboardElementsTableViewCell {
+    
     func configureCollectionView() {
+        if collectionView.superview == nil {
+            addSubview(collectionView)
+        }
+        
         collectionView.register(KeyboardElementsCollectionViewCell.self)
+        
+        collectionView.backgroundColor = .clear
+        collectionView.clipsToBounds = false
+        collectionView.dataSource = self
+        
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.isPagingEnabled = false
+        collectionView.alwaysBounceHorizontal = true
     }
     
 }
