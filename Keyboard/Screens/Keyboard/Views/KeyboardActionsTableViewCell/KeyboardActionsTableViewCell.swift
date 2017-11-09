@@ -93,7 +93,7 @@ private extension KeyboardActionsTableViewCell {
         
         collectionView.delegate = self
         
-        layout.scrollDirection = .vertical
+        layout.scrollDirection = .horizontal
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.isScrollEnabled = false
@@ -103,8 +103,8 @@ private extension KeyboardActionsTableViewCell {
         
         collectionView.backgroundColor = .clear
         
-        layout.minimumInteritemSpacing = 6
-        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 6
     }
     
     func configureSwitchButton() {
@@ -207,7 +207,7 @@ extension KeyboardActionsTableViewCell: UICollectionViewDelegateFlowLayout {
         
         let horizontalInsets: CGFloat = 16 + (Device.isPad() &&
             (UIScreen.main.bounds.width > UIScreen.main.bounds.height) ? 260 : 0)
-        let width = (collectionView.frame.size.width - 5 * layout.minimumInteritemSpacing - horizontalInsets) / 6
+        let width = (collectionView.frame.size.width - 5 * layout.minimumLineSpacing - horizontalInsets) / 6
         return CGSize(width: width, height: 44)
     }
     
