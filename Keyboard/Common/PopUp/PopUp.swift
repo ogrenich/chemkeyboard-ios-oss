@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Neon
 
 extension PopUp {
     
@@ -121,11 +122,7 @@ private extension PopUp {
     
     func addConstraints() {
         popUpView.addSubview(contentView)
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.topAnchor.constraint(equalTo: popUpView.topAnchor).isActive = true
-        contentView.leadingAnchor.constraint(equalTo: popUpView.leadingAnchor).isActive = true
-        contentView.bottomAnchor.constraint(equalTo: popUpView.bottomAnchor).isActive = true
-        contentView.trailingAnchor.constraint(equalTo: popUpView.trailingAnchor).isActive = true
+        contentView.fillSuperview()
     }
     
     func addContentView(with element: Element, style: PopUpStyle) {
