@@ -50,7 +50,9 @@ extension KeyboardSymbolsCollectionViewCell {
         self.cellTouchUp = cellTouchUp
         self.cellDrag = cellDrag
         
-        setupUI(with: corners)
+        roundCorners(corners: corners, radius: 4)
+        
+        setupUI()
         
         configureSymbolLabel()
         
@@ -65,9 +67,8 @@ extension KeyboardSymbolsCollectionViewCell {
 
 private extension KeyboardSymbolsCollectionViewCell {
     
-    func setupUI(with corners: UIRectCorner) {
+    func setupUI() {
         backgroundColor = #colorLiteral(red: 0.9568627451, green: 0.9568627451, blue: 0.9568627451, alpha: 1)
-        roundCorners(corners: corners, radius: 4)
     }
     
 }

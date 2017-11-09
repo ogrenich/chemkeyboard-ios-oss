@@ -43,7 +43,10 @@ extension KeyboardElementsCollectionViewCell {
                    _ needsToShowExtendedPopUp: PublishSubject<KeyboardElementsCollectionViewCell>) -> KeyboardElementsCollectionViewCell {
         self.needsToShowExtendedPopUp = needsToShowExtendedPopUp
         
-        setupUI(with: element)
+        backgroundColor = element.category?.color?.hexColor
+        shadowColor = element.category?.shadowColor?.hexColor
+        
+        setupUI()
         
         configureSymbolLabel(with: element)
         configureNameLabel(with: element)
@@ -59,13 +62,11 @@ extension KeyboardElementsCollectionViewCell {
 
 private extension KeyboardElementsCollectionViewCell {
     
-    func setupUI(with element: Element) {
-        backgroundColor = element.category?.color?.hexColor
+    func setupUI() {
         cornerRadius = 4
         shadowRadius = 4
         shadowOffset = CGSize(width: 0, height: 1)
         shadowOpacity = 1
-        shadowColor = element.category?.shadowColor?.hexColor
     }
     
 }
