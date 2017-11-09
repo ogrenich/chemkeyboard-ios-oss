@@ -401,18 +401,10 @@
 			path = "SF UI Display";
 			sourceTree = "<group>";
 		};
-		156D00871F7D4894004C333F /* KeyboardCategoriesCollectionViewCell */ = {
-			isa = PBXGroup;
-			children = (
-				156D00881F7D48A0004C333F /* KeyboardCategoriesCollectionViewCell.swift */,
-			);
-			path = KeyboardCategoriesCollectionViewCell;
-			sourceTree = "<group>";
-		};
 		156D008C1F7D49BA004C333F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				156D008E1F7D49D3004C333F /* KeyboardElementsCollectionViewCell */,
+				156D008F1F7D49DC004C333F /* KeyboardElementsCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -420,25 +412,9 @@
 		156D008D1F7D49BE004C333F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				156D00931F7D49FF004C333F /* KeyboardSymbolsCollectionViewCell */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		156D008E1F7D49D3004C333F /* KeyboardElementsCollectionViewCell */ = {
-			isa = PBXGroup;
-			children = (
-				156D008F1F7D49DC004C333F /* KeyboardElementsCollectionViewCell.swift */,
-			);
-			path = KeyboardElementsCollectionViewCell;
-			sourceTree = "<group>";
-		};
-		156D00931F7D49FF004C333F /* KeyboardSymbolsCollectionViewCell */ = {
-			isa = PBXGroup;
-			children = (
 				156D00941F7D4A08004C333F /* KeyboardSymbolsCollectionViewCell.swift */,
 			);
-			path = KeyboardSymbolsCollectionViewCell;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		156D00981F7E97EC004C333F /* Services */ = {
@@ -592,23 +568,15 @@
 		15BBC71E1F7D436D00A229BC /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				15BBC71F1F7D438E00A229BC /* KeyboardActionsCollectionViewCell */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		15BBC71F1F7D438E00A229BC /* KeyboardActionsCollectionViewCell */ = {
-			isa = PBXGroup;
-			children = (
 				15BBC7201F7D43BB00A229BC /* KeyboardActionsCollectionViewCell.swift */,
 			);
-			path = KeyboardActionsCollectionViewCell;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		15BBC72A1F7D47D000A229BC /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				156D00871F7D4894004C333F /* KeyboardCategoriesCollectionViewCell */,
+				156D00881F7D48A0004C333F /* KeyboardCategoriesCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
