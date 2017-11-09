@@ -85,13 +85,9 @@ extension KeyboardElementsTableViewCell {
         self.needsScrollElementsCollectionViewToCategoryAt = needsScrollElementsCollectionViewToCategoryAt
         self.needsPlayInputClick = needsPlayInputClick
         
-        backgroundColor = .clear
+        setupUI()
         
         configureCollectionView()
-        
-        if collectionView.superview == nil {
-            addSubview(collectionView)
-        }
         
         bindSelf()
         bindToViewModel()
@@ -104,7 +100,19 @@ extension KeyboardElementsTableViewCell {
 
 private extension KeyboardElementsTableViewCell {
     
+    func setupUI() {
+        backgroundColor = .clear
+    }
+    
+}
+
+private extension KeyboardElementsTableViewCell {
+    
     func configureCollectionView() {
+        if collectionView.superview == nil {
+            addSubview(collectionView)
+        }
+        
         collectionView.register(KeyboardElementsCollectionViewCell.self)
         
         collectionView.backgroundColor = .clear

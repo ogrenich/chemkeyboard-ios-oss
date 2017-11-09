@@ -50,14 +50,9 @@ extension KeyboardSymbolsCollectionViewCell {
         self.cellTouchUp = cellTouchUp
         self.cellDrag = cellDrag
         
-        backgroundColor = #colorLiteral(red: 0.9568627451, green: 0.9568627451, blue: 0.9568627451, alpha: 1)
-        roundCorners(corners: corners, radius: 4)
+        setupUI(with: corners)
         
         configureSymbolLabel()
-        
-        if symbolLabel.superview == nil {
-            addSubview(symbolLabel)
-        }
         
         if gesture == nil {
             addTouchEvents()
@@ -70,7 +65,20 @@ extension KeyboardSymbolsCollectionViewCell {
 
 private extension KeyboardSymbolsCollectionViewCell {
     
+    func setupUI(with corners: UIRectCorner) {
+        backgroundColor = #colorLiteral(red: 0.9568627451, green: 0.9568627451, blue: 0.9568627451, alpha: 1)
+        roundCorners(corners: corners, radius: 4)
+    }
+    
+}
+
+private extension KeyboardSymbolsCollectionViewCell {
+    
     func configureSymbolLabel() {
+        if symbolLabel.superview == nil {
+            addSubview(symbolLabel)
+        }
+        
         symbolLabel.text = symbol.value
         symbolLabel.font = UIFont(name: "SFUIDisplay-Medium", size: 18)
         symbolLabel.textAlignment = .center

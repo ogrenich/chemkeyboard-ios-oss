@@ -57,13 +57,9 @@ extension KeyboardSymbolsTableViewCell {
         self.needsReactToSimpleButtonTouchEvent = needsReactToSimpleButtonTouchEvent
         self.needsPlayInputClick = needsPlayInputClick
         
-        backgroundColor = .clear
+        setupUI()
         
         configureCollectionView()
-        
-        if collectionView.superview == nil {
-            addSubview(collectionView)
-        }
         
         bindSelf()
         bindViewModel()
@@ -75,7 +71,19 @@ extension KeyboardSymbolsTableViewCell {
 
 private extension KeyboardSymbolsTableViewCell {
     
+    func setupUI() {
+        backgroundColor = .clear
+    }
+    
+}
+
+private extension KeyboardSymbolsTableViewCell {
+    
     func configureCollectionView() {
+        if collectionView.superview == nil {
+            addSubview(collectionView)
+        }
+        
         collectionView.register(KeyboardSymbolsCollectionViewCell.self)
         
         guard let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {

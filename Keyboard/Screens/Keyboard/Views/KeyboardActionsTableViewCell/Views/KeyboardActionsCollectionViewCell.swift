@@ -53,12 +53,7 @@ extension KeyboardActionsCollectionViewCell {
     @discardableResult
     func configure(with group: SymbolGroup,
                    selected: Bool) -> KeyboardActionsCollectionViewCell {
-        clipsToBounds = false
-        backgroundColor = .clear
-        
-        buttonView.backgroundColor = #colorLiteral(red: 0.9568627451, green: 0.9568627451, blue: 0.9568627451, alpha: 1)
-        topView.backgroundColor = .clear
-        bottomView.backgroundColor = .clear
+        setupUI()
         
         configureLabels(with: group)
         configureAccessoryView()
@@ -72,6 +67,19 @@ extension KeyboardActionsCollectionViewCell {
         isSelected = selected
         
         return self
+    }
+    
+}
+
+private extension KeyboardActionsCollectionViewCell {
+    
+    func setupUI() {
+        clipsToBounds = false
+        backgroundColor = .clear
+        
+        buttonView.backgroundColor = #colorLiteral(red: 0.9568627451, green: 0.9568627451, blue: 0.9568627451, alpha: 1)
+        topView.backgroundColor = .clear
+        bottomView.backgroundColor = .clear
     }
     
 }

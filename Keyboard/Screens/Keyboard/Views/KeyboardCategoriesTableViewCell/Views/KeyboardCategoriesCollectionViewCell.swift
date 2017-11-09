@@ -51,7 +51,7 @@ extension KeyboardCategoriesCollectionViewCell {
         nameLabel.text = category.name
         isSelected = selected
         
-        backgroundColor = .clear
+        setupUI()
         
         configureSelectedBackgroundImageView()
         configureNameLabel()
@@ -63,6 +63,14 @@ extension KeyboardCategoriesCollectionViewCell {
         layoutFrames()
         
         return self
+    }
+    
+}
+
+private extension KeyboardCategoriesCollectionViewCell {
+    
+    func setupUI() {
+        backgroundColor = .clear
     }
     
 }

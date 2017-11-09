@@ -62,7 +62,7 @@ extension KeyboardActionsTableViewCell {
         self.needsReactToDeleteButtonTouchEvent = needsReactToDeleteButtonTouchEvent
         self.needsPlayInputClick = needsPlayInputClick
         
-        backgroundColor = .clear
+        setupUI()
         
         configureCollectionView()
         configureSwitchButton()
@@ -79,6 +79,14 @@ extension KeyboardActionsTableViewCell {
         bindViewModel()
         
         return self
+    }
+    
+}
+
+private extension KeyboardActionsTableViewCell {
+    
+    func setupUI() {
+        backgroundColor = .clear
     }
     
 }
