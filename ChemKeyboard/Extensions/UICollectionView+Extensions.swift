@@ -12,7 +12,8 @@ public extension UICollectionView {
     
     @discardableResult
     public func register<T: UICollectionViewCell>(_: T.Type) -> UICollectionView {
-        register(UINib(nibName: T.nibName, bundle: nil), forCellWithReuseIdentifier: T.reuseIdentifier)
+        register(T.self, forCellWithReuseIdentifier: T.reuseIdentifier)
+        
         return self
     }
     
