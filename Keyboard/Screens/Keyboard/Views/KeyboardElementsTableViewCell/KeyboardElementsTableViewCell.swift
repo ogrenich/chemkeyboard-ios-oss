@@ -120,7 +120,7 @@ private extension KeyboardElementsTableViewCell {
         collectionView.dataSource = self
         
         collectionView.showsVerticalScrollIndicator = false
-        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.isPagingEnabled = false
         collectionView.alwaysBounceHorizontal = true
     }
