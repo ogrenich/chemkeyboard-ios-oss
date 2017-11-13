@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import Neon
+import AudioToolbox.AudioServices
 
 @IBDesignable
 class KeyboardElementsTableViewCell: UITableViewCell {
@@ -194,10 +195,15 @@ private extension KeyboardElementsTableViewCell {
                     let element = self.viewModel.categories.value[indexPath.section].elements[indexPath.item]
                     PopUp.instance.show(element: element, at: frame, style: .extended)
                     DispatchQueue.main.async { [weak self] in
-                        self?.impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
-                        self?.impactFeedbackGenerator?.prepare()
-                        self?.impactFeedbackGenerator?.impactOccurred()
-                        self?.impactFeedbackGenerator = nil
+                        if UIDevice.current.hasHapticFeedback {
+                            self?.impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+                            self?.impactFeedbackGenerator?.prepare()
+                            self?.impactFeedbackGenerator?.impactOccurred()
+                            self?.impactFeedbackGenerator = nil
+                        } else if UIDevice.current.hasTapticEngine {
+                            let soundID = kSystemSoundID_Vibrate
+                            AudioServicesPlaySystemSound(soundID)
+                        }
                     }
                 }
             }
