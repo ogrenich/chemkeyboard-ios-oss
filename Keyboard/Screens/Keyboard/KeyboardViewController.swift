@@ -291,7 +291,14 @@ extension KeyboardViewController: UITableViewDataSource {
         case .buttons:
             let cell: KeyboardButtonsTableViewCell = tableView.dequeueReusableCell()
             
-            return cell
+            let configuredCell = cell.configure(needsPlayInputClick,
+                                                needsReactToDeleteButtonTouchEvent: needsReactToDeleteButtonTouchEvent,
+                                                needsReactToSimpleButtonTouchEvent: needsReactToSimpleButtonTouchEvent)
+            
+            configuredCell.switchButton.addTarget(self,
+                                                  action: #selector(handleInputModeList(from:with:)),
+                                                  for: .allTouchEvents)
+            return configuredCell
         }
     }
 
