@@ -26,6 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setUpMainInterface()
         setUpFabric()
         
+        RxKeyboard.instance.bindUIKeyboardNotifications()
+        
         return true
     }
 

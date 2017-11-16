@@ -19,6 +19,8 @@ class MainViewController: UIViewController, Storyboardable {
     @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var copyrightLabel: UILabel!
     
+    @IBOutlet weak var copyrightLabelBottomConstraint: NSLayoutConstraint!
+    
     
     fileprivate let bag = DisposeBag()
 
@@ -73,6 +75,11 @@ private extension MainViewController {
         copyToClipboardButton.rx.tap
             .withLatestFrom(formulaTextField.rx.text)
             .bind { UIPasteboard.general.string = $0 }
+            .disposed(by: bag)
+        
+        RxKeyboard.instance.visibleHeight.asObservable()
+            .map { $0 + 12 }
+            .bind(to: copyrightLabelBottomConstraint.rx.constant)
             .disposed(by: bag)
     }
     
