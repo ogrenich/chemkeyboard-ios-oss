@@ -84,7 +84,7 @@ class KeyboardViewController: UIInputViewController {
 private extension KeyboardViewController {
 
     func setupUI() {
-        viewHeightConstraint = view.heightAnchor.constraint(equalToConstant: 300)
+        viewHeightConstraint = view.heightAnchor.constraint(equalToConstant: 330)
     }
 
     func updateUI() {
@@ -204,15 +204,13 @@ private extension KeyboardViewController {
                     let numberOfSymbolsInLine = selectedSymbolGroup
                         .numberOfSymbolsInLine.value
                 else {
-                    return 300 - 52
+                    return 330 - 44
                 }
 
                 let numberOfLines = (CGFloat(selectedSymbolGroup.symbols.count)
                     / CGFloat(numberOfSymbolsInLine)).rounded(.up)
 
-                return (300 - 52)
-                    + (numberOfLines * 44)
-                    + ((numberOfLines - 1) * 1) + 8
+                return (330 - 44) + numberOfLines * 44
             }
             .drive(viewHeightConstraint.rx.constant)
             .disposed(by: bag)
@@ -316,7 +314,7 @@ extension KeyboardViewController: UITableViewDelegate {
         case .categories:
             return 36
         case .elements:
-            return 156
+            return 160
         case .symbols:
             guard
                 let selectedSymbolGroup = viewModel.selectedSymbolGroup.value,
@@ -328,9 +326,11 @@ extension KeyboardViewController: UITableViewDelegate {
             let numberOfLines = (CGFloat(selectedSymbolGroup.symbols.count)
                 / CGFloat(numberOfSymbolsInLine)).rounded(.up)
 
-            return (numberOfLines * 44) + ((numberOfLines - 1) * 1) + 8
+            return numberOfLines * 44
         case .actions:
-            return 56
+            return 40
+        case .buttons:
+            return 50
         }
     }
 
