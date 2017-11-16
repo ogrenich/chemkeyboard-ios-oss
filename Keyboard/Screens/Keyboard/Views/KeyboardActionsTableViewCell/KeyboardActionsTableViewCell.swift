@@ -164,7 +164,7 @@ extension KeyboardActionsTableViewCell: UICollectionViewDelegateFlowLayout {
         let horizontalInsets: CGFloat = 16 + (Device.isPad() &&
             (UIScreen.main.bounds.width > UIScreen.main.bounds.height) ? 360 : 0)
         let width = (collectionView.frame.size.width - 5 * layout.minimumLineSpacing - horizontalInsets) / 6
-        return CGSize(width: width, height: 44)
+        return CGSize(width: width, height: 28)
     }
     
 }
