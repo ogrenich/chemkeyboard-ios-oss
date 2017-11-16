@@ -88,7 +88,9 @@
 		4B8745AE4BAD293BC6D7131B /* Pods-ChemKeyboard-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 30C9BA0C773809E607101729 /* Pods-ChemKeyboard-metadata.plist */; };
 		5A63CEB91FBD7790003855FD /* KeyboardButtonsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A63CEB81FBD7790003855FD /* KeyboardButtonsTableViewCell.swift */; };
 		5A63CEBB1FBDAB6E003855FD /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A63CEBA1FBDAB6E003855FD /* UIButton+Extensions.swift */; };
+		5A63CEBD1FBDAB92003855FD /* UIInputViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A63CEBC1FBDAB92003855FD /* UIInputViewController+Extensions.swift */; };
 		5A63CEBE1FBDAC22003855FD /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A63CEBA1FBDAB6E003855FD /* UIButton+Extensions.swift */; };
+		5A63CEBF1FBDAC82003855FD /* UIInputViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A63CEBC1FBDAB92003855FD /* UIInputViewController+Extensions.swift */; };
 		5A9396F81F83DC6900B0E546 /* KeyboardElementsCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9396F71F83DC6900B0E546 /* KeyboardElementsCollectionViewLayout.swift */; };
 		5ABE8D8C1F854EEC0029E30B /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABE8D8B1F854EEC0029E30B /* String+Extensions.swift */; };
 		5ABE8D8D1F854F220029E30B /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABE8D8B1F854EEC0029E30B /* String+Extensions.swift */; };
@@ -191,6 +193,7 @@
 		30C9BA0C773809E607101729 /* Pods-ChemKeyboard-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-ChemKeyboard-metadata.plist"; path = "Pods/Pods-ChemKeyboard-metadata.plist"; sourceTree = "<group>"; };
 		5A63CEB81FBD7790003855FD /* KeyboardButtonsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardButtonsTableViewCell.swift; sourceTree = "<group>"; };
 		5A63CEBA1FBDAB6E003855FD /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
+		5A63CEBC1FBDAB92003855FD /* UIInputViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIInputViewController+Extensions.swift"; sourceTree = "<group>"; };
 		5A9396F71F83DC6900B0E546 /* KeyboardElementsCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardElementsCollectionViewLayout.swift; sourceTree = "<group>"; };
 		5ABE8D8B1F854EEC0029E30B /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		5AC0F7B81F866463004ECF6E /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
@@ -515,6 +518,7 @@
 				150E16281F9E200600BB591A /* UserDefaults+Extensions.swift */,
 				5AF9BA611FA89B510034054D /* UIDevice+Extensions.swift */,
 				5A63CEBA1FBDAB6E003855FD /* UIButton+Extensions.swift */,
+				5A63CEBC1FBDAB92003855FD /* UIInputViewController+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -962,6 +966,7 @@
 				157697841F838C690051AD67 /* ElementService.swift in Sources */,
 				150E162C1F9E21F200BB591A /* InstructionsViewController.swift in Sources */,
 				15BBC6DC1F7CFFB100A229BC /* Element.swift in Sources */,
+				5A63CEBD1FBDAB92003855FD /* UIInputViewController+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -986,6 +991,7 @@
 				5ABE8D8D1F854F220029E30B /* String+Extensions.swift in Sources */,
 				15BBC6E91F7D0F9600A229BC /* SymbolGroup.swift in Sources */,
 				150DC39D1FAA0AD0004F9BC4 /* UIKit+Extensions.swift in Sources */,
+				5A63CEBF1FBDAC82003855FD /* UIInputViewController+Extensions.swift in Sources */,
 				15BBC7171F7D3C0200A229BC /* KeyboardActionsTableViewCellModel.swift in Sources */,
 				15BBC7051F7D3B7E00A229BC /* KeyboardCategoriesTableViewCell.swift in Sources */,
 				5AE382D51F97A8810059B080 /* SimpleSymbolPopUp.swift in Sources */,
