@@ -81,7 +81,7 @@ private extension KeyboardSymbolsCollectionViewCell {
         }
         
         symbolLabel.text = symbol.value
-        symbolLabel.font = UIFont(name: "SFUIDisplay-Medium", size: 18)
+        symbolLabel.font = UIFont(name: "SFUIDisplay-Bold", size: 16)
         symbolLabel.textAlignment = .center
     }
     
