@@ -92,13 +92,7 @@ private extension KeyboardButtonsTableViewCell {
             button.titleLabel?.font = UIFont(name: "SFUIDisplay-Bold", size: 12)
             button.setTitleColor(.black, for: .normal)
             
-            if let text = button.titleLabel?.text {
-                let attributedString = NSMutableAttributedString(string: text)
-                attributedString.addAttribute(NSAttributedStringKey.kern,
-                                              value: 1.1,
-                                              range: NSRange(location: 0, length: text.count))
-                button.setAttributedTitle(attributedString, for: .normal)
-            }
+            button.setTitle(button.titleLabel?.text, letterSpacing: 1.1)
         }
         
         deleteButton.setImage(UIImage(named: "Delete"), for: .normal)
