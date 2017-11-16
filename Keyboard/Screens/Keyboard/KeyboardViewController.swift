@@ -14,7 +14,7 @@ import AudioToolbox.AudioServices
 private extension KeyboardViewController {
 
     enum Section: Int, Iteratable {
-        case categories, elements, symbols, actions
+        case categories, elements, symbols, actions, buttons
     }
 
 }
@@ -134,6 +134,7 @@ private extension KeyboardViewController {
             .register(KeyboardElementsTableViewCell.self)
             .register(KeyboardSymbolsTableViewCell.self)
             .register(KeyboardActionsTableViewCell.self)
+            .register(KeyboardButtonsTableViewCell.self)
     }
 
 }
@@ -287,6 +288,10 @@ extension KeyboardViewController: UITableViewDataSource {
                                                    action: #selector(handleInputModeList(from:with:)),
                                                    for: .allTouchEvents)
             return configuredCell
+        case .buttons:
+            let cell: KeyboardButtonsTableViewCell = tableView.dequeueReusableCell()
+            
+            return cell
         }
     }
 
