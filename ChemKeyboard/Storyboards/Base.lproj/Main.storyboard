@@ -122,9 +122,9 @@
                             <constraint firstItem="eWs-fH-kT4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="96" id="BSQ-kl-c0o"/>
                             <constraint firstItem="eWs-fH-kT4" firstAttribute="bottom" secondItem="7zg-R9-cGW" secondAttribute="bottom" id="Fwe-G4-Ukn"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="s28-MY-vAR" secondAttribute="trailing" constant="14" id="Iqu-4q-M0L"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="s28-MY-vAR" secondAttribute="bottom" constant="357" id="TIP-oi-XSG"/>
                             <constraint firstItem="BgL-4n-BvI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="14" id="VOx-H3-uos"/>
                             <constraint firstItem="nb8-5h-tzp" firstAttribute="leading" secondItem="eWs-fH-kT4" secondAttribute="leading" id="XB2-uX-xx0"/>
-                            <constraint firstItem="BgL-4n-BvI" firstAttribute="top" secondItem="nb8-5h-tzp" secondAttribute="bottom" constant="52" id="eDe-4e-DbW"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="eWs-fH-kT4" secondAttribute="trailing" constant="14" id="ea0-ui-nt4"/>
                             <constraint firstItem="o7N-Pa-d82" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="fhh-vk-9wx"/>
                             <constraint firstItem="nb8-5h-tzp" firstAttribute="top" secondItem="eWs-fH-kT4" secondAttribute="bottom" constant="14" id="kk1-yY-GzE"/>
@@ -143,6 +143,7 @@
                         <outlet property="clearTextButton" destination="7zg-R9-cGW" id="HP7-wG-y3a"/>
                         <outlet property="copyToClipboardButton" destination="nb8-5h-tzp" id="7fY-2j-m9z"/>
                         <outlet property="copyrightLabel" destination="s28-MY-vAR" id="QrG-Tg-X6D"/>
+                        <outlet property="copyrightLabelBottomConstraint" destination="TIP-oi-XSG" id="RiD-rM-d3T"/>
                         <outlet property="formulaTextField" destination="eWs-fH-kT4" id="cnk-Y6-SN1"/>
                         <outlet property="infoButton" destination="o7N-Pa-d82" id="pUR-nB-gHt"/>
                         <outlet property="versionLabel" destination="BgL-4n-BvI" id="KQz-PP-jTL"/>

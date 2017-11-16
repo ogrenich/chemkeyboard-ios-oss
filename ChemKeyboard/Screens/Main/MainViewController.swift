@@ -19,12 +19,19 @@ class MainViewController: UIViewController, Storyboardable {
     @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var copyrightLabel: UILabel!
     
+    @IBOutlet weak var copyrightLabelBottomConstraint: NSLayoutConstraint!
+    
+    
+    fileprivate var maximumConstantForCopyrightLabelBottomConstraint: CGFloat = 0
+    
     
     fileprivate let bag = DisposeBag()
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configureMaximumConstant()
         
         bindSelf()
     }
@@ -35,6 +42,15 @@ class MainViewController: UIViewController, Storyboardable {
         formulaTextField.becomeFirstResponder()
     }
 
+}
+
+private extension MainViewController {
+    
+    func configureMaximumConstant() {
+        maximumConstantForCopyrightLabelBottomConstraint = view.frame.height - copyToClipboardButton.frame.origin.y -
+            copyToClipboardButton.frame.height - versionLabel.frame.height - copyrightLabel.frame.height
+    }
+    
 }
 
 private extension MainViewController {
@@ -73,6 +89,12 @@ private extension MainViewController {
         copyToClipboardButton.rx.tap
             .withLatestFrom(formulaTextField.rx.text)
             .bind { UIPasteboard.general.string = $0 }
+            .disposed(by: bag)
+        
+        RxKeyboard.instance.visibleHeight.asObservable()
+            .filter { [weak self] in $0 <= self?.maximumConstantForCopyrightLabelBottomConstraint ?? 0 }
+            .map { $0 + 12 }
+            .bind(to: copyrightLabelBottomConstraint.rx.constant)
             .disposed(by: bag)
     }
     
