@@ -57,6 +57,10 @@ class KeyboardViewController: UIInputViewController {
         }
 
         fetchData()
+        
+        if let keyboardButtonsTableViewCell = tableView.cellForRow(at: IndexPath(row: 0, section: Section.buttons.rawValue)) as? KeyboardButtonsTableViewCell {
+            keyboardButtonsTableViewCell.returnButton.setTitle(returnKeyString(), letterSpacing: 1.1)
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {

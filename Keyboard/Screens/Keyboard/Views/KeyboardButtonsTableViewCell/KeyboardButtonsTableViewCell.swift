@@ -14,7 +14,7 @@ class KeyboardButtonsTableViewCell: UITableViewCell {
     
     lazy var switchButton: UIButton = UIButton()
     fileprivate lazy var spaceButton: UIButton = UIButton()
-    fileprivate lazy var returnButton: UIButton = UIButton()
+    lazy var returnButton: UIButton = UIButton()
     fileprivate lazy var deleteButton: UIButton = UIButton()
     
     fileprivate lazy var spaceSymbol: Symbol = Symbol()
