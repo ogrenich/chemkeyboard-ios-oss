@@ -73,10 +73,6 @@ class KeyboardViewController: UIInputViewController {
                 self?.tableView.reloadData()
             }
         }
-
-        if let actionsCell = tableView.cellForRow(at: IndexPath(row: 0, section: Section.actions.rawValue)) as? KeyboardActionsTableViewCell {
-            actionsCell.willRotate()
-        }
     }
 
 }
@@ -277,15 +273,8 @@ extension KeyboardViewController: UITableViewDataSource {
 
             let cellModel = KeyboardActionsTableViewCellModel.init(with: viewModel.symbolGroups,
                                                                    selectedSymbolGroup: viewModel.selectedSymbolGroup)
-
-            let configuredCell = cell.configure(with: cellModel,
-                                                needsReactToDeleteButtonTouchEvent: needsReactToDeleteButtonTouchEvent,
-                                                needsPlayInputClick)
-
-            configuredCell.switchButton.addTarget(self,
-                                                   action: #selector(handleInputModeList(from:with:)),
-                                                   for: .allTouchEvents)
-            return configuredCell
+            
+            return cell.configure(with: cellModel, needsPlayInputClick)
         case .buttons:
             let cell: KeyboardButtonsTableViewCell = tableView.dequeueReusableCell()
             

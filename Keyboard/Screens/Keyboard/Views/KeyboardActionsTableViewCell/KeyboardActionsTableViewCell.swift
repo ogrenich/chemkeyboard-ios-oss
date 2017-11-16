@@ -15,23 +15,15 @@ import Neon
 @IBDesignable
 class KeyboardActionsTableViewCell: UITableViewCell {
     
-    lazy var switchButton: UIButton = UIButton()
     fileprivate lazy var collectionView: UICollectionView = UICollectionView(frame: .zero,
                                                                              collectionViewLayout:
-                                                                             UICollectionViewFlowLayout())
-    fileprivate lazy var deleteButton: UIButton = UIButton()
+                                                                             UICollectionViewFlowLayout())    
     
-    
-    fileprivate weak var needsReactToDeleteButtonTouchEvent: PublishSubject<Void>!
     fileprivate weak var needsPlayInputClick: PublishSubject<Void>!
     
     
     fileprivate var bag = DisposeBag()
     fileprivate var viewModel: KeyboardActionsTableViewCellModel!
-    
-    fileprivate weak var timer: Timer?
-    
-    fileprivate var subviewsHierarchyHasBeenConfigured: Bool = false
     
     
     override func prepareForReuse() {
@@ -43,36 +35,22 @@ class KeyboardActionsTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        layoutFrames()
+        collectionView.fillSuperview()
     }
-    
-    deinit {
-        invalidateTimer()
-    }
-    
+        
 }
 
 extension KeyboardActionsTableViewCell {
     
     @discardableResult
     func configure(with viewModel: KeyboardActionsTableViewCellModel,
-                   needsReactToDeleteButtonTouchEvent: PublishSubject<Void>,
                    _ needsPlayInputClick: PublishSubject<Void>) -> KeyboardActionsTableViewCell {
         self.viewModel = viewModel
-        self.needsReactToDeleteButtonTouchEvent = needsReactToDeleteButtonTouchEvent
         self.needsPlayInputClick = needsPlayInputClick
         
         setupUI()
         
         configureCollectionView()
-        configureSwitchButton()
-        configureDeleteButton()
-        
-        if !subviewsHierarchyHasBeenConfigured {
-            configureSubviewsHierarchy()
-        }
-        
-        addGestureRecognizersOnDeleteButton()
         
         bindSelf()
         bindToViewModel()
@@ -94,6 +72,10 @@ private extension KeyboardActionsTableViewCell {
 private extension KeyboardActionsTableViewCell {
     
     func configureCollectionView() {
+        if collectionView.superview == nil {
+            addSubview(collectionView)
+        }
+        
         collectionView.register(KeyboardActionsCollectionViewCell.self)
         
         guard let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
@@ -115,34 +97,12 @@ private extension KeyboardActionsTableViewCell {
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 6
     }
-    
-    func configureSwitchButton() {
-        switchButton.setImage(UIImage(named: "Switch"), for: .normal)
-        switchButton.imageEdgeInsets = UIEdgeInsets(top: 2, left: 6, bottom: 0, right: 0)
-    }
-    
-    func configureDeleteButton() {
-        deleteButton.setImage(UIImage(named: "Delete"), for: .normal)
-        deleteButton.imageEdgeInsets = UIEdgeInsets(top: 2, left: 0, bottom: 0, right: 4)
-    }
-    
-    func configureSubviewsHierarchy() {
-        addSubview(switchButton)
-        addSubview(deleteButton)
-        addSubview(collectionView)
         
-        subviewsHierarchyHasBeenConfigured = true
-    }
-    
 }
 
 private extension KeyboardActionsTableViewCell {
     
     func bindSelf() {
-        switchButton.rx.tap
-            .bind(to: needsPlayInputClick)
-            .disposed(by: bag)
-        
         collectionView.rx.itemHighlighted
             .map { _ in }
             .bind(to: needsPlayInputClick)
@@ -185,24 +145,11 @@ private extension KeyboardActionsTableViewCell {
     
 }
 
-private extension KeyboardActionsTableViewCell {
-    
-    func layoutFrames() {
-        switchButton.fillSuperview(left: 0, right: width - 45, top: 0, bottom: 0)
-        deleteButton.fillSuperview(left: width - 44, right: 0, top: 0, bottom: 0)
-        collectionView.alignBetweenHorizontal(align: .toTheRightCentered,
-                                              primaryView: switchButton,
-                                              secondaryView: deleteButton,
-                                              padding: 0, height: height)
-    }
-    
-}
-
 extension KeyboardActionsTableViewCell: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         let sideInset: CGFloat = 8 + (Device.isPad() && (UIScreen.main.bounds.width > UIScreen.main.bounds.height) ?
-            130 : 0)
+            180 : 0)
         
         return UIEdgeInsets(top: 6, left: sideInset, bottom: 6, right: sideInset)
     }
@@ -215,71 +162,9 @@ extension KeyboardActionsTableViewCell: UICollectionViewDelegateFlowLayout {
         }
         
         let horizontalInsets: CGFloat = 16 + (Device.isPad() &&
-            (UIScreen.main.bounds.width > UIScreen.main.bounds.height) ? 260 : 0)
+            (UIScreen.main.bounds.width > UIScreen.main.bounds.height) ? 360 : 0)
         let width = (collectionView.frame.size.width - 5 * layout.minimumLineSpacing - horizontalInsets) / 6
         return CGSize(width: width, height: 44)
-    }
-    
-}
-
-private extension KeyboardActionsTableViewCell {
-    
-    func setUpTimer(with selector: Selector) {
-        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self,
-                                     selector: selector,
-                                     userInfo: nil, repeats: true)
-    }
-    
-    func invalidateTimer() {
-        timer?.invalidate()
-        timer = nil
-    }
-    
-}
-
-extension KeyboardActionsTableViewCell {
-    
-    func addGestureRecognizersOnDeleteButton() {
-        let tap = UITapGestureRecognizer(target: self,
-                                         action: #selector(handleSimpleDeleteEvent))
-        
-        let longPress = UILongPressGestureRecognizer(target: self,
-                                                     action: #selector(handleLongPressOnDeleteButton(_:)))
-       
-        deleteButton.addGestureRecognizer(tap)
-        deleteButton.addGestureRecognizer(longPress)
-    }
-    
-    @objc func handleSimpleDeleteEvent() {
-        needsReactToDeleteButtonTouchEvent.onNext(())
-        needsPlayInputClick.onNext(())
-    }
-    
-    @objc func handleLongPressOnDeleteButton(_ gesture: UIGestureRecognizer) {
-        switch gesture.state {
-        case .began:
-            setUpTimer(with: #selector(handleSimpleDeleteEvent))
-        case .ended, .cancelled, .failed:
-            invalidateTimer()
-        default:
-            break
-        }
-    }
-    
-}
-
-extension KeyboardActionsTableViewCell {
-    
-    func willRotate() {
-        DispatchQueue.main.async { [weak self] in
-            guard let `self` = self else {
-                return
-            }
-            
-            self.collectionView.reloadData()
-            self.collectionView.setNeedsLayout()
-            self.collectionView.layoutIfNeeded()
-        }
     }
     
 }
