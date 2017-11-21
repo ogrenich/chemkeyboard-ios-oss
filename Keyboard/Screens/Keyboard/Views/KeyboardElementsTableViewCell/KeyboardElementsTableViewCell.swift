@@ -201,8 +201,7 @@ private extension KeyboardElementsTableViewCell {
                             self?.impactFeedbackGenerator?.impactOccurred()
                             self?.impactFeedbackGenerator = nil
                         } else if UIDevice.current.hasTapticEngine {
-                            let soundID = kSystemSoundID_Vibrate
-                            AudioServicesPlaySystemSound(soundID)
+                            AudioServicesPlaySystemSound(1520)
                         }
                     }
                 }
