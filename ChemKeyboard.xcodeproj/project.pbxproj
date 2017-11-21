@@ -86,7 +86,6 @@
 		15BBC7291F7D447C00A229BC /* UICollectionViewCell+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BBC7271F7D447C00A229BC /* UICollectionViewCell+Extensions.swift */; };
 		15E218041F9F7AA7008AC6B2 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 15E218031F9F7AA7008AC6B2 /* Settings.bundle */; };
 		4B8745AE4BAD293BC6D7131B /* Pods-ChemKeyboard-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 30C9BA0C773809E607101729 /* Pods-ChemKeyboard-metadata.plist */; };
-		5A63CEB91FBD7790003855FD /* KeyboardButtonsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A63CEB81FBD7790003855FD /* KeyboardButtonsTableViewCell.swift */; };
 		5A63CEBB1FBDAB6E003855FD /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A63CEBA1FBDAB6E003855FD /* UIButton+Extensions.swift */; };
 		5A63CEBD1FBDAB92003855FD /* UIInputViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A63CEBC1FBDAB92003855FD /* UIInputViewController+Extensions.swift */; };
 		5A63CEBE1FBDAC22003855FD /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A63CEBA1FBDAB6E003855FD /* UIButton+Extensions.swift */; };
@@ -191,7 +190,6 @@
 		15BBC7271F7D447C00A229BC /* UICollectionViewCell+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+Extensions.swift"; sourceTree = "<group>"; };
 		15E218031F9F7AA7008AC6B2 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		30C9BA0C773809E607101729 /* Pods-ChemKeyboard-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-ChemKeyboard-metadata.plist"; path = "Pods/Pods-ChemKeyboard-metadata.plist"; sourceTree = "<group>"; };
-		5A63CEB81FBD7790003855FD /* KeyboardButtonsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardButtonsTableViewCell.swift; sourceTree = "<group>"; };
 		5A63CEBA1FBDAB6E003855FD /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
 		5A63CEBC1FBDAB92003855FD /* UIInputViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIInputViewController+Extensions.swift"; sourceTree = "<group>"; };
 		5A9396F71F83DC6900B0E546 /* KeyboardElementsCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardElementsCollectionViewLayout.swift; sourceTree = "<group>"; };
@@ -526,7 +524,6 @@
 		15BBC7011F7D3AEE00A229BC /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				5A63CEB71FBD775C003855FD /* KeyboardButtonsTableViewCell */,
 				15BBC7091F7D3BA200A229BC /* KeyboardActionsTableViewCell */,
 				15BBC7021F7D3B3700A229BC /* KeyboardCategoriesTableViewCell */,
 				15BBC7071F7D3B9200A229BC /* KeyboardElementsTableViewCell */,
@@ -598,14 +595,6 @@
 				15E218031F9F7AA7008AC6B2 /* Settings.bundle */,
 			);
 			path = Settings;
-			sourceTree = "<group>";
-		};
-		5A63CEB71FBD775C003855FD /* KeyboardButtonsTableViewCell */ = {
-			isa = PBXGroup;
-			children = (
-				5A63CEB81FBD7790003855FD /* KeyboardButtonsTableViewCell.swift */,
-			);
-			path = KeyboardButtonsTableViewCell;
 			sourceTree = "<group>";
 		};
 		5AD182C91F8CF1C300080313 /* Resources */ = {
@@ -976,7 +965,6 @@
 			files = (
 				5AE382D71F97AAF90059B080 /* ExtendedElementPopUp.swift in Sources */,
 				15BBC6E31F7D035A00A229BC /* ElementCategory.swift in Sources */,
-				5A63CEB91FBD7790003855FD /* KeyboardButtonsTableViewCell.swift in Sources */,
 				15BBC71D1F7D3C4500A229BC /* KeyboardSymbolsTableViewCellModel.swift in Sources */,
 				5AE382CD1F9610F00059B080 /* SimpleElementPopUp.swift in Sources */,
 				15BBC6E61F7D0EC900A229BC /* Symbol.swift in Sources */,

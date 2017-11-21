@@ -10,11 +10,12 @@ import UIKit
 import RxSwift
 import RxCocoa
 import AudioToolbox.AudioServices
+import Device
 
 private extension KeyboardViewController {
 
     enum Section: Int, Iteratable {
-        case categories, elements, symbols, actions, buttons
+        case categories, elements, symbols, actions
     }
 
 }
@@ -57,10 +58,6 @@ class KeyboardViewController: UIInputViewController {
         }
 
         fetchData()
-        
-        if let keyboardButtonsTableViewCell = tableView.cellForRow(at: IndexPath(row: 0, section: Section.buttons.rawValue)) as? KeyboardButtonsTableViewCell {
-            keyboardButtonsTableViewCell.returnButton.setTitle(returnKeyString(), letterSpacing: 1.1)
-        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -84,7 +81,7 @@ class KeyboardViewController: UIInputViewController {
 private extension KeyboardViewController {
 
     func setupUI() {
-        viewHeightConstraint = view.heightAnchor.constraint(equalToConstant: 330)
+        viewHeightConstraint = view.heightAnchor.constraint(equalToConstant: Device.isPad() ? 300 : 330)
     }
 
     func updateUI() {
@@ -134,7 +131,6 @@ private extension KeyboardViewController {
             .register(KeyboardElementsTableViewCell.self)
             .register(KeyboardSymbolsTableViewCell.self)
             .register(KeyboardActionsTableViewCell.self)
-            .register(KeyboardButtonsTableViewCell.self)
     }
 
 }
@@ -204,13 +200,13 @@ private extension KeyboardViewController {
                     let numberOfSymbolsInLine = selectedSymbolGroup
                         .numberOfSymbolsInLine.value
                 else {
-                    return 330 - 44
+                    return Device.isPad() ? 300 - 44 : 330 - 44
                 }
 
                 let numberOfLines = (CGFloat(selectedSymbolGroup.symbols.count)
                     / CGFloat(numberOfSymbolsInLine)).rounded(.up)
 
-                return (330 - 44) + numberOfLines * 44
+                return (Device.isPad() ? 300 - 44 : 330 - 44) + numberOfLines * 44
             }
             .drive(viewHeightConstraint.rx.constant)
             .disposed(by: bag)
@@ -274,21 +270,19 @@ extension KeyboardViewController: UITableViewDataSource {
                                   needsPlayInputClick)
         case .actions:
             let cell: KeyboardActionsTableViewCell = tableView.dequeueReusableCell()
-
             let cellModel = KeyboardActionsTableViewCellModel.init(with: viewModel.symbolGroups,
                                                                    selectedSymbolGroup: viewModel.selectedSymbolGroup)
             
-            return cell.configure(with: cellModel, needsPlayInputClick)
-        case .buttons:
-            let cell: KeyboardButtonsTableViewCell = tableView.dequeueReusableCell()
-            
-            let configuredCell = cell.configure(needsPlayInputClick,
+            let configuredCell = cell.configure(with: cellModel,
+                                                needsPlayInputClick,
                                                 needsReactToDeleteButtonTouchEvent: needsReactToDeleteButtonTouchEvent,
                                                 needsReactToSimpleButtonTouchEvent: needsReactToSimpleButtonTouchEvent)
             
             configuredCell.switchButton.addTarget(self,
                                                   action: #selector(handleInputModeList(from:with:)),
                                                   for: .allTouchEvents)
+            configuredCell.returnButton.setTitle(returnKeyString(), letterSpacing: 1.1)
+            
             return configuredCell
         }
     }
@@ -321,9 +315,7 @@ extension KeyboardViewController: UITableViewDelegate {
 
             return numberOfLines * 44
         case .actions:
-            return 40
-        case .buttons:
-            return 50
+            return Device.isPad() ? 60 : 90
         }
     }
 
