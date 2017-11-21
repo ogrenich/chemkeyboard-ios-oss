@@ -121,7 +121,7 @@ private extension KeyboardActionsTableViewCell {
         collectionView.backgroundColor = .clear
         
         layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 6
+        layout.minimumLineSpacing = Device.isPad() ? 8 : 6
     }
     
     func configureButtons() {
@@ -228,11 +228,30 @@ private extension KeyboardActionsTableViewCell {
 private extension KeyboardActionsTableViewCell {
     
     func layoutFrames() {
+        if Device.isPad() {
+            switchButton.fillSuperview(left: 0, right: width - 44, top: 0, bottom: 0)
+            deleteButton.fillSuperview(left: width - 44, right: 0, top: 0, bottom: 0)
+            
+            let sideOffset: CGFloat = UIScreen.main.bounds.width < UIScreen.main.bounds.height ? 44 : 174
+        
+            collectionView.fillSuperview(left: sideOffset,
+                                         right: width - (58 * 6 + 8 * 5) - sideOffset - 12,
+                                         top: 0, bottom: 0)
+        
+            let leftOffset = collectionView.frame.maxX
+            spaceButton.fillSuperview(left: leftOffset + 4,
+                                      right: (width - leftOffset - 18 - sideOffset) * 0.36 + 14 + sideOffset,
+                                      top: 8, bottom: 8)
+            returnButton.fillSuperview(left: 12 + leftOffset + (width - leftOffset - 18 - sideOffset) * 0.64,
+                                       right: sideOffset + 6,
+                                       top: 8, bottom: 8)
+        } else {
             collectionView.fillSuperview(left: 0, right: 0, top: 0, bottom: 50)
             switchButton.fillSuperview(left: 0, right: width - 44, top: 40, bottom: 0)
             spaceButton.fillSuperview(left: 50, right: 47 + (width - 88) * 0.36, top: 40, bottom: 6)
             returnButton.fillSuperview(left: 47 + (width - 88) * 0.64, right: 50, top: 40, bottom: 6)
             deleteButton.fillSuperview(left: width - 44, right: 0, top: 40, bottom: 0)
+        }
     }
     
 }
@@ -286,10 +305,12 @@ extension KeyboardActionsTableViewCell {
 extension KeyboardActionsTableViewCell: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        let sideInset: CGFloat = 8 + (Device.isPad() && (UIScreen.main.bounds.width > UIScreen.main.bounds.height) ?
-            180 : 0)
         
-        return UIEdgeInsets(top: 6, left: sideInset, bottom: 6, right: sideInset)
+        if Device.isPad() {
+            return UIEdgeInsets(top: 6, left: 6, bottom: 6, right: 6)
+        }
+
+        return UIEdgeInsets(top: 6, left: 8, bottom: 6, right: 8)
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -299,9 +320,11 @@ extension KeyboardActionsTableViewCell: UICollectionViewDelegateFlowLayout {
             return CGSize.zero
         }
         
-        let horizontalInsets: CGFloat = 16 + (Device.isPad() &&
-            (UIScreen.main.bounds.width > UIScreen.main.bounds.height) ? 360 : 0)
-        let width = (collectionView.frame.size.width - 5 * layout.minimumLineSpacing - horizontalInsets) / 6
+        if Device.isPad() {
+            return CGSize(width: 58, height: 44)
+        }
+        
+        let width = (collectionView.frame.size.width - 5 * layout.minimumLineSpacing - 16) / 6
         return CGSize(width: width, height: 28)
     }
     

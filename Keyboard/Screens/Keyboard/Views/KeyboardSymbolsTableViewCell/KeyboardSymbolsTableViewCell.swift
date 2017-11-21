@@ -185,11 +185,11 @@ private extension KeyboardSymbolsTableViewCell {
                     corners.insert(.topRight)
                 }
                 
-                if item == numberOfSymbols - numberOfSymbolsInLine && selectedSymbolGroup.name != "Digits" {
+                if item == numberOfSymbols - numberOfSymbolsInLine && (selectedSymbolGroup.name != "Digits" || Device.isPad()) {
                     corners.insert(.bottomLeft)
                 }
                 
-                if item == numberOfSymbols - 1 && selectedSymbolGroup.name != "Greek" {
+                if item == numberOfSymbols - 1 && (selectedSymbolGroup.name != "Greek" || Device.isPad()) {
                     corners.insert(.bottomRight)
                 }
                 

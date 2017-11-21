@@ -27,7 +27,7 @@ class KeyboardActionsCollectionViewCell: UICollectionViewCell {
             buttonView.layer.mask = nil
             
             buttonView.roundCorners(corners: isSelected ? [.bottomLeft, .bottomRight] : .allCorners,
-                                    radius: 8)
+                                    radius: 4)
             
             accessoryView.isHidden = !isSelected
         }
@@ -109,8 +109,8 @@ private extension KeyboardActionsCollectionViewCell {
         [leftView, rightView].forEach { view in
             view.backgroundColor = .white
         }
-        leftView.cornerRadius = (group.name == "Digits") ? 0 : 8
-        rightView.cornerRadius = (group.name == "Greek") ? 0 : 8
+        leftView.cornerRadius = (group.name != "Digits" || Device.isPad()) ? 6 : 0
+        rightView.cornerRadius = (group.name != "Greek" || Device.isPad()) ? 6 : 0
     }
     
     func configureSubviewsHierarchy() {
@@ -134,9 +134,9 @@ private extension KeyboardActionsCollectionViewCell {
         
         symbolLabel.fillSuperview()
         
-        accessoryView.fillSuperview(left: -8, right: -8, top: -6, bottom: height)
-        leftView.fillSuperview(left: -8, right: accessoryView.width - 8, top: 0, bottom: -6)
-        rightView.fillSuperview(left: accessoryView.width - 8, right: -8, top: 0, bottom: -6)
+        accessoryView.fillSuperview(left: -6, right: -6, top: Device.isPad() ? -8 : -6, bottom: height)
+        leftView.fillSuperview(left: -6, right: accessoryView.width - 6, top: 0, bottom: Device.isPad() ? -8 : -6)
+        rightView.fillSuperview(left: accessoryView.width - 6, right: -6, top: 0, bottom: Device.isPad() ? -8 : -6)
     }
     
 }
