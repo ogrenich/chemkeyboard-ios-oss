@@ -232,7 +232,7 @@ private extension KeyboardActionsTableViewCell {
             switchButton.fillSuperview(left: 0, right: width - 44, top: 0, bottom: 0)
             deleteButton.fillSuperview(left: width - 44, right: 0, top: 0, bottom: 0)
             
-            let sideOffset: CGFloat = UIScreen.main.bounds.width < UIScreen.main.bounds.height ? 44 : 174
+            let sideOffset: CGFloat = Device.isWide() ? 174 : 44
         
             collectionView.fillSuperview(left: sideOffset,
                                          right: width - (58 * 6 + 8 * 5) - sideOffset - 12,
