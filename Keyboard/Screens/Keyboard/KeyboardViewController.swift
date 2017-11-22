@@ -281,7 +281,7 @@ extension KeyboardViewController: UITableViewDataSource {
             configuredCell.switchButton.addTarget(self,
                                                   action: #selector(handleInputModeList(from:with:)),
                                                   for: .allTouchEvents)
-            configuredCell.returnButton.setTitle(returnKeyString(), letterSpacing: 1.1)
+            configuredCell.returnButton.setTitle(returnKeyString, letterSpacing: 1.1)
             
             return configuredCell
         }

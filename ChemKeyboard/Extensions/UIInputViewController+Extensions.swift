@@ -10,7 +10,7 @@ import UIKit
 
 public extension UIInputViewController {
     
-    public func returnKeyString() -> String {
+    public var returnKeyString: String {
         if let type = textDocumentProxy.returnKeyType {
             switch type {
             case .`default`:
