@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import Neon
+import Device
 
 class KeyboardSymbolsCollectionViewCell: UICollectionViewCell {
     
@@ -81,7 +82,8 @@ private extension KeyboardSymbolsCollectionViewCell {
         }
         
         symbolLabel.text = symbol.value
-        symbolLabel.font = UIFont(name: "SFUIDisplay-Medium", size: 18)
+        symbolLabel.font = Device.isPad() ?
+            UIFont(name: "SFUIDisplay-Medium", size: 18) : UIFont(name: "SFUIDisplay-Bold", size: 16)
         symbolLabel.textAlignment = .center
     }
     
