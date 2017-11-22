@@ -91,6 +91,8 @@
 		5A63CEBE1FBDAC22003855FD /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A63CEBA1FBDAB6E003855FD /* UIButton+Extensions.swift */; };
 		5A63CEBF1FBDAC82003855FD /* UIInputViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A63CEBC1FBDAB92003855FD /* UIInputViewController+Extensions.swift */; };
 		5A63CEC11FBDC305003855FD /* RxKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A63CEC01FBDC305003855FD /* RxKeyboard.swift */; };
+		5A63CEC31FC56ED4003855FD /* Device+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A63CEC21FC56ED4003855FD /* Device+Extensions.swift */; };
+		5A63CEC41FC56ED4003855FD /* Device+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A63CEC21FC56ED4003855FD /* Device+Extensions.swift */; };
 		5A9396F81F83DC6900B0E546 /* KeyboardElementsCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9396F71F83DC6900B0E546 /* KeyboardElementsCollectionViewLayout.swift */; };
 		5ABE8D8C1F854EEC0029E30B /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABE8D8B1F854EEC0029E30B /* String+Extensions.swift */; };
 		5ABE8D8D1F854F220029E30B /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABE8D8B1F854EEC0029E30B /* String+Extensions.swift */; };
@@ -194,6 +196,7 @@
 		5A63CEBA1FBDAB6E003855FD /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
 		5A63CEBC1FBDAB92003855FD /* UIInputViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIInputViewController+Extensions.swift"; sourceTree = "<group>"; };
 		5A63CEC01FBDC305003855FD /* RxKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxKeyboard.swift; sourceTree = "<group>"; };
+		5A63CEC21FC56ED4003855FD /* Device+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Device+Extensions.swift"; sourceTree = "<group>"; };
 		5A9396F71F83DC6900B0E546 /* KeyboardElementsCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardElementsCollectionViewLayout.swift; sourceTree = "<group>"; };
 		5ABE8D8B1F854EEC0029E30B /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		5AC0F7B81F866463004ECF6E /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
@@ -520,6 +523,7 @@
 				5AF9BA611FA89B510034054D /* UIDevice+Extensions.swift */,
 				5A63CEBA1FBDAB6E003855FD /* UIButton+Extensions.swift */,
 				5A63CEBC1FBDAB92003855FD /* UIInputViewController+Extensions.swift */,
+				5A63CEC21FC56ED4003855FD /* Device+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -958,6 +962,7 @@
 				1501F6C71F792A18000DCE0B /* AppDelegate.swift in Sources */,
 				157697841F838C690051AD67 /* ElementService.swift in Sources */,
 				150E162C1F9E21F200BB591A /* InstructionsViewController.swift in Sources */,
+				5A63CEC31FC56ED4003855FD /* Device+Extensions.swift in Sources */,
 				15BBC6DC1F7CFFB100A229BC /* Element.swift in Sources */,
 				5A63CEBD1FBDAB92003855FD /* UIInputViewController+Extensions.swift in Sources */,
 			);
@@ -992,6 +997,7 @@
 				15BBC7291F7D447C00A229BC /* UICollectionViewCell+Extensions.swift in Sources */,
 				15BBC7191F7D3C1400A229BC /* KeyboardCategoriesTableViewCellModel.swift in Sources */,
 				15BBC6F61F7D32E000A229BC /* Reusable.swift in Sources */,
+				5A63CEC41FC56ED4003855FD /* Device+Extensions.swift in Sources */,
 				156D008A1F7D48A0004C333F /* KeyboardCategoriesCollectionViewCell.swift in Sources */,
 				156D00911F7D49DC004C333F /* KeyboardElementsCollectionViewCell.swift in Sources */,
 				155082631FA8AE3B005113C3 /* ElementService.swift in Sources */,
