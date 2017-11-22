@@ -86,7 +86,6 @@
 		15BBC7291F7D447C00A229BC /* UICollectionViewCell+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BBC7271F7D447C00A229BC /* UICollectionViewCell+Extensions.swift */; };
 		15E218041F9F7AA7008AC6B2 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 15E218031F9F7AA7008AC6B2 /* Settings.bundle */; };
 		4B8745AE4BAD293BC6D7131B /* Pods-ChemKeyboard-metadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 30C9BA0C773809E607101729 /* Pods-ChemKeyboard-metadata.plist */; };
-		5A63CEC11FBDC305003855FD /* RxKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A63CEC01FBDC305003855FD /* RxKeyboard.swift */; };
 		5A9396F81F83DC6900B0E546 /* KeyboardElementsCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9396F71F83DC6900B0E546 /* KeyboardElementsCollectionViewLayout.swift */; };
 		5ABE8D8C1F854EEC0029E30B /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABE8D8B1F854EEC0029E30B /* String+Extensions.swift */; };
 		5ABE8D8D1F854F220029E30B /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABE8D8B1F854EEC0029E30B /* String+Extensions.swift */; };
@@ -187,7 +186,6 @@
 		15BBC7271F7D447C00A229BC /* UICollectionViewCell+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+Extensions.swift"; sourceTree = "<group>"; };
 		15E218031F9F7AA7008AC6B2 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		30C9BA0C773809E607101729 /* Pods-ChemKeyboard-metadata.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "Pods-ChemKeyboard-metadata.plist"; path = "Pods/Pods-ChemKeyboard-metadata.plist"; sourceTree = "<group>"; };
-		5A63CEC01FBDC305003855FD /* RxKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxKeyboard.swift; sourceTree = "<group>"; };
 		5A9396F71F83DC6900B0E546 /* KeyboardElementsCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardElementsCollectionViewLayout.swift; sourceTree = "<group>"; };
 		5ABE8D8B1F854EEC0029E30B /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		5AC0F7B81F866463004ECF6E /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
@@ -302,7 +300,6 @@
 			children = (
 				150E161C1F9DFD8600BB591A /* Button.swift */,
 				150E16171F9DF18C00BB591A /* TextField.swift */,
-				5A63CEC01FBDC305003855FD /* RxKeyboard.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -940,7 +937,6 @@
 				150E16181F9DF18C00BB591A /* TextField.swift in Sources */,
 				15BBC6F21F7D325100A229BC /* Iteratable.swift in Sources */,
 				5AC0F7B91F866463004ECF6E /* UIView+Extensions.swift in Sources */,
-				5A63CEC11FBDC305003855FD /* RxKeyboard.swift in Sources */,
 				5ABE8D8C1F854EEC0029E30B /* String+Extensions.swift in Sources */,
 				150E161D1F9DFD8600BB591A /* Button.swift in Sources */,
 				150E16271F9E147700BB591A /* UIStoryboard+Extensions.swift in Sources */,
