@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13528" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13526"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="SF-UI-Display-Heavy.otf">
-            <string>SFUIDisplay-Heavy</string>
+        <array key="AppleColorEmoji@2x.ttc">
+            <string>AppleColorEmoji</string>
+        </array>
+        <array key="SF-UI-Display-Medium.otf">
+            <string>SFUIDisplay-Medium</string>
         </array>
         <array key="SF-UI-Display-Semibold.otf">
             <string>SFUIDisplay-Semibold</string>
@@ -27,123 +31,100 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o7N-Pa-d82" customClass="Button" customModule="ChemKeyboard" customModuleProvider="target">
-                                <rect key="frame" x="319" y="28" width="44" height="44"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o7N-Pa-d82">
+                                <rect key="frame" x="331" y="35" width="32" height="18"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="ULv-eE-Mt3"/>
-                                    <constraint firstAttribute="width" constant="44" id="npf-Dy-T2o"/>
+                                    <constraint firstAttribute="height" constant="18" id="D4g-vQ-D6d"/>
                                 </constraints>
-                                <state key="normal" image="Info"/>
+                                <fontDescription key="fontDescription" name="SFUIDisplay-Semibold" family="SF UI Display" pointSize="15"/>
+                                <state key="normal" title="Help">
+                                    <color key="titleColor" red="0.22352941179999999" green="0.59607843140000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Type Your Formula" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eWs-fH-kT4" customClass="TextField" customModule="ChemKeyboard" customModuleProvider="target">
-                                <rect key="frame" x="14" y="116" width="347" height="64"/>
-                                <color key="backgroundColor" red="0.88627450980392153" green="0.88627450980392153" blue="0.88627450980392153" alpha="0.30249357876712329" colorSpace="calibratedRGB"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Type formula here" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eWs-fH-kT4" customClass="TextField" customModule="ChemKeyboard" customModuleProvider="target">
+                                <rect key="frame" x="12" y="155" width="349" height="30"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="QKQ-o2-N1U"/>
+                                    <constraint firstAttribute="height" constant="30" id="QKQ-o2-N1U"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="SFUIDisplay-Heavy" family="SF UI Display" pointSize="28"/>
+                                <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="24"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
                                         <color key="value" white="0.0" alpha="0.1033015839041096" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="paddingLeft">
-                                        <real key="value" value="16"/>
+                                        <real key="value" value="0.0"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="paddingRight">
                                         <real key="value" value="58"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="4"/>
-                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7zg-R9-cGW" customClass="Button" customModule="ChemKeyboard" customModuleProvider="target">
-                                <rect key="frame" x="317" y="116" width="44" height="64"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7zg-R9-cGW">
+                                <rect key="frame" x="317" y="155" width="44" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="44" id="mle-aN-39W"/>
                                 </constraints>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" image="Clear"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nb8-5h-tzp" customClass="Button" customModule="ChemKeyboard" customModuleProvider="target">
-                                <rect key="frame" x="14" y="194" width="149" height="40"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ChemKeyboard v 1.1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BgL-4n-BvI">
+                                <rect key="frame" x="12" y="35" width="137.5" height="18"/>
+                                <fontDescription key="fontDescription" name="SFUIDisplay-Semibold" family="SF UI Display" pointSize="15"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x3r-Er-QYx">
+                                <rect key="frame" x="12" y="197" width="351" height="1"/>
+                                <color key="backgroundColor" red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="M1V-Ge-r8d"/>
+                                    <constraint firstAttribute="height" constant="1" id="4H3-Rb-Tzv"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nb8-5h-tzp" customClass="Button" customModule="ChemKeyboard" customModuleProvider="target">
+                                <rect key="frame" x="12" y="218" width="120" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="M1V-Ge-r8d"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="SFUIDisplay-Semibold" family="SF UI Display" pointSize="15"/>
-                                <inset key="contentEdgeInsets" minX="14" minY="0.0" maxX="14" maxY="0.0"/>
-                                <state key="normal" title="Copy to clipboard">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
+                                <state key="normal" title="Copy to clipboard"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
-                                        <color key="value" red="0.22745098039215686" green="0.61568627450980395" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="normalTextColor">
+                                        <color key="value" red="0.22352941179999999" green="0.59607843140000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
-                                        <color key="value" red="0.22745098039215686" green="0.61568627450980395" blue="1" alpha="0.8044734589041096" colorSpace="calibratedRGB"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="highlightedTextColor">
+                                        <color key="value" red="0.22352941179999999" green="0.59607843140000005" blue="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="disabledBackgroundColor">
-                                        <color key="value" red="0.22745098039215686" green="0.61568627450980395" blue="1" alpha="0.40483197773972601" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                        <real key="value" value="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                        <size key="value" width="0.0" height="2"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.12" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="disabledTextColor">
+                                        <color key="value" red="0.22352941179999999" green="0.59607843140000005" blue="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ChemKeyboard v1.0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BgL-4n-BvI">
-                                <rect key="frame" x="14" y="286" width="92" height="12"/>
-                                <fontDescription key="fontDescription" name="SFUIDisplay-Heavy" family="SF UI Display" pointSize="10"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.19568707191780821" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© 2017 Chemistry Open Intelligence Pte. Ltd." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s28-MY-vAR">
-                                <rect key="frame" x="14" y="298" width="203" height="12"/>
-                                <fontDescription key="fontDescription" name="SFUIDisplay-Heavy" family="SF UI Display" pointSize="10"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.19568707190000001" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="eWs-fH-kT4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="96" id="BSQ-kl-c0o"/>
+                            <constraint firstAttribute="trailing" secondItem="x3r-Er-QYx" secondAttribute="trailing" constant="12" id="2hs-kp-I7f"/>
+                            <constraint firstItem="eWs-fH-kT4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="135" id="BSQ-kl-c0o"/>
+                            <constraint firstItem="o7N-Pa-d82" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="15" id="BTD-Kt-ro1"/>
                             <constraint firstItem="eWs-fH-kT4" firstAttribute="bottom" secondItem="7zg-R9-cGW" secondAttribute="bottom" id="Fwe-G4-Ukn"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="s28-MY-vAR" secondAttribute="trailing" constant="14" id="Iqu-4q-M0L"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="s28-MY-vAR" secondAttribute="bottom" constant="357" id="TIP-oi-XSG"/>
-                            <constraint firstItem="BgL-4n-BvI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="14" id="VOx-H3-uos"/>
+                            <constraint firstItem="BgL-4n-BvI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="15" id="H9N-WG-oUi"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="o7N-Pa-d82" secondAttribute="trailing" constant="12" id="K8X-Uj-Dgm"/>
+                            <constraint firstItem="x3r-Er-QYx" firstAttribute="top" secondItem="eWs-fH-kT4" secondAttribute="bottom" constant="12" id="MOe-4n-Ikr"/>
+                            <constraint firstItem="BgL-4n-BvI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="12" id="O2l-Fp-myM"/>
+                            <constraint firstItem="x3r-Er-QYx" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="12" id="OXM-iD-0eB"/>
                             <constraint firstItem="nb8-5h-tzp" firstAttribute="leading" secondItem="eWs-fH-kT4" secondAttribute="leading" id="XB2-uX-xx0"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="eWs-fH-kT4" secondAttribute="trailing" constant="14" id="ea0-ui-nt4"/>
-                            <constraint firstItem="o7N-Pa-d82" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="fhh-vk-9wx"/>
-                            <constraint firstItem="nb8-5h-tzp" firstAttribute="top" secondItem="eWs-fH-kT4" secondAttribute="bottom" constant="14" id="kk1-yY-GzE"/>
-                            <constraint firstItem="eWs-fH-kT4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="14" id="pvj-3j-cQ8"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="o7N-Pa-d82" secondAttribute="trailing" constant="12" id="sBM-rB-qva"/>
+                            <constraint firstItem="nb8-5h-tzp" firstAttribute="top" secondItem="x3r-Er-QYx" secondAttribute="bottom" constant="20" id="lPa-uk-bpx"/>
+                            <constraint firstItem="eWs-fH-kT4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="12" id="pvj-3j-cQ8"/>
                             <constraint firstItem="7zg-R9-cGW" firstAttribute="top" secondItem="eWs-fH-kT4" secondAttribute="top" id="sGa-76-eLt"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="BgL-4n-BvI" secondAttribute="trailing" constant="14" id="tLX-XD-BqN"/>
                             <constraint firstItem="7zg-R9-cGW" firstAttribute="trailing" secondItem="eWs-fH-kT4" secondAttribute="trailing" id="uCg-NA-HlO"/>
                             <constraint firstItem="nb8-5h-tzp" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="eWs-fH-kT4" secondAttribute="trailing" id="uTw-bp-2m2"/>
-                            <constraint firstItem="s28-MY-vAR" firstAttribute="top" secondItem="BgL-4n-BvI" secondAttribute="bottom" id="wGg-L4-S38"/>
-                            <constraint firstItem="s28-MY-vAR" firstAttribute="leading" secondItem="BgL-4n-BvI" secondAttribute="leading" id="zR1-qt-HkN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="clearTextButton" destination="7zg-R9-cGW" id="HP7-wG-y3a"/>
                         <outlet property="copyToClipboardButton" destination="nb8-5h-tzp" id="7fY-2j-m9z"/>
-                        <outlet property="copyrightLabel" destination="s28-MY-vAR" id="QrG-Tg-X6D"/>
-                        <outlet property="copyrightLabelBottomConstraint" destination="TIP-oi-XSG" id="RiD-rM-d3T"/>
                         <outlet property="formulaTextField" destination="eWs-fH-kT4" id="cnk-Y6-SN1"/>
                         <outlet property="infoButton" destination="o7N-Pa-d82" id="pUR-nB-gHt"/>
                         <outlet property="versionLabel" destination="BgL-4n-BvI" id="KQz-PP-jTL"/>
@@ -163,15 +144,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZoD-Ki-JAk" customClass="Button" customModule="ChemKeyboard" customModuleProvider="target">
-                                <rect key="frame" x="315" y="20" width="60" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="2rE-fY-Moz"/>
-                                    <constraint firstAttribute="height" constant="60" id="ek8-KP-FZk"/>
-                                </constraints>
-                                <inset key="imageEdgeInsets" minX="2" minY="-6" maxX="-2" maxY="6"/>
-                                <state key="normal" image="Close"/>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon" translatesAutoresizingMaskIntoConstraints="NO" id="7pd-aY-v2F">
                                 <rect key="frame" x="81.5" y="50.5" width="212" height="212"/>
                                 <constraints>
@@ -179,122 +151,90 @@
                                     <constraint firstAttribute="width" secondItem="7pd-aY-v2F" secondAttribute="height" multiplier="1:1" id="Em0-gN-x1V"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Akc-QN-Xfw">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 easy steps to set up ChemKeyboard" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Akc-QN-Xfw">
                                 <rect key="frame" x="32" y="274.5" width="311" height="82"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="82" id="LXT-Mq-in6"/>
                                 </constraints>
-                                <string key="text">5 easy steps to
-set up ChemKeyboard</string>
-                                <fontDescription key="fontDescription" name="SFUIDisplay-Heavy" family="SF UI Display" pointSize="34"/>
+                                <fontDescription key="fontDescription" name="SFUIDisplay-Semibold" family="SF UI Display" pointSize="30"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r1e-9m-KjL">
                                 <rect key="frame" x="0.0" y="378.5" width="375" height="210"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="g7a-7a-gnM">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="👆" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="g7a-7a-gnM">
                                         <rect key="frame" x="32" y="0.0" width="26" height="26"/>
-                                        <color key="backgroundColor" red="0.2274509804" green="0.61568627450000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="26" id="O7Q-9y-ehN"/>
                                             <constraint firstAttribute="height" constant="26" id="r71-ti-zl1"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="SFUIDisplay-Heavy" family="SF UI Display" pointSize="15"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="AppleColorEmoji" family="Apple Color Emoji" pointSize="23"/>
+                                        <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="13"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Go to Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5CM-m0-LCw">
-                                        <rect key="frame" x="78" y="4" width="97" height="18"/>
-                                        <fontDescription key="fontDescription" name="SFUIDisplay-Heavy" family="SF UI Display" pointSize="15"/>
+                                        <rect key="frame" x="78" y="4" width="96.5" height="18"/>
+                                        <fontDescription key="fontDescription" name="SFUIDisplay-Semibold" family="SF UI Display" pointSize="15"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Zhy-NT-bGl">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✌️" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Zhy-NT-bGl">
                                         <rect key="frame" x="32" y="42" width="26" height="26"/>
-                                        <color key="backgroundColor" red="0.2274509804" green="0.61568627450000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="26" id="7h2-zR-VnE"/>
                                             <constraint firstAttribute="height" constant="26" id="VLX-l4-w8W"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="SFUIDisplay-Heavy" family="SF UI Display" pointSize="15"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="AppleColorEmoji" family="Apple Color Emoji" pointSize="23"/>
+                                        <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="13"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap General" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="239-Ez-Sqh">
-                                        <rect key="frame" x="78" y="46" width="80.5" height="18"/>
-                                        <fontDescription key="fontDescription" name="SFUIDisplay-Heavy" family="SF UI Display" pointSize="15"/>
+                                        <rect key="frame" x="78" y="46" width="81" height="18"/>
+                                        <fontDescription key="fontDescription" name="SFUIDisplay-Semibold" family="SF UI Display" pointSize="15"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="8Hs-cZ-sin">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🤙" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="8Hs-cZ-sin">
                                         <rect key="frame" x="32" y="84" width="26" height="26"/>
-                                        <color key="backgroundColor" red="0.2274509804" green="0.61568627450000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="26" id="Kc5-0m-pNC"/>
                                             <constraint firstAttribute="width" constant="26" id="VyY-Xz-ZQ7"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="SFUIDisplay-Heavy" family="SF UI Display" pointSize="15"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="AppleColorEmoji" family="Apple Color Emoji" pointSize="23"/>
+                                        <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="13"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find and tap Keyboards" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z7c-Rv-VQA">
-                                        <rect key="frame" x="78" y="88" width="161" height="18"/>
-                                        <fontDescription key="fontDescription" name="SFUIDisplay-Heavy" family="SF UI Display" pointSize="15"/>
+                                        <rect key="frame" x="78" y="88" width="160" height="18"/>
+                                        <fontDescription key="fontDescription" name="SFUIDisplay-Semibold" family="SF UI Display" pointSize="15"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="A3d-SI-EVi">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="👇" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="A3d-SI-EVi">
                                         <rect key="frame" x="32" y="126" width="26" height="26"/>
-                                        <color key="backgroundColor" red="0.2274509804" green="0.61568627450000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="26" id="PSg-km-Uvm"/>
                                             <constraint firstAttribute="width" constant="26" id="n8t-6c-CTy"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="SFUIDisplay-Heavy" family="SF UI Display" pointSize="15"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="AppleColorEmoji" family="Apple Color Emoji" pointSize="23"/>
+                                        <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="13"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap Add New Keyboard" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HRm-f6-08B">
-                                        <rect key="frame" x="78" y="130" width="159" height="18"/>
-                                        <fontDescription key="fontDescription" name="SFUIDisplay-Heavy" family="SF UI Display" pointSize="15"/>
+                                        <rect key="frame" x="78" y="130" width="158" height="18"/>
+                                        <fontDescription key="fontDescription" name="SFUIDisplay-Semibold" family="SF UI Display" pointSize="15"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="odz-3Y-Nsf">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🖖" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="odz-3Y-Nsf">
                                         <rect key="frame" x="32" y="168" width="26" height="26"/>
-                                        <color key="backgroundColor" red="0.2274509804" green="0.61568627450000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="26" id="WNO-sH-N2x"/>
                                             <constraint firstAttribute="width" constant="26" id="nBm-I9-u4U"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="SFUIDisplay-Heavy" family="SF UI Display" pointSize="15"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="AppleColorEmoji" family="Apple Color Emoji" pointSize="23"/>
+                                        <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="13"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap on ChemKeyboard" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vap-mf-Zh5">
-                                        <rect key="frame" x="78" y="172" width="154" height="18"/>
-                                        <fontDescription key="fontDescription" name="SFUIDisplay-Heavy" family="SF UI Display" pointSize="15"/>
+                                        <rect key="frame" x="78" y="172" width="154.5" height="18"/>
+                                        <fontDescription key="fontDescription" name="SFUIDisplay-Semibold" family="SF UI Display" pointSize="15"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -329,7 +269,7 @@ set up ChemKeyboard</string>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hnq-TC-RdZ" customClass="Button" customModule="ChemKeyboard" customModuleProvider="target">
-                                <rect key="frame" x="126" y="607" width="123" height="40"/>
+                                <rect key="frame" x="64.5" y="607" width="123" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="frm-ou-ZYv"/>
                                 </constraints>
@@ -365,30 +305,46 @@ set up ChemKeyboard</string>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jkl-SU-Gs9">
+                                <rect key="frame" x="207.5" y="607" width="122" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="oIc-1N-jFM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFUIDisplay-Semibold" family="SF UI Display" pointSize="15"/>
+                                <inset key="contentEdgeInsets" minX="14" minY="0.0" maxX="14" maxY="0.0"/>
+                                <state key="normal" title="Already did it!">
+                                    <color key="titleColor" red="0.22352941176470587" green="0.59607843137254901" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="hnq-TC-RdZ" firstAttribute="top" secondItem="r1e-9m-KjL" secondAttribute="bottom" constant="18" id="2lN-Vr-IFk"/>
-                            <constraint firstItem="EoF-ee-vL4" firstAttribute="trailing" secondItem="ZoD-Ki-JAk" secondAttribute="trailing" id="DHs-aS-6mY"/>
                             <constraint firstItem="r1e-9m-KjL" firstAttribute="leading" secondItem="EoF-ee-vL4" secondAttribute="leading" id="F7w-l6-Iwh"/>
                             <constraint firstItem="EoF-ee-vL4" firstAttribute="trailing" secondItem="Akc-QN-Xfw" secondAttribute="trailing" constant="32" id="LYz-4k-HgL"/>
                             <constraint firstItem="EoF-ee-vL4" firstAttribute="bottom" secondItem="hnq-TC-RdZ" secondAttribute="bottom" constant="20" id="P9l-Hu-eGC"/>
                             <constraint firstItem="7pd-aY-v2F" firstAttribute="centerX" secondItem="EoF-ee-vL4" secondAttribute="centerX" id="PV6-hz-rsu"/>
-                            <constraint firstItem="hnq-TC-RdZ" firstAttribute="centerX" secondItem="EoF-ee-vL4" secondAttribute="centerX" id="SnF-Z9-PIr"/>
+                            <constraint firstItem="hnq-TC-RdZ" firstAttribute="trailing" secondItem="EoF-ee-vL4" secondAttribute="centerX" id="SnF-Z9-PIr"/>
                             <constraint firstItem="EoF-ee-vL4" firstAttribute="trailing" secondItem="r1e-9m-KjL" secondAttribute="trailing" id="VVe-Xn-1RQ"/>
                             <constraint firstItem="r1e-9m-KjL" firstAttribute="top" secondItem="Akc-QN-Xfw" secondAttribute="bottom" constant="22" id="cnk-Nu-clG"/>
                             <constraint firstItem="Akc-QN-Xfw" firstAttribute="top" secondItem="7pd-aY-v2F" secondAttribute="bottom" constant="12" id="gNT-bu-AyA"/>
-                            <constraint firstItem="ZoD-Ki-JAk" firstAttribute="top" secondItem="EoF-ee-vL4" secondAttribute="top" id="xdq-0z-UM5"/>
+                            <constraint firstItem="jkl-SU-Gs9" firstAttribute="top" secondItem="hnq-TC-RdZ" secondAttribute="top" id="hA7-Kg-R1q"/>
+                            <constraint firstItem="jkl-SU-Gs9" firstAttribute="leading" secondItem="hnq-TC-RdZ" secondAttribute="trailing" constant="20" id="wG6-gn-LaM"/>
                             <constraint firstItem="Akc-QN-Xfw" firstAttribute="leading" secondItem="EoF-ee-vL4" secondAttribute="leading" constant="32" id="y6b-GE-HF7"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="EoF-ee-vL4"/>
                     </view>
                     <connections>
-                        <outlet property="closeButton" destination="ZoD-Ki-JAk" id="KGb-kx-rXu"/>
+                        <outlet property="closeButton" destination="jkl-SU-Gs9" id="Y0Q-Ji-zTc"/>
+                        <outlet property="findAndTapKeyboardsLabel" destination="z7c-Rv-VQA" id="zRL-bl-jnQ"/>
                         <outlet property="goToSettingsButton" destination="hnq-TC-RdZ" id="ivo-qG-ilR"/>
+                        <outlet property="goToSettingsLabel" destination="5CM-m0-LCw" id="t7q-34-kBZ"/>
                         <outlet property="iconImageView" destination="7pd-aY-v2F" id="muk-BL-1K9"/>
                         <outlet property="iconImageViewHeightConstraint" destination="4jC-2v-dij" id="g94-Tn-gZP"/>
                         <outlet property="stepsView" destination="r1e-9m-KjL" id="Itd-cD-r5t"/>
+                        <outlet property="tapAddNewKeyboardLabel" destination="HRm-f6-08B" id="cdZ-RC-aTe"/>
+                        <outlet property="tapChemKeyboardLabel" destination="vap-mf-Zh5" id="sLu-SW-Zgv"/>
+                        <outlet property="tapGeneralLabel" destination="239-Ez-Sqh" id="Zub-nU-cSL"/>
                         <outlet property="titleLabel" destination="Akc-QN-Xfw" id="dZ4-VW-MNl"/>
                         <outlet property="verticalSpaceBetweenIconImageViewAndTitleLabelConstraint" destination="gNT-bu-AyA" id="Xsk-yJ-M87"/>
                         <outlet property="verticalSpaceBetweenStepsViewAndGoToSettingsButtonConstraint" destination="2lN-Vr-IFk" id="NMJ-a7-4rZ"/>
@@ -402,9 +358,7 @@ set up ChemKeyboard</string>
     </scenes>
     <resources>
         <image name="Clear" width="21" height="22"/>
-        <image name="Close" width="23" height="22"/>
         <image name="Icon" width="272" height="272"/>
-        <image name="Info" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Kgp-u0-ppz"/>

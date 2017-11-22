@@ -18,6 +18,11 @@ class InstructionsViewController: UIViewController, Storyboardable {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var verticalSpaceBetweenIconImageViewAndTitleLabelConstraint: NSLayoutConstraint!
     @IBOutlet weak var stepsView: UIView!
+    @IBOutlet weak var goToSettingsLabel: UILabel!
+    @IBOutlet weak var tapGeneralLabel: UILabel!
+    @IBOutlet weak var findAndTapKeyboardsLabel: UILabel!
+    @IBOutlet weak var tapAddNewKeyboardLabel: UILabel!
+    @IBOutlet weak var tapChemKeyboardLabel: UILabel!
     @IBOutlet weak var verticalSpaceBetweenTitleLabelAndStepsViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var goToSettingsButton: Button!
     @IBOutlet weak var verticalSpaceBetweenStepsViewAndGoToSettingsButtonConstraint: NSLayoutConstraint!
@@ -30,6 +35,8 @@ class InstructionsViewController: UIViewController, Storyboardable {
         super.viewDidLoad()
 
         configureConstraints()
+        
+        configureLabels()
         
         bindSelf()
     }
@@ -79,6 +86,26 @@ private extension InstructionsViewController {
             verticalSpaceBetweenTitleLabelAndStepsViewConstraint.constant = 22
             verticalSpaceBetweenStepsViewAndGoToSettingsButtonConstraint.constant = 44
         }
+    }
+    
+}
+
+private extension InstructionsViewController {
+    
+    private func attributedString(for label: UILabel, length: Int) -> NSMutableAttributedString {
+        let attributedString = NSMutableAttributedString(string: label.text ?? "")
+        attributedString.addAttribute(NSAttributedStringKey.font,
+                                      value: UIFont.systemFont(ofSize: 15.0, weight: UIFont.Weight.regular),
+                                      range: NSRange(location: 0, length: length))
+        return attributedString
+    }
+    
+    func configureLabels() {
+        goToSettingsLabel.attributedText = attributedString(for: goToSettingsLabel, length: 5)
+        tapGeneralLabel.attributedText = attributedString(for: tapGeneralLabel, length: 3)
+        findAndTapKeyboardsLabel.attributedText = attributedString(for: findAndTapKeyboardsLabel, length: 13)
+        tapAddNewKeyboardLabel.attributedText = attributedString(for: tapAddNewKeyboardLabel, length: 3)
+        tapChemKeyboardLabel.attributedText = attributedString(for: tapChemKeyboardLabel, length: 6)
     }
     
 }
