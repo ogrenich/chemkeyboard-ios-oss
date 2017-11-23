@@ -15,6 +15,10 @@ public class Button: UIButton {
     @IBInspectable var highlightedBackgroundColor: UIColor? = nil
     @IBInspectable var disabledBackgroundColor: UIColor? = nil
     
+    @IBInspectable var normalTextColor: UIColor? = nil
+    @IBInspectable var highlightedTextColor: UIColor? = nil
+    @IBInspectable var disabledTextColor: UIColor? = nil
+    
     var sublayer: CALayer = CALayer()
     
     
@@ -31,6 +35,13 @@ public class Button: UIButton {
         }
     }
     
+    
+    public override func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
+        
+        customize()
+    }
+    
     public override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -41,6 +52,7 @@ public class Button: UIButton {
         super.awakeFromNib()
         
         setUpLayers()
+        customize()
     }
     
 }
@@ -63,6 +75,24 @@ private extension Button {
         }
         if layer.masksToBounds {
             layer.masksToBounds = false
+        }
+    }
+    
+}
+
+private extension Button {
+    
+    func customize() {
+        if let normalTextColor = normalTextColor {
+            setTitleColor(normalTextColor, for: .normal)
+        }
+        
+        if let highlightedTextColor = highlightedTextColor {
+            setTitleColor(highlightedTextColor, for: .highlighted)
+        }
+        
+        if let disabledTextColor = disabledTextColor {
+            setTitleColor(disabledTextColor, for: .disabled)
         }
     }
     

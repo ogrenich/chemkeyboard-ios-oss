@@ -311,7 +311,6 @@
 			children = (
 				150E161C1F9DFD8600BB591A /* Button.swift */,
 				150E16171F9DF18C00BB591A /* TextField.swift */,
-				5A63CEC01FBDC305003855FD /* RxKeyboard.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -953,7 +952,6 @@
 				150E16181F9DF18C00BB591A /* TextField.swift in Sources */,
 				15BBC6F21F7D325100A229BC /* Iteratable.swift in Sources */,
 				5AC0F7B91F866463004ECF6E /* UIView+Extensions.swift in Sources */,
-				5A63CEC11FBDC305003855FD /* RxKeyboard.swift in Sources */,
 				5ABE8D8C1F854EEC0029E30B /* String+Extensions.swift in Sources */,
 				150E161D1F9DFD8600BB591A /* Button.swift in Sources */,
 				150E16271F9E147700BB591A /* UIStoryboard+Extensions.swift in Sources */,
