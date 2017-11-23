@@ -71,6 +71,10 @@ class KeyboardElementsTableViewCell: UITableViewCell {
         
         collectionView.fillSuperview()
         collectionView.reloadData()
+        if let selectedCategory = viewModel.selectedCategory.value,
+            let index = viewModel.categories.value.index(of: selectedCategory) {
+            needsScrollElementsCollectionViewToCategoryAt.onNext(index)
+        }
     }
     
 }
