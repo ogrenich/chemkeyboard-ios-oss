@@ -70,6 +70,7 @@ class KeyboardElementsTableViewCell: UITableViewCell {
         super.layoutSubviews()
         
         collectionView.fillSuperview()
+        collectionView.reloadData()
     }
     
 }

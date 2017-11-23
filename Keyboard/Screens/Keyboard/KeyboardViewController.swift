@@ -74,6 +74,8 @@ class KeyboardViewController: UIInputViewController {
                 self?.tableView.reloadData()
             }
         }
+        
+        updateHeightConstraint()
     }
 
 }
@@ -193,22 +195,10 @@ private extension KeyboardViewController {
             })
             .disposed(by: bag)
 
-        viewModel.selectedSymbolGroup.asDriver()
-            .map {
-                guard
-                    let selectedSymbolGroup = $0,
-                    let numberOfSymbolsInLine = selectedSymbolGroup
-                        .numberOfSymbolsInLine.value
-                else {
-                    return Device.isPad() ? 300 - 44 : 330 - 44
-                }
-
-                let numberOfLines = (CGFloat(selectedSymbolGroup.symbols.count)
-                    / CGFloat(numberOfSymbolsInLine)).rounded(.up)
-
-                return (Device.isPad() ? 300 - 44 : 330 - 44) + numberOfLines * 44
+        viewModel.selectedSymbolGroup.asObservable()
+            .bind { [weak self] _ in
+                self?.updateHeightConstraint()
             }
-            .drive(viewHeightConstraint.rx.constant)
             .disposed(by: bag)
 
         viewModel.selectedSymbolGroup.asDriver()
