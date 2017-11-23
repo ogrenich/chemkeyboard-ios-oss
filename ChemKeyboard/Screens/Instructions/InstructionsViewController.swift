@@ -242,6 +242,63 @@ private extension InstructionsViewController {
                                    padding: padding, width: width, height: height)
     }
     
+    func layoutTitleView() {
+        switch type {
+        case .iPhoneSE:
+            titleLabel.fillSuperview(left: 32, right: 32, top: titleView.height - 70, bottom: 0)
+            iconImageView.align(.aboveCentered, relativeTo: titleLabel, padding: -4, width: 170, height: 170)
+        case .iPhone7:
+            titleLabel.fillSuperview(left: 32, right: 32, top: titleView.height - 70, bottom: 0)
+            iconImageView.align(.aboveCentered, relativeTo: titleLabel, padding: 2, width: 212, height: 212)
+        case .iPhone8Plus:
+            titleLabel.fillSuperview(left: 32, right: 32, top: titleView.height - 70, bottom: 0)
+            iconImageView.align(.aboveCentered, relativeTo: titleLabel, padding: 20, width: 212, height: 212)
+        case .iPhoneX:
+            titleLabel.fillSuperview(left: 32, right: 32, top: titleView.height - 70, bottom: 0)
+            iconImageView.align(.aboveCentered, relativeTo: titleLabel, padding: 46, width: 270, height: 270)
+        case .iPad:
+            titleLabel.fillSuperview(left: 0, right: 0, top: titleView.height - 100, bottom: 0)
+            iconImageView.align(.aboveCentered, relativeTo: titleLabel, padding: 48, width: 212, height: 212)
+        case .iPadWide:
+            titleLabel.fillSuperview(left: 0, right: 0, top: titleView.height - 100, bottom: 0)
+            iconImageView.align(.aboveCentered, relativeTo: titleLabel, padding: 34, width: 270, height: 270)
+        case .iPadHorizontal:
+            titleLabel.fillSuperview(left: goToSettingsButton.frame.minX, right: 0, top: titleView.height - 156, bottom: 56)
+            iconImageView.align(.toTheLeftCentered, relativeTo: titleLabel, padding: 40, width: 212, height: 212)
+        }
+    }
+    
+    func layoutStepView() {
+        switch type {
+        case .iPhoneSE, .iPhone7, .iPhone8Plus, .iPhoneX:
+            stepsView.groupInCorner(group: .vertical,
+                                    views: [goToSettingsEmojiLabel, tapGeneralEmojiLabel, findAndTapKeyboardsEmojiLabel,
+                                            tapAddNewKeyboardEmojiLabel, tapChemKeyboardEmojiLabel],
+                                    inCorner: .bottomLeft, padding: 10, width: 24, height: 32)
+            
+            alignLabelsToEmoji(padding: 16, align: .toTheRightCentered, width: stepsView.frame.width - 50, height: 18)
+        case .iPad:
+            stepsView.groupInCorner(group: .vertical,
+                                    views: [goToSettingsEmojiLabel, tapGeneralEmojiLabel, findAndTapKeyboardsEmojiLabel,
+                                            tapAddNewKeyboardEmojiLabel, tapChemKeyboardEmojiLabel],
+                                    inCorner: .bottomLeft, padding: 22, width: 46, height: 60)
+            
+            alignLabelsToEmoji(padding: 38, align: .toTheRightCentered, width: stepsView.frame.width - 106, height: 30)
+        case .iPadWide:
+            stepsView.groupAgainstEdge(group: .horizontal,
+                                       views: [goToSettingsEmojiLabel, tapGeneralEmojiLabel, findAndTapKeyboardsEmojiLabel,
+                                               tapAddNewKeyboardEmojiLabel, tapChemKeyboardEmojiLabel],
+                                       againstEdge: .top, padding: 80, width: 96, height: 126)
+            
+            alignLabelsToEmoji(padding: 14, align: .underCentered, width: 140, height: 44)
+        case .iPadHorizontal:
+            stepsView.groupAgainstEdge(group: .horizontal,
+                                       views: [goToSettingsEmojiLabel, tapGeneralEmojiLabel, findAndTapKeyboardsEmojiLabel,
+                                               tapAddNewKeyboardEmojiLabel, tapChemKeyboardEmojiLabel],
+                                       againstEdge: .top, padding: 110, width: 66, height: 86)
+            
+            alignLabelsToEmoji(padding: 28, align: .underCentered, width: 120, height: 36)
+        }
     }
     
 }
