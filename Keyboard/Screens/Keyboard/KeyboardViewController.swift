@@ -301,6 +301,9 @@ extension KeyboardViewController: UITableViewDelegate {
         case .categories:
             return 36
         case .elements:
+            if UIScreen.main.bounds.height < UIScreen.main.bounds.width && !Device.isPad() {
+                return 60
+            }
             return 160
         case .symbols:
             guard
