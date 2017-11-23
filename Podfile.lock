@@ -4,11 +4,11 @@ PODS:
   - Device (3.0.3)
   - Fabric (1.7.2)
   - Neon (0.4.0)
-  - Realm (3.0.1):
-    - Realm/Headers (= 3.0.1)
-  - Realm/Headers (3.0.1)
-  - RealmSwift (3.0.1):
-    - Realm (= 3.0.1)
+  - Realm (3.0.2):
+    - Realm/Headers (= 3.0.2)
+  - Realm/Headers (3.0.2)
+  - RealmSwift (3.0.2):
+    - Realm (= 3.0.2)
   - RxCocoa (4.0.0):
     - RxSwift (~> 4.0)
   - RxSwift (4.0.0)
@@ -18,7 +18,7 @@ DEPENDENCIES:
   - Device (= 3.0.3)
   - Fabric (= 1.7.2)
   - Neon (= 0.4.0)
-  - RealmSwift (= 3.0.1)
+  - RealmSwift (= 3.0.2)
   - RxCocoa (= 4.0.0)
 
 SPEC CHECKSUMS:
@@ -26,11 +26,11 @@ SPEC CHECKSUMS:
   Device: 9a5264ee4e0f392e7153d2c46b10c8df46b7aad2
   Fabric: 9cd6a848efcf1b8b07497e0b6a2e7d336353ba15
   Neon: 7fb5a9327e7e57911843f608e08f4893a74deaf9
-  Realm: ba6144c74f835f7497791f6599d63a7755377b83
-  RealmSwift: 7d13b1ac4b6022a13f841e3143e7789c9e40ad0d
+  Realm: 6f23fd1f178a09342eac21bfa7c2bf4312a7a180
+  RealmSwift: 695393add1b8f9d5fa75dd16e6355cf3935f71e2
   RxCocoa: d62846ca96495d862fa4c59ea7d87e5031d7340e
   RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
 
-PODFILE CHECKSUM: 3bf7b7ff2d2c459951ffa2d76cabf8bdb23cf799
+PODFILE CHECKSUM: 1d06babd45cb7197e21d0cc61f5c127cd3784541
 
 COCOAPODS: 1.3.1

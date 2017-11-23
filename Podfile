@@ -11,7 +11,7 @@ def common
     pod 'Crashlytics', '3.9.3'
     
     pod 'RxCocoa', '4.0.0'
-    pod 'RealmSwift', '3.0.1'
+    pod 'RealmSwift', '3.0.2'
     
     pod 'Device', '3.0.3'
     
