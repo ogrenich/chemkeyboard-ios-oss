@@ -9,6 +9,15 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Neon
+
+extension InstructionsViewController {
+    
+    enum DeviceType {
+        case iPhoneSE, iPhone7, iPhone8Plus, iPhoneX, iPad, iPadWide, iPadHorizontal
+    }
+    
+}
 
 class InstructionsViewController: UIViewController, Storyboardable {
 
@@ -42,6 +51,8 @@ class InstructionsViewController: UIViewController, Storyboardable {
     @IBOutlet weak var goToSettingsButtonBottomConstraint: NSLayoutConstraint!
     
     
+    fileprivate var type: DeviceType = .iPhone7
+    
     
     fileprivate let bag = DisposeBag()
     
@@ -51,9 +62,40 @@ class InstructionsViewController: UIViewController, Storyboardable {
 
         configureConstraints()
         
-        configureLabels()
-        
         bindSelf()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        updateType()
+        
+        configureLabels()
+    }
+    
+        
+}
+private extension InstructionsViewController {
+    
+    func updateType() {
+        if UIScreen.main.bounds.height < UIScreen.main.bounds.width {
+            type = .iPadHorizontal
+        } else {
+            switch UIScreen.main.bounds.height {
+            case 0...568:
+                type = .iPhoneSE
+            case 569...667:
+                type = .iPhone7
+            case 668...736:
+                type = .iPhone8Plus
+            case 737...812:
+                type = .iPhoneX
+            case 813...1024:
+                type = .iPad
+            default:
+                type = .iPadWide
+            }
+        }
     }
     
 }
@@ -78,28 +120,44 @@ private extension InstructionsViewController {
             .disposed(by: bag)
     }
     
+}
+
     func configureConstraints() {
-        switch UIScreen.main.bounds.height {
-        case 0...568:
-            iconImageViewHeightConstraint.constant = 170
-            verticalSpaceBetweenIconImageViewAndTitleLabelConstraint.constant = -4
-            verticalSpaceBetweenTitleLabelAndStepsViewConstraint.constant = 16
-            verticalSpaceBetweenStepsViewAndGoToSettingsButtonConstraint.constant = 0
-        case 569...667:
-            iconImageViewHeightConstraint.constant = 212
-            verticalSpaceBetweenIconImageViewAndTitleLabelConstraint.constant = 12
-            verticalSpaceBetweenTitleLabelAndStepsViewConstraint.constant = 22
-            verticalSpaceBetweenStepsViewAndGoToSettingsButtonConstraint.constant = 18
-        case 668...736:
-            iconImageViewHeightConstraint.constant = 270
-            verticalSpaceBetweenIconImageViewAndTitleLabelConstraint.constant = 8
-            verticalSpaceBetweenTitleLabelAndStepsViewConstraint.constant = 22
-            verticalSpaceBetweenStepsViewAndGoToSettingsButtonConstraint.constant = 34
-        default:
-            iconImageViewHeightConstraint.constant = 270
-            verticalSpaceBetweenIconImageViewAndTitleLabelConstraint.constant = 46
-            verticalSpaceBetweenTitleLabelAndStepsViewConstraint.constant = 22
+        switch type {
+        case .iPhoneSE:
+            verticalSpaceBetweenTitleViewAndStepsViewConstraint.constant = 16
+            verticalSpaceBetweenStepsViewAndGoToSettingsButtonConstraint.constant = 10
+        case .iPhone7:
+            verticalSpaceBetweenTitleViewAndStepsViewConstraint.constant = 30
+            verticalSpaceBetweenStepsViewAndGoToSettingsButtonConstraint.constant = 30
+        case .iPhone8Plus:
+            verticalSpaceBetweenTitleViewAndStepsViewConstraint.constant = 30
+            verticalSpaceBetweenStepsViewAndGoToSettingsButtonConstraint.constant = 40
+        case .iPhoneX:
+            verticalSpaceBetweenTitleViewAndStepsViewConstraint.constant = 22
             verticalSpaceBetweenStepsViewAndGoToSettingsButtonConstraint.constant = 44
+        case .iPad:
+            verticalSpaceBetweenTitleViewAndStepsViewConstraint.constant = 40
+            verticalSpaceBetweenStepsViewAndGoToSettingsButtonConstraint.constant = 42
+            stepsViewLeadingConstraint.constant = 160
+            stepsViewTrailingConstraint.constant = 160
+            stepsViewHeightConstraint.constant = 410
+            goToSettingsButtonBottomConstraint.constant = 35
+        case .iPadWide:
+            verticalSpaceBetweenTitleViewAndStepsViewConstraint.constant = 58
+            verticalSpaceBetweenStepsViewAndGoToSettingsButtonConstraint.constant = 410
+            stepsViewLeadingConstraint.constant = 0
+            stepsViewTrailingConstraint.constant = 0
+            stepsViewHeightConstraint.constant = 264
+            goToSettingsButtonBottomConstraint.constant = 35
+        case .iPadHorizontal:
+            verticalSpaceBetweenTitleViewAndStepsViewConstraint.constant = -30
+            verticalSpaceBetweenStepsViewAndGoToSettingsButtonConstraint.constant = 157
+            stepsViewLeadingConstraint.constant = 0
+            stepsViewTrailingConstraint.constant = 0
+            stepsViewHeightConstraint.constant = 260
+            goToSettingsButtonBottomConstraint.constant = 35
+        }
         }
     }
     
