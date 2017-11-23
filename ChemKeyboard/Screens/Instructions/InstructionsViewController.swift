@@ -12,21 +12,36 @@ import RxCocoa
 
 class InstructionsViewController: UIViewController, Storyboardable {
 
-    @IBOutlet weak var closeButton: Button!
+    @IBOutlet weak var closeButton: UIButton!
+    
+    @IBOutlet weak var titleView: UIView!
     @IBOutlet weak var iconImageView: UIImageView!
-    @IBOutlet weak var iconImageViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var verticalSpaceBetweenIconImageViewAndTitleLabelConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var verticalSpaceBetweenTitleViewAndStepsViewConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var stepsView: UIView!
+    @IBOutlet weak var stepsViewLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var stepsViewTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var stepsViewHeightConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var goToSettingsLabel: UILabel!
+    @IBOutlet weak var goToSettingsEmojiLabel: UILabel!
     @IBOutlet weak var tapGeneralLabel: UILabel!
+    @IBOutlet weak var tapGeneralEmojiLabel: UILabel!
     @IBOutlet weak var findAndTapKeyboardsLabel: UILabel!
+    @IBOutlet weak var findAndTapKeyboardsEmojiLabel: UILabel!
     @IBOutlet weak var tapAddNewKeyboardLabel: UILabel!
+    @IBOutlet weak var tapAddNewKeyboardEmojiLabel: UILabel!
     @IBOutlet weak var tapChemKeyboardLabel: UILabel!
-    @IBOutlet weak var verticalSpaceBetweenTitleLabelAndStepsViewConstraint: NSLayoutConstraint!
-    @IBOutlet weak var goToSettingsButton: Button!
+    @IBOutlet weak var tapChemKeyboardEmojiLabel: UILabel!
+    
     @IBOutlet weak var verticalSpaceBetweenStepsViewAndGoToSettingsButtonConstraint: NSLayoutConstraint!
-
+    
+    @IBOutlet weak var goToSettingsButton: Button!
+    @IBOutlet weak var goToSettingsButtonBottomConstraint: NSLayoutConstraint!
+    
+    
     
     fileprivate let bag = DisposeBag()
     

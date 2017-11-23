@@ -336,19 +336,27 @@
                     </view>
                     <connections>
                         <outlet property="closeButton" destination="jkl-SU-Gs9" id="Y0Q-Ji-zTc"/>
+                        <outlet property="findAndTapKeyboardsEmojiLabel" destination="8Hs-cZ-sin" id="QQo-Bn-o4S"/>
                         <outlet property="findAndTapKeyboardsLabel" destination="z7c-Rv-VQA" id="zRL-bl-jnQ"/>
                         <outlet property="goToSettingsButton" destination="hnq-TC-RdZ" id="ivo-qG-ilR"/>
+                        <outlet property="goToSettingsButtonBottomConstraint" destination="P9l-Hu-eGC" id="CQT-9z-JIa"/>
+                        <outlet property="goToSettingsEmojiLabel" destination="g7a-7a-gnM" id="kTR-Tr-anm"/>
                         <outlet property="goToSettingsLabel" destination="5CM-m0-LCw" id="t7q-34-kBZ"/>
                         <outlet property="iconImageView" destination="7pd-aY-v2F" id="muk-BL-1K9"/>
-                        <outlet property="iconImageViewHeightConstraint" destination="4jC-2v-dij" id="g94-Tn-gZP"/>
                         <outlet property="stepsView" destination="r1e-9m-KjL" id="Itd-cD-r5t"/>
+                        <outlet property="stepsViewHeightConstraint" destination="ihR-L0-JAB" id="DzI-mL-lzp"/>
+                        <outlet property="stepsViewLeadingConstraint" destination="F7w-l6-Iwh" id="M9N-GF-Wvs"/>
+                        <outlet property="stepsViewTrailingConstraint" destination="VVe-Xn-1RQ" id="qap-gv-OSv"/>
+                        <outlet property="tapAddNewKeyboardEmojiLabel" destination="A3d-SI-EVi" id="8oz-zw-EbR"/>
                         <outlet property="tapAddNewKeyboardLabel" destination="HRm-f6-08B" id="cdZ-RC-aTe"/>
+                        <outlet property="tapChemKeyboardEmojiLabel" destination="odz-3Y-Nsf" id="ySb-DC-lwa"/>
                         <outlet property="tapChemKeyboardLabel" destination="vap-mf-Zh5" id="sLu-SW-Zgv"/>
+                        <outlet property="tapGeneralEmojiLabel" destination="Zhy-NT-bGl" id="J1m-My-z0O"/>
                         <outlet property="tapGeneralLabel" destination="239-Ez-Sqh" id="Zub-nU-cSL"/>
                         <outlet property="titleLabel" destination="Akc-QN-Xfw" id="dZ4-VW-MNl"/>
-                        <outlet property="verticalSpaceBetweenIconImageViewAndTitleLabelConstraint" destination="gNT-bu-AyA" id="Xsk-yJ-M87"/>
+                        <outlet property="titleView" destination="Vck-FU-gcn" id="9bX-NH-JUd"/>
                         <outlet property="verticalSpaceBetweenStepsViewAndGoToSettingsButtonConstraint" destination="2lN-Vr-IFk" id="NMJ-a7-4rZ"/>
-                        <outlet property="verticalSpaceBetweenTitleLabelAndStepsViewConstraint" destination="cnk-Nu-clG" id="Niz-7K-lUb"/>
+                        <outlet property="verticalSpaceBetweenTitleViewAndStepsViewConstraint" destination="ngt-71-Cfb" id="VfZ-9f-1TZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tuU-jB-eFY" userLabel="First Responder" sceneMemberID="firstResponder"/>
