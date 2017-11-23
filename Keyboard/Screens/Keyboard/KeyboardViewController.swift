@@ -225,6 +225,24 @@ private extension KeyboardViewController {
 
 }
 
+private extension KeyboardViewController {
+    
+    func updateHeightConstraint() {
+        let numberOfLines: CGFloat
+        
+        if let selectedSymbolGroup = viewModel.selectedSymbolGroup.value, let numberOfSymbolsInLine = selectedSymbolGroup.numberOfSymbolsInLine.value {
+            numberOfLines = (CGFloat(selectedSymbolGroup.symbols.count) / CGFloat(numberOfSymbolsInLine)).rounded(.up)
+        } else {
+            numberOfLines = 0
+        }
+        
+        let constant = (Device.isPad() ? 300 - 44 : 330 - 44) + numberOfLines * 44 -
+            (UIScreen.main.bounds.height < UIScreen.main.bounds.width && !Device.isPad() ? 100 : 0)
+        viewHeightConstraint.constant = constant
+    }
+    
+}
+
 extension KeyboardViewController: UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
