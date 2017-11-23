@@ -271,8 +271,8 @@ private extension KeyboardElementsTableViewCell {
             return 0
         }
         
-        let numberOfColumns =
-            (CGFloat(viewModel.categories.value[section].elements.count / layout.numberOfRows)).rounded(.up)
+        let numberOfColumns = (CGFloat(viewModel.categories.value[section].elements.count) /
+            CGFloat(layout.numberOfRows)).rounded(.up)
         return numberOfColumns * 66
     }
     
