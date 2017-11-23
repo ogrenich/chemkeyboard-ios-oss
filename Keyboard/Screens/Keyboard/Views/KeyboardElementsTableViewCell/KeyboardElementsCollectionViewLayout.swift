@@ -56,6 +56,7 @@ class KeyboardElementsCollectionViewLayout: UICollectionViewLayout {
         
         numberOfRows = newNumberOfRows
         cache = []
+        contentWidth = 0
         
         var rowNumber: Int = 0
         var columnNumber: Int = 0
