@@ -74,6 +74,8 @@ class KeyboardViewController: UIInputViewController {
                 self?.tableView.reloadData()
             }
         }
+        
+        updateHeightConstraint()
     }
 
 }
@@ -193,22 +195,10 @@ private extension KeyboardViewController {
             })
             .disposed(by: bag)
 
-        viewModel.selectedSymbolGroup.asDriver()
-            .map {
-                guard
-                    let selectedSymbolGroup = $0,
-                    let numberOfSymbolsInLine = selectedSymbolGroup
-                        .numberOfSymbolsInLine.value
-                else {
-                    return Device.isPad() ? 300 - 44 : 330 - 44
-                }
-
-                let numberOfLines = (CGFloat(selectedSymbolGroup.symbols.count)
-                    / CGFloat(numberOfSymbolsInLine)).rounded(.up)
-
-                return (Device.isPad() ? 300 - 44 : 330 - 44) + numberOfLines * 44
+        viewModel.selectedSymbolGroup.asObservable()
+            .bind { [weak self] _ in
+                self?.updateHeightConstraint()
             }
-            .drive(viewHeightConstraint.rx.constant)
             .disposed(by: bag)
 
         viewModel.selectedSymbolGroup.asDriver()
@@ -223,6 +213,24 @@ private extension KeyboardViewController {
             .disposed(by: bag)
     }
 
+}
+
+private extension KeyboardViewController {
+    
+    func updateHeightConstraint() {
+        let numberOfLines: CGFloat
+        
+        if let selectedSymbolGroup = viewModel.selectedSymbolGroup.value, let numberOfSymbolsInLine = selectedSymbolGroup.numberOfSymbolsInLine.value {
+            numberOfLines = (CGFloat(selectedSymbolGroup.symbols.count) / CGFloat(numberOfSymbolsInLine)).rounded(.up)
+        } else {
+            numberOfLines = 0
+        }
+        
+        let constant = (Device.isPad() ? 300 - 44 : 330 - 44) + numberOfLines * 44 -
+            (UIScreen.main.bounds.height < UIScreen.main.bounds.width && !Device.isPad() ? 100 : 0)
+        viewHeightConstraint.constant = constant
+    }
+    
 }
 
 extension KeyboardViewController: UITableViewDataSource {
@@ -301,6 +309,9 @@ extension KeyboardViewController: UITableViewDelegate {
         case .categories:
             return 36
         case .elements:
+            if UIScreen.main.bounds.height < UIScreen.main.bounds.width && !Device.isPad() {
+                return 60
+            }
             return 160
         case .symbols:
             guard

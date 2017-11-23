@@ -34,7 +34,7 @@ class KeyboardElementsTableViewCell: UITableViewCell {
     
     fileprivate var impactFeedbackGenerator: UIImpactFeedbackGenerator? = nil
     
-    var currentSection: RxSwift.Observable<Int> {
+    fileprivate var currentSection: RxSwift.Observable<Int> {
         return collectionView.rx.contentOffset
             .flatMap { [weak self] contentOffset -> RxSwift.Observable<Int> in
                 guard
@@ -70,6 +70,11 @@ class KeyboardElementsTableViewCell: UITableViewCell {
         super.layoutSubviews()
         
         collectionView.fillSuperview()
+        collectionView.reloadData()
+        if let selectedCategory = viewModel.selectedCategory.value,
+            let index = viewModel.categories.value.index(of: selectedCategory) {
+            needsScrollElementsCollectionViewToCategoryAt.onNext(index)
+        }
     }
     
 }
@@ -262,7 +267,12 @@ private extension KeyboardElementsTableViewCell {
 private extension KeyboardElementsTableViewCell {
     
     func widthOfCollectionViewSection(at section: Int) -> CGFloat {
-        let numberOfColumns = (CGFloat(viewModel.categories.value[section].elements.count) / 3).rounded(.up)
+        guard let layout = collectionView.collectionViewLayout as? KeyboardElementsCollectionViewLayout else {
+            return 0
+        }
+        
+        let numberOfColumns = (CGFloat(viewModel.categories.value[section].elements.count) /
+            CGFloat(layout.numberOfRows)).rounded(.up)
         return numberOfColumns * 66
     }
     
