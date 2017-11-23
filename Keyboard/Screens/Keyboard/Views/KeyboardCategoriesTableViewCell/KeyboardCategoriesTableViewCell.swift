@@ -162,8 +162,7 @@ private extension KeyboardCategoriesTableViewCell {
 extension KeyboardCategoriesTableViewCell: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        let sideInset: CGFloat = 6 + (Device.isPad() && (UIScreen.main.bounds.width > UIScreen.main.bounds.height) ?
-            130 : 0)
+        let sideInset: CGFloat = 6 + (Device.isWide() ? 130 : 0)
         
         return UIEdgeInsets(top: 0, left: sideInset, bottom: 0, right: sideInset)
     }
