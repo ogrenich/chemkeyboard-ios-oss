@@ -59,8 +59,6 @@ class InstructionsViewController: UIViewController, Storyboardable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        configureConstraints()
         
         bindSelf()
     }
@@ -70,11 +68,20 @@ class InstructionsViewController: UIViewController, Storyboardable {
         
         updateType()
         
+        configureConstraints()
         configureLabels()
+        configureEmoji()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         
+        layoutTitleView()
+        layoutStepView()
+    }
+    
 }
+
 private extension InstructionsViewController {
     
     func updateType() {
