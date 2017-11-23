@@ -122,6 +122,17 @@ private extension InstructionsViewController {
     
 }
 
+private extension InstructionsViewController {
+    
+    private func attributedString(for label: UILabel, length: Int, size: CGFloat) -> NSMutableAttributedString {
+        let attributedString = NSMutableAttributedString(string: label.text ?? "")
+        if let font = UIFont(name: "SFUIDisplay-Regular", size: size) {
+            attributedString.addAttribute(NSAttributedStringKey.font, value: font,
+                                          range: NSRange(location: 0, length: length))
+        }
+        return attributedString
+    }
+    
     func configureConstraints() {
         switch type {
         case .iPhoneSE:
@@ -158,6 +169,59 @@ private extension InstructionsViewController {
             stepsViewHeightConstraint.constant = 260
             goToSettingsButtonBottomConstraint.constant = 35
         }
+    }
+    
+    func configureLabels() {
+        var fontSize: CGFloat = 0
+        
+        [goToSettingsLabel, tapGeneralLabel, findAndTapKeyboardsLabel,
+         tapAddNewKeyboardLabel, tapChemKeyboardLabel].forEach { label in
+            switch type {
+            case .iPhoneSE, .iPhone7, .iPhone8Plus, .iPhoneX:
+                fontSize = 15
+                titleLabel.textAlignment = .left
+                titleLabel.font = UIFont(name: "SFUIDisplay-Semibold", size: 30)
+                label?.textAlignment = .left
+            case .iPad:
+                fontSize = 24
+                titleLabel.textAlignment = .center
+                titleLabel.font = UIFont(name: "SFUIDisplay-Semibold", size: 42)
+                label?.textAlignment = .left
+            case .iPadWide:
+                fontSize = 18
+                titleLabel.textAlignment = .center
+                titleLabel.font = UIFont(name: "SFUIDisplay-Semibold", size: 42)
+                label?.textAlignment = .center
+            case .iPadHorizontal:
+                fontSize = 15
+                titleLabel.textAlignment = .left
+                titleLabel.font = UIFont(name: "SFUIDisplay-Semibold", size: 42)
+                label?.textAlignment = .center
+            }
+            
+            label?.font = UIFont(name: "SFUIDisplay-Semibold", size: fontSize)
+        }
+        
+        goToSettingsLabel.attributedText = attributedString(for: goToSettingsLabel, length: 5, size: fontSize)
+        tapGeneralLabel.attributedText = attributedString(for: tapGeneralLabel, length: 3, size: fontSize)
+        findAndTapKeyboardsLabel.attributedText = attributedString(for: findAndTapKeyboardsLabel, length: 13, size: fontSize)
+        tapAddNewKeyboardLabel.attributedText = attributedString(for: tapAddNewKeyboardLabel, length: 3, size: fontSize)
+        tapChemKeyboardLabel.attributedText = attributedString(for: tapChemKeyboardLabel, length: 6, size: fontSize)
+    }
+    
+    func configureEmoji() {
+        [goToSettingsEmojiLabel, tapGeneralEmojiLabel, findAndTapKeyboardsEmojiLabel,
+         tapAddNewKeyboardEmojiLabel, tapChemKeyboardEmojiLabel].forEach { emojiLabel in
+            switch type {
+            case .iPhoneSE, .iPhone7, .iPhone8Plus, .iPhoneX:
+                emojiLabel?.font = UIFont(name: "AppleColorEmoji", size: 23)
+            case .iPad:
+                emojiLabel?.font = UIFont(name: "AppleColorEmoji", size: 45)
+            case .iPadWide:
+                emojiLabel?.font = UIFont(name: "AppleColorEmoji", size: 95)
+            case .iPadHorizontal:
+                emojiLabel?.font = UIFont(name: "AppleColorEmoji", size: 65)
+            }
         }
     }
     
@@ -165,20 +229,19 @@ private extension InstructionsViewController {
 
 private extension InstructionsViewController {
     
-    private func attributedString(for label: UILabel, length: Int) -> NSMutableAttributedString {
-        let attributedString = NSMutableAttributedString(string: label.text ?? "")
-        attributedString.addAttribute(NSAttributedStringKey.font,
-                                      value: UIFont.systemFont(ofSize: 15.0, weight: UIFont.Weight.regular),
-                                      range: NSRange(location: 0, length: length))
-        return attributedString
+    private func alignLabelsToEmoji(padding: CGFloat, align: Align, width: CGFloat, height: CGFloat) {
+        goToSettingsLabel.align(align, relativeTo: goToSettingsEmojiLabel,
+                                padding: padding, width: width, height: height)
+        tapGeneralLabel.align(align, relativeTo: tapGeneralEmojiLabel,
+                              padding: padding, width: width, height: height)
+        findAndTapKeyboardsLabel.align(align, relativeTo: findAndTapKeyboardsEmojiLabel,
+                                       padding: padding, width: width, height: height)
+        tapAddNewKeyboardLabel.align(align, relativeTo: tapAddNewKeyboardEmojiLabel,
+                                     padding: padding, width: width, height: height)
+        tapChemKeyboardLabel.align(align, relativeTo: tapChemKeyboardEmojiLabel,
+                                   padding: padding, width: width, height: height)
     }
     
-    func configureLabels() {
-        goToSettingsLabel.attributedText = attributedString(for: goToSettingsLabel, length: 5)
-        tapGeneralLabel.attributedText = attributedString(for: tapGeneralLabel, length: 3)
-        findAndTapKeyboardsLabel.attributedText = attributedString(for: findAndTapKeyboardsLabel, length: 13)
-        tapAddNewKeyboardLabel.attributedText = attributedString(for: tapAddNewKeyboardLabel, length: 3)
-        tapChemKeyboardLabel.attributedText = attributedString(for: tapChemKeyboardLabel, length: 6)
     }
     
 }
