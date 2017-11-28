@@ -73,7 +73,7 @@ class KeyboardElementsTableViewCell: UITableViewCell {
         collectionView.reloadData()
         if let selectedCategory = viewModel.selectedCategory.value,
             let index = viewModel.categories.value.index(of: selectedCategory) {
-            needsScrollElementsCollectionViewToCategoryAt.onNext(index)
+            setOffsetToSection(at: index)
         }
     }
     
@@ -249,15 +249,7 @@ private extension KeyboardElementsTableViewCell {
                     return
                 }
                 
-                var offset: CGFloat = 0
-                
-                (0..<$0).forEach { [weak self] section in
-                    offset += self?.widthOfCollectionViewSection(at: section) ?? 0
-                }
-                
-                let maxContentOffset = self.collectionView.contentSize.width - self.collectionView.frame.width
-                offset = min(offset, maxContentOffset)
-                self.collectionView.setContentOffset(CGPoint(x: offset, y: 0), animated: true)
+                self.setOffsetToSection(at: $0)
             }
             .disposed(by: bag)
     }
@@ -274,6 +266,19 @@ private extension KeyboardElementsTableViewCell {
         let numberOfColumns = (CGFloat(viewModel.categories.value[section].elements.count) /
             CGFloat(layout.numberOfRows)).rounded(.up)
         return numberOfColumns * 66
+    }
+    
+    func setOffsetToSection(at section: Int) {
+        var offset: CGFloat = 0
+        
+        (0..<section).forEach { [weak self] section in
+            offset += self?.widthOfCollectionViewSection(at: section) ?? 0
+        }
+        
+        let maxContentOffset = max(collectionView.contentSize.width - collectionView.frame.width, 0)
+        offset = min(offset, maxContentOffset)
+        print(offset)
+        collectionView.setContentOffset(CGPoint(x: offset, y: 0), animated: true)
     }
     
 }
