@@ -277,7 +277,6 @@ private extension KeyboardElementsTableViewCell {
         
         let maxContentOffset = max(collectionView.contentSize.width - collectionView.frame.width, 0)
         offset = min(offset, maxContentOffset)
-        print(offset)
         collectionView.setContentOffset(CGPoint(x: offset, y: 0), animated: true)
     }
     
