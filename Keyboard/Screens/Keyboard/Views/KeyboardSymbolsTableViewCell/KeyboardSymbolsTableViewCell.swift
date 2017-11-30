@@ -10,11 +10,14 @@ import UIKit
 import RxSwift
 import RxCocoa
 import Device
+import Neon
 
 @IBDesignable
 class KeyboardSymbolsTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    fileprivate lazy var collectionView: UICollectionView = UICollectionView(frame: .zero,
+                                                                             collectionViewLayout:
+                                                                             UICollectionViewFlowLayout())
     
     
     fileprivate weak var needsReactToSimpleButtonTouchEvent: PublishSubject<Symbol?>!
@@ -36,6 +39,12 @@ class KeyboardSymbolsTableViewCell: UITableViewCell {
         bag = DisposeBag()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        collectionView.fillSuperview()
+    }
+    
 }
 
 extension KeyboardSymbolsTableViewCell {
@@ -47,6 +56,8 @@ extension KeyboardSymbolsTableViewCell {
         self.viewModel = viewModel
         self.needsReactToSimpleButtonTouchEvent = needsReactToSimpleButtonTouchEvent
         self.needsPlayInputClick = needsPlayInputClick
+        
+        setupUI()
         
         configureCollectionView()
         
@@ -60,8 +71,39 @@ extension KeyboardSymbolsTableViewCell {
 
 private extension KeyboardSymbolsTableViewCell {
     
+    func setupUI() {
+        backgroundColor = .clear
+    }
+    
+}
+
+private extension KeyboardSymbolsTableViewCell {
+    
     func configureCollectionView() {
+        if collectionView.superview == nil {
+            addSubview(collectionView)
+        }
+        
         collectionView.register(KeyboardSymbolsCollectionViewCell.self)
+        
+        guard let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
+            return
+        }
+        
+        collectionView.delegate = self
+        
+        layout.scrollDirection = .vertical
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.isScrollEnabled = false
+        collectionView.isPagingEnabled = false
+        collectionView.bounces = false
+        collectionView.bouncesZoom = false
+        
+        collectionView.backgroundColor = .clear
+        
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
     }
     
 }
@@ -143,11 +185,11 @@ private extension KeyboardSymbolsTableViewCell {
                     corners.insert(.topRight)
                 }
                 
-                if item == numberOfSymbols - numberOfSymbolsInLine {
+                if item == numberOfSymbols - numberOfSymbolsInLine && (selectedSymbolGroup.name != "Digits" || Device.isPad()) {
                     corners.insert(.bottomLeft)
                 }
                 
-                if item == numberOfSymbols - 1 {
+                if item == numberOfSymbols - 1 && (selectedSymbolGroup.name != "Greek" || Device.isPad()) {
                     corners.insert(.bottomRight)
                 }
                 
@@ -162,24 +204,19 @@ private extension KeyboardSymbolsTableViewCell {
 extension KeyboardSymbolsTableViewCell: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        let sideInset: CGFloat = 8 + (Device.isPad() && (UIScreen.main.bounds.width > UIScreen.main.bounds.height) ? 136 : 0)
+        let sideInset: CGFloat = 8 + (Device.isWide() ? 136 : 0)
         
-        return UIEdgeInsets(top: 8, left: sideInset, bottom: 0, right: sideInset)
+        return UIEdgeInsets(top: 0, left: sideInset, bottom: 0, right: sideInset)
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        guard let layout = collectionViewLayout as? UICollectionViewFlowLayout else {
-            return CGSize.zero
-        }
-        
-        let sectionsInsets: CGFloat = 16 + (Device.isPad() &&
-            (UIScreen.main.bounds.width > UIScreen.main.bounds.height) ? 272 : 0)
+        let sectionsInsets: CGFloat = 16 + (Device.isWide() ? 272 : 0)
         let numberOfSymbolsInLine = viewModel.selectedSymbolGroup.value?.numberOfSymbolsInLine.value ?? 10
-        let interitemsSpacing = layout.minimumInteritemSpacing * CGFloat(numberOfSymbolsInLine - 1)
         
-        return CGSize(width: (collectionView.frame.size.width - sectionsInsets - interitemsSpacing) / CGFloat(numberOfSymbolsInLine), height: 44)
+        return CGSize(width: (collectionView.frame.size.width - sectionsInsets) /
+            CGFloat(numberOfSymbolsInLine), height: 44)
     }
     
 }

@@ -12,7 +12,8 @@ public extension UITableView {
     
     @discardableResult
     public func register<T: UITableViewCell>(_: T.Type) -> UITableView {
-        register(UINib(nibName: T.nibName, bundle: nil), forCellReuseIdentifier: T.reuseIdentifier)
+        register(T.self, forCellReuseIdentifier: T.reuseIdentifier)
+        
         return self
     }
     

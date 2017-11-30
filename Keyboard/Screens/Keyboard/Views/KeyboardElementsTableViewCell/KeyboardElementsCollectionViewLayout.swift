@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import Device
 
 class KeyboardElementsCollectionViewLayout: UICollectionViewLayout {
 
-    fileprivate let numberOfRows: Int = 3
+    var numberOfRows: Int = 3
     fileprivate let cellPadding: CGFloat = 4
     fileprivate let cellWidth: CGFloat = 58
     fileprivate let cellHeight: CGFloat = 44
@@ -39,12 +40,23 @@ class KeyboardElementsCollectionViewLayout: UICollectionViewLayout {
     
     
     override func prepare() {
+        let newNumberOfRows: Int
+        if UIScreen.main.bounds.height < UIScreen.main.bounds.width && !Device.isPad() {
+            newNumberOfRows = 1
+        } else {
+            newNumberOfRows = 3
+        }
+        
         guard
             let collectionView = collectionView,
-            cache.isEmpty
+            cache.isEmpty || newNumberOfRows != numberOfRows
         else {
             return
         }
+        
+        numberOfRows = newNumberOfRows
+        cache = []
+        contentWidth = 0
         
         var rowNumber: Int = 0
         var columnNumber: Int = 0

@@ -17,7 +17,6 @@ class MainViewController: UIViewController, Storyboardable {
     @IBOutlet weak var clearTextButton: Button!
     @IBOutlet weak var copyToClipboardButton: Button!
     @IBOutlet weak var versionLabel: UILabel!
-    @IBOutlet weak var copyrightLabel: UILabel!
     
     
     fileprivate let bag = DisposeBag()

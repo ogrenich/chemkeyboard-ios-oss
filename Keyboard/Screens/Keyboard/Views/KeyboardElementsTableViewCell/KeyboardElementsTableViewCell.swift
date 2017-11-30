@@ -9,11 +9,15 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Neon
+import AudioToolbox.AudioServices
 
 @IBDesignable
 class KeyboardElementsTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    fileprivate lazy var collectionView: UICollectionView = UICollectionView(frame: .zero,
+                                                                             collectionViewLayout:
+                                                                             KeyboardElementsCollectionViewLayout())
     
     
     fileprivate weak var needsReactToSimpleButtonTouchEvent: PublishSubject<Symbol?>!
@@ -30,7 +34,7 @@ class KeyboardElementsTableViewCell: UITableViewCell {
     
     fileprivate var impactFeedbackGenerator: UIImpactFeedbackGenerator? = nil
     
-    var currentSection: RxSwift.Observable<Int> {
+    fileprivate var currentSection: RxSwift.Observable<Int> {
         return collectionView.rx.contentOffset
             .flatMap { [weak self] contentOffset -> RxSwift.Observable<Int> in
                 guard
@@ -62,6 +66,17 @@ class KeyboardElementsTableViewCell: UITableViewCell {
         bag = DisposeBag()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        collectionView.fillSuperview()
+        collectionView.reloadData()
+        if let selectedCategory = viewModel.selectedCategory.value,
+            let index = viewModel.categories.value.index(of: selectedCategory) {
+            setOffsetToSection(at: index)
+        }
+    }
+    
 }
 
 extension KeyboardElementsTableViewCell {
@@ -76,6 +91,8 @@ extension KeyboardElementsTableViewCell {
         self.needsScrollElementsCollectionViewToCategoryAt = needsScrollElementsCollectionViewToCategoryAt
         self.needsPlayInputClick = needsPlayInputClick
         
+        setupUI()
+        
         configureCollectionView()
         
         bindSelf()
@@ -89,8 +106,29 @@ extension KeyboardElementsTableViewCell {
 
 private extension KeyboardElementsTableViewCell {
     
+    func setupUI() {
+        backgroundColor = .clear
+    }
+    
+}
+
+private extension KeyboardElementsTableViewCell {
+    
     func configureCollectionView() {
+        if collectionView.superview == nil {
+            addSubview(collectionView)
+        }
+        
         collectionView.register(KeyboardElementsCollectionViewCell.self)
+        
+        collectionView.backgroundColor = .clear
+        collectionView.clipsToBounds = false
+        collectionView.dataSource = self
+        
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.isPagingEnabled = false
+        collectionView.alwaysBounceHorizontal = true
     }
     
 }
@@ -162,10 +200,14 @@ private extension KeyboardElementsTableViewCell {
                     let element = self.viewModel.categories.value[indexPath.section].elements[indexPath.item]
                     PopUp.instance.show(element: element, at: frame, style: .extended)
                     DispatchQueue.main.async { [weak self] in
-                        self?.impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
-                        self?.impactFeedbackGenerator?.prepare()
-                        self?.impactFeedbackGenerator?.impactOccurred()
-                        self?.impactFeedbackGenerator = nil
+                        if UIDevice.current.hasHapticFeedback {
+                            self?.impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+                            self?.impactFeedbackGenerator?.prepare()
+                            self?.impactFeedbackGenerator?.impactOccurred()
+                            self?.impactFeedbackGenerator = nil
+                        } else if UIDevice.current.hasTapticEngine {
+                            AudioServicesPlaySystemSound(1520)
+                        }
                     }
                 }
             }
@@ -207,15 +249,7 @@ private extension KeyboardElementsTableViewCell {
                     return
                 }
                 
-                var offset: CGFloat = 0
-                
-                (0..<$0).forEach { [weak self] section in
-                    offset += self?.widthOfCollectionViewSection(at: section) ?? 0
-                }
-                
-                let maxContentOffset = self.collectionView.contentSize.width - self.collectionView.frame.width
-                offset = min(offset, maxContentOffset)
-                self.collectionView.setContentOffset(CGPoint(x: offset, y: 0), animated: true)
+                self.setOffsetToSection(at: $0)
             }
             .disposed(by: bag)
     }
@@ -225,8 +259,25 @@ private extension KeyboardElementsTableViewCell {
 private extension KeyboardElementsTableViewCell {
     
     func widthOfCollectionViewSection(at section: Int) -> CGFloat {
-        let numberOfColumns = (CGFloat(viewModel.categories.value[section].elements.count) / 3).rounded(.up)
+        guard let layout = collectionView.collectionViewLayout as? KeyboardElementsCollectionViewLayout else {
+            return 0
+        }
+        
+        let numberOfColumns = (CGFloat(viewModel.categories.value[section].elements.count) /
+            CGFloat(layout.numberOfRows)).rounded(.up)
         return numberOfColumns * 66
+    }
+    
+    func setOffsetToSection(at section: Int) {
+        var offset: CGFloat = 0
+        
+        (0..<section).forEach { [weak self] section in
+            offset += self?.widthOfCollectionViewSection(at: section) ?? 0
+        }
+        
+        let maxContentOffset = max(collectionView.contentSize.width - collectionView.frame.width, 0)
+        offset = min(offset, maxContentOffset)
+        collectionView.setContentOffset(CGPoint(x: offset, y: 0), animated: true)
     }
     
 }

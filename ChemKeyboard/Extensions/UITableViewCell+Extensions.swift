@@ -8,4 +8,4 @@
 
 import UIKit
 
-extension UITableViewCell: Reusable, NibLoadable { }
+extension UITableViewCell: Reusable { }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Neon
 
 class ExtendedElementPopUp: UIView {
 
@@ -15,6 +16,13 @@ class ExtendedElementPopUp: UIView {
     fileprivate let molarMassLabel: UILabel = UILabel()
     fileprivate let nameLabel: UILabel = UILabel()
     fileprivate let electronConfigurationLabel: UILabel = UILabel()
+    
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        layoutFrames()
+    }
 
 }
 
@@ -35,7 +43,6 @@ extension ExtendedElementPopUp {
 private extension ExtendedElementPopUp {
     
     func setUpLabels(with element: Element) {
-        
         symbolLabel.font = UIFont(name: "SFUIDisplay-Bold", size: 32)
         [numberLabel, molarMassLabel, nameLabel, electronConfigurationLabel].forEach { label in
             label.font = UIFont(name: "SFUIDisplay-Bold", size: 11)
@@ -48,6 +55,7 @@ private extension ExtendedElementPopUp {
         electronConfigurationLabel.text = element.electronConfiguration ?? ""
         
         [symbolLabel, numberLabel, molarMassLabel, nameLabel, electronConfigurationLabel].forEach { label in
+            label.sizeToFit()
             label.adjustsFontSizeToFitWidth = true
             label.translatesAutoresizingMaskIntoConstraints = false
             addSubview(label)
@@ -56,30 +64,35 @@ private extension ExtendedElementPopUp {
         [symbolLabel, nameLabel, electronConfigurationLabel].forEach { label in
             label.textColor = element.category?.textColor?.hexColor ?? .black
             label.textAlignment = .left
-            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 6).isActive = true
         }
         [numberLabel, molarMassLabel].forEach { label in
             label.textColor = (element.category?.textColor?.hexColor ?? .black).withAlphaComponent(0.5)
             label.textAlignment = .right
-            label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -6).isActive = true
+        }
+    }
+    
+}
+
+private extension ExtendedElementPopUp {
+    
+    func layoutFrames() {
+        var symbolWidth = symbolLabel.width
+        var molarMassWidth = molarMassLabel.width
+        if (symbolWidth + molarMassWidth) > width - 12 {
+            symbolWidth -= 6
+            molarMassWidth = width - 12 - symbolWidth
         }
         
-        symbolLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 30).isActive = true
-        symbolLabel.heightAnchor.constraint(lessThanOrEqualToConstant: 34).isActive = true
-        [numberLabel, molarMassLabel, nameLabel, electronConfigurationLabel].forEach { label in
-            label.heightAnchor.constraint(equalToConstant: 14).isActive = true
-        }
+        let electronConfigurationWidth = min(electronConfigurationLabel.width, width - 12)
         
-        symbolLabel.topAnchor.constraint(equalTo: topAnchor, constant: 2).isActive = true
-        numberLabel.topAnchor.constraint(equalTo: topAnchor, constant: 4).isActive = true
-        nameLabel.topAnchor.constraint(equalTo: symbolLabel.bottomAnchor).isActive = true
-        electronConfigurationLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor).isActive = true
-        molarMassLabel.topAnchor.constraint(equalTo: numberLabel.bottomAnchor).isActive = true
-        
-        molarMassLabel.leadingAnchor.constraint(greaterThanOrEqualTo: symbolLabel.trailingAnchor).isActive = true
-        numberLabel.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor).isActive = true
-        nameLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor).isActive = true
-        electronConfigurationLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor).isActive = true
+        symbolLabel.anchorInCorner(.topLeft,
+                                   xPad: 6, yPad: 0,
+                                   width: symbolWidth, height: 34)
+        numberLabel.anchorInCorner(.topRight, xPad: 6, yPad: 6, width: numberLabel.width, height: 14)
+        molarMassLabel.anchorInCorner(.topRight, xPad: 6, yPad: 6 + 14, width: molarMassWidth, height: 14)
+        nameLabel.anchorInCorner(.topLeft, xPad: 6, yPad: 34, width: nameLabel.width, height: 14)
+        electronConfigurationLabel.anchorInCorner(.topLeft, xPad: 6, yPad: 34 + 14,
+                                                  width: electronConfigurationWidth, height: 14)
     }
     
 }

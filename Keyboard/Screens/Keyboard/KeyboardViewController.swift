@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import AudioToolbox.AudioServices
+import Device
 
 private extension KeyboardViewController {
 
@@ -73,10 +74,8 @@ class KeyboardViewController: UIInputViewController {
                 self?.tableView.reloadData()
             }
         }
-
-        if let actionsCell = tableView.cellForRow(at: IndexPath(row: 0, section: Section.actions.rawValue)) as? KeyboardActionsTableViewCell {
-            actionsCell.willRotate()
-        }
+        
+        updateHeightConstraint()
     }
 
 }
@@ -84,7 +83,7 @@ class KeyboardViewController: UIInputViewController {
 private extension KeyboardViewController {
 
     func setupUI() {
-        viewHeightConstraint = view.heightAnchor.constraint(equalToConstant: 300)
+        viewHeightConstraint = view.heightAnchor.constraint(equalToConstant: Device.isPad() ? 300 : 330)
     }
 
     func updateUI() {
@@ -196,24 +195,10 @@ private extension KeyboardViewController {
             })
             .disposed(by: bag)
 
-        viewModel.selectedSymbolGroup.asDriver()
-            .map {
-                guard
-                    let selectedSymbolGroup = $0,
-                    let numberOfSymbolsInLine = selectedSymbolGroup
-                        .numberOfSymbolsInLine.value
-                else {
-                    return 300 - 52
-                }
-
-                let numberOfLines = (CGFloat(selectedSymbolGroup.symbols.count)
-                    / CGFloat(numberOfSymbolsInLine)).rounded(.up)
-
-                return (300 - 52)
-                    + (numberOfLines * 44)
-                    + ((numberOfLines - 1) * 1) + 8
+        viewModel.selectedSymbolGroup.asObservable()
+            .bind { [weak self] _ in
+                self?.updateHeightConstraint()
             }
-            .drive(viewHeightConstraint.rx.constant)
             .disposed(by: bag)
 
         viewModel.selectedSymbolGroup.asDriver()
@@ -228,6 +213,24 @@ private extension KeyboardViewController {
             .disposed(by: bag)
     }
 
+}
+
+private extension KeyboardViewController {
+    
+    func updateHeightConstraint() {
+        let numberOfLines: CGFloat
+        
+        if let selectedSymbolGroup = viewModel.selectedSymbolGroup.value, let numberOfSymbolsInLine = selectedSymbolGroup.numberOfSymbolsInLine.value {
+            numberOfLines = (CGFloat(selectedSymbolGroup.symbols.count) / CGFloat(numberOfSymbolsInLine)).rounded(.up)
+        } else {
+            numberOfLines = 0
+        }
+        
+        let constant = (Device.isPad() ? 300 - 44 : 330 - 44) + numberOfLines * 44 -
+            (UIScreen.main.bounds.height < UIScreen.main.bounds.width && !Device.isPad() ? 100 : 0)
+        viewHeightConstraint.constant = constant
+    }
+    
 }
 
 extension KeyboardViewController: UITableViewDataSource {
@@ -275,17 +278,19 @@ extension KeyboardViewController: UITableViewDataSource {
                                   needsPlayInputClick)
         case .actions:
             let cell: KeyboardActionsTableViewCell = tableView.dequeueReusableCell()
-
             let cellModel = KeyboardActionsTableViewCellModel.init(with: viewModel.symbolGroups,
                                                                    selectedSymbolGroup: viewModel.selectedSymbolGroup)
-
+            
             let configuredCell = cell.configure(with: cellModel,
+                                                needsPlayInputClick,
                                                 needsReactToDeleteButtonTouchEvent: needsReactToDeleteButtonTouchEvent,
-                                                needsPlayInputClick)
-
-            configuredCell.switchButton?.addTarget(self,
-                                                   action: #selector(handleInputModeList(from:with:)),
-                                                   for: .allTouchEvents)
+                                                needsReactToSimpleButtonTouchEvent: needsReactToSimpleButtonTouchEvent)
+            
+            configuredCell.switchButton.addTarget(self,
+                                                  action: #selector(handleInputModeList(from:with:)),
+                                                  for: .allTouchEvents)
+            configuredCell.returnButton.setTitle(returnKeyString, letterSpacing: 1.1)
+            
             return configuredCell
         }
     }
@@ -304,7 +309,10 @@ extension KeyboardViewController: UITableViewDelegate {
         case .categories:
             return 36
         case .elements:
-            return 156
+            if UIScreen.main.bounds.height < UIScreen.main.bounds.width && !Device.isPad() {
+                return 60
+            }
+            return 160
         case .symbols:
             guard
                 let selectedSymbolGroup = viewModel.selectedSymbolGroup.value,
@@ -316,9 +324,9 @@ extension KeyboardViewController: UITableViewDelegate {
             let numberOfLines = (CGFloat(selectedSymbolGroup.symbols.count)
                 / CGFloat(numberOfSymbolsInLine)).rounded(.up)
 
-            return (numberOfLines * 44) + ((numberOfLines - 1) * 1) + 8
+            return numberOfLines * 44
         case .actions:
-            return 56
+            return Device.isPad() ? 60 : 90
         }
     }
 

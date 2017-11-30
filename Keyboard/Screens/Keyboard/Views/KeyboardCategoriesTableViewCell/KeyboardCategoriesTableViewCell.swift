@@ -10,11 +10,14 @@ import UIKit
 import RxSwift
 import RxCocoa
 import Device
+import Neon
 
 @IBDesignable
 class KeyboardCategoriesTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    fileprivate lazy var collectionView: UICollectionView = UICollectionView(frame: .zero,
+                                                                             collectionViewLayout:
+                                                                             UICollectionViewFlowLayout())
     
     
     fileprivate weak var needsScrollElementsCollectionViewToCategoryAt: PublishSubject<Int>!
@@ -31,6 +34,12 @@ class KeyboardCategoriesTableViewCell: UITableViewCell {
         bag = DisposeBag()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        collectionView.fillSuperview()
+    }
+    
 }
 
 extension KeyboardCategoriesTableViewCell {
@@ -42,6 +51,8 @@ extension KeyboardCategoriesTableViewCell {
         self.viewModel = viewModel
         self.needsScrollElementsCollectionViewToCategoryAt = needsScrollElementsCollectionViewToCategoryAt
         self.needsPlayInputClick = needsPlayInputClick
+        
+        setupUI()
         
         configureCollectionView()
         
@@ -56,12 +67,38 @@ extension KeyboardCategoriesTableViewCell {
 
 private extension KeyboardCategoriesTableViewCell {
     
+    func setupUI() {
+        backgroundColor = .clear
+    }
+    
+}
+
+private extension KeyboardCategoriesTableViewCell {
+    
     func configureCollectionView() {
+        if collectionView.superview == nil {
+            addSubview(collectionView)
+        }
+        
         collectionView.register(KeyboardCategoriesCollectionViewCell.self)
         
-        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.estimatedItemSize = UICollectionViewFlowLayoutAutomaticSize
+        guard let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
+            return
         }
+        
+        collectionView.delegate = self
+        
+        layout.scrollDirection = .horizontal
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.isPagingEnabled = false
+        collectionView.alwaysBounceHorizontal = true
+        
+        collectionView.backgroundColor = .clear
+        
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
+        layout.estimatedItemSize = CGSize(width: 100, height: 36)
     }
     
 }
@@ -125,16 +162,9 @@ private extension KeyboardCategoriesTableViewCell {
 extension KeyboardCategoriesTableViewCell: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        let sideInset: CGFloat = 6 + (Device.isPad() && (UIScreen.main.bounds.width > UIScreen.main.bounds.height) ?
-            130 : 0)
+        let sideInset: CGFloat = 6 + (Device.isWide() ? 130 : 0)
         
         return UIEdgeInsets(top: 0, left: sideInset, bottom: 0, right: sideInset)
     }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: Device.isPad() ? 62 : 50, height: 36)
-    }
-    
+
 }
